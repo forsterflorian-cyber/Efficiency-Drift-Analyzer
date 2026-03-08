@@ -1,0 +1,6 @@
+<properties>
+    <property id="hrA" type="number">0</property>
+    <property id="paceA" type="number">0</property>
+    <property id="hrB" type="number">0</property>
+    <property id="paceB" type="number">0</property>
+</properties>

@@ -1,0 +1,20 @@
+<strings>
+    <string id="AppName">Efficiency Drift Analyzer</string>
+    <string id="lblAktPace">Pace: </string>
+    <string id="lblSollPace">Exp. Pace: </string>
+    <string id="lblSollHr">Exp. HR: </string>
+    <string id="lblAktHr">HR: </string>
+    <string id="unitPercent">%</string>
+    <string id="lblFitDrift">Metabolic Drift</string>
+    <string id="lblFitDriftChart">Efficiency Analysis</string>
+    <string id="lblFitAvgDrift">Avg. Metabolic Drift</string>
+    
+    <string id="hrATitle">HR Point A (Z2)</string>
+    <string id="hrAPrompt">Heart rate in bpm</string>
+    <string id="paceATitle">Pace Point A (Z2)</string>
+    <string id="paceAPrompt">Pace in sec/km (e.g. 360 for 6:00)</string>
+    <string id="hrBTitle">HR Point B (Threshold)</string>
+    <string id="hrBPrompt">Heart rate in bpm</string>
+    <string id="paceBTitle">Pace Point B (Threshold)</string>
+    <string id="paceBPrompt">Pace in sec/km (e.g. 270 for 4:30)</string>
+</strings>

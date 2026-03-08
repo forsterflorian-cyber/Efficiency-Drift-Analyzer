@@ -1,0 +1,1826 @@
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Activity,1,14,22]; ]
+import Toybox.Activity;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [Lang,2,14,18]; ]
+import Toybox.Lang;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 3; @symbol_importdef<0> = [Toybox,3,7,13]; @symbol_importdef<1> = [Time,3,14,18]; ]
+import Toybox.Time;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 4; @symbol_importdef<0> = [Toybox,4,7,13]; @symbol_importdef<1> = [WatchUi,4,14,21]; ]
+import Toybox.WatchUi;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 5; @symbol_importdef<0> = [Toybox,5,7,13]; @symbol_importdef<1> = [Application,5,14,25]; @symbol_importdef<2> = [Properties,5,26,36]; ]
+import Toybox.Application.Properties;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 6; @symbol_importdef<0> = [Toybox,6,7,13]; @symbol_importdef<1> = [Graphics,6,14,22]; ]
+import Toybox.Graphics;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 7; @symbol_importdef<0> = [Toybox,7,7,13]; @symbol_importdef<1> = [FitContributor,7,14,28]; ]
+import Toybox.FitContributor;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 9; @symbol_classdef = [EDAView,9,6,13]; @symbol_extends<0> = [WatchUi,9,22,29]; @symbol_extends<1> = [DataField,9,30,39]; ]
+class EDAView extends WatchUi.DataField {
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 9; ]
+    <init> {
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 48 16 ]
+        symbol [ Graphics %tmp.1 48 36 44 ];
+        %tmp.1 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.2 48 45 56 ];
+        %tmp.2 = getv %tmp.1 :COLOR_WHITE;
+        putv self :bgColor %tmp.2;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 49 16 ]
+        symbol [ Graphics %tmp.3 49 36 44 ];
+        %tmp.3 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.4 49 45 56 ];
+        %tmp.4 = getv %tmp.3 :COLOR_BLACK;
+        putv self :fgColor %tmp.4;
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 9; ]
+    static
+    <init> {
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 12; @position = 18; @symbol_constdef = [ALPHA_SPEED,12,18,29]; @symbol_type<0> = [Float,12,33,38]; ]
+    private
+    const ALPHA_SPEED as Float = 0.20;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 13; @position = 18; @symbol_constdef = [ALPHA_HR,13,18,26]; @symbol_type<0> = [Float,13,30,35]; ]
+    private
+    const ALPHA_HR as Float = 0.03;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 14; @position = 18; @symbol_constdef = [ALPHA_DRIFT,14,18,29]; @symbol_type<0> = [Float,14,33,38]; ]
+    private
+    const ALPHA_DRIFT as Float = 0.05;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 15; @position = 18; @symbol_constdef = [WARMUP_MS,15,18,27]; @symbol_type<0> = [Number,15,31,37]; ]
+    private
+    const WARMUP_MS as Number = 180000;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 16; @position = 18; @symbol_constdef = [DRIFT_DEADZONE,16,18,32]; @symbol_type<0> = [Float,16,36,41]; ]
+    private
+    const DRIFT_DEADZONE as Float = 1.0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 19; @position = 16; @symbol_vardef = [hrA,19,16,19]; @symbol_type<0> = [Float,19,23,28]; ]
+    private
+    var hrA as Float = 0.0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 20; @position = 16; @symbol_vardef = [paceA,20,16,21]; @symbol_type<0> = [Float,20,25,30]; ]
+    private
+    var paceA as Float = 0.0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 21; @position = 16; @symbol_vardef = [hrB,21,16,19]; @symbol_type<0> = [Float,21,23,28]; ]
+    private
+    var hrB as Float = 0.0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 22; @position = 16; @symbol_vardef = [paceB,22,16,21]; @symbol_type<0> = [Float,22,25,30]; ]
+    private
+    var paceB as Float = 0.0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 23; @position = 16; @symbol_vardef = [m,23,16,17]; @symbol_type<0> = [Float,23,21,26]; ]
+    private
+    var m as Float = 0.0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 24; @position = 16; @symbol_vardef = [b,24,16,17]; @symbol_type<0> = [Float,24,21,26]; ]
+    private
+    var b as Float = 0.0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 27; @position = 16; @symbol_vardef = [ewmaSpeed,27,16,25]; @symbol_type<0> = [Float,27,29,34]; ]
+    private
+    var ewmaSpeed as Float = 0.0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 28; @position = 16; @symbol_vardef = [ewmaHr,28,16,22]; @symbol_type<0> = [Float,28,26,31]; ]
+    private
+    var ewmaHr as Float = 0.0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 29; @position = 16; @symbol_vardef = [ewmaDrift,29,16,25]; @symbol_type<0> = [Float,29,29,34]; ]
+    private
+    var ewmaDrift as Float = 0.0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 30; @position = 16; @symbol_vardef = [filterInitialized,30,16,33]; @symbol_type<0> = [Boolean,30,37,44]; ]
+    private
+    var filterInitialized as Boolean = false;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 31; @position = 16; @symbol_vardef = [driftInitialized,31,16,32]; @symbol_type<0> = [Boolean,31,36,43]; ]
+    private
+    var driftInitialized as Boolean = false;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 32; @position = 16; @symbol_vardef = [isConfigured,32,16,28]; @symbol_type<0> = [Boolean,32,32,39]; ]
+    private
+    var isConfigured as Boolean = false;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 33; @position = 16; @symbol_vardef = [mTimerTime,33,16,26]; @symbol_type<0> = [Number,33,30,36]; ]
+    private
+    var mTimerTime as Number = 0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 36; @position = 16; @symbol_vardef = [lblAktPace,36,16,26]; @symbol_type<0> = [String,36,30,36]; ]
+    private
+    var lblAktPace as String = "";
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 37; @position = 16; @symbol_vardef = [lblSollPace,37,16,27]; @symbol_type<0> = [String,37,31,37]; ]
+    private
+    var lblSollPace as String = "";
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 38; @position = 16; @symbol_vardef = [lblSollHr,38,16,25]; @symbol_type<0> = [String,38,29,35]; ]
+    private
+    var lblSollHr as String = "";
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 39; @position = 16; @symbol_vardef = [lblAktHr,39,16,24]; @symbol_type<0> = [String,39,28,34]; ]
+    private
+    var lblAktHr as String = "";
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 40; @position = 16; @symbol_vardef = [isGerman,40,16,24]; @symbol_type<0> = [Boolean,40,28,35]; ]
+    private
+    var isGerman as Boolean = false;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 42; @position = 16; @symbol_vardef = [valAktPace,42,16,26]; @symbol_type<0> = [String,42,30,36]; ]
+    private
+    var valAktPace as String = "--:--";
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 43; @position = 16; @symbol_vardef = [valSollPace,43,16,27]; @symbol_type<0> = [String,43,31,37]; ]
+    private
+    var valSollPace as String = "--:--";
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 44; @position = 16; @symbol_vardef = [strDrift,44,16,24]; @symbol_type<0> = [String,44,28,34]; ]
+    private
+    var strDrift as String = "--";
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 45; @position = 16; @symbol_vardef = [valSollHr,45,16,25]; @symbol_type<0> = [String,45,29,35]; ]
+    private
+    var valSollHr as String = "--";
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 46; @position = 16; @symbol_vardef = [valAktHr,46,16,24]; @symbol_type<0> = [String,46,28,34]; ]
+    private
+    var valAktHr as String = "--";
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 48; @position = 16; @symbol_vardef = [bgColor,48,16,23]; @symbol_type<0> = [Number,48,27,33]; ]
+    private
+    var bgColor as Number;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 49; @position = 16; @symbol_vardef = [fgColor,49,16,23]; @symbol_type<0> = [Number,49,27,33]; ]
+    private
+    var fgColor as Number;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 52; @position = 16; @symbol_vardef = [driftField,52,16,26]; @symbol_type<0> = [Toybox,52,30,36]; @symbol_type<1> = [FitContributor,52,37,51]; @symbol_type<2> = [Field,52,52,57]; ]
+    private
+    var driftField as Toybox.FitContributor.Field or Null = null;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 53; @position = 16; @symbol_vardef = [avgDriftField,53,16,29]; @symbol_type<0> = [Toybox,53,33,39]; @symbol_type<1> = [FitContributor,53,40,54]; @symbol_type<2> = [Field,53,55,60]; ]
+    private
+    var avgDriftField as Toybox.FitContributor.Field or Null = null;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 54; @position = 18; @symbol_constdef = [DRIFT_GRAPH_ID,54,18,32]; ]
+    private
+    const DRIFT_GRAPH_ID = 0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 55; @position = 18; @symbol_constdef = [DRIFT_AVG_ID,55,18,30]; ]
+    private
+    const DRIFT_AVG_ID = 1;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 57; @position = 16; @symbol_vardef = [driftSum,57,16,24]; @symbol_type<0> = [Float,57,28,33]; ]
+    private
+    var driftSum as Float = 0.0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 58; @position = 16; @symbol_vardef = [driftCount,58,16,26]; @symbol_type<0> = [Number,58,30,36]; ]
+    private
+    var driftCount as Number = 0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 60; @symbol_functiondef = [initialize,60,13,23]; ]
+    function initialize() as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_60_26_67_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 61 8 ]
+        symbol [ DataField %tmp.2 61 8 17 ];
+        %tmp.2 = getv ? :DataField;
+        symbol [ initialize %tmp.3 61 18 28 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 62 8 ]
+        %tmp.4 = self;
+        symbol [ loadStrings %tmp.5 62 8 19 ];
+        %tmp.5 = getv function %tmp.4 :loadStrings;
+        invoke %tmp.4 %tmp.5();
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 63 8 ]
+        %tmp.6 = self;
+        symbol [ loadSettings %tmp.7 63 8 20 ];
+        %tmp.7 = getv function %tmp.6 :loadSettings;
+        invoke %tmp.6 %tmp.7();
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 65 8 ]
+        %tmp.8 = self;
+        symbol [ createField %tmp.9 65 21 32 ];
+        %tmp.9 = getv function %tmp.8 :createField;
+        %tmp.10 = "metabolic_drift";
+        symbol [ DRIFT_GRAPH_ID %tmp.12 65 52 66 ];
+        %tmp.12 = getv ? :DRIFT_GRAPH_ID;
+        symbol [ FitContributor %tmp.13 65 68 82 ];
+        %tmp.13 = getm $.Toybox.FitContributor;
+        symbol [ DATA_TYPE_FLOAT %tmp.14 65 83 98 ];
+        %tmp.14 = getv %tmp.13 :DATA_TYPE_FLOAT;
+        %tmp.15 = newd 2;
+        %tmp.17 = const :displayLabel;
+        symbol [ displayLabel %tmp.17 65 103 115 const ];
+        %tmp.18 = "Drift";
+        %tmp.19 = dup %tmp.15;
+        %tmp.20 = aputv %tmp.19 %tmp.17 %tmp.18;
+        %tmp.22 = const :units;
+        symbol [ units %tmp.22 65 129 134 const ];
+        %tmp.23 = "%";
+        %tmp.24 = dup %tmp.20;
+        %tmp.25 = aputv %tmp.24 %tmp.22 %tmp.23;
+        %tmp.26 = invoke %tmp.8 %tmp.9(%tmp.10, %tmp.12, %tmp.14, %tmp.25);
+        symbol [ driftField ? 65 8 18 ];
+        putv self :driftField %tmp.26;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 66 8 ]
+        %tmp.27 = self;
+        symbol [ createField %tmp.28 66 24 35 ];
+        %tmp.28 = getv function %tmp.27 :createField;
+        %tmp.29 = "avg_metabolic_drift";
+        symbol [ DRIFT_AVG_ID %tmp.31 66 59 71 ];
+        %tmp.31 = getv ? :DRIFT_AVG_ID;
+        symbol [ FitContributor %tmp.32 66 73 87 ];
+        %tmp.32 = getm $.Toybox.FitContributor;
+        symbol [ DATA_TYPE_FLOAT %tmp.33 66 88 103 ];
+        %tmp.33 = getv %tmp.32 :DATA_TYPE_FLOAT;
+        %tmp.34 = newd 2;
+        %tmp.36 = const :displayLabel;
+        symbol [ displayLabel %tmp.36 66 108 120 const ];
+        %tmp.37 = "Avg Drift";
+        %tmp.38 = dup %tmp.34;
+        %tmp.39 = aputv %tmp.38 %tmp.36 %tmp.37;
+        %tmp.41 = const :units;
+        symbol [ units %tmp.41 66 138 143 const ];
+        %tmp.42 = "%";
+        %tmp.43 = dup %tmp.39;
+        %tmp.44 = aputv %tmp.43 %tmp.41 %tmp.42;
+        %tmp.45 = invoke %tmp.27 %tmp.28(%tmp.29, %tmp.31, %tmp.33, %tmp.44);
+        symbol [ avgDriftField ? 66 8 21 ];
+        putv self :avgDriftField %tmp.45;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_60_26_67_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 69; @symbol_functiondef = [loadStrings,69,21,32]; ]
+    private
+    function loadStrings() {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_69_35_75_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 70 8 ]
+        symbol [ WatchUi %tmp.1 70 21 28 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.2 70 29 41 ];
+        %tmp.2 = getv function %tmp.1 :loadResource;
+        symbol [ Rez %tmp.4 70 42 45 ];
+        %tmp.4 = getv ? :Rez;
+        symbol [ Strings %tmp.5 70 46 53 ];
+        %tmp.5 = getv %tmp.4 :Strings;
+        symbol [ lblAktPace %tmp.6 70 54 64 ];
+        %tmp.6 = getv %tmp.5 :lblAktPace;
+        %tmp.7 = invoke %tmp.1 %tmp.2(%tmp.6);
+        %tmp.8 = as %tmp.7 String;
+        symbol [ String %tmp.8 70 69 75 ];
+        symbol [ lblAktPace ? 70 8 18 ];
+        putv self :lblAktPace %tmp.8;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 71 8 ]
+        symbol [ WatchUi %tmp.9 71 22 29 ];
+        %tmp.9 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.10 71 30 42 ];
+        %tmp.10 = getv function %tmp.9 :loadResource;
+        symbol [ Rez %tmp.12 71 43 46 ];
+        %tmp.12 = getv ? :Rez;
+        symbol [ Strings %tmp.13 71 47 54 ];
+        %tmp.13 = getv %tmp.12 :Strings;
+        symbol [ lblSollPace %tmp.14 71 55 66 ];
+        %tmp.14 = getv %tmp.13 :lblSollPace;
+        %tmp.15 = invoke %tmp.9 %tmp.10(%tmp.14);
+        %tmp.16 = as %tmp.15 String;
+        symbol [ String %tmp.16 71 71 77 ];
+        symbol [ lblSollPace ? 71 8 19 ];
+        putv self :lblSollPace %tmp.16;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 72 8 ]
+        symbol [ WatchUi %tmp.17 72 20 27 ];
+        %tmp.17 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.18 72 28 40 ];
+        %tmp.18 = getv function %tmp.17 :loadResource;
+        symbol [ Rez %tmp.20 72 41 44 ];
+        %tmp.20 = getv ? :Rez;
+        symbol [ Strings %tmp.21 72 45 52 ];
+        %tmp.21 = getv %tmp.20 :Strings;
+        symbol [ lblSollHr %tmp.22 72 53 62 ];
+        %tmp.22 = getv %tmp.21 :lblSollHr;
+        %tmp.23 = invoke %tmp.17 %tmp.18(%tmp.22);
+        %tmp.24 = as %tmp.23 String;
+        symbol [ String %tmp.24 72 67 73 ];
+        symbol [ lblSollHr ? 72 8 17 ];
+        putv self :lblSollHr %tmp.24;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 73 8 ]
+        symbol [ WatchUi %tmp.25 73 19 26 ];
+        %tmp.25 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.26 73 27 39 ];
+        %tmp.26 = getv function %tmp.25 :loadResource;
+        symbol [ Rez %tmp.28 73 40 43 ];
+        %tmp.28 = getv ? :Rez;
+        symbol [ Strings %tmp.29 73 44 51 ];
+        %tmp.29 = getv %tmp.28 :Strings;
+        symbol [ lblAktHr %tmp.30 73 52 60 ];
+        %tmp.30 = getv %tmp.29 :lblAktHr;
+        %tmp.31 = invoke %tmp.25 %tmp.26(%tmp.30);
+        %tmp.32 = as %tmp.31 String;
+        symbol [ String %tmp.32 73 65 71 ];
+        symbol [ lblAktHr ? 73 8 16 ];
+        putv self :lblAktHr %tmp.32;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 74 8 ]
+        symbol [ lblSollPace %tmp.34 74 20 31 ];
+        %tmp.34 = getv ? :lblSollPace;
+        symbol [ substring %tmp.35 74 32 41 ];
+        %tmp.35 = getv function %tmp.34 :substring;
+        %tmp.36 = 0;
+        %tmp.37 = 1;
+        %tmp.38 = invoke %tmp.34 %tmp.35(%tmp.36, %tmp.37);
+        symbol [ equals %tmp.39 74 48 54 ];
+        %tmp.39 = getv function %tmp.38 :equals;
+        %tmp.40 = "E";
+        %tmp.41 = invoke %tmp.38 %tmp.39(%tmp.40);
+        symbol [ isGerman ? 74 8 16 ];
+        putv self :isGerman %tmp.41;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_69_35_75_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 77; @symbol_functiondef = [loadSettings,77,13,25]; ]
+    function loadSettings() as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_77_36_88_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 78 8 ]
+        try @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_beginTry @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_endTry @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_catch @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_finally;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_beginTry:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_12_84_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 79 12 ]
+        symbol [ Properties %tmp.1 79 18 28 ];
+        %tmp.1 = getm $.Toybox.Application.Properties;
+        symbol [ getValue %tmp.2 79 29 37 ];
+        %tmp.2 = getv function %tmp.1 :getValue;
+        %tmp.3 = "hrA";
+        %tmp.4 = invoke %tmp.1 %tmp.2(%tmp.3);
+        symbol [ toFloat %tmp.5 79 45 52 ];
+        %tmp.5 = getv function %tmp.4 :toFloat;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        symbol [ hrA ? 79 12 15 ];
+        putv self :hrA %tmp.6;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 80 12 ]
+        symbol [ Properties %tmp.7 80 20 30 ];
+        %tmp.7 = getm $.Toybox.Application.Properties;
+        symbol [ getValue %tmp.8 80 31 39 ];
+        %tmp.8 = getv function %tmp.7 :getValue;
+        %tmp.9 = "paceA";
+        %tmp.10 = invoke %tmp.7 %tmp.8(%tmp.9);
+        symbol [ toFloat %tmp.11 80 49 56 ];
+        %tmp.11 = getv function %tmp.10 :toFloat;
+        %tmp.12 = invoke %tmp.10 %tmp.11();
+        symbol [ paceA ? 80 12 17 ];
+        putv self :paceA %tmp.12;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 81 12 ]
+        symbol [ Properties %tmp.13 81 18 28 ];
+        %tmp.13 = getm $.Toybox.Application.Properties;
+        symbol [ getValue %tmp.14 81 29 37 ];
+        %tmp.14 = getv function %tmp.13 :getValue;
+        %tmp.15 = "hrB";
+        %tmp.16 = invoke %tmp.13 %tmp.14(%tmp.15);
+        symbol [ toFloat %tmp.17 81 45 52 ];
+        %tmp.17 = getv function %tmp.16 :toFloat;
+        %tmp.18 = invoke %tmp.16 %tmp.17();
+        symbol [ hrB ? 81 12 15 ];
+        putv self :hrB %tmp.18;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 82 12 ]
+        symbol [ Properties %tmp.19 82 20 30 ];
+        %tmp.19 = getm $.Toybox.Application.Properties;
+        symbol [ getValue %tmp.20 82 31 39 ];
+        %tmp.20 = getv function %tmp.19 :getValue;
+        %tmp.21 = "paceB";
+        %tmp.22 = invoke %tmp.19 %tmp.20(%tmp.21);
+        symbol [ toFloat %tmp.23 82 49 56 ];
+        %tmp.23 = getv function %tmp.22 :toFloat;
+        %tmp.24 = invoke %tmp.22 %tmp.23();
+        symbol [ paceB ? 82 12 17 ];
+        putv self :paceB %tmp.24;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 83 12 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_28_83_71_begin:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_28_83_58_begin:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_28_83_45_begin:
+        symbol [ hrA %tmp.26 83 28 31 ];
+        %tmp.26 = getv ? :hrA;
+        %tmp.27 = 0;
+        %tmp.28 = gt %tmp.26 %tmp.27;
+        %tmp.29 = dup %tmp.28;
+        bf %tmp.29 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_39_83_45_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_39_83_45_true:
+        symbol [ hrB %tmp.31 83 39 42 ];
+        %tmp.31 = getv ? :hrB;
+        %tmp.32 = 0;
+        %tmp.33 = gt %tmp.31 %tmp.32;
+        %tmp.34 = and %tmp.28 %tmp.33;
+        push %tmp.34;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_39_83_45_end:
+        %tmp.35 = phi [%tmp.29 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_28_83_45_begin] [%tmp.34 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_39_83_45_true] [%tmp.35 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_39_83_45_end];
+        %tmp.36 = dup %tmp.35;
+        bf %tmp.36 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_50_83_58_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_50_83_58_true:
+        symbol [ paceA %tmp.38 83 50 55 ];
+        %tmp.38 = getv ? :paceA;
+        %tmp.39 = 0;
+        %tmp.40 = gt %tmp.38 %tmp.39;
+        %tmp.41 = and %tmp.35 %tmp.40;
+        push %tmp.41;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_50_83_58_end:
+        %tmp.42 = phi [%tmp.36 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_28_83_58_begin] [%tmp.41 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_50_83_58_true] [%tmp.42 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_50_83_58_end];
+        %tmp.43 = dup %tmp.42;
+        bf %tmp.43 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_63_83_71_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_63_83_71_true:
+        symbol [ paceB %tmp.45 83 63 68 ];
+        %tmp.45 = getv ? :paceB;
+        %tmp.46 = 0;
+        %tmp.47 = gt %tmp.45 %tmp.46;
+        %tmp.48 = and %tmp.42 %tmp.47;
+        push %tmp.48;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_63_83_71_end:
+        %tmp.49 = phi [%tmp.43 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_28_83_71_begin] [%tmp.48 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_63_83_71_true] [%tmp.49 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_83_63_83_71_end];
+        symbol [ isConfigured ? 83 12 24 ];
+        putv self :isConfigured %tmp.49;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_12_84_8_stop:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_endTry:
+        jsr @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_finally;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_catch:
+        %tmp.50 = exception;
+        push %tmp.50;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 84 10 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_catch" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_84_10_86_8_end" ]
+        %e.1 = local;
+        symbol [ e %e.1 84 17 18 ];
+        %tmp.51 = dup %tmp.50;
+        lputv %e.1 %tmp.51;
+        symbol [ e %e.1 84 17 18 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_84_20_86_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 85 12 ]
+        %tmp.52 = false;
+        symbol [ isConfigured ? 85 12 24 ];
+        putv self :isConfigured %tmp.52;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_84_20_86_8_stop:
+        jsr @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_finally;
+        pop;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_84_10_86_8_end:
+        try @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_catch @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_84_10_86_8_end @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_84_10_86_8_end @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_finally;
+        jsr @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_finally;
+        throw %tmp.50;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_finally:
+        jsrret;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_78_8_86_8_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 87 8 ]
+        %tmp.53 = self;
+        symbol [ calculateLinearModel %tmp.54 87 8 28 ];
+        %tmp.54 = getv function %tmp.53 :calculateLinearModel;
+        invoke %tmp.53 %tmp.54();
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_77_36_88_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 90; @symbol_functiondef = [calculateLinearModel,90,21,41]; ]
+    private
+    function calculateLinearModel() as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_90_52_97_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 91 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_90_52_97_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_90_52_97_4_stop" ]
+        %v1.1 = local;
+        symbol [ v1 %v1.1 91 12 14 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_91_17_91_48_begin:
+        symbol [ paceA %tmp.2 91 18 23 ];
+        %tmp.2 = getv ? :paceA;
+        %tmp.3 = 0;
+        %tmp.4 = gt %tmp.2 %tmp.3;
+        bf %tmp.4 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_91_17_91_48_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_91_17_91_48_true:
+        %tmp.5 = 1000.0;
+        symbol [ paceA %tmp.7 91 40 45 ];
+        %tmp.7 = getv ? :paceA;
+        %tmp.8 = div %tmp.5 %tmp.7;
+        push %tmp.8;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_91_17_91_48_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_91_17_91_48_else_false:
+        %tmp.9 = 0.0;
+        push %tmp.9;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_91_17_91_48_end:
+        %tmp.10 = phi [%tmp.4 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_91_17_91_48_begin] [%tmp.8 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_91_17_91_48_true] [%tmp.9 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_91_17_91_48_else_false] [%tmp.10 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_91_17_91_48_end];
+        lputv %v1.1 %tmp.10;
+        symbol [ v1 %v1.1 91 12 14 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 92 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_90_52_97_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_90_52_97_4_stop" ]
+        %v2.2 = local;
+        symbol [ v2 %v2.2 92 12 14 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_92_17_92_48_begin:
+        symbol [ paceB %tmp.12 92 18 23 ];
+        %tmp.12 = getv ? :paceB;
+        %tmp.13 = 0;
+        %tmp.14 = gt %tmp.12 %tmp.13;
+        bf %tmp.14 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_92_17_92_48_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_92_17_92_48_true:
+        %tmp.15 = 1000.0;
+        symbol [ paceB %tmp.17 92 40 45 ];
+        %tmp.17 = getv ? :paceB;
+        %tmp.18 = div %tmp.15 %tmp.17;
+        push %tmp.18;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_92_17_92_48_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_92_17_92_48_else_false:
+        %tmp.19 = 0.0;
+        push %tmp.19;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_92_17_92_48_end:
+        %tmp.20 = phi [%tmp.14 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_92_17_92_48_begin] [%tmp.18 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_92_17_92_48_true] [%tmp.19 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_92_17_92_48_else_false] [%tmp.20 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_92_17_92_48_end];
+        lputv %v2.2 %tmp.20;
+        symbol [ v2 %v2.2 92 12 14 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 93 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_93_8_96_8_if_stmt:
+        %tmp.21 = lgetv %v2.2;
+        symbol [ v2 %tmp.21 93 12 14 ];
+        %tmp.22 = lgetv %v1.1;
+        symbol [ v1 %tmp.22 93 17 19 ];
+        %tmp.23 = sub %tmp.21 %tmp.22;
+        %tmp.24 = 0;
+        %tmp.25 = ne %tmp.23 %tmp.24;
+        bf %tmp.25 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_93_8_96_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_93_8_96_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_93_26_96_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 94 12 ]
+        symbol [ hrB %tmp.27 94 17 20 ];
+        %tmp.27 = getv ? :hrB;
+        symbol [ hrA %tmp.29 94 23 26 ];
+        %tmp.29 = getv ? :hrA;
+        %tmp.30 = sub %tmp.27 %tmp.29;
+        %tmp.31 = lgetv %v2.2;
+        symbol [ v2 %tmp.31 94 31 33 ];
+        %tmp.32 = lgetv %v1.1;
+        symbol [ v1 %tmp.32 94 36 38 ];
+        %tmp.33 = sub %tmp.31 %tmp.32;
+        %tmp.34 = div %tmp.30 %tmp.33;
+        symbol [ m ? 94 12 13 ];
+        putv self :m %tmp.34;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 95 12 ]
+        symbol [ hrA %tmp.36 95 16 19 ];
+        %tmp.36 = getv ? :hrA;
+        symbol [ m %tmp.38 95 23 24 ];
+        %tmp.38 = getv ? :m;
+        %tmp.39 = lgetv %v1.1;
+        symbol [ v1 %tmp.39 95 27 29 ];
+        %tmp.40 = mul %tmp.38 %tmp.39;
+        %tmp.41 = sub %tmp.36 %tmp.40;
+        symbol [ b ? 95 12 13 ];
+        putv self :b %tmp.41;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_93_26_96_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_93_8_96_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_93_8_96_8_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_90_52_97_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 99; @symbol_functiondef = [formatPace,99,21,31]; @symbol_param<0> = [speedInMs,99,32,41]; @symbol_param<0>_type<0> = [Float,99,45,50]; @symbol_return<0> = [String,99,55,61]; ]
+    private
+    function formatPace(speedInMs as Float) as String {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_99_62_105_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 100 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_100_8_100_48_if_stmt:
+        %tmp.1 = lgetv %speedInMs;
+        symbol [ speedInMs %tmp.1 100 12 21 ];
+        %tmp.2 = 0.2;
+        %tmp.3 = lte %tmp.1 %tmp.2;
+        bf %tmp.3 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_100_8_100_48_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_100_8_100_48_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_100_30_100_48_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 100 32 ]
+        %tmp.4 = "--:--";
+        ret %tmp.4;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_100_30_100_48_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_100_8_100_48_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_100_8_100_48_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 101 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_99_62_105_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_99_62_105_4_stop" ]
+        %secondsPerKm.1 = local;
+        symbol [ secondsPerKm %secondsPerKm.1 101 12 24 ];
+        %tmp.5 = 1000.0;
+        %tmp.6 = lgetv %speedInMs;
+        symbol [ speedInMs %tmp.6 101 36 45 ];
+        %tmp.7 = div %tmp.5 %tmp.6;
+        lputv %secondsPerKm.1 %tmp.7;
+        symbol [ secondsPerKm %secondsPerKm.1 101 12 24 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 102 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_99_62_105_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_99_62_105_4_stop" ]
+        %minutes.2 = local;
+        symbol [ minutes %minutes.2 102 12 19 ];
+        %tmp.8 = lgetv %secondsPerKm.1;
+        symbol [ secondsPerKm %tmp.8 102 23 35 ];
+        %tmp.9 = 60;
+        %tmp.10 = div %tmp.8 %tmp.9;
+        symbol [ toNumber %tmp.11 102 42 50 ];
+        %tmp.11 = getv function %tmp.10 :toNumber;
+        %tmp.12 = invoke %tmp.10 %tmp.11();
+        lputv %minutes.2 %tmp.12;
+        symbol [ minutes %minutes.2 102 12 19 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 103 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_99_62_105_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_99_62_105_4_stop" ]
+        %seconds.3 = local;
+        symbol [ seconds %seconds.3 103 12 19 ];
+        %tmp.13 = lgetv %secondsPerKm.1;
+        symbol [ secondsPerKm %tmp.13 103 23 35 ];
+        symbol [ toNumber %tmp.14 103 36 44 ];
+        %tmp.14 = getv function %tmp.13 :toNumber;
+        %tmp.15 = invoke %tmp.13 %tmp.14();
+        %tmp.16 = 60;
+        %tmp.17 = mod %tmp.15 %tmp.16;
+        lputv %seconds.3 %tmp.17;
+        symbol [ seconds %seconds.3 103 12 19 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 104 8 ]
+        %tmp.18 = lgetv %minutes.2;
+        symbol [ minutes %tmp.18 104 15 22 ];
+        symbol [ toString %tmp.19 104 23 31 ];
+        %tmp.19 = getv function %tmp.18 :toString;
+        %tmp.20 = invoke %tmp.18 %tmp.19();
+        %tmp.21 = ":";
+        %tmp.22 = add %tmp.20 %tmp.21;
+        %tmp.23 = lgetv %seconds.3;
+        symbol [ seconds %tmp.23 104 42 49 ];
+        symbol [ format %tmp.24 104 50 56 ];
+        %tmp.24 = getv function %tmp.23 :format;
+        %tmp.25 = "%02d";
+        %tmp.26 = invoke %tmp.23 %tmp.24(%tmp.25);
+        %tmp.27 = add %tmp.22 %tmp.26;
+        ret %tmp.27;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_99_62_105_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 107; @symbol_functiondef = [compute,107,13,20]; @symbol_param<0> = [info,107,21,25]; @symbol_param<0>_type<0> = [Activity,107,29,37]; @symbol_param<0>_type<1> = [Info,107,38,42]; ]
+    function compute(info as Activity.Info) as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_107_52_175_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 108 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_107_52_175_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_107_52_175_4_stop" ]
+        %curSpeed.1 = local;
+        symbol [ curSpeed %curSpeed.1 108 12 20 ];
+        %tmp.1 = lgetv %info;
+        symbol [ info %tmp.1 108 23 27 ];
+        symbol [ currentSpeed %tmp.2 108 28 40 ];
+        %tmp.2 = getv %tmp.1 :currentSpeed;
+        lputv %curSpeed.1 %tmp.2;
+        symbol [ curSpeed %curSpeed.1 108 12 20 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 109 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_107_52_175_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_107_52_175_4_stop" ]
+        %curHr.2 = local;
+        symbol [ curHr %curHr.2 109 12 17 ];
+        %tmp.3 = lgetv %info;
+        symbol [ info %tmp.3 109 20 24 ];
+        symbol [ currentHeartRate %tmp.4 109 25 41 ];
+        %tmp.4 = getv %tmp.3 :currentHeartRate;
+        lputv %curHr.2 %tmp.4;
+        symbol [ curHr %curHr.2 109 12 17 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 110 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_110_21_110_65_begin:
+        %tmp.5 = lgetv %info;
+        symbol [ info %tmp.5 110 22 26 ];
+        symbol [ timerTime %tmp.6 110 27 36 ];
+        %tmp.6 = getv %tmp.5 :timerTime;
+        %tmp.7 = null;
+        %tmp.8 = ne %tmp.6 %tmp.7;
+        bf %tmp.8 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_110_21_110_65_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_110_21_110_65_true:
+        %tmp.9 = lgetv %info;
+        symbol [ info %tmp.9 110 48 52 ];
+        symbol [ timerTime %tmp.10 110 53 62 ];
+        %tmp.10 = getv %tmp.9 :timerTime;
+        push %tmp.10;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_110_21_110_65_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_110_21_110_65_else_false:
+        %tmp.11 = 0;
+        push %tmp.11;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_110_21_110_65_end:
+        %tmp.12 = phi [%tmp.8 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_110_21_110_65_begin] [%tmp.10 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_110_21_110_65_true] [%tmp.11 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_110_21_110_65_else_false] [%tmp.12 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_110_21_110_65_end];
+        symbol [ mTimerTime ? 110 8 18 ];
+        putv self :mTimerTime %tmp.12;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 112 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_8_115_8_if_stmt:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_12_112_54_begin:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_12_112_41_begin:
+        %tmp.13 = lgetv %curSpeed.1;
+        symbol [ curSpeed %tmp.13 112 12 20 ];
+        %tmp.14 = null;
+        %tmp.15 = eq %tmp.13 %tmp.14;
+        bt %tmp.15 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_8_115_8_if_true;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_32_112_41_false:
+        %tmp.16 = lgetv %curHr.2;
+        symbol [ curHr %tmp.16 112 32 37 ];
+        %tmp.17 = null;
+        %tmp.18 = eq %tmp.16 %tmp.17;
+        push %tmp.18;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_32_112_41_end:
+        %tmp.19 = phi [%tmp.15 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_12_112_41_begin] [%tmp.18 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_32_112_41_false] [%tmp.19 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_32_112_41_end];
+        bt %tmp.19 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_8_115_8_if_true;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_49_112_54_false:
+        symbol [ m %tmp.21 112 49 50 ];
+        %tmp.21 = getv ? :m;
+        %tmp.22 = 0.0;
+        %tmp.23 = eq %tmp.21 %tmp.22;
+        push %tmp.23;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_49_112_54_end:
+        %tmp.24 = phi [%tmp.19 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_12_112_54_begin] [%tmp.23 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_49_112_54_false] [%tmp.24 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_49_112_54_end];
+        bf %tmp.24 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_8_115_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_8_115_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_59_115_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 113 12 ]
+        %tmp.25 = self;
+        symbol [ resetDisplay %tmp.26 113 12 24 ];
+        %tmp.26 = getv function %tmp.25 :resetDisplay;
+        invoke %tmp.25 %tmp.26();
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 114 12 ]
+        ret ?;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_59_115_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_8_115_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_112_8_115_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 117 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_117_8_124_8_if_stmt:
+        symbol [ filterInitialized %tmp.28 117 13 30 ];
+        %tmp.28 = getv ? :filterInitialized;
+        %tmp.29 = not %tmp.28;
+        bf %tmp.29 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_117_8_124_8_if_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_117_8_124_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_117_32_121_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 118 12 ]
+        %tmp.30 = lgetv %curSpeed.1;
+        symbol [ curSpeed %tmp.30 118 24 32 ];
+        symbol [ toFloat %tmp.31 118 33 40 ];
+        %tmp.31 = getv function %tmp.30 :toFloat;
+        %tmp.32 = invoke %tmp.30 %tmp.31();
+        symbol [ ewmaSpeed ? 118 12 21 ];
+        putv self :ewmaSpeed %tmp.32;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 119 12 ]
+        %tmp.33 = lgetv %curHr.2;
+        symbol [ curHr %tmp.33 119 21 26 ];
+        symbol [ toFloat %tmp.34 119 27 34 ];
+        %tmp.34 = getv function %tmp.33 :toFloat;
+        %tmp.35 = invoke %tmp.33 %tmp.34();
+        symbol [ ewmaHr ? 119 12 18 ];
+        putv self :ewmaHr %tmp.35;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 120 12 ]
+        %tmp.36 = true;
+        symbol [ filterInitialized ? 120 12 29 ];
+        putv self :filterInitialized %tmp.36;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_117_32_121_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_117_8_124_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_117_8_124_8_if_else_false:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_121_15_124_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 122 12 ]
+        symbol [ ALPHA_SPEED %tmp.38 122 25 36 ];
+        %tmp.38 = getv ? :ALPHA_SPEED;
+        %tmp.39 = lgetv %curSpeed.1;
+        symbol [ curSpeed %tmp.39 122 39 47 ];
+        %tmp.40 = mul %tmp.38 %tmp.39;
+        %tmp.41 = 1.0;
+        symbol [ ALPHA_SPEED %tmp.43 122 59 70 ];
+        %tmp.43 = getv ? :ALPHA_SPEED;
+        %tmp.44 = sub %tmp.41 %tmp.43;
+        symbol [ ewmaSpeed %tmp.46 122 74 83 ];
+        %tmp.46 = getv ? :ewmaSpeed;
+        %tmp.47 = mul %tmp.44 %tmp.46;
+        %tmp.48 = add %tmp.40 %tmp.47;
+        symbol [ ewmaSpeed ? 122 12 21 ];
+        putv self :ewmaSpeed %tmp.48;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 123 12 ]
+        symbol [ ALPHA_HR %tmp.50 123 22 30 ];
+        %tmp.50 = getv ? :ALPHA_HR;
+        %tmp.51 = lgetv %curHr.2;
+        symbol [ curHr %tmp.51 123 33 38 ];
+        %tmp.52 = mul %tmp.50 %tmp.51;
+        %tmp.53 = 1.0;
+        symbol [ ALPHA_HR %tmp.55 123 50 58 ];
+        %tmp.55 = getv ? :ALPHA_HR;
+        %tmp.56 = sub %tmp.53 %tmp.55;
+        symbol [ ewmaHr %tmp.58 123 62 68 ];
+        %tmp.58 = getv ? :ewmaHr;
+        %tmp.59 = mul %tmp.56 %tmp.58;
+        %tmp.60 = add %tmp.52 %tmp.59;
+        symbol [ ewmaHr ? 123 12 18 ];
+        putv self :ewmaHr %tmp.60;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_121_15_124_8_stop:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_117_8_124_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 126 8 ]
+        %tmp.61 = self;
+        symbol [ formatPace %tmp.62 126 21 31 ];
+        %tmp.62 = getv function %tmp.61 :formatPace;
+        %tmp.63 = lgetv %curSpeed.1;
+        symbol [ curSpeed %tmp.63 126 32 40 ];
+        symbol [ toFloat %tmp.64 126 41 48 ];
+        %tmp.64 = getv function %tmp.63 :toFloat;
+        %tmp.65 = invoke %tmp.63 %tmp.64();
+        %tmp.66 = invoke %tmp.61 %tmp.62(%tmp.65);
+        symbol [ valAktPace ? 126 8 18 ];
+        putv self :valAktPace %tmp.66;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 127 8 ]
+        symbol [ ewmaHr %tmp.68 127 19 25 ];
+        %tmp.68 = getv ? :ewmaHr;
+        symbol [ toNumber %tmp.69 127 26 34 ];
+        %tmp.69 = getv function %tmp.68 :toNumber;
+        %tmp.70 = invoke %tmp.68 %tmp.69();
+        symbol [ toString %tmp.71 127 37 45 ];
+        %tmp.71 = getv function %tmp.70 :toString;
+        %tmp.72 = invoke %tmp.70 %tmp.71();
+        symbol [ valAktHr ? 127 8 16 ];
+        putv self :valAktHr %tmp.72;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 129 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_129_8_133_8_if_stmt:
+        symbol [ isConfigured %tmp.74 129 13 25 ];
+        %tmp.74 = getv ? :isConfigured;
+        %tmp.75 = not %tmp.74;
+        bf %tmp.75 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_129_8_133_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_129_8_133_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_129_27_133_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 130 12 ]
+        %tmp.76 = "SET-UP";
+        symbol [ strDrift ? 130 12 20 ];
+        putv self :strDrift %tmp.76;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 131 12 ]
+        %tmp.77 = self;
+        symbol [ resetDisplayStrings %tmp.78 131 12 31 ];
+        %tmp.78 = getv function %tmp.77 :resetDisplayStrings;
+        invoke %tmp.77 %tmp.78();
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 132 12 ]
+        ret ?;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_129_27_133_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_129_8_133_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_129_8_133_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 135 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_8_139_8_if_stmt:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_12_135_44_begin:
+        %tmp.79 = lgetv %curSpeed.1;
+        symbol [ curSpeed %tmp.79 135 12 20 ];
+        %tmp.80 = 1.0;
+        %tmp.81 = lte %tmp.79 %tmp.80;
+        bt %tmp.81 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_8_139_8_if_true;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_31_135_44_false:
+        symbol [ ewmaSpeed %tmp.83 135 31 40 ];
+        %tmp.83 = getv ? :ewmaSpeed;
+        %tmp.84 = 1.0;
+        %tmp.85 = lte %tmp.83 %tmp.84;
+        push %tmp.85;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_31_135_44_end:
+        %tmp.86 = phi [%tmp.81 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_12_135_44_begin] [%tmp.85 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_31_135_44_false] [%tmp.86 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_31_135_44_end];
+        bf %tmp.86 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_8_139_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_8_139_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_49_139_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 136 12 ]
+        %tmp.87 = "STOP";
+        symbol [ strDrift ? 136 12 20 ];
+        putv self :strDrift %tmp.87;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 137 12 ]
+        %tmp.88 = self;
+        symbol [ resetDisplayStrings %tmp.89 137 12 31 ];
+        %tmp.89 = getv function %tmp.88 :resetDisplayStrings;
+        invoke %tmp.88 %tmp.89();
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 138 12 ]
+        ret ?;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_49_139_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_8_139_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_135_8_139_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 141 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_141_8_147_8_if_stmt:
+        symbol [ mTimerTime %tmp.91 141 12 22 ];
+        %tmp.91 = getv ? :mTimerTime;
+        symbol [ WARMUP_MS %tmp.93 141 25 34 ];
+        %tmp.93 = getv ? :WARMUP_MS;
+        %tmp.94 = lt %tmp.91 %tmp.93;
+        bf %tmp.94 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_141_8_147_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_141_8_147_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_141_36_147_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 142 12 ]
+        %tmp.95 = "Warm-up";
+        symbol [ strDrift ? 142 12 20 ];
+        putv self :strDrift %tmp.95;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 143 12 ]
+        %tmp.96 = self;
+        symbol [ resetDisplayStrings %tmp.97 143 12 31 ];
+        %tmp.97 = getv function %tmp.96 :resetDisplayStrings;
+        invoke %tmp.96 %tmp.97();
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 144 12 ]
+        %tmp.98 = self;
+        symbol [ getBackgroundColor %tmp.99 144 22 40 ];
+        %tmp.99 = getv function %tmp.98 :getBackgroundColor;
+        %tmp.100 = invoke %tmp.98 %tmp.99();
+        symbol [ bgColor ? 144 12 19 ];
+        putv self :bgColor %tmp.100;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 145 12 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_145_22_145_90_begin:
+        symbol [ bgColor %tmp.102 145 23 30 ];
+        %tmp.102 = getv ? :bgColor;
+        symbol [ Graphics %tmp.103 145 34 42 ];
+        %tmp.103 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.104 145 43 54 ];
+        %tmp.104 = getv %tmp.103 :COLOR_BLACK;
+        %tmp.105 = eq %tmp.102 %tmp.104;
+        bf %tmp.105 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_145_22_145_90_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_145_22_145_90_true:
+        symbol [ Graphics %tmp.106 145 58 66 ];
+        %tmp.106 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.107 145 67 78 ];
+        %tmp.107 = getv %tmp.106 :COLOR_WHITE;
+        push %tmp.107;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_145_22_145_90_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_145_22_145_90_else_false:
+        symbol [ Graphics %tmp.108 145 81 89 ];
+        %tmp.108 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.109 145 90 101 ];
+        %tmp.109 = getv %tmp.108 :COLOR_BLACK;
+        push %tmp.109;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_145_22_145_90_end:
+        %tmp.110 = phi [%tmp.105 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_145_22_145_90_begin] [%tmp.107 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_145_22_145_90_true] [%tmp.109 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_145_22_145_90_else_false] [%tmp.110 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_145_22_145_90_end];
+        symbol [ fgColor ? 145 12 19 ];
+        putv self :fgColor %tmp.110;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 146 12 ]
+        ret ?;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_141_36_147_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_141_8_147_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_141_8_147_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 149 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_107_52_175_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_107_52_175_4_stop" ]
+        %hrSoll.3 = local;
+        symbol [ hrSoll %hrSoll.3 149 12 18 ];
+        symbol [ m %tmp.112 149 22 23 ];
+        %tmp.112 = getv ? :m;
+        symbol [ ewmaSpeed %tmp.114 149 26 35 ];
+        %tmp.114 = getv ? :ewmaSpeed;
+        %tmp.115 = mul %tmp.112 %tmp.114;
+        symbol [ b %tmp.117 149 39 40 ];
+        %tmp.117 = getv ? :b;
+        %tmp.118 = add %tmp.115 %tmp.117;
+        lputv %hrSoll.3 %tmp.118;
+        symbol [ hrSoll %hrSoll.3 149 12 18 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 150 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_107_52_175_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_107_52_175_4_stop" ]
+        %vSoll.4 = local;
+        symbol [ vSoll %vSoll.4 150 12 17 ];
+        symbol [ ewmaHr %tmp.120 150 21 27 ];
+        %tmp.120 = getv ? :ewmaHr;
+        symbol [ b %tmp.122 150 30 31 ];
+        %tmp.122 = getv ? :b;
+        %tmp.123 = sub %tmp.120 %tmp.122;
+        symbol [ m %tmp.125 150 35 36 ];
+        %tmp.125 = getv ? :m;
+        %tmp.126 = div %tmp.123 %tmp.125;
+        lputv %vSoll.4 %tmp.126;
+        symbol [ vSoll %vSoll.4 150 12 17 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 151 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_151_22_151_63_begin:
+        %tmp.127 = lgetv %vSoll.4;
+        symbol [ vSoll %tmp.127 151 23 28 ];
+        %tmp.128 = 0.5;
+        %tmp.129 = lte %tmp.127 %tmp.128;
+        bf %tmp.129 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_151_22_151_63_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_151_22_151_63_true:
+        %tmp.130 = "LOW";
+        push %tmp.130;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_151_22_151_63_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_151_22_151_63_else_false:
+        %tmp.131 = self;
+        symbol [ formatPace %tmp.132 151 47 57 ];
+        %tmp.132 = getv function %tmp.131 :formatPace;
+        %tmp.133 = lgetv %vSoll.4;
+        symbol [ vSoll %tmp.133 151 58 63 ];
+        %tmp.134 = invoke %tmp.131 %tmp.132(%tmp.133);
+        push %tmp.134;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_151_22_151_63_end:
+        %tmp.135 = phi [%tmp.129 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_151_22_151_63_begin] [%tmp.130 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_151_22_151_63_true] [%tmp.134 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_151_22_151_63_else_false] [%tmp.135 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_151_22_151_63_end];
+        symbol [ valSollPace ? 151 8 19 ];
+        putv self :valSollPace %tmp.135;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 152 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_152_20_152_66_begin:
+        %tmp.136 = lgetv %hrSoll.3;
+        symbol [ hrSoll %tmp.136 152 21 27 ];
+        %tmp.137 = 0;
+        %tmp.138 = gt %tmp.136 %tmp.137;
+        bf %tmp.138 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_152_20_152_66_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_152_20_152_66_true:
+        %tmp.139 = lgetv %hrSoll.3;
+        symbol [ hrSoll %tmp.139 152 35 41 ];
+        symbol [ toNumber %tmp.140 152 42 50 ];
+        %tmp.140 = getv function %tmp.139 :toNumber;
+        %tmp.141 = invoke %tmp.139 %tmp.140();
+        symbol [ toString %tmp.142 152 53 61 ];
+        %tmp.142 = getv function %tmp.141 :toString;
+        %tmp.143 = invoke %tmp.141 %tmp.142();
+        push %tmp.143;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_152_20_152_66_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_152_20_152_66_else_false:
+        %tmp.144 = "--";
+        push %tmp.144;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_152_20_152_66_end:
+        %tmp.145 = phi [%tmp.138 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_152_20_152_66_begin] [%tmp.143 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_152_20_152_66_true] [%tmp.144 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_152_20_152_66_else_false] [%tmp.145 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_152_20_152_66_end];
+        symbol [ valSollHr ? 152 8 17 ];
+        putv self :valSollHr %tmp.145;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 154 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_154_8_174_8_if_stmt:
+        %tmp.146 = lgetv %hrSoll.3;
+        symbol [ hrSoll %tmp.146 154 12 18 ];
+        %tmp.147 = 0;
+        %tmp.148 = gt %tmp.146 %tmp.147;
+        bf %tmp.148 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_154_8_174_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_154_8_174_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_154_24_174_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 155 12 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_154_24_174_8_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_154_24_174_8_stop" ]
+        %rawDrift.5 = local;
+        symbol [ rawDrift %rawDrift.5 155 16 24 ];
+        symbol [ ewmaHr %tmp.150 155 29 35 ];
+        %tmp.150 = getv ? :ewmaHr;
+        %tmp.151 = lgetv %hrSoll.3;
+        symbol [ hrSoll %tmp.151 155 38 44 ];
+        %tmp.152 = div %tmp.150 %tmp.151;
+        %tmp.153 = 1.0;
+        %tmp.154 = sub %tmp.152 %tmp.153;
+        %tmp.155 = 100.0;
+        %tmp.156 = mul %tmp.154 %tmp.155;
+        lputv %rawDrift.5 %tmp.156;
+        symbol [ rawDrift %rawDrift.5 155 16 24 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 156 12 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_156_12_161_12_if_stmt:
+        symbol [ driftInitialized %tmp.158 156 17 33 ];
+        %tmp.158 = getv ? :driftInitialized;
+        %tmp.159 = not %tmp.158;
+        bf %tmp.159 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_156_12_161_12_if_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_156_12_161_12_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_156_35_159_12_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 157 16 ]
+        %tmp.160 = lgetv %rawDrift.5;
+        symbol [ rawDrift %tmp.160 157 28 36 ];
+        symbol [ ewmaDrift ? 157 16 25 ];
+        putv self :ewmaDrift %tmp.160;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 158 16 ]
+        %tmp.161 = true;
+        symbol [ driftInitialized ? 158 16 32 ];
+        putv self :driftInitialized %tmp.161;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_156_35_159_12_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_156_12_161_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_156_12_161_12_if_else_false:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_159_19_161_12_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 160 16 ]
+        symbol [ ALPHA_DRIFT %tmp.163 160 29 40 ];
+        %tmp.163 = getv ? :ALPHA_DRIFT;
+        %tmp.164 = lgetv %rawDrift.5;
+        symbol [ rawDrift %tmp.164 160 43 51 ];
+        %tmp.165 = mul %tmp.163 %tmp.164;
+        %tmp.166 = 1.0;
+        symbol [ ALPHA_DRIFT %tmp.168 160 63 74 ];
+        %tmp.168 = getv ? :ALPHA_DRIFT;
+        %tmp.169 = sub %tmp.166 %tmp.168;
+        symbol [ ewmaDrift %tmp.171 160 78 87 ];
+        %tmp.171 = getv ? :ewmaDrift;
+        %tmp.172 = mul %tmp.169 %tmp.171;
+        %tmp.173 = add %tmp.165 %tmp.172;
+        symbol [ ewmaDrift ? 160 16 25 ];
+        putv self :ewmaDrift %tmp.173;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_159_19_161_12_stop:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_156_12_161_12_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 163 12 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_154_24_174_8_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_154_24_174_8_stop" ]
+        %displayDrift.6 = local;
+        symbol [ displayDrift %displayDrift.6 163 16 28 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_163_31_163_74_begin:
+        symbol [ ewmaDrift %tmp.175 163 32 41 ];
+        %tmp.175 = getv ? :ewmaDrift;
+        symbol [ abs %tmp.176 163 42 45 ];
+        %tmp.176 = getv function %tmp.175 :abs;
+        %tmp.177 = invoke %tmp.175 %tmp.176();
+        symbol [ DRIFT_DEADZONE %tmp.179 163 50 64 ];
+        %tmp.179 = getv ? :DRIFT_DEADZONE;
+        %tmp.180 = lt %tmp.177 %tmp.179;
+        bf %tmp.180 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_163_31_163_74_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_163_31_163_74_true:
+        %tmp.181 = 0.0;
+        push %tmp.181;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_163_31_163_74_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_163_31_163_74_else_false:
+        symbol [ ewmaDrift %tmp.183 163 74 83 ];
+        %tmp.183 = getv ? :ewmaDrift;
+        push %tmp.183;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_163_31_163_74_end:
+        %tmp.184 = phi [%tmp.180 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_163_31_163_74_begin] [%tmp.181 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_163_31_163_74_true] [%tmp.183 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_163_31_163_74_else_false] [%tmp.184 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_163_31_163_74_end];
+        lputv %displayDrift.6 %tmp.184;
+        symbol [ displayDrift %displayDrift.6 163 16 28 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 164 12 ]
+        %tmp.185 = self;
+        symbol [ updateColorsAndText %tmp.186 164 12 31 ];
+        %tmp.186 = getv function %tmp.185 :updateColorsAndText;
+        %tmp.187 = lgetv %displayDrift.6;
+        symbol [ displayDrift %tmp.187 164 32 44 ];
+        invoke %tmp.185 %tmp.186(%tmp.187);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 166 12 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_166_12_173_12_if_stmt:
+        %tmp.188 = lgetv %info;
+        symbol [ info %tmp.188 166 16 20 ];
+        symbol [ timerState %tmp.189 166 21 31 ];
+        %tmp.189 = getv %tmp.188 :timerState;
+        symbol [ Activity %tmp.190 166 35 43 ];
+        %tmp.190 = getm $.Toybox.Activity;
+        symbol [ TIMER_STATE_ON %tmp.191 166 44 58 ];
+        %tmp.191 = getv %tmp.190 :TIMER_STATE_ON;
+        %tmp.192 = eq %tmp.189 %tmp.191;
+        bf %tmp.192 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_166_12_173_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_166_12_173_12_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_166_60_173_12_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 167 16 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_167_16_167_76_if_stmt:
+        symbol [ driftField %tmp.194 167 20 30 ];
+        %tmp.194 = getv ? :driftField;
+        %tmp.195 = null;
+        %tmp.196 = ne %tmp.194 %tmp.195;
+        bf %tmp.196 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_167_16_167_76_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_167_16_167_76_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_167_40_167_76_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 167 42 ]
+        symbol [ driftField %tmp.198 167 42 52 ];
+        %tmp.198 = getv ? :driftField;
+        %tmp.199 = as %tmp.198 { (!Null) };
+        symbol [ setData %tmp.200 167 53 60 ];
+        %tmp.200 = getv function %tmp.199 :setData;
+        %tmp.201 = lgetv %displayDrift.6;
+        symbol [ displayDrift %tmp.201 167 61 73 ];
+        invoke %tmp.199 %tmp.200(%tmp.201);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_167_40_167_76_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_167_16_167_76_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_167_16_167_76_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 168 16 ]
+        symbol [ driftSum %tmp.202 168 16 24 ];
+        %tmp.202 = getv self :driftSum;
+        %tmp.203 = lgetv %displayDrift.6;
+        symbol [ displayDrift %tmp.203 168 28 40 ];
+        %tmp.204 = add %tmp.202 %tmp.203;
+        symbol [ driftSum ? 168 16 24 ];
+        putv self :driftSum dup %tmp.204;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 169 16 ]
+        symbol [ driftCount %tmp.207 169 16 26 ];
+        %tmp.207 = getv ? :driftCount;
+        %tmp.208 = add %tmp.207 1;
+        symbol [ driftCount ? 169 16 26 ];
+        putv self :driftCount dup %tmp.208;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 170 16 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_16_172_16_if_stmt:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_20_170_58_begin:
+        symbol [ avgDriftField %tmp.210 170 20 33 ];
+        %tmp.210 = getv ? :avgDriftField;
+        %tmp.211 = null;
+        %tmp.212 = ne %tmp.210 %tmp.211;
+        bf %tmp.212 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_16_172_16_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_45_170_58_true:
+        symbol [ driftCount %tmp.214 170 45 55 ];
+        %tmp.214 = getv ? :driftCount;
+        %tmp.215 = 0;
+        %tmp.216 = gt %tmp.214 %tmp.215;
+        push %tmp.216;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_45_170_58_end:
+        %tmp.217 = phi [%tmp.212 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_20_170_58_begin] [%tmp.216 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_45_170_58_true] [%tmp.217 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_45_170_58_end];
+        bf %tmp.217 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_16_172_16_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_16_172_16_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_61_172_16_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 171 20 ]
+        symbol [ avgDriftField %tmp.219 171 20 33 ];
+        %tmp.219 = getv ? :avgDriftField;
+        %tmp.220 = as %tmp.219 { (!Null) };
+        symbol [ setData %tmp.221 171 34 41 ];
+        %tmp.221 = getv function %tmp.220 :setData;
+        symbol [ driftSum %tmp.223 171 42 50 ];
+        %tmp.223 = getv ? :driftSum;
+        symbol [ driftCount %tmp.225 171 53 63 ];
+        %tmp.225 = getv ? :driftCount;
+        %tmp.226 = div %tmp.223 %tmp.225;
+        invoke %tmp.220 %tmp.221(%tmp.226);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_61_172_16_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_16_172_16_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_170_16_172_16_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_166_60_173_12_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_166_12_173_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_166_12_173_12_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_154_24_174_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_154_8_174_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_154_8_174_8_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_107_52_175_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 177; @symbol_functiondef = [resetDisplay,177,21,33]; ]
+    private
+    function resetDisplay() {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_177_36_183_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 178 8 ]
+        %tmp.1 = "--:--";
+        symbol [ valAktPace ? 178 8 18 ];
+        putv self :valAktPace %tmp.1;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 179 8 ]
+        %tmp.2 = self;
+        symbol [ resetDisplayStrings %tmp.3 179 8 27 ];
+        %tmp.3 = getv function %tmp.2 :resetDisplayStrings;
+        invoke %tmp.2 %tmp.3();
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 180 8 ]
+        %tmp.4 = "--";
+        symbol [ strDrift ? 180 8 16 ];
+        putv self :strDrift %tmp.4;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 181 8 ]
+        %tmp.5 = self;
+        symbol [ getBackgroundColor %tmp.6 181 18 36 ];
+        %tmp.6 = getv function %tmp.5 :getBackgroundColor;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        symbol [ bgColor ? 181 8 15 ];
+        putv self :bgColor %tmp.7;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 182 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_182_18_182_86_begin:
+        symbol [ bgColor %tmp.9 182 19 26 ];
+        %tmp.9 = getv ? :bgColor;
+        symbol [ Graphics %tmp.10 182 30 38 ];
+        %tmp.10 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.11 182 39 50 ];
+        %tmp.11 = getv %tmp.10 :COLOR_BLACK;
+        %tmp.12 = eq %tmp.9 %tmp.11;
+        bf %tmp.12 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_182_18_182_86_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_182_18_182_86_true:
+        symbol [ Graphics %tmp.13 182 54 62 ];
+        %tmp.13 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.14 182 63 74 ];
+        %tmp.14 = getv %tmp.13 :COLOR_WHITE;
+        push %tmp.14;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_182_18_182_86_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_182_18_182_86_else_false:
+        symbol [ Graphics %tmp.15 182 77 85 ];
+        %tmp.15 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.16 182 86 97 ];
+        %tmp.16 = getv %tmp.15 :COLOR_BLACK;
+        push %tmp.16;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_182_18_182_86_end:
+        %tmp.17 = phi [%tmp.12 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_182_18_182_86_begin] [%tmp.14 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_182_18_182_86_true] [%tmp.16 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_182_18_182_86_else_false] [%tmp.17 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_182_18_182_86_end];
+        symbol [ fgColor ? 182 8 15 ];
+        putv self :fgColor %tmp.17;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_177_36_183_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 185; @symbol_functiondef = [resetDisplayStrings,185,21,40]; ]
+    private
+    function resetDisplayStrings() {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_185_43_188_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 186 8 ]
+        %tmp.1 = "--:--";
+        symbol [ valSollPace ? 186 8 19 ];
+        putv self :valSollPace %tmp.1;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 187 8 ]
+        %tmp.2 = "--";
+        symbol [ valSollHr ? 187 8 17 ];
+        putv self :valSollHr %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_185_43_188_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 190; @symbol_functiondef = [updateColorsAndText,190,21,40]; @symbol_param<0> = [driftPercent,190,41,53]; @symbol_param<0>_type<0> = [Float,190,57,62]; ]
+    private
+    function updateColorsAndText(driftPercent as Float) {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_190_64_203_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 191 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_190_64_203_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_190_64_203_4_stop" ]
+        %sign.1 = local;
+        symbol [ sign %sign.1 191 12 16 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_191_19_191_44_begin:
+        %tmp.1 = lgetv %driftPercent;
+        symbol [ driftPercent %tmp.1 191 19 31 ];
+        %tmp.2 = 0;
+        %tmp.3 = gt %tmp.1 %tmp.2;
+        bf %tmp.3 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_191_19_191_44_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_191_19_191_44_true:
+        %tmp.4 = "+";
+        push %tmp.4;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_191_19_191_44_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_191_19_191_44_else_false:
+        %tmp.5 = "";
+        push %tmp.5;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_191_19_191_44_end:
+        %tmp.6 = phi [%tmp.3 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_191_19_191_44_begin] [%tmp.4 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_191_19_191_44_true] [%tmp.5 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_191_19_191_44_else_false] [%tmp.6 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_191_19_191_44_end];
+        lputv %sign.1 %tmp.6;
+        symbol [ sign %sign.1 191 12 16 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 192 8 ]
+        %tmp.7 = lgetv %sign.1;
+        symbol [ sign %tmp.7 192 19 23 ];
+        %tmp.8 = lgetv %driftPercent;
+        symbol [ driftPercent %tmp.8 192 26 38 ];
+        symbol [ format %tmp.9 192 39 45 ];
+        %tmp.9 = getv function %tmp.8 :format;
+        %tmp.10 = "%.1f";
+        %tmp.11 = invoke %tmp.8 %tmp.9(%tmp.10);
+        %tmp.12 = add %tmp.7 %tmp.11;
+        %tmp.13 = "%";
+        %tmp.14 = add %tmp.12 %tmp.13;
+        symbol [ strDrift ? 192 8 16 ];
+        putv self :strDrift %tmp.14;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 193 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_193_8_202_8_if_stmt:
+        %tmp.15 = lgetv %driftPercent;
+        symbol [ driftPercent %tmp.15 193 12 24 ];
+        %tmp.16 = 3.0;
+        %tmp.17 = lt %tmp.15 %tmp.16;
+        bf %tmp.17 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_193_8_202_8_if_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_193_8_202_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_193_32_196_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 194 12 ]
+        symbol [ Graphics %tmp.18 194 22 30 ];
+        %tmp.18 = getm $.Toybox.Graphics;
+        symbol [ COLOR_GREEN %tmp.19 194 31 42 ];
+        %tmp.19 = getv %tmp.18 :COLOR_GREEN;
+        symbol [ bgColor ? 194 12 19 ];
+        putv self :bgColor %tmp.19;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 195 12 ]
+        symbol [ Graphics %tmp.20 195 22 30 ];
+        %tmp.20 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.21 195 31 42 ];
+        %tmp.21 = getv %tmp.20 :COLOR_BLACK;
+        symbol [ fgColor ? 195 12 19 ];
+        putv self :fgColor %tmp.21;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_193_32_196_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_193_8_202_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_193_8_202_8_if_false:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 196 15 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_15_202_8_if_stmt:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_19_196_58_begin:
+        %tmp.22 = lgetv %driftPercent;
+        symbol [ driftPercent %tmp.22 196 19 31 ];
+        %tmp.23 = 3.0;
+        %tmp.24 = gte %tmp.22 %tmp.23;
+        bf %tmp.24 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_15_202_8_if_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_42_196_58_true:
+        %tmp.25 = lgetv %driftPercent;
+        symbol [ driftPercent %tmp.25 196 42 54 ];
+        %tmp.26 = 7.0;
+        %tmp.27 = lte %tmp.25 %tmp.26;
+        push %tmp.27;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_42_196_58_end:
+        %tmp.28 = phi [%tmp.24 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_19_196_58_begin] [%tmp.27 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_42_196_58_true] [%tmp.28 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_42_196_58_end];
+        bf %tmp.28 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_15_202_8_if_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_15_202_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_63_199_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 197 12 ]
+        symbol [ Graphics %tmp.29 197 22 30 ];
+        %tmp.29 = getm $.Toybox.Graphics;
+        symbol [ COLOR_YELLOW %tmp.30 197 31 43 ];
+        %tmp.30 = getv %tmp.29 :COLOR_YELLOW;
+        symbol [ bgColor ? 197 12 19 ];
+        putv self :bgColor %tmp.30;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 198 12 ]
+        symbol [ Graphics %tmp.31 198 22 30 ];
+        %tmp.31 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.32 198 31 42 ];
+        %tmp.32 = getv %tmp.31 :COLOR_BLACK;
+        symbol [ fgColor ? 198 12 19 ];
+        putv self :fgColor %tmp.32;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_63_199_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_15_202_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_15_202_8_if_else_false:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_199_15_202_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 200 12 ]
+        symbol [ Graphics %tmp.33 200 22 30 ];
+        %tmp.33 = getm $.Toybox.Graphics;
+        symbol [ COLOR_RED %tmp.34 200 31 40 ];
+        %tmp.34 = getv %tmp.33 :COLOR_RED;
+        symbol [ bgColor ? 200 12 19 ];
+        putv self :bgColor %tmp.34;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 201 12 ]
+        symbol [ Graphics %tmp.35 201 22 30 ];
+        %tmp.35 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.36 201 31 42 ];
+        %tmp.36 = getv %tmp.35 :COLOR_WHITE;
+        symbol [ fgColor ? 201 12 19 ];
+        putv self :fgColor %tmp.36;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_199_15_202_8_stop:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_196_15_202_8_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_193_8_202_8_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_190_64_203_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 205; @symbol_functiondef = [onUpdate,205,13,21]; @symbol_param<0> = [dc,205,22,24]; @symbol_param<0>_type<0> = [Graphics,205,28,36]; @symbol_param<0>_type<1> = [Dc,205,37,39]; ]
+    function onUpdate(dc as Graphics.Dc) as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 206 8 ]
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 206 8 10 ];
+        symbol [ setColor %tmp.2 206 11 19 ];
+        %tmp.2 = getv function %tmp.1 :setColor;
+        symbol [ Graphics %tmp.3 206 20 28 ];
+        %tmp.3 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.4 206 29 46 ];
+        %tmp.4 = getv %tmp.3 :COLOR_TRANSPARENT;
+        symbol [ bgColor %tmp.6 206 48 55 ];
+        %tmp.6 = getv ? :bgColor;
+        invoke %tmp.1 %tmp.2(%tmp.4, %tmp.6);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 207 8 ]
+        %tmp.7 = lgetv %dc;
+        symbol [ dc %tmp.7 207 8 10 ];
+        symbol [ clear %tmp.8 207 11 16 ];
+        %tmp.8 = getv function %tmp.7 :clear;
+        invoke %tmp.7 %tmp.8();
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 209 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_stop" ]
+        %width.1 = local;
+        symbol [ width %width.1 209 12 17 ];
+        %tmp.9 = lgetv %dc;
+        symbol [ dc %tmp.9 209 20 22 ];
+        symbol [ getWidth %tmp.10 209 23 31 ];
+        %tmp.10 = getv function %tmp.9 :getWidth;
+        %tmp.11 = invoke %tmp.9 %tmp.10();
+        lputv %width.1 %tmp.11;
+        symbol [ width %width.1 209 12 17 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 210 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_stop" ]
+        %height.2 = local;
+        symbol [ height %height.2 210 12 18 ];
+        %tmp.12 = lgetv %dc;
+        symbol [ dc %tmp.12 210 21 23 ];
+        symbol [ getHeight %tmp.13 210 24 33 ];
+        %tmp.13 = getv function %tmp.12 :getHeight;
+        %tmp.14 = invoke %tmp.12 %tmp.13();
+        lputv %height.2 %tmp.14;
+        symbol [ height %height.2 210 12 18 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 211 8 ]
+        %tmp.15 = lgetv %dc;
+        symbol [ dc %tmp.15 211 8 10 ];
+        symbol [ setColor %tmp.16 211 11 19 ];
+        %tmp.16 = getv function %tmp.15 :setColor;
+        symbol [ fgColor %tmp.18 211 20 27 ];
+        %tmp.18 = getv ? :fgColor;
+        symbol [ Graphics %tmp.19 211 29 37 ];
+        %tmp.19 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.20 211 38 55 ];
+        %tmp.20 = getv %tmp.19 :COLOR_TRANSPARENT;
+        invoke %tmp.15 %tmp.16(%tmp.18, %tmp.20);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 213 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_stop" ]
+        %pL.3 = local;
+        symbol [ pL %pL.3 213 12 14 ];
+        symbol [ lblAktPace %tmp.22 213 17 27 ];
+        %tmp.22 = getv ? :lblAktPace;
+        lputv %pL.3 %tmp.22;
+        symbol [ pL %pL.3 213 12 14 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 214 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_stop" ]
+        %sPL.4 = local;
+        symbol [ sPL %sPL.4 214 12 15 ];
+        symbol [ lblSollPace %tmp.24 214 18 29 ];
+        %tmp.24 = getv ? :lblSollPace;
+        lputv %sPL.4 %tmp.24;
+        symbol [ sPL %sPL.4 214 12 15 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 215 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_stop" ]
+        %sHL.5 = local;
+        symbol [ sHL %sHL.5 215 12 15 ];
+        symbol [ lblSollHr %tmp.26 215 18 27 ];
+        %tmp.26 = getv ? :lblSollHr;
+        lputv %sHL.5 %tmp.26;
+        symbol [ sHL %sHL.5 215 12 15 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 216 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_stop" ]
+        %hL.6 = local;
+        symbol [ hL %hL.6 216 12 14 ];
+        symbol [ lblAktHr %tmp.28 216 17 25 ];
+        %tmp.28 = getv ? :lblAktHr;
+        lputv %hL.6 %tmp.28;
+        symbol [ hL %hL.6 216 12 14 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 218 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_218_8_223_8_if_stmt:
+        %tmp.29 = lgetv %width.1;
+        symbol [ width %tmp.29 218 12 17 ];
+        %tmp.30 = 180;
+        %tmp.31 = lt %tmp.29 %tmp.30;
+        bf %tmp.31 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_218_8_223_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_218_8_223_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_218_25_223_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 219 12 ]
+        %tmp.32 = "P:";
+        lputv %pL.3 %tmp.32;
+        symbol [ pL %pL.3 219 12 14 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 220 12 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_220_18_220_40_begin:
+        symbol [ isGerman %tmp.34 220 18 26 ];
+        %tmp.34 = getv ? :isGerman;
+        bf %tmp.34 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_220_18_220_40_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_220_18_220_40_true:
+        %tmp.35 = "Erw.P:";
+        push %tmp.35;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_220_18_220_40_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_220_18_220_40_else_false:
+        %tmp.36 = "Exp.P:";
+        push %tmp.36;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_220_18_220_40_end:
+        %tmp.37 = phi [%tmp.34 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_220_18_220_40_begin] [%tmp.35 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_220_18_220_40_true] [%tmp.36 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_220_18_220_40_else_false] [%tmp.37 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_220_18_220_40_end];
+        lputv %sPL.4 %tmp.37;
+        symbol [ sPL %sPL.4 220 12 15 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 221 12 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_221_18_221_40_begin:
+        symbol [ isGerman %tmp.39 221 18 26 ];
+        %tmp.39 = getv ? :isGerman;
+        bf %tmp.39 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_221_18_221_40_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_221_18_221_40_true:
+        %tmp.40 = "Erw.H:";
+        push %tmp.40;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_221_18_221_40_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_221_18_221_40_else_false:
+        %tmp.41 = "Exp.H:";
+        push %tmp.41;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_221_18_221_40_end:
+        %tmp.42 = phi [%tmp.39 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_221_18_221_40_begin] [%tmp.40 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_221_18_221_40_true] [%tmp.41 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_221_18_221_40_else_false] [%tmp.42 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_221_18_221_40_end];
+        lputv %sHL.5 %tmp.42;
+        symbol [ sHL %sHL.5 221 12 15 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 222 12 ]
+        %tmp.43 = "H:";
+        lputv %hL.6 %tmp.43;
+        symbol [ hL %hL.6 222 12 14 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_218_25_223_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_218_8_223_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_218_8_223_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 225 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_stop" ]
+        %fOuter.7 = local;
+        symbol [ fOuter %fOuter.7 225 12 18 ];
+        symbol [ Graphics %tmp.44 225 21 29 ];
+        %tmp.44 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.45 225 30 40 ];
+        %tmp.45 = getv %tmp.44 :FONT_XTINY;
+        lputv %fOuter.7 %tmp.45;
+        symbol [ fOuter %fOuter.7 225 12 18 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 226 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_stop" ]
+        %fInner.8 = local;
+        symbol [ fInner %fInner.8 226 12 18 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_226_21_226_69_begin:
+        %tmp.46 = lgetv %height.2;
+        symbol [ height %tmp.46 226 22 28 ];
+        %tmp.47 = 140;
+        %tmp.48 = lt %tmp.46 %tmp.47;
+        bf %tmp.48 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_226_21_226_69_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_226_21_226_69_true:
+        symbol [ Graphics %tmp.49 226 38 46 ];
+        %tmp.49 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.50 226 47 57 ];
+        %tmp.50 = getv %tmp.49 :FONT_XTINY;
+        push %tmp.50;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_226_21_226_69_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_226_21_226_69_else_false:
+        symbol [ Graphics %tmp.51 226 60 68 ];
+        %tmp.51 = getm $.Toybox.Graphics;
+        symbol [ FONT_TINY %tmp.52 226 69 78 ];
+        %tmp.52 = getv %tmp.51 :FONT_TINY;
+        push %tmp.52;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_226_21_226_69_end:
+        %tmp.53 = phi [%tmp.48 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_226_21_226_69_begin] [%tmp.50 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_226_21_226_69_true] [%tmp.52 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_226_21_226_69_else_false] [%tmp.53 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_226_21_226_69_end];
+        lputv %fInner.8 %tmp.53;
+        symbol [ fInner %fInner.8 226 12 18 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 227 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_stop" ]
+        %fDrift.9 = local;
+        symbol [ fDrift %fDrift.9 227 12 18 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_227_21_227_69_begin:
+        %tmp.54 = lgetv %height.2;
+        symbol [ height %tmp.54 227 22 28 ];
+        %tmp.55 = 140;
+        %tmp.56 = lt %tmp.54 %tmp.55;
+        bf %tmp.56 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_227_21_227_69_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_227_21_227_69_true:
+        symbol [ Graphics %tmp.57 227 38 46 ];
+        %tmp.57 = getm $.Toybox.Graphics;
+        symbol [ FONT_SMALL %tmp.58 227 47 57 ];
+        %tmp.58 = getv %tmp.57 :FONT_SMALL;
+        push %tmp.58;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_227_21_227_69_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_227_21_227_69_else_false:
+        symbol [ Graphics %tmp.59 227 60 68 ];
+        %tmp.59 = getm $.Toybox.Graphics;
+        symbol [ FONT_MEDIUM %tmp.60 227 69 80 ];
+        %tmp.60 = getv %tmp.59 :FONT_MEDIUM;
+        push %tmp.60;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_227_21_227_69_end:
+        %tmp.61 = phi [%tmp.56 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_227_21_227_69_begin] [%tmp.58 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_227_21_227_69_true] [%tmp.60 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_227_21_227_69_else_false] [%tmp.61 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_227_21_227_69_end];
+        lputv %fDrift.9 %tmp.61;
+        symbol [ fDrift %fDrift.9 227 12 18 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 228 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_228_8_228_66_if_stmt:
+        %tmp.62 = lgetv %height.2;
+        symbol [ height %tmp.62 228 12 18 ];
+        %tmp.63 = 200;
+        %tmp.64 = gt %tmp.62 %tmp.63;
+        bf %tmp.64 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_228_8_228_66_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_228_8_228_66_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_228_26_228_66_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 228 28 ]
+        symbol [ Graphics %tmp.65 228 37 45 ];
+        %tmp.65 = getm $.Toybox.Graphics;
+        symbol [ FONT_NUMBER_MEDIUM %tmp.66 228 46 64 ];
+        %tmp.66 = getv %tmp.65 :FONT_NUMBER_MEDIUM;
+        lputv %fDrift.9 %tmp.66;
+        symbol [ fDrift %fDrift.9 228 28 34 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_228_26_228_66_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_228_8_228_66_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_228_8_228_66_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 230 8 ]
+        %tmp.67 = lgetv %dc;
+        symbol [ dc %tmp.67 230 8 10 ];
+        symbol [ drawText %tmp.68 230 11 19 ];
+        %tmp.68 = getv function %tmp.67 :drawText;
+        %tmp.69 = lgetv %width.1;
+        symbol [ width %tmp.69 230 20 25 ];
+        %tmp.70 = 2;
+        %tmp.71 = div %tmp.69 %tmp.70;
+        %tmp.72 = lgetv %height.2;
+        symbol [ height %tmp.72 230 31 37 ];
+        %tmp.73 = 0.12;
+        %tmp.74 = mul %tmp.72 %tmp.73;
+        %tmp.75 = lgetv %fOuter.7;
+        symbol [ fOuter %tmp.75 230 46 52 ];
+        %tmp.76 = lgetv %pL.3;
+        symbol [ pL %tmp.76 230 54 56 ];
+        symbol [ valAktPace %tmp.78 230 59 69 ];
+        %tmp.78 = getv ? :valAktPace;
+        %tmp.79 = add %tmp.76 %tmp.78;
+        symbol [ Graphics %tmp.80 230 71 79 ];
+        %tmp.80 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.81 230 80 99 ];
+        %tmp.81 = getv %tmp.80 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.82 230 102 110 ];
+        %tmp.82 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.83 230 111 131 ];
+        %tmp.83 = getv %tmp.82 :TEXT_JUSTIFY_VCENTER;
+        %tmp.84 = bitor %tmp.81 %tmp.83;
+        invoke %tmp.67 %tmp.68(%tmp.71, %tmp.74, %tmp.75, %tmp.79, %tmp.84);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 231 8 ]
+        %tmp.85 = lgetv %dc;
+        symbol [ dc %tmp.85 231 8 10 ];
+        symbol [ drawText %tmp.86 231 11 19 ];
+        %tmp.86 = getv function %tmp.85 :drawText;
+        %tmp.87 = lgetv %width.1;
+        symbol [ width %tmp.87 231 20 25 ];
+        %tmp.88 = 2;
+        %tmp.89 = div %tmp.87 %tmp.88;
+        %tmp.90 = lgetv %height.2;
+        symbol [ height %tmp.90 231 31 37 ];
+        %tmp.91 = 0.30;
+        %tmp.92 = mul %tmp.90 %tmp.91;
+        %tmp.93 = lgetv %fInner.8;
+        symbol [ fInner %tmp.93 231 46 52 ];
+        %tmp.94 = lgetv %sPL.4;
+        symbol [ sPL %tmp.94 231 54 57 ];
+        symbol [ valSollPace %tmp.96 231 60 71 ];
+        %tmp.96 = getv ? :valSollPace;
+        %tmp.97 = add %tmp.94 %tmp.96;
+        symbol [ Graphics %tmp.98 231 73 81 ];
+        %tmp.98 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.99 231 82 101 ];
+        %tmp.99 = getv %tmp.98 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.100 231 104 112 ];
+        %tmp.100 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.101 231 113 133 ];
+        %tmp.101 = getv %tmp.100 :TEXT_JUSTIFY_VCENTER;
+        %tmp.102 = bitor %tmp.99 %tmp.101;
+        invoke %tmp.85 %tmp.86(%tmp.89, %tmp.92, %tmp.93, %tmp.97, %tmp.102);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 232 8 ]
+        %tmp.103 = lgetv %dc;
+        symbol [ dc %tmp.103 232 8 10 ];
+        symbol [ drawText %tmp.104 232 11 19 ];
+        %tmp.104 = getv function %tmp.103 :drawText;
+        %tmp.105 = lgetv %width.1;
+        symbol [ width %tmp.105 232 20 25 ];
+        %tmp.106 = 2;
+        %tmp.107 = div %tmp.105 %tmp.106;
+        %tmp.108 = lgetv %height.2;
+        symbol [ height %tmp.108 232 31 37 ];
+        %tmp.109 = 0.48;
+        %tmp.110 = mul %tmp.108 %tmp.109;
+        %tmp.111 = lgetv %fDrift.9;
+        symbol [ fDrift %tmp.111 232 46 52 ];
+        symbol [ strDrift %tmp.113 232 54 62 ];
+        %tmp.113 = getv ? :strDrift;
+        symbol [ Graphics %tmp.114 232 64 72 ];
+        %tmp.114 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.115 232 73 92 ];
+        %tmp.115 = getv %tmp.114 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.116 232 95 103 ];
+        %tmp.116 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.117 232 104 124 ];
+        %tmp.117 = getv %tmp.116 :TEXT_JUSTIFY_VCENTER;
+        %tmp.118 = bitor %tmp.115 %tmp.117;
+        invoke %tmp.103 %tmp.104(%tmp.107, %tmp.110, %tmp.111, %tmp.113, %tmp.118);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 235 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_235_8_242_8_if_stmt:
+        symbol [ isConfigured %tmp.120 235 13 25 ];
+        %tmp.120 = getv ? :isConfigured;
+        %tmp.121 = not %tmp.120;
+        bf %tmp.121 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_235_8_242_8_if_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_235_8_242_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_235_27_237_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 236 12 ]
+        %tmp.122 = lgetv %dc;
+        symbol [ dc %tmp.122 236 12 14 ];
+        symbol [ drawText %tmp.123 236 15 23 ];
+        %tmp.123 = getv function %tmp.122 :drawText;
+        %tmp.124 = lgetv %width.1;
+        symbol [ width %tmp.124 236 24 29 ];
+        %tmp.125 = 2;
+        %tmp.126 = div %tmp.124 %tmp.125;
+        %tmp.127 = lgetv %height.2;
+        symbol [ height %tmp.127 236 35 41 ];
+        %tmp.128 = 0.60;
+        %tmp.129 = mul %tmp.127 %tmp.128;
+        symbol [ Graphics %tmp.130 236 50 58 ];
+        %tmp.130 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.131 236 59 69 ];
+        %tmp.131 = getv %tmp.130 :FONT_XTINY;
+        %tmp.132 = "CHECK SETTINGS";
+        symbol [ Graphics %tmp.133 236 89 97 ];
+        %tmp.133 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.134 236 98 117 ];
+        %tmp.134 = getv %tmp.133 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.135 236 120 128 ];
+        %tmp.135 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.136 236 129 149 ];
+        %tmp.136 = getv %tmp.135 :TEXT_JUSTIFY_VCENTER;
+        %tmp.137 = bitor %tmp.134 %tmp.136;
+        invoke %tmp.122 %tmp.123(%tmp.126, %tmp.129, %tmp.131, %tmp.132, %tmp.137);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_235_27_237_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_235_8_242_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_235_8_242_8_if_false:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 237 15 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_237_15_242_8_if_stmt:
+        symbol [ strDrift %tmp.139 237 19 27 ];
+        %tmp.139 = getv ? :strDrift;
+        symbol [ equals %tmp.140 237 28 34 ];
+        %tmp.140 = getv function %tmp.139 :equals;
+        %tmp.141 = "Warm-up";
+        %tmp.142 = invoke %tmp.139 %tmp.140(%tmp.141);
+        bf %tmp.142 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_237_15_242_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_237_15_242_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_237_47_242_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 238 12 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_237_47_242_8_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_237_47_242_8_stop" ]
+        %remaining.10 = local;
+        symbol [ remaining %remaining.10 238 16 25 ];
+        symbol [ WARMUP_MS %tmp.144 238 29 38 ];
+        %tmp.144 = getv ? :WARMUP_MS;
+        symbol [ mTimerTime %tmp.146 238 41 51 ];
+        %tmp.146 = getv ? :mTimerTime;
+        %tmp.147 = sub %tmp.144 %tmp.146;
+        %tmp.148 = 1000;
+        %tmp.149 = div %tmp.147 %tmp.148;
+        lputv %remaining.10 %tmp.149;
+        symbol [ remaining %remaining.10 238 16 25 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 239 12 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_239_12_241_12_if_stmt:
+        %tmp.150 = lgetv %remaining.10;
+        symbol [ remaining %tmp.150 239 16 25 ];
+        %tmp.151 = 0;
+        %tmp.152 = gt %tmp.150 %tmp.151;
+        bf %tmp.152 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_239_12_241_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_239_12_241_12_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_239_31_241_12_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 240 16 ]
+        %tmp.153 = lgetv %dc;
+        symbol [ dc %tmp.153 240 16 18 ];
+        symbol [ drawText %tmp.154 240 19 27 ];
+        %tmp.154 = getv function %tmp.153 :drawText;
+        %tmp.155 = lgetv %width.1;
+        symbol [ width %tmp.155 240 28 33 ];
+        %tmp.156 = 2;
+        %tmp.157 = div %tmp.155 %tmp.156;
+        %tmp.158 = lgetv %height.2;
+        symbol [ height %tmp.158 240 39 45 ];
+        %tmp.159 = 0.60;
+        %tmp.160 = mul %tmp.158 %tmp.159;
+        symbol [ Graphics %tmp.161 240 54 62 ];
+        %tmp.161 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.162 240 63 73 ];
+        %tmp.162 = getv %tmp.161 :FONT_XTINY;
+        %tmp.163 = lgetv %remaining.10;
+        symbol [ remaining %tmp.163 240 75 84 ];
+        symbol [ toString %tmp.164 240 85 93 ];
+        %tmp.164 = getv function %tmp.163 :toString;
+        %tmp.165 = invoke %tmp.163 %tmp.164();
+        %tmp.166 = "s LEFT";
+        %tmp.167 = add %tmp.165 %tmp.166;
+        symbol [ Graphics %tmp.168 240 108 116 ];
+        %tmp.168 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.169 240 117 136 ];
+        %tmp.169 = getv %tmp.168 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.170 240 139 147 ];
+        %tmp.170 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.171 240 148 168 ];
+        %tmp.171 = getv %tmp.170 :TEXT_JUSTIFY_VCENTER;
+        %tmp.172 = bitor %tmp.169 %tmp.171;
+        invoke %tmp.153 %tmp.154(%tmp.157, %tmp.160, %tmp.162, %tmp.167, %tmp.172);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_239_31_241_12_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_239_12_241_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_239_12_241_12_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_237_47_242_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_237_15_242_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_237_15_242_8_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_235_8_242_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 244 8 ]
+        %tmp.173 = lgetv %dc;
+        symbol [ dc %tmp.173 244 8 10 ];
+        symbol [ drawText %tmp.174 244 11 19 ];
+        %tmp.174 = getv function %tmp.173 :drawText;
+        %tmp.175 = lgetv %width.1;
+        symbol [ width %tmp.175 244 20 25 ];
+        %tmp.176 = 2;
+        %tmp.177 = div %tmp.175 %tmp.176;
+        %tmp.178 = lgetv %height.2;
+        symbol [ height %tmp.178 244 31 37 ];
+        %tmp.179 = 0.72;
+        %tmp.180 = mul %tmp.178 %tmp.179;
+        %tmp.181 = lgetv %fInner.8;
+        symbol [ fInner %tmp.181 244 46 52 ];
+        %tmp.182 = lgetv %sHL.5;
+        symbol [ sHL %tmp.182 244 54 57 ];
+        symbol [ valSollHr %tmp.184 244 60 69 ];
+        %tmp.184 = getv ? :valSollHr;
+        %tmp.185 = add %tmp.182 %tmp.184;
+        symbol [ Graphics %tmp.186 244 71 79 ];
+        %tmp.186 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.187 244 80 99 ];
+        %tmp.187 = getv %tmp.186 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.188 244 102 110 ];
+        %tmp.188 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.189 244 111 131 ];
+        %tmp.189 = getv %tmp.188 :TEXT_JUSTIFY_VCENTER;
+        %tmp.190 = bitor %tmp.187 %tmp.189;
+        invoke %tmp.173 %tmp.174(%tmp.177, %tmp.180, %tmp.181, %tmp.185, %tmp.190);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc" 245 8 ]
+        %tmp.191 = lgetv %dc;
+        symbol [ dc %tmp.191 245 8 10 ];
+        symbol [ drawText %tmp.192 245 11 19 ];
+        %tmp.192 = getv function %tmp.191 :drawText;
+        %tmp.193 = lgetv %width.1;
+        symbol [ width %tmp.193 245 20 25 ];
+        %tmp.194 = 2;
+        %tmp.195 = div %tmp.193 %tmp.194;
+        %tmp.196 = lgetv %height.2;
+        symbol [ height %tmp.196 245 31 37 ];
+        %tmp.197 = 0.88;
+        %tmp.198 = mul %tmp.196 %tmp.197;
+        %tmp.199 = lgetv %fOuter.7;
+        symbol [ fOuter %tmp.199 245 46 52 ];
+        %tmp.200 = lgetv %hL.6;
+        symbol [ hL %tmp.200 245 54 56 ];
+        symbol [ valAktHr %tmp.202 245 59 67 ];
+        %tmp.202 = getv ? :valAktHr;
+        %tmp.203 = add %tmp.200 %tmp.202;
+        symbol [ Graphics %tmp.204 245 69 77 ];
+        %tmp.204 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.205 245 78 97 ];
+        %tmp.205 = getv %tmp.204 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.206 245 100 108 ];
+        %tmp.206 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.207 245 109 129 ];
+        %tmp.207 = getv %tmp.206 :TEXT_JUSTIFY_VCENTER;
+        %tmp.208 = bitor %tmp.205 %tmp.207;
+        invoke %tmp.191 %tmp.192(%tmp.195, %tmp.198, %tmp.199, %tmp.203, %tmp.208);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_Efficiency_Drift_AnalyzerView_mc_205_49_246_4_stop:
+    }
+}
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\Efficiency-Drift-AnalyzerView.mc"; @line = 1; ]
+<init> {
+}

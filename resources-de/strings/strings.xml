@@ -1,0 +1,20 @@
+<strings>
+    <string id="AppName">Efficiency Drift Analyzer</string>
+    <string id="lblAktPace">Pace: </string>
+    <string id="lblSollPace">Erw. Pace: </string>
+    <string id="lblSollHr">Erw. HR: </string>
+    <string id="lblAktHr">HR: </string>
+    <string id="unitPercent">%</string>
+    <string id="lblFitDrift">Metabolische Drift</string>
+    <string id="lblFitDriftChart">Effizienz-Analyse</string>
+    <string id="lblFitAvgDrift">Durchschn. Met. Drift</string>
+
+    <string id="hrATitle">HF Punkt A (GA1)</string>
+    <string id="hrAPrompt">Herzfrequenz in bpm</string>
+    <string id="paceATitle">Pace Punkt A (GA1)</string>
+    <string id="paceAPrompt">Pace in Sekunden pro km (z.B. 360 für 6:00)</string>
+    <string id="hrBTitle">HF Punkt B (Schwelle)</string>
+    <string id="hrBPrompt">Herzfrequenz in bpm</string>
+    <string id="paceBTitle">Pace Punkt B (Schwelle)</string>
+    <string id="paceBPrompt">Pace in Sekunden pro km (z.B. 270 für 4:30)</string>
+</strings>
