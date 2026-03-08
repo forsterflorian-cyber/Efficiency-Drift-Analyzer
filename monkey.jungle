@@ -1,1 +1,12 @@
 project.manifest = manifest.xml
+
+modern_excludes = low_mem
+low_mem_excludes = high_mem;debug
+
+# Modern products keep the full UI and exclude the low-memory alternatives.
+base.excludeAnnotations = $(modern_excludes)
+
+# SDK 8.4.1 Device Reference: fr55/fr245/fr245m provide 32768 bytes for Data Fields.
+fr55.excludeAnnotations = $(low_mem_excludes)
+fr245.excludeAnnotations = $(low_mem_excludes)
+fr245m.excludeAnnotations = $(low_mem_excludes)
