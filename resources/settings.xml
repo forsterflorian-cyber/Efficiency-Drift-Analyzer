@@ -2,9 +2,9 @@
     <setting propertyKey="@Properties.hrA" title="@Strings.hrATitle" prompt="@Strings.hrAPrompt">
         <settingConfig type="numeric" />
     </setting>
-    <setting propertyKey="@Properties.paceA" title="@Strings.paceATitle" prompt="@Strings.paceAPrompt">
-        <settingConfig type="numeric" />
-    </setting>
+<setting propertyKey="@Properties.paceA" title="@Strings.paceATitle" prompt="@Strings.paceAPrompt">
+    <settingConfig type="numeric" />
+</setting>
     <setting propertyKey="@Properties.hrB" title="@Strings.hrBTitle" prompt="@Strings.hrBPrompt">
         <settingConfig type="numeric" />
     </setting>

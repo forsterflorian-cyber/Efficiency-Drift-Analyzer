@@ -5,6 +5,7 @@ import Toybox.WatchUi;
 import Toybox.Application.Properties;
 import Toybox.Graphics;
 import Toybox.FitContributor;
+import Toybox.System; // Neu für die Abfrage der Einheiten
 
 class EDAView extends WatchUi.DataField {
 
@@ -14,6 +15,9 @@ class EDAView extends WatchUi.DataField {
     private const ALPHA_DRIFT as Float = 0.05;
     private const WARMUP_MS as Number  = 180000; 
     private const DRIFT_DEADZONE as Float = 1.0;
+
+    // --- Einheiten-Logik ---
+    private var mDistanceFactor as Float = 1000.0; // Standard: Kilometer
 
     // --- Interne Berechnungs-Variablen ---
     private var hrA as Float = 0.0;
@@ -30,7 +34,7 @@ class EDAView extends WatchUi.DataField {
     private var filterInitialized as Boolean = false;
     private var driftInitialized as Boolean = false;
     private var isConfigured as Boolean = false;
-    private var mTimerTime as Number = 0; // Speichert die Zeit für onUpdate
+    private var mTimerTime as Number = 0;
 
     // --- UI & Lokalisierung ---
     private var lblAktPace as String = "";
@@ -75,6 +79,14 @@ class EDAView extends WatchUi.DataField {
     }
 
     function loadSettings() as Void {
+        // 1. Systemeinstellung prüfen: Kilometer oder Meilen?
+        var deviceSettings = System.getDeviceSettings();
+        if (deviceSettings.paceUnits == System.UNIT_STATUTE) {
+            mDistanceFactor = 1609.34; // Meter pro Meile
+        } else {
+            mDistanceFactor = 1000.0; // Meter pro Kilometer
+        }
+
         try {
             hrA = Properties.getValue("hrA").toFloat();
             paceA = Properties.getValue("paceA").toFloat();
@@ -88,8 +100,10 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function calculateLinearModel() as Void {
-        var v1 = (paceA > 0) ? 1000.0 / paceA : 0.0;
-        var v2 = (paceB > 0) ? 1000.0 / paceB : 0.0;
+        // v = Strecke / Zeit. Pace ist Zeit pro Strecke (s/km oder s/mi)
+        var v1 = (paceA > 0) ? mDistanceFactor / paceA : 0.0;
+        var v2 = (paceB > 0) ? mDistanceFactor / paceB : 0.0;
+
         if (v2 - v1 != 0) {
             m = (hrB - hrA) / (v2 - v1);
             b = hrA - (m * v1);
@@ -98,9 +112,10 @@ class EDAView extends WatchUi.DataField {
 
     private function formatPace(speedInMs as Float) as String {
         if (speedInMs <= 0.2) { return "--:--"; }
-        var secondsPerKm = 1000.0 / speedInMs;
-        var minutes = (secondsPerKm / 60).toNumber();
-        var seconds = (secondsPerKm.toNumber() % 60);
+        // Sekunden pro Distanzeinheit (km oder mi)
+        var secondsPerUnit = mDistanceFactor / speedInMs;
+        var minutes = (secondsPerUnit / 60).toNumber();
+        var seconds = (secondsPerUnit.toNumber() % 60);
         return minutes.toString() + ":" + seconds.format("%02d");
     }
 
@@ -231,7 +246,6 @@ class EDAView extends WatchUi.DataField {
         dc.drawText(width / 2, height * 0.30, fInner, sPL + valSollPace, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.drawText(width / 2, height * 0.48, fDrift, strDrift, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
-        // Sub-Label Hinweis Logik
         if (!isConfigured) {
             dc.drawText(width / 2, height * 0.60, Graphics.FONT_XTINY, "CHECK SETTINGS", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         } else if (strDrift.equals("Warm-up")) {

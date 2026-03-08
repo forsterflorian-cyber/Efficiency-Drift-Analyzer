@@ -9,12 +9,13 @@
     <string id="lblFitDriftChart">Effizienz-Analyse</string>
     <string id="lblFitAvgDrift">Durchschn. Met. Drift</string>
 
-    <string id="hrATitle">HF Punkt A (GA1)</string>
+    <string id="hrATitle">HF Punkt A (Basis)</string>
     <string id="hrAPrompt">Herzfrequenz in bpm</string>
-    <string id="paceATitle">Pace Punkt A (GA1)</string>
-    <string id="paceAPrompt">Pace in Sekunden pro km (z.B. 360 für 6:00)</string>
+    <string id="paceATitle">Pace Punkt A</string>
+    <string id="paceAPrompt">Gesamtsekunden pro Einheit (km oder Meile). Muss zur Uhreinstellung passen. Beispiel: 360 für 6:00 min/Einheit.</string>
+    
     <string id="hrBTitle">HF Punkt B (Schwelle)</string>
     <string id="hrBPrompt">Herzfrequenz in bpm</string>
-    <string id="paceBTitle">Pace Punkt B (Schwelle)</string>
-    <string id="paceBPrompt">Pace in Sekunden pro km (z.B. 270 für 4:30)</string>
+    <string id="paceBTitle">Pace Punkt B</string>
+    <string id="paceBPrompt">Gesamtsekunden pro Einheit (km oder Meile). Muss zur Uhreinstellung passen. Beispiel: 270 für 4:30 min/Einheit.</string>
 </strings>

@@ -4,278 +4,284 @@
 <pcToLineNum>
 <entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="1" lineNum="35" parent="globals" pc="268435460" symbol="getApp"/>
 <entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="1" lineNum="36" parent="globals" pc="268435470" symbol="getApp"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="2" lineNum="9" parent="globals/EDAView" pc="268435481" symbol="&lt;init&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="3" lineNum="5" parent="globals/EDAApp" pc="268435493" symbol="&lt;init&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="4" lineNum="5" parent="globals/Background" pc="268435505" symbol="&lt;init&gt;"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="5" lineNum="7" parent="globals/Rez" pc="268435517" symbol="&lt;init&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="6" lineNum="177" parent="globals/EDAView" pc="268435537" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="6" lineNum="178" parent="globals/EDAView" pc="268435539" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="6" lineNum="179" parent="globals/EDAView" pc="268435551" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="6" lineNum="180" parent="globals/EDAView" pc="268435558" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="6" lineNum="181" parent="globals/EDAView" pc="268435570" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="6" lineNum="182" parent="globals/EDAView" pc="268435583" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="107" parent="globals/EDAView" pc="268435610" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="108" parent="globals/EDAView" pc="268435613" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="109" parent="globals/EDAView" pc="268435621" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="110" parent="globals/EDAView" pc="268435629" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="112" parent="globals/EDAView" pc="268435656" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="113" parent="globals/EDAView" pc="268435678" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="114" parent="globals/EDAView" pc="268435685" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="117" parent="globals/EDAView" pc="268435689" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="118" parent="globals/EDAView" pc="268435698" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="119" parent="globals/EDAView" pc="268435712" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="120" parent="globals/EDAView" pc="268435726" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="122" parent="globals/EDAView" pc="268435737" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="123" parent="globals/EDAView" pc="268435764" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="126" parent="globals/EDAView" pc="268435791" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="127" parent="globals/EDAView" pc="268435813" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="129" parent="globals/EDAView" pc="268435837" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="130" parent="globals/EDAView" pc="268435846" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="131" parent="globals/EDAView" pc="268435858" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="132" parent="globals/EDAView" pc="268435865" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="135" parent="globals/EDAView" pc="268435869" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="136" parent="globals/EDAView" pc="268435894" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="137" parent="globals/EDAView" pc="268435906" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="138" parent="globals/EDAView" pc="268435913" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="141" parent="globals/EDAView" pc="268435917" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="142" parent="globals/EDAView" pc="268435930" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="143" parent="globals/EDAView" pc="268435942" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="144" parent="globals/EDAView" pc="268435949" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="145" parent="globals/EDAView" pc="268435962" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="146" parent="globals/EDAView" pc="268435988" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="149" parent="globals/EDAView" pc="268435992" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="150" parent="globals/EDAView" pc="268436011" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="151" parent="globals/EDAView" pc="268436030" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="152" parent="globals/EDAView" pc="268436066" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="154" parent="globals/EDAView" pc="268436101" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="155" parent="globals/EDAView" pc="268436108" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="156" parent="globals/EDAView" pc="268436130" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="157" parent="globals/EDAView" pc="268436139" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="158" parent="globals/EDAView" pc="268436148" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="160" parent="globals/EDAView" pc="268436159" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="163" parent="globals/EDAView" pc="268436186" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="164" parent="globals/EDAView" pc="268436217" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="166" parent="globals/EDAView" pc="268436228" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="167" parent="globals/EDAView" pc="268436240" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="167" parent="globals/EDAView" pc="268436249" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="168" parent="globals/EDAView" pc="268436268" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="169" parent="globals/EDAView" pc="268436283" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="170" parent="globals/EDAView" pc="268436298" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="171" parent="globals/EDAView" pc="268436317" symbol="compute"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="8" lineNum="185" parent="globals/EDAView" pc="268436352" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplayStrings&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="8" lineNum="186" parent="globals/EDAView" pc="268436354" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplayStrings&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="8" lineNum="187" parent="globals/EDAView" pc="268436366" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplayStrings&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="190" parent="globals/EDAView" pc="268436379" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="191" parent="globals/EDAView" pc="268436382" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="192" parent="globals/EDAView" pc="268436404" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="193" parent="globals/EDAView" pc="268436434" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="194" parent="globals/EDAView" pc="268436445" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="195" parent="globals/EDAView" pc="268436456" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="196" parent="globals/EDAView" pc="268436467" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="197" parent="globals/EDAView" pc="268436489" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="198" parent="globals/EDAView" pc="268436501" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="200" parent="globals/EDAView" pc="268436512" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="201" parent="globals/EDAView" pc="268436524" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="99" parent="globals/EDAView" pc="268436537" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="100" parent="globals/EDAView" pc="268436540" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="100" parent="globals/EDAView" pc="268436551" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="101" parent="globals/EDAView" pc="268436560" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="102" parent="globals/EDAView" pc="268436570" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="103" parent="globals/EDAView" pc="268436583" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="104" parent="globals/EDAView" pc="268436595" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="11" lineNum="90" parent="globals/EDAView" pc="268436624" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="11" lineNum="91" parent="globals/EDAView" pc="268436627" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="11" lineNum="92" parent="globals/EDAView" pc="268436654" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="11" lineNum="93" parent="globals/EDAView" pc="268436681" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="11" lineNum="94" parent="globals/EDAView" pc="268436691" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="11" lineNum="95" parent="globals/EDAView" pc="268436715" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="77" parent="globals/EDAView" pc="268436740" symbol="loadSettings"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="79" parent="globals/EDAView" pc="268436743" symbol="loadSettings"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="80" parent="globals/EDAView" pc="268436773" symbol="loadSettings"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="81" parent="globals/EDAView" pc="268436803" symbol="loadSettings"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="82" parent="globals/EDAView" pc="268436833" symbol="loadSettings"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="83" parent="globals/EDAView" pc="268436863" symbol="loadSettings"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="84" parent="globals/EDAView" pc="268436922" symbol="loadSettings"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="85" parent="globals/EDAView" pc="268436926" symbol="loadSettings"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="87" parent="globals/EDAView" pc="268436946" symbol="loadSettings"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="13" lineNum="69" parent="globals/EDAView" pc="268436954" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="13" lineNum="70" parent="globals/EDAView" pc="268436956" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="13" lineNum="71" parent="globals/EDAView" pc="268436994" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="13" lineNum="72" parent="globals/EDAView" pc="268437032" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="13" lineNum="73" parent="globals/EDAView" pc="268437070" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="13" lineNum="74" parent="globals/EDAView" pc="268437108" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="14" lineNum="60" parent="globals/EDAView" pc="268437145" symbol="initialize"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="14" lineNum="61" parent="globals/EDAView" pc="268437147" symbol="initialize"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="14" lineNum="62" parent="globals/EDAView" pc="268437159" symbol="initialize"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="14" lineNum="63" parent="globals/EDAView" pc="268437166" symbol="initialize"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="14" lineNum="65" parent="globals/EDAView" pc="268437173" symbol="initialize"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="14" lineNum="66" parent="globals/EDAView" pc="268437223" symbol="initialize"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="205" parent="globals/EDAView" pc="268437275" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="206" parent="globals/EDAView" pc="268437278" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="207" parent="globals/EDAView" pc="268437295" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="209" parent="globals/EDAView" pc="268437303" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="210" parent="globals/EDAView" pc="268437312" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="211" parent="globals/EDAView" pc="268437321" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="213" parent="globals/EDAView" pc="268437338" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="214" parent="globals/EDAView" pc="268437345" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="215" parent="globals/EDAView" pc="268437352" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="216" parent="globals/EDAView" pc="268437359" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="218" parent="globals/EDAView" pc="268437366" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="219" parent="globals/EDAView" pc="268437375" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="220" parent="globals/EDAView" pc="268437382" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="221" parent="globals/EDAView" pc="268437405" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="222" parent="globals/EDAView" pc="268437428" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="225" parent="globals/EDAView" pc="268437438" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="226" parent="globals/EDAView" pc="268437441" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="227" parent="globals/EDAView" pc="268437458" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="228" parent="globals/EDAView" pc="268437476" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="228" parent="globals/EDAView" pc="268437485" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="230" parent="globals/EDAView" pc="268437492" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="231" parent="globals/EDAView" pc="268437527" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="232" parent="globals/EDAView" pc="268437562" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="235" parent="globals/EDAView" pc="268437594" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="236" parent="globals/EDAView" pc="268437603" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="237" parent="globals/EDAView" pc="268437637" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="238" parent="globals/EDAView" pc="268437658" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="239" parent="globals/EDAView" pc="268437674" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="240" parent="globals/EDAView" pc="268437681" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="244" parent="globals/EDAView" pc="268437726" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="245" parent="globals/EDAView" pc="268437761" symbol="onUpdate"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="16" lineNum="14" parent="globals/EDAApp" pc="268437797" symbol="onStart"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="17" lineNum="26" parent="globals/EDAApp" pc="268437800" symbol="onSettingsChanged"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="17" lineNum="27" parent="globals/EDAApp" pc="268437803" symbol="onSettingsChanged"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="17" lineNum="28" parent="globals/EDAApp" pc="268437810" symbol="onSettingsChanged"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="17" lineNum="29" parent="globals/EDAApp" pc="268437816" symbol="onSettingsChanged"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="17" lineNum="31" parent="globals/EDAApp" pc="268437828" symbol="onSettingsChanged"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="18" lineNum="20" parent="globals/EDAApp" pc="268437840" symbol="getInitialView"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="18" lineNum="21" parent="globals/EDAApp" pc="268437843" symbol="getInitialView"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="18" lineNum="22" parent="globals/EDAApp" pc="268437863" symbol="getInitialView"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="18" lineNum="23" parent="globals/EDAApp" pc="268437872" symbol="getInitialView"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="19" lineNum="10" parent="globals/EDAApp" pc="268437882" symbol="initialize"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="19" lineNum="11" parent="globals/EDAApp" pc="268437884" symbol="initialize"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="20" lineNum="17" parent="globals/EDAApp" pc="268437897" symbol="onStop"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="21" lineNum="19" parent="globals/Background" pc="268437900" symbol="setColor"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="21" lineNum="20" parent="globals/Background" pc="268437902" symbol="setColor"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="22" lineNum="9" parent="globals/Background" pc="268437912" symbol="initialize"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="22" lineNum="10" parent="globals/Background" pc="268437915" symbol="initialize"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="22" lineNum="14" parent="globals/Background" pc="268437933" symbol="initialize"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="22" lineNum="16" parent="globals/Background" pc="268437949" symbol="initialize"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="23" lineNum="23" parent="globals/Background" pc="268437962" symbol="draw"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="23" lineNum="24" parent="globals/Background" pc="268437964" symbol="draw"/>
-<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="23" lineNum="25" parent="globals/Background" pc="268437981" symbol="draw"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="24" lineNum="57" parent="globals/Rez/Layouts" pc="268437990" symbol="BottomRightLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="24" lineNum="58" parent="globals/Rez/Layouts" pc="268438001" symbol="BottomRightLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="24" lineNum="60" parent="globals/Rez/Layouts" pc="268438025" symbol="BottomRightLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="24" lineNum="62" parent="globals/Rez/Layouts" pc="268438108" symbol="BottomRightLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="24" lineNum="64" parent="globals/Rez/Layouts" pc="268438191" symbol="BottomRightLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="25" lineNum="37" parent="globals/Rez/Layouts" pc="268438211" symbol="TopRightLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="25" lineNum="38" parent="globals/Rez/Layouts" pc="268438222" symbol="TopRightLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="25" lineNum="40" parent="globals/Rez/Layouts" pc="268438246" symbol="TopRightLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="25" lineNum="42" parent="globals/Rez/Layouts" pc="268438329" symbol="TopRightLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="25" lineNum="44" parent="globals/Rez/Layouts" pc="268438412" symbol="TopRightLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="26" lineNum="47" parent="globals/Rez/Layouts" pc="268438432" symbol="BottomLeftLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="26" lineNum="48" parent="globals/Rez/Layouts" pc="268438443" symbol="BottomLeftLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="26" lineNum="50" parent="globals/Rez/Layouts" pc="268438467" symbol="BottomLeftLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="26" lineNum="52" parent="globals/Rez/Layouts" pc="268438549" symbol="BottomLeftLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="26" lineNum="54" parent="globals/Rez/Layouts" pc="268438631" symbol="BottomLeftLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="27" lineNum="27" parent="globals/Rez/Layouts" pc="268438651" symbol="TopLeftLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="27" lineNum="28" parent="globals/Rez/Layouts" pc="268438662" symbol="TopLeftLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="27" lineNum="30" parent="globals/Rez/Layouts" pc="268438686" symbol="TopLeftLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="27" lineNum="32" parent="globals/Rez/Layouts" pc="268438768" symbol="TopLeftLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="27" lineNum="34" parent="globals/Rez/Layouts" pc="268438850" symbol="TopLeftLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="28" lineNum="13" parent="globals/Rez/Layouts" pc="268438870" symbol="MainLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="28" lineNum="14" parent="globals/Rez/Layouts" pc="268438881" symbol="MainLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="28" lineNum="16" parent="globals/Rez/Layouts" pc="268438890" symbol="MainLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="28" lineNum="18" parent="globals/Rez/Layouts" pc="268438899" symbol="MainLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="28" lineNum="20" parent="globals/Rez/Layouts" pc="268438923" symbol="MainLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="28" lineNum="22" parent="globals/Rez/Layouts" pc="268439030" symbol="MainLayout"/>
-<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B4024-00\\source\\Rez.mcgen" id="28" lineNum="24" parent="globals/Rez/Layouts" pc="268439137" symbol="MainLayout"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="2" lineNum="10" parent="globals/EDAView" pc="268435486" symbol="&lt;init&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="3" lineNum="5" parent="globals/EDAApp" pc="268435505" symbol="&lt;init&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="4" lineNum="5" parent="globals/Background" pc="268435524" symbol="&lt;init&gt;"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="5" lineNum="7" parent="globals/Rez" pc="268435543" symbol="&lt;init&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="6" lineNum="192" parent="globals/EDAView" pc="268435567" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="6" lineNum="193" parent="globals/EDAView" pc="268435569" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="6" lineNum="194" parent="globals/EDAView" pc="268435582" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="6" lineNum="195" parent="globals/EDAView" pc="268435594" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="6" lineNum="196" parent="globals/EDAView" pc="268435607" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="6" lineNum="197" parent="globals/EDAView" pc="268435626" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="122" parent="globals/EDAView" pc="268435665" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="123" parent="globals/EDAView" pc="268435669" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="124" parent="globals/EDAView" pc="268435679" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="125" parent="globals/EDAView" pc="268435689" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="127" parent="globals/EDAView" pc="268435726" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="128" parent="globals/EDAView" pc="268435755" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="129" parent="globals/EDAView" pc="268435767" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="132" parent="globals/EDAView" pc="268435771" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="133" parent="globals/EDAView" pc="268435783" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="134" parent="globals/EDAView" pc="268435802" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="135" parent="globals/EDAView" pc="268435821" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="137" parent="globals/EDAView" pc="268435834" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="138" parent="globals/EDAView" pc="268435865" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="141" parent="globals/EDAView" pc="268435896" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="142" parent="globals/EDAView" pc="268435926" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="144" parent="globals/EDAView" pc="268435960" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="145" parent="globals/EDAView" pc="268435972" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="146" parent="globals/EDAView" pc="268435985" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="147" parent="globals/EDAView" pc="268435997" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="150" parent="globals/EDAView" pc="268436001" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="151" parent="globals/EDAView" pc="268436029" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="152" parent="globals/EDAView" pc="268436042" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="153" parent="globals/EDAView" pc="268436054" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="156" parent="globals/EDAView" pc="268436058" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="157" parent="globals/EDAView" pc="268436075" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="158" parent="globals/EDAView" pc="268436088" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="159" parent="globals/EDAView" pc="268436100" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="160" parent="globals/EDAView" pc="268436119" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="161" parent="globals/EDAView" pc="268436157" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="164" parent="globals/EDAView" pc="268436161" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="165" parent="globals/EDAView" pc="268436189" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="166" parent="globals/EDAView" pc="268436217" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="167" parent="globals/EDAView" pc="268436257" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="169" parent="globals/EDAView" pc="268436304" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="170" parent="globals/EDAView" pc="268436315" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="171" parent="globals/EDAView" pc="268436340" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="172" parent="globals/EDAView" pc="268436352" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="173" parent="globals/EDAView" pc="268436362" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="175" parent="globals/EDAView" pc="268436375" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="178" parent="globals/EDAView" pc="268436406" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="179" parent="globals/EDAView" pc="268436450" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="181" parent="globals/EDAView" pc="268436464" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="182" parent="globals/EDAView" pc="268436481" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="182" parent="globals/EDAView" pc="268436494" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="183" parent="globals/EDAView" pc="268436517" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="184" parent="globals/EDAView" pc="268436533" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="185" parent="globals/EDAView" pc="268436552" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="7" lineNum="186" parent="globals/EDAView" pc="268436582" symbol="compute"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="8" lineNum="200" parent="globals/EDAView" pc="268436627" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplayStrings&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="8" lineNum="201" parent="globals/EDAView" pc="268436629" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplayStrings&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="8" lineNum="202" parent="globals/EDAView" pc="268436642" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplayStrings&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="205" parent="globals/EDAView" pc="268436656" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="206" parent="globals/EDAView" pc="268436660" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="207" parent="globals/EDAView" pc="268436686" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="208" parent="globals/EDAView" pc="268436719" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="209" parent="globals/EDAView" pc="268436730" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="210" parent="globals/EDAView" pc="268436743" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="211" parent="globals/EDAView" pc="268436759" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="212" parent="globals/EDAView" pc="268436781" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="213" parent="globals/EDAView" pc="268436794" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="215" parent="globals/EDAView" pc="268436810" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="9" lineNum="216" parent="globals/EDAView" pc="268436823" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="113" parent="globals/EDAView" pc="268436837" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="114" parent="globals/EDAView" pc="268436841" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="114" parent="globals/EDAView" pc="268436852" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="116" parent="globals/EDAView" pc="268436861" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="117" parent="globals/EDAView" pc="268436874" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="118" parent="globals/EDAView" pc="268436893" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="10" lineNum="119" parent="globals/EDAView" pc="268436912" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="11" lineNum="102" parent="globals/EDAView" pc="268436947" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="11" lineNum="104" parent="globals/EDAView" pc="268436951" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="11" lineNum="105" parent="globals/EDAView" pc="268436995" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="11" lineNum="107" parent="globals/EDAView" pc="268437039" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="11" lineNum="108" parent="globals/EDAView" pc="268437053" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="11" lineNum="109" parent="globals/EDAView" pc="268437084" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="81" parent="globals/EDAView" pc="268437116" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="83" parent="globals/EDAView" pc="268437120" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="84" parent="globals/EDAView" pc="268437137" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="85" parent="globals/EDAView" pc="268437154" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="87" parent="globals/EDAView" pc="268437170" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="91" parent="globals/EDAView" pc="268437183" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="92" parent="globals/EDAView" pc="268437220" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="93" parent="globals/EDAView" pc="268437257" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="94" parent="globals/EDAView" pc="268437294" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="95" parent="globals/EDAView" pc="268437331" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="96" parent="globals/EDAView" pc="268437419" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="97" parent="globals/EDAView" pc="268437423" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="12" lineNum="99" parent="globals/EDAView" pc="268437445" symbol="loadSettings"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="13" lineNum="73" parent="globals/EDAView" pc="268437458" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="13" lineNum="74" parent="globals/EDAView" pc="268437460" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="13" lineNum="75" parent="globals/EDAView" pc="268437507" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="13" lineNum="76" parent="globals/EDAView" pc="268437554" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="13" lineNum="77" parent="globals/EDAView" pc="268437601" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="13" lineNum="78" parent="globals/EDAView" pc="268437648" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="14" lineNum="64" parent="globals/EDAView" pc="268437698" symbol="initialize"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="14" lineNum="65" parent="globals/EDAView" pc="268437700" symbol="initialize"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="14" lineNum="66" parent="globals/EDAView" pc="268437718" symbol="initialize"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="14" lineNum="67" parent="globals/EDAView" pc="268437730" symbol="initialize"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="14" lineNum="69" parent="globals/EDAView" pc="268437742" symbol="initialize"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="14" lineNum="70" parent="globals/EDAView" pc="268437808" symbol="initialize"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="220" parent="globals/EDAView" pc="268437875" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="221" parent="globals/EDAView" pc="268437879" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="222" parent="globals/EDAView" pc="268437904" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="224" parent="globals/EDAView" pc="268437916" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="225" parent="globals/EDAView" pc="268437929" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="226" parent="globals/EDAView" pc="268437942" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="228" parent="globals/EDAView" pc="268437967" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="229" parent="globals/EDAView" pc="268437977" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="230" parent="globals/EDAView" pc="268437987" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="231" parent="globals/EDAView" pc="268437997" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="233" parent="globals/EDAView" pc="268438007" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="234" parent="globals/EDAView" pc="268438018" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="235" parent="globals/EDAView" pc="268438025" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="236" parent="globals/EDAView" pc="268438051" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="237" parent="globals/EDAView" pc="268438077" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="240" parent="globals/EDAView" pc="268438087" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="241" parent="globals/EDAView" pc="268438094" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="242" parent="globals/EDAView" pc="268438120" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="243" parent="globals/EDAView" pc="268438146" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="243" parent="globals/EDAView" pc="268438157" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="245" parent="globals/EDAView" pc="268438167" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="246" parent="globals/EDAView" pc="268438213" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="247" parent="globals/EDAView" pc="268438259" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="249" parent="globals/EDAView" pc="268438302" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="250" parent="globals/EDAView" pc="268438314" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="251" parent="globals/EDAView" pc="268438360" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="252" parent="globals/EDAView" pc="268438385" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="253" parent="globals/EDAView" pc="268438407" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="254" parent="globals/EDAView" pc="268438418" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="258" parent="globals/EDAView" pc="268438479" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerView.mc" id="15" lineNum="259" parent="globals/EDAView" pc="268438525" symbol="onUpdate"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="16" lineNum="14" parent="globals/EDAApp" pc="268438572" symbol="onStart"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="17" lineNum="26" parent="globals/EDAApp" pc="268438575" symbol="onSettingsChanged"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="17" lineNum="27" parent="globals/EDAApp" pc="268438579" symbol="onSettingsChanged"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="17" lineNum="28" parent="globals/EDAApp" pc="268438589" symbol="onSettingsChanged"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="17" lineNum="29" parent="globals/EDAApp" pc="268438596" symbol="onSettingsChanged"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="17" lineNum="31" parent="globals/EDAApp" pc="268438611" symbol="onSettingsChanged"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="18" lineNum="20" parent="globals/EDAApp" pc="268438628" symbol="getInitialView"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="18" lineNum="21" parent="globals/EDAApp" pc="268438632" symbol="getInitialView"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="18" lineNum="22" parent="globals/EDAApp" pc="268438656" symbol="getInitialView"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="18" lineNum="23" parent="globals/EDAApp" pc="268438666" symbol="getInitialView"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="19" lineNum="10" parent="globals/EDAApp" pc="268438683" symbol="initialize"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="19" lineNum="11" parent="globals/EDAApp" pc="268438685" symbol="initialize"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerApp.mc" id="20" lineNum="17" parent="globals/EDAApp" pc="268438704" symbol="onStop"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="21" lineNum="19" parent="globals/Background" pc="268438707" symbol="setColor"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="21" lineNum="20" parent="globals/Background" pc="268438709" symbol="setColor"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="22" lineNum="9" parent="globals/Background" pc="268438720" symbol="initialize"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="22" lineNum="10" parent="globals/Background" pc="268438724" symbol="initialize"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="22" lineNum="14" parent="globals/Background" pc="268438745" symbol="initialize"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="22" lineNum="16" parent="globals/Background" pc="268438765" symbol="initialize"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="23" lineNum="23" parent="globals/Background" pc="268438779" symbol="draw"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="23" lineNum="24" parent="globals/Background" pc="268438781" symbol="draw"/>
+<entry filename="E:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\source\\Efficiency-Drift-AnalyzerBackground.mc" id="23" lineNum="25" parent="globals/Background" pc="268438806" symbol="draw"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="24" lineNum="57" parent="globals/Rez/Layouts" pc="268438819" symbol="BottomRightLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="24" lineNum="58" parent="globals/Rez/Layouts" pc="268438831" symbol="BottomRightLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="24" lineNum="60" parent="globals/Rez/Layouts" pc="268438859" symbol="BottomRightLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="24" lineNum="62" parent="globals/Rez/Layouts" pc="268438971" symbol="BottomRightLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="24" lineNum="64" parent="globals/Rez/Layouts" pc="268439083" symbol="BottomRightLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="25" lineNum="37" parent="globals/Rez/Layouts" pc="268439120" symbol="TopRightLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="25" lineNum="38" parent="globals/Rez/Layouts" pc="268439132" symbol="TopRightLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="25" lineNum="40" parent="globals/Rez/Layouts" pc="268439160" symbol="TopRightLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="25" lineNum="42" parent="globals/Rez/Layouts" pc="268439272" symbol="TopRightLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="25" lineNum="44" parent="globals/Rez/Layouts" pc="268439384" symbol="TopRightLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="26" lineNum="47" parent="globals/Rez/Layouts" pc="268439421" symbol="BottomLeftLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="26" lineNum="48" parent="globals/Rez/Layouts" pc="268439433" symbol="BottomLeftLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="26" lineNum="50" parent="globals/Rez/Layouts" pc="268439461" symbol="BottomLeftLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="26" lineNum="52" parent="globals/Rez/Layouts" pc="268439573" symbol="BottomLeftLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="26" lineNum="54" parent="globals/Rez/Layouts" pc="268439685" symbol="BottomLeftLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="27" lineNum="27" parent="globals/Rez/Layouts" pc="268439722" symbol="TopLeftLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="27" lineNum="28" parent="globals/Rez/Layouts" pc="268439734" symbol="TopLeftLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="27" lineNum="30" parent="globals/Rez/Layouts" pc="268439762" symbol="TopLeftLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="27" lineNum="32" parent="globals/Rez/Layouts" pc="268439874" symbol="TopLeftLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="27" lineNum="34" parent="globals/Rez/Layouts" pc="268439986" symbol="TopLeftLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="28" lineNum="13" parent="globals/Rez/Layouts" pc="268440023" symbol="MainLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="28" lineNum="14" parent="globals/Rez/Layouts" pc="268440035" symbol="MainLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="28" lineNum="16" parent="globals/Rez/Layouts" pc="268440048" symbol="MainLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="28" lineNum="18" parent="globals/Rez/Layouts" pc="268440061" symbol="MainLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="28" lineNum="20" parent="globals/Rez/Layouts" pc="268440089" symbol="MainLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="28" lineNum="22" parent="globals/Rez/Layouts" pc="268440224" symbol="MainLayout"/>
+<entry filename="e:\\Verwaltung\\07_IT &amp; Identität\\IT Projekte\\Efficiency-Drift-Analyzer\\bin\\gen\\006-B3600-00\\source\\Rez.mcgen" id="28" lineNum="24" parent="globals/Rez/Layouts" pc="268440359" symbol="MainLayout"/>
 </pcToLineNum>
 <symbolTable>
 <entry id="8388639" module="true" symbol="Graphics"/>
+<entry field="true" id="33" symbol="&lt;globals/EDAView/&lt;&gt;mDistanceFactor&gt;"/>
 <entry field="true" id="28" symbol="&lt;globals/EDAView/&lt;&gt;lblSollHr&gt;"/>
 <entry field="true" id="24" symbol="&lt;globals/EDAView/&lt;&gt;isConfigured&gt;"/>
-<entry field="true" id="38" symbol="&lt;globals/EDAView/&lt;&gt;strDrift&gt;"/>
+<entry field="true" id="39" symbol="&lt;globals/EDAView/&lt;&gt;strDrift&gt;"/>
 <entry id="8388632" method="true" symbol="&lt;init&gt;"/>
 <entry id="8389849" symbol="units"/>
-<entry id="49" method="true" symbol="MainLayout"/>
+<entry id="50" method="true" symbol="MainLayout"/>
 <entry id="8389683" method="true" symbol="onSettingsChanged"/>
-<entry field="true" id="68" symbol="unitPercent"/>
-<entry field="true" id="35" symbol="&lt;globals/EDAView/&lt;&gt;paceB&gt;"/>
-<entry field="true" id="34" symbol="&lt;globals/EDAView/&lt;&gt;paceA&gt;"/>
-<entry field="true" id="67" symbol="paceBTitle"/>
-<entry field="true" id="61" symbol="lblFitDriftChart"/>
+<entry field="true" id="69" symbol="unitPercent"/>
+<entry field="true" id="36" symbol="&lt;globals/EDAView/&lt;&gt;paceB&gt;"/>
+<entry field="true" id="35" symbol="&lt;globals/EDAView/&lt;&gt;paceA&gt;"/>
+<entry field="true" id="68" symbol="paceBTitle"/>
+<entry field="true" id="62" symbol="lblFitDriftChart"/>
 <entry field="true" id="12" symbol="&lt;globals/EDAView/&lt;&gt;driftCount&gt;"/>
 <entry field="true" id="8388611" module="true" symbol="Toybox"/>
 <entry id="7" object="true" symbol="EDAView"/>
-<entry field="true" id="60" symbol="lblFitDrift"/>
+<entry field="true" id="61" symbol="lblFitDrift"/>
 <entry field="true" id="14" symbol="&lt;globals/EDAView/&lt;&gt;driftInitialized&gt;"/>
-<entry field="true" id="52" symbol="AppName"/>
+<entry field="true" id="53" symbol="AppName"/>
 <entry id="5" module="true" symbol="globals/Rez/Strings"/>
-<entry id="37" method="true" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplayStrings&gt;"/>
+<entry id="38" method="true" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplayStrings&gt;"/>
 <entry field="true" id="17" symbol="&lt;globals/EDAView/&lt;&gt;ewmaHr&gt;"/>
-<entry field="true" id="43" symbol="&lt;globals/EDAView/&lt;&gt;valSollPace&gt;"/>
+<entry field="true" id="44" symbol="&lt;globals/EDAView/&lt;&gt;valSollPace&gt;"/>
 <entry id="8388631" module="true" symbol="Activity"/>
 <entry id="8388648" module="true" symbol="WatchUi"/>
-<entry field="true" id="56" symbol="hrBTitle"/>
+<entry field="true" id="57" symbol="hrBTitle"/>
 <entry id="8390425" module="true" symbol="Properties"/>
 <entry id="2" module="true" symbol="globals/Rez"/>
-<entry id="36" method="true" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
+<entry id="37" method="true" symbol="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;"/>
 <entry id="8389124" method="true" symbol="onUpdate"/>
 <entry field="true" id="8389065" symbol="locY"/>
 <entry field="true" id="8389064" symbol="locX"/>
 <entry field="true" id="15" symbol="&lt;globals/EDAView/&lt;&gt;driftSum&gt;"/>
-<entry field="true" id="42" symbol="&lt;globals/EDAView/&lt;&gt;valSollHr&gt;"/>
-<entry field="true" id="63" symbol="lblSollPace"/>
-<entry id="69" symbol="displayLabel"/>
+<entry field="true" id="43" symbol="&lt;globals/EDAView/&lt;&gt;valSollHr&gt;"/>
+<entry field="true" id="64" symbol="lblSollPace"/>
+<entry id="70" symbol="displayLabel"/>
 <entry id="8388771" module="true" object="true" symbol="Drawables"/>
 <entry id="8389348" symbol="font"/>
 <entry id="8389275" method="true" symbol="getApp"/>
-<entry field="true" id="62" symbol="lblSollHr"/>
+<entry field="true" id="63" symbol="lblSollHr"/>
 <entry id="4" module="true" symbol="globals/Rez/Layouts"/>
 <entry field="true" id="8389063" symbol="identifier"/>
-<entry field="true" id="57" symbol="lblAktHr"/>
+<entry field="true" id="58" symbol="lblAktHr"/>
 <entry field="true" id="32" symbol="&lt;globals/EDAView/&lt;&gt;m&gt;"/>
-<entry id="39" method="true" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
+<entry id="40" method="true" symbol="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;"/>
 <entry id="8389349" symbol="justification"/>
 <entry id="8389137" method="true" symbol="compute"/>
-<entry field="true" id="44" symbol="&lt;globals/EDAApp/&lt;&gt;mView&gt;"/>
-<entry field="true" id="40" symbol="&lt;globals/EDAView/&lt;&gt;valAktHr&gt;"/>
+<entry field="true" id="45" symbol="&lt;globals/EDAApp/&lt;&gt;mView&gt;"/>
+<entry field="true" id="41" symbol="&lt;globals/EDAView/&lt;&gt;valAktHr&gt;"/>
 <entry id="8389131" method="true" symbol="setColor"/>
 <entry field="true" id="9" symbol="&lt;globals/EDAView/&lt;&gt;b&gt;"/>
 <entry id="3" module="true" symbol="globals/Rez/Drawables"/>
 <entry field="true" id="10" symbol="&lt;globals/EDAView/&lt;&gt;bgColor&gt;"/>
-<entry field="true" id="53" symbol="hrAPrompt"/>
+<entry field="true" id="54" symbol="hrAPrompt"/>
 <entry field="true" id="26" symbol="&lt;globals/EDAView/&lt;&gt;lblAktHr&gt;"/>
-<entry field="true" id="64" symbol="paceAPrompt"/>
-<entry field="true" id="65" symbol="paceATitle"/>
-<entry field="true" id="66" symbol="paceBPrompt"/>
+<entry field="true" id="65" symbol="paceAPrompt"/>
+<entry field="true" id="66" symbol="paceATitle"/>
+<entry field="true" id="67" symbol="paceBPrompt"/>
 <entry field="true" id="8" symbol="&lt;globals/EDAView/&lt;&gt;avgDriftField&gt;"/>
-<entry id="50" method="true" symbol="TopLeftLayout"/>
+<entry id="51" method="true" symbol="TopLeftLayout"/>
+<entry id="8388644" module="true" symbol="System"/>
 <entry field="true" id="19" symbol="&lt;globals/EDAView/&lt;&gt;fgColor&gt;"/>
 <entry id="8388645" module="true" symbol="Time"/>
 <entry id="8388769" module="true" object="true" symbol="Rez"/>
 <entry field="true" id="23" symbol="&lt;globals/EDAView/&lt;&gt;hrB&gt;"/>
 <entry field="true" id="22" symbol="&lt;globals/EDAView/&lt;&gt;hrA&gt;"/>
-<entry id="47" method="true" symbol="BottomLeftLayout"/>
-<entry id="48" method="true" symbol="BottomRightLayout"/>
+<entry id="48" method="true" symbol="BottomLeftLayout"/>
+<entry id="49" method="true" symbol="BottomRightLayout"/>
 <entry id="8388640" module="true" symbol="Lang"/>
 <entry field="true" id="8389130" symbol="mColor"/>
 <entry id="8389068" method="true" symbol="draw"/>
-<entry field="true" id="46" symbol="LauncherIcon"/>
+<entry field="true" id="47" symbol="LauncherIcon"/>
 <entry id="8388610" symbol="statics"/>
 <entry id="21" method="true" symbol="&lt;globals/EDAView/&lt;&gt;formatPace&gt;"/>
 <entry id="8389350" module="true" symbol="globals"/>
-<entry field="true" id="59" symbol="lblFitAvgDrift"/>
+<entry field="true" id="60" symbol="lblFitAvgDrift"/>
 <entry id="8388770" module="true" object="true" symbol="Strings"/>
 <entry field="true" id="18" symbol="&lt;globals/EDAView/&lt;&gt;ewmaSpeed&gt;"/>
 <entry id="8390146" module="true" object="true" symbol="Background"/>
 <entry id="8388702" method="true" symbol="initialize"/>
-<entry field="true" id="54" symbol="hrATitle"/>
+<entry field="true" id="55" symbol="hrATitle"/>
 <entry id="8389279" method="true" symbol="onStart"/>
 <entry id="8389780" module="true" symbol="FitContributor"/>
-<entry field="true" id="33" symbol="&lt;globals/EDAView/&lt;&gt;mTimerTime&gt;"/>
-<entry field="true" id="55" symbol="hrBPrompt"/>
+<entry field="true" id="34" symbol="&lt;globals/EDAView/&lt;&gt;mTimerTime&gt;"/>
+<entry field="true" id="56" symbol="hrBPrompt"/>
 <entry field="true" id="20" symbol="&lt;globals/EDAView/&lt;&gt;filterInitialized&gt;"/>
 <entry id="8389280" method="true" symbol="getInitialView"/>
 <entry id="8389281" method="true" symbol="onStop"/>
@@ -283,9 +289,9 @@
 <entry id="11" method="true" symbol="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;"/>
 <entry id="31" method="true" symbol="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;"/>
 <entry field="true" id="13" symbol="&lt;globals/EDAView/&lt;&gt;driftField&gt;"/>
-<entry field="true" id="58" symbol="lblAktPace"/>
-<entry field="true" id="41" symbol="&lt;globals/EDAView/&lt;&gt;valAktPace&gt;"/>
-<entry id="45" module="true" symbol="Layouts"/>
+<entry field="true" id="59" symbol="lblAktPace"/>
+<entry field="true" id="42" symbol="&lt;globals/EDAView/&lt;&gt;valAktPace&gt;"/>
+<entry id="46" module="true" symbol="Layouts"/>
 <entry id="30" method="true" symbol="loadSettings"/>
 <entry field="true" id="27" symbol="&lt;globals/EDAView/&lt;&gt;lblAktPace&gt;"/>
 <entry field="true" id="25" symbol="&lt;globals/EDAView/&lt;&gt;isGerman&gt;"/>
@@ -293,65 +299,66 @@
 <entry id="8388635" module="true" symbol="Application"/>
 <entry field="true" id="16" symbol="&lt;globals/EDAView/&lt;&gt;ewmaDrift&gt;"/>
 <entry field="true" id="29" symbol="&lt;globals/EDAView/&lt;&gt;lblSollPace&gt;"/>
-<entry id="51" method="true" symbol="TopRightLayout"/>
+<entry id="52" method="true" symbol="TopRightLayout"/>
 </symbolTable>
 <localVars>
-<entry arg="true" endPc="268436351" name="info" stackId="1" startPc="268435610"/>
-<entry endPc="268436350" name="curSpeed" stackId="2" startPc="268435613"/>
-<entry endPc="268436350" name="curHr" stackId="3" startPc="268435613"/>
-<entry endPc="268436350" name="hrSoll" stackId="4" startPc="268435613"/>
-<entry endPc="268436350" name="vSoll" stackId="5" startPc="268435613"/>
-<entry endPc="268436347" name="rawDrift" stackId="6" startPc="268436108"/>
-<entry endPc="268436347" name="displayDrift" stackId="7" startPc="268436108"/>
-<entry arg="true" endPc="268436536" name="driftPercent" stackId="1" startPc="268436379"/>
-<entry endPc="268436535" name="sign" stackId="2" startPc="268436382"/>
-<entry arg="true" endPc="268436623" name="speedInMs" stackId="1" startPc="268436537"/>
-<entry endPc="268436623" name="secondsPerKm" stackId="2" startPc="268436540"/>
-<entry endPc="268436623" name="minutes" stackId="3" startPc="268436540"/>
-<entry endPc="268436623" name="seconds" stackId="4" startPc="268436540"/>
-<entry endPc="268436738" name="v1" stackId="1" startPc="268436627"/>
-<entry endPc="268436738" name="v2" stackId="2" startPc="268436627"/>
-<entry endPc="268436940" name="e" stackId="1" startPc="268436922"/>
-<entry arg="true" endPc="268437796" name="dc" stackId="1" startPc="268437275"/>
-<entry endPc="268437795" name="width" stackId="2" startPc="268437278"/>
-<entry endPc="268437795" name="height" stackId="3" startPc="268437278"/>
-<entry endPc="268437795" name="pL" stackId="4" startPc="268437278"/>
-<entry endPc="268437795" name="sPL" stackId="5" startPc="268437278"/>
-<entry endPc="268437795" name="sHL" stackId="6" startPc="268437278"/>
-<entry endPc="268437795" name="hL" stackId="7" startPc="268437278"/>
-<entry endPc="268437795" name="fOuter" stackId="8" startPc="268437278"/>
-<entry endPc="268437795" name="fInner" stackId="9" startPc="268437278"/>
-<entry endPc="268437795" name="fDrift" stackId="10" startPc="268437278"/>
-<entry endPc="268437722" name="remaining" stackId="11" startPc="268437658"/>
-<entry endPc="268437838" name="view" stackId="1" startPc="268437803"/>
-<entry endPc="268437881" name="view" stackId="1" startPc="268437843"/>
-<entry arg="true" endPc="268437911" name="color" stackId="1" startPc="268437900"/>
-<entry endPc="268437960" name="dictionary" stackId="1" startPc="268437915"/>
-<entry arg="true" endPc="268437989" name="dc" stackId="1" startPc="268437962"/>
-<entry arg="true" endPc="268438210" name="dc" stackId="1" startPc="268437990"/>
-<entry endPc="268438210" name="rez_cmp_local_custom_drawable_16187860511068497434" stackId="2" startPc="268438001"/>
-<entry endPc="268438210" name="rez_cmp_local_text_label" stackId="3" startPc="268438001"/>
-<entry endPc="268438210" name="rez_cmp_local_text_value" stackId="4" startPc="268438001"/>
-<entry arg="true" endPc="268438431" name="dc" stackId="1" startPc="268438211"/>
-<entry endPc="268438431" name="rez_cmp_local_custom_drawable_11824933295158922413" stackId="2" startPc="268438222"/>
-<entry endPc="268438431" name="rez_cmp_local_text_label" stackId="3" startPc="268438222"/>
-<entry endPc="268438431" name="rez_cmp_local_text_value" stackId="4" startPc="268438222"/>
-<entry arg="true" endPc="268438650" name="dc" stackId="1" startPc="268438432"/>
-<entry endPc="268438650" name="rez_cmp_local_custom_drawable_16380678501279751870" stackId="2" startPc="268438443"/>
-<entry endPc="268438650" name="rez_cmp_local_text_label" stackId="3" startPc="268438443"/>
-<entry endPc="268438650" name="rez_cmp_local_text_value" stackId="4" startPc="268438443"/>
-<entry arg="true" endPc="268438869" name="dc" stackId="1" startPc="268438651"/>
-<entry endPc="268438869" name="rez_cmp_local_custom_drawable_83741574912206153191" stackId="2" startPc="268438662"/>
-<entry endPc="268438869" name="rez_cmp_local_text_label" stackId="3" startPc="268438662"/>
-<entry endPc="268438869" name="rez_cmp_local_text_value" stackId="4" startPc="268438662"/>
-<entry arg="true" endPc="268439156" name="dc" stackId="1" startPc="268438870"/>
-<entry endPc="268439156" name="rez_cmp_local_var_dc_getHeight" stackId="2" startPc="268438881"/>
-<entry endPc="268439156" name="rez_cmp_local_var_dc_getWidth" stackId="3" startPc="268438881"/>
-<entry endPc="268439156" name="rez_cmp_local_custom_drawable_11939594661139614796" stackId="4" startPc="268438881"/>
-<entry endPc="268439156" name="rez_cmp_local_text_label" stackId="5" startPc="268438881"/>
-<entry endPc="268439156" name="rez_cmp_local_text_value" stackId="6" startPc="268438881"/>
+<entry arg="true" endPc="268436626" name="info" stackId="1" startPc="268435665"/>
+<entry endPc="268436625" name="curSpeed" stackId="2" startPc="268435669"/>
+<entry endPc="268436625" name="curHr" stackId="3" startPc="268435669"/>
+<entry endPc="268436625" name="hrSoll" stackId="4" startPc="268435669"/>
+<entry endPc="268436625" name="vSoll" stackId="5" startPc="268435669"/>
+<entry endPc="268436622" name="rawDrift" stackId="6" startPc="268436315"/>
+<entry endPc="268436622" name="displayDrift" stackId="7" startPc="268436315"/>
+<entry arg="true" endPc="268436836" name="driftPercent" stackId="1" startPc="268436656"/>
+<entry endPc="268436835" name="sign" stackId="2" startPc="268436660"/>
+<entry arg="true" endPc="268436946" name="speedInMs" stackId="1" startPc="268436837"/>
+<entry endPc="268436946" name="secondsPerUnit" stackId="2" startPc="268436841"/>
+<entry endPc="268436946" name="minutes" stackId="3" startPc="268436841"/>
+<entry endPc="268436946" name="seconds" stackId="4" startPc="268436841"/>
+<entry endPc="268437114" name="v1" stackId="1" startPc="268436951"/>
+<entry endPc="268437114" name="v2" stackId="2" startPc="268436951"/>
+<entry endPc="268437456" name="deviceSettings" stackId="1" startPc="268437120"/>
+<entry endPc="268437439" name="e" stackId="2" startPc="268437419"/>
+<entry arg="true" endPc="268438571" name="dc" stackId="1" startPc="268437875"/>
+<entry endPc="268438570" name="width" stackId="2" startPc="268437879"/>
+<entry endPc="268438570" name="height" stackId="3" startPc="268437879"/>
+<entry endPc="268438570" name="pL" stackId="4" startPc="268437879"/>
+<entry endPc="268438570" name="sPL" stackId="5" startPc="268437879"/>
+<entry endPc="268438570" name="sHL" stackId="6" startPc="268437879"/>
+<entry endPc="268438570" name="hL" stackId="7" startPc="268437879"/>
+<entry endPc="268438570" name="fOuter" stackId="8" startPc="268437879"/>
+<entry endPc="268438570" name="fInner" stackId="9" startPc="268437879"/>
+<entry endPc="268438570" name="fDrift" stackId="10" startPc="268437879"/>
+<entry endPc="268438475" name="remaining" stackId="11" startPc="268438385"/>
+<entry endPc="268438626" name="view" stackId="1" startPc="268438579"/>
+<entry endPc="268438682" name="view" stackId="1" startPc="268438632"/>
+<entry arg="true" endPc="268438719" name="color" stackId="1" startPc="268438707"/>
+<entry endPc="268438777" name="dictionary" stackId="1" startPc="268438724"/>
+<entry arg="true" endPc="268438818" name="dc" stackId="1" startPc="268438779"/>
+<entry arg="true" endPc="268439119" name="dc" stackId="1" startPc="268438819"/>
+<entry endPc="268439119" name="rez_cmp_local_custom_drawable_16187860511068497434" stackId="2" startPc="268438831"/>
+<entry endPc="268439119" name="rez_cmp_local_text_label" stackId="3" startPc="268438831"/>
+<entry endPc="268439119" name="rez_cmp_local_text_value" stackId="4" startPc="268438831"/>
+<entry arg="true" endPc="268439420" name="dc" stackId="1" startPc="268439120"/>
+<entry endPc="268439420" name="rez_cmp_local_custom_drawable_11824933295158922413" stackId="2" startPc="268439132"/>
+<entry endPc="268439420" name="rez_cmp_local_text_label" stackId="3" startPc="268439132"/>
+<entry endPc="268439420" name="rez_cmp_local_text_value" stackId="4" startPc="268439132"/>
+<entry arg="true" endPc="268439721" name="dc" stackId="1" startPc="268439421"/>
+<entry endPc="268439721" name="rez_cmp_local_custom_drawable_16380678501279751870" stackId="2" startPc="268439433"/>
+<entry endPc="268439721" name="rez_cmp_local_text_label" stackId="3" startPc="268439433"/>
+<entry endPc="268439721" name="rez_cmp_local_text_value" stackId="4" startPc="268439433"/>
+<entry arg="true" endPc="268440022" name="dc" stackId="1" startPc="268439722"/>
+<entry endPc="268440022" name="rez_cmp_local_custom_drawable_83741574912206153191" stackId="2" startPc="268439734"/>
+<entry endPc="268440022" name="rez_cmp_local_text_label" stackId="3" startPc="268439734"/>
+<entry endPc="268440022" name="rez_cmp_local_text_value" stackId="4" startPc="268439734"/>
+<entry arg="true" endPc="268440395" name="dc" stackId="1" startPc="268440023"/>
+<entry endPc="268440395" name="rez_cmp_local_var_dc_getHeight" stackId="2" startPc="268440035"/>
+<entry endPc="268440395" name="rez_cmp_local_var_dc_getWidth" stackId="3" startPc="268440035"/>
+<entry endPc="268440395" name="rez_cmp_local_custom_drawable_11939594661139614796" stackId="4" startPc="268440035"/>
+<entry endPc="268440395" name="rez_cmp_local_text_label" stackId="5" startPc="268440035"/>
+<entry endPc="268440395" name="rez_cmp_local_text_value" stackId="6" startPc="268440035"/>
 </localVars>
-<deviceInfo deviceVersion="5c7ae9cf907f88c116a91dc4ffd75be9b5b7d2e9" partNumber="006-B4024-00"/>
+<deviceInfo deviceVersion="8fc30743a4191ec19bcafa28e3ffcc2b5a958a17" partNumber="006-B3600-00"/>
 <annotations>
 <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="lblFitDriftChart"/>
 <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="LauncherIcon"/>
@@ -373,90 +380,90 @@
 <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="lblFitDrift"/>
 </annotations>
 <dataEntryOffsetMappings>
-<dataEntry label="globals" offset="58" parentId="" symbolId="globals" type="module"/>
-<dataEntry label="globals/EDAView" offset="134" parentId="globals" symbolId="EDAView" type="class"/>
-<dataEntry label="globals/EDAApp" offset="520" parentId="globals" symbolId="EDAApp" type="class"/>
-<dataEntry label="globals/Background" offset="609" parentId="globals" symbolId="Background" type="class"/>
-<dataEntry label="globals/Rez" offset="680" parentId="globals" symbolId="Rez" type="module"/>
-<dataEntry label="globals/Rez/Drawables" offset="733" parentId="Rez" symbolId="Drawables" type="module"/>
-<dataEntry label="globals/Rez/Layouts" offset="768" parentId="Rez" symbolId="Layouts" type="module"/>
-<dataEntry label="globals/Rez/Strings" offset="839" parentId="Rez" symbolId="Strings" type="module"/>
+<dataEntry label="globals" offset="63" parentId="" symbolId="globals" type="module"/>
+<dataEntry label="globals/EDAView" offset="142" parentId="globals" symbolId="EDAView" type="class"/>
+<dataEntry label="globals/EDAApp" offset="501" parentId="globals" symbolId="EDAApp" type="class"/>
+<dataEntry label="globals/Background" offset="588" parentId="globals" symbolId="Background" type="class"/>
+<dataEntry label="globals/Rez" offset="659" parentId="globals" symbolId="Rez" type="module"/>
+<dataEntry label="globals/Rez/Drawables" offset="714" parentId="Rez" symbolId="Drawables" type="module"/>
+<dataEntry label="globals/Rez/Layouts" offset="753" parentId="Rez" symbolId="Layouts" type="module"/>
+<dataEntry label="globals/Rez/Strings" offset="824" parentId="Rez" symbolId="Strings" type="module"/>
 </dataEntryOffsetMappings>
 <functions>
-<functionEntry accessMode="public" endPc="268435480" name="getApp" startPc="268435460">
+<functionEntry accessMode="public" endPc="268435485" name="getApp" startPc="268435460">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435492" name="&lt;init&gt;" parent="EDAView" startPc="268435481">
+<functionEntry accessMode="public" endPc="268435504" name="&lt;init&gt;" parent="EDAView" startPc="268435486">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435504" name="&lt;init&gt;" parent="EDAApp" startPc="268435493">
+<functionEntry accessMode="public" endPc="268435523" name="&lt;init&gt;" parent="EDAApp" startPc="268435505">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435516" name="&lt;init&gt;" parent="Background" startPc="268435505">
+<functionEntry accessMode="public" endPc="268435542" name="&lt;init&gt;" parent="Background" startPc="268435524">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435536" name="&lt;init&gt;" parent="Rez" startPc="268435517">
+<functionEntry accessMode="public" endPc="268435566" name="&lt;init&gt;" parent="Rez" startPc="268435543">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="private" endPc="268435609" name="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;" parent="EDAView" startPc="268435537">
+<functionEntry accessMode="private" endPc="268435664" name="&lt;globals/EDAView/&lt;&gt;resetDisplay&gt;" parent="EDAView" startPc="268435567">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436351" name="compute" parent="EDAView" startPc="268435610">
+<functionEntry accessMode="public" endPc="268436626" name="compute" parent="EDAView" startPc="268435665">
 <param id="info"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="private" endPc="268436378" name="&lt;globals/EDAView/&lt;&gt;resetDisplayStrings&gt;" parent="EDAView" startPc="268436352">
+<functionEntry accessMode="private" endPc="268436655" name="&lt;globals/EDAView/&lt;&gt;resetDisplayStrings&gt;" parent="EDAView" startPc="268436627">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="private" endPc="268436536" name="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;" parent="EDAView" startPc="268436379">
+<functionEntry accessMode="private" endPc="268436836" name="&lt;globals/EDAView/&lt;&gt;updateColorsAndText&gt;" parent="EDAView" startPc="268436656">
 <param id="driftPercent"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="private" endPc="268436623" name="&lt;globals/EDAView/&lt;&gt;formatPace&gt;" parent="EDAView" startPc="268436537">
+<functionEntry accessMode="private" endPc="268436946" name="&lt;globals/EDAView/&lt;&gt;formatPace&gt;" parent="EDAView" startPc="268436837">
 <param id="speedInMs"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="private" endPc="268436739" name="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;" parent="EDAView" startPc="268436624">
+<functionEntry accessMode="private" endPc="268437115" name="&lt;globals/EDAView/&lt;&gt;calculateLinearModel&gt;" parent="EDAView" startPc="268436947">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436953" name="loadSettings" parent="EDAView" startPc="268436740">
+<functionEntry accessMode="public" endPc="268437457" name="loadSettings" parent="EDAView" startPc="268437116">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="private" endPc="268437144" name="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;" parent="EDAView" startPc="268436954">
+<functionEntry accessMode="private" endPc="268437697" name="&lt;globals/EDAView/&lt;&gt;loadStrings&gt;" parent="EDAView" startPc="268437458">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437274" name="initialize" parent="EDAView" startPc="268437145">
+<functionEntry accessMode="public" endPc="268437874" name="initialize" parent="EDAView" startPc="268437698">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437796" name="onUpdate" parent="EDAView" startPc="268437275">
+<functionEntry accessMode="public" endPc="268438571" name="onUpdate" parent="EDAView" startPc="268437875">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437799" name="onStart" parent="EDAApp" startPc="268437797">
+<functionEntry accessMode="public" endPc="268438574" name="onStart" parent="EDAApp" startPc="268438572">
 <param id="state"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437839" name="onSettingsChanged" parent="EDAApp" startPc="268437800">
+<functionEntry accessMode="public" endPc="268438627" name="onSettingsChanged" parent="EDAApp" startPc="268438575">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437881" name="getInitialView" parent="EDAApp" startPc="268437840">
+<functionEntry accessMode="public" endPc="268438682" name="getInitialView" parent="EDAApp" startPc="268438628">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437896" name="initialize" parent="EDAApp" startPc="268437882">
+<functionEntry accessMode="public" endPc="268438703" name="initialize" parent="EDAApp" startPc="268438683">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437899" name="onStop" parent="EDAApp" startPc="268437897">
+<functionEntry accessMode="public" endPc="268438706" name="onStop" parent="EDAApp" startPc="268438704">
 <param id="state"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437911" name="setColor" parent="Background" startPc="268437900">
+<functionEntry accessMode="public" endPc="268438719" name="setColor" parent="Background" startPc="268438707">
 <param id="color"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437961" name="initialize" parent="Background" startPc="268437912">
+<functionEntry accessMode="public" endPc="268438778" name="initialize" parent="Background" startPc="268438720">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437989" name="draw" parent="Background" startPc="268437962">
+<functionEntry accessMode="public" endPc="268438818" name="draw" parent="Background" startPc="268438779">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
@@ -469,23 +476,23 @@
 <functionEntry accessMode="public" name="&lt;init&gt;" parent="Strings">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438210" name="BottomRightLayout" parent="Layouts" startPc="268437990">
+<functionEntry accessMode="public" endPc="268439119" name="BottomRightLayout" parent="Layouts" startPc="268438819">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438431" name="TopRightLayout" parent="Layouts" startPc="268438211">
+<functionEntry accessMode="public" endPc="268439420" name="TopRightLayout" parent="Layouts" startPc="268439120">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438650" name="BottomLeftLayout" parent="Layouts" startPc="268438432">
+<functionEntry accessMode="public" endPc="268439721" name="BottomLeftLayout" parent="Layouts" startPc="268439421">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438869" name="TopLeftLayout" parent="Layouts" startPc="268438651">
+<functionEntry accessMode="public" endPc="268440022" name="TopLeftLayout" parent="Layouts" startPc="268439722">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268439156" name="MainLayout" parent="Layouts" startPc="268438870">
+<functionEntry accessMode="public" endPc="268440395" name="MainLayout" parent="Layouts" startPc="268440023">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
