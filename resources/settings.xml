@@ -1,14 +1,14 @@
 <settings>
     <setting propertyKey="@Properties.hrA" title="@Strings.hrATitle" prompt="@Strings.hrAPrompt">
-        <settingConfig type="numeric" />
+        <settingConfig type="numeric" required="true" min="40" max="240" errorMessage="@Strings.hrValidationError" />
     </setting>
-<setting propertyKey="@Properties.paceA" title="@Strings.paceATitle" prompt="@Strings.paceAPrompt">
-    <settingConfig type="numeric" />
-</setting>
+    <setting propertyKey="@Properties.paceA" title="@Strings.paceATitle" prompt="@Strings.paceAPrompt">
+        <settingConfig type="numeric" required="true" min="120" max="1800" errorMessage="@Strings.paceValidationError" />
+    </setting>
     <setting propertyKey="@Properties.hrB" title="@Strings.hrBTitle" prompt="@Strings.hrBPrompt">
-        <settingConfig type="numeric" />
+        <settingConfig type="numeric" required="true" min="40" max="240" errorMessage="@Strings.hrValidationError" />
     </setting>
     <setting propertyKey="@Properties.paceB" title="@Strings.paceBTitle" prompt="@Strings.paceBPrompt">
-        <settingConfig type="numeric" />
+        <settingConfig type="numeric" required="true" min="120" max="1800" errorMessage="@Strings.paceValidationError" />
     </setting>
 </settings>

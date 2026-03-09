@@ -11,11 +11,13 @@
     
     <string id="hrATitle">HR Point A (Base)</string>
     <string id="hrAPrompt">Heart rate in bpm</string>
+    <string id="hrValidationError">Enter a heart rate between 40 and 240 bpm.</string>
     <string id="paceATitle">Pace Point A</string>
-    <string id="paceAPrompt">Total seconds per unit (km/mi). Matches your watch unit setting. Example: 360 for 6:00 min/unit.</string>
+    <string id="paceAPrompt">Total seconds per pace unit (km/mi). Matches your watch pace setting. Example: 360 for 6:00 min/unit.</string>
+    <string id="paceValidationError">Enter total seconds per pace unit between 120 and 1800.</string>
     
     <string id="hrBTitle">HR Point B (Threshold)</string>
     <string id="hrBPrompt">Heart rate in bpm</string>
     <string id="paceBTitle">Pace Point B</string>
-    <string id="paceBPrompt">Total seconds per unit (km/mi). Matches your watch unit setting. Example: 270 for 4:30 min/unit.</string>
+    <string id="paceBPrompt">Total seconds per pace unit (km/mi). Matches your watch pace setting. Example: 270 for 4:30 min/unit.</string>
 </strings>

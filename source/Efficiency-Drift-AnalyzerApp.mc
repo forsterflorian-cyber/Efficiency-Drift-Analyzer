@@ -26,7 +26,7 @@ class EDAApp extends Application.AppBase {
     function onSettingsChanged() as Void {
         var view = mView;
         if (view != null) {
-            view.loadSettings();
+            view.applySettingsChange();
         }
         WatchUi.requestUpdate();
     }

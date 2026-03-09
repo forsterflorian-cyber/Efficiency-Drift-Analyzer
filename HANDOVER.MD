@@ -1,18 +1,22 @@
 ==============================================================================
-HANDOVER: Efficiency-Drift-Analyzer (EDA) - Status: Production Ready
+HANDOVER: Efficiency-Drift-Analyzer (EDA) - Status: Production Ready (v0.2.4)
 ==============================================================================
-Status: All audit findings (math, memory, session) resolved and verified.
+Status: Performance optimized and hardened. Ready for deployment.
 
-### TECHNICAL MILESTONES (09-MAR-2026)
-- Session Integrity: isRunningActivity and resolveActivityProfile() now 
-  hard-reset on every session/lap to prevent sport profile leakage.
-- Math: Regression model uses mDistanceFactor (Miles/Km compatibility).
-- Memory: O(1) Ringbuffer for :low_mem tier eliminates heap growth risk.
-- FIT 2.0: Session average field correctly typed as MESG_TYPE_SESSION.
-- Robustness: Time-discrete EWMA and 180s warm-up blocker implemented.
+### FINAL OPTIMIZATIONS (09-MAR-2026)
+- Performance: High-Mem drift calculation now use incremental split sums. 
+  Linear O(n) scans have been replaced with O(1) updates.
+- Robustness: HR spike detection (MAX_HR_JUMP_PER_SEC) is now time-normalized 
+  using deltaMs to ensure consistency across variable update intervals.
+- Profile Fallback: Implemented 30s timeout for profile resolution. 
+  System now falls back to "Running" profile if no info is provided.
+- Settings: Hardened settings.xml with required/min/max constraints and 
+  explicit error messages for user feedback.
+- Hygiene: Removed unused Background and Layout resources to reduce 
+  maintenance overhead and binary footprint.
 
-### ARCHITECTURE
-- Tiers: (:high_mem) full history vs. (:low_mem) fixed-size ring buffer.
-- UI: Active reset to "--" on sensor signal loss (HR/GPS).
-- Reliability: Verified zero-leak and zero-growth heap profile.
+### CORE ARCHITECTURE
+- Units: Model calibration is strictly bound to 'paceUnits' for 
+  consistency with the primary watch display.
+- Session: Verified integrity across Laps, Multisport-Legs, and Hot-Reloads.
 ==============================================================================

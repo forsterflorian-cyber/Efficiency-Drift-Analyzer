@@ -1,47 +1,37 @@
 ==============================================================================
-STORE LISTING - Efficiency-Drift-Analyzer (v0.2.1-alpha)
+STORE LISTING - Efficiency-Drift-Analyzer (v0.2.4-alpha)
 ==============================================================================
 
 [ENGLISH]
-Efficiency-Drift-Analyzer - Real-Time Metabolic Audit
+Efficiency-Drift-Analyzer - Professional Metabolic Audit
 Support: https://buymeacoffee.com/forsterf
 
-Master your aerobic engine. EDA is a professional data field that calculates 
-Aerobic Decoupling (Cardiac Drift) using a personalized model. Unlike 
-generic metrics, EDA shows the "extra" your metabolism pays due to 
-fatigue, heat, or decreasing efficiency.
+Master your endurance. EDA is a high-performance data field that calculates 
+Aerobic Decoupling (Cardiac Drift) in real-time. Optimized for elite 
+training and long-distance racing.
 
-CORE METRICS:
-- DRIFT %: Your metabolic surcharge (Green <3% | Yellow 3-7% | Red >7%).
-- EXP. PACE: The pace your current HR "should" be producing.
-- EXP. HR: The target heart rate for your current speed.
-
-TECHNICAL FEATURES:
-- DUAL-EWMA: Independent smoothing for Pace and HR to account for lag.
-- WARM-UP GUARD: 180s countdown to ensure accurate measurement.
-- FIT 2.0: High-resolution drift graph available in Garmin Connect.
-- CALIBRATION: Requires Base/Threshold points in Connect IQ settings.
+FEATURES:
+- Drift %: Accurate metabolic surcharge indicator (Green/Yellow/Red).
+- O(1) Engine: Optimized for minimal CPU load even during 10h+ sessions.
+- Smart Filtering: Time-normalized EWMA and spike protection.
+- Profile Intelligence: Auto-detection of sport profiles with 30s fallback.
+- FIT 2.0: High-resolution drift data synced to Garmin Connect.
 
 ------------------------------------------------------------------------------
 
 [DEUTSCH]
-Efficiency-Drift-Analyzer - Stoffwechsel-Audit in Echtzeit
-Support: https://buymeacoffee.com/forsterf
+Efficiency-Drift-Analyzer - Professionelles Stoffwechsel-Audit
+Unterstuetze das Projekt: https://buymeacoffee.com/forsterf
 
-Meistere deine aerobe Ausdauer. EDA ist ein professionelles Datenfeld zur 
-Berechnung der aeroben Entkopplung (Cardiac Drift) mittels eines 
-personalisierten Modells. EDA zeigt dir exakt, welchen "Aufpreis" dein 
-Stoffwechsel durch Ermuedung, Hitze oder Effizienzverlust zahlt.
+Meistere deine Ausdauer. EDA ist ein Hochleistungs-Datenfeld zur Berechnung 
+der aeroben Entkopplung (Cardiac Drift) in Echtzeit. Optimiert fuer 
+Profi-Training und Langstrecken-Wettkaempfe.
 
-KERNWERTE:
-- DRIFT %: Dein metabolischer Aufschlag (Gruen <3% | Gelb 3-7% | Rot >7%).
-- EXP. PACE: Die Pace, die dein aktueller Puls liefern "sollte".
-- EXP. HR: Der Zielpuls fuer deine aktuelle Geschwindigkeit.
-
-TECHNISCHE FEATURES:
-- DUAL-EWMA: Unabhaengige Glaettung von Pace und Puls (Cardiac Lag Kompensation).
-- WARM-UP SCHUTZ: 180s Countdown fuer valide Messungen ab dem Kaltstart.
-- FIT 2.0: Hochaufloesende Drift-Graphen direkt in Garmin Connect.
-- KALIBRIERUNG: Benoetigt Basis- und Schwellenwerte in den CIQ-Settings.
+FEATURES:
+- Drift %: Praeziser Indikator fuer metabolischen Aufpreis (Gruen/Gelb/Rot).
+- O(1) Engine: Minimale CPU-Last selbst bei Aktivitaeten ueber 10 Stunden.
+- Intelligente Filter: Zeitnormalisierte EWMA und Spike-Schutz.
+- Profil-Logik: Auto-Erkennung von Sportprofilen mit 30s Fallback.
+- FIT 2.0: Hochaufloesende Drift-Daten direkt in Garmin Connect.
 
 ==============================================================================

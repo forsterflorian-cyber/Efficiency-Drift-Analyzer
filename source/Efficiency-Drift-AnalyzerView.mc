@@ -19,6 +19,7 @@ class EDAView extends WatchUi.DataField {
     private const SPLIT_BUCKET_MS as Number = 10000;
     private const CALIBRATION_DISTANCE_FACTOR as Float = 1000.0;
     private const WARMUP_VALID_MS as Number = 180000;
+    private const PROFILE_RESOLVE_TIMEOUT_MS as Number = 30000;
 
     (:low_mem)
     private const LOW_MEM_WINDOW_MS as Number = 1200000;
@@ -75,8 +76,26 @@ class EDAView extends WatchUi.DataField {
     private var validActiveMs as Number = 0;
     private var driftActiveMs as Number = 0;
 
+    (:high_mem)
     private var splitWeightedEf as Array<Float> = [];
+
+    (:high_mem)
     private var splitValidMs as Array<Number> = [];
+
+    (:high_mem)
+    private var splitBoundaryBucket as Number = 0;
+
+    (:high_mem)
+    private var split1WeightedTotal as Float = 0.0;
+
+    (:high_mem)
+    private var split1MsTotal as Number = 0;
+
+    (:high_mem)
+    private var split2WeightedTotal as Float = 0.0;
+
+    (:high_mem)
+    private var split2MsTotal as Number = 0;
     private var driftSum as Float = 0.0;
     private var driftCount as Number = 0;
     private var sessionDriftSum as Float = 0.0;
@@ -179,12 +198,18 @@ class EDAView extends WatchUi.DataField {
 
     private function loadDistanceFactor() as Void {
         var deviceSettings = System.getDeviceSettings();
-        if (deviceSettings.distanceUnits == System.UNIT_STATUTE) {
+        if (deviceSettings.paceUnits == System.UNIT_STATUTE) {
             mDistanceFactor = 1609.34;
             return;
         }
 
         mDistanceFactor = 1000.0;
+    }
+
+    function applySettingsChange() as Void {
+        loadSettings();
+        resetSessionFitSummary();
+        resetSessionState();
     }
 
     (:high_mem)
@@ -261,14 +286,18 @@ class EDAView extends WatchUi.DataField {
             var profileInfo = Activity.getProfileInfo();
             if (profileInfo != null) {
                 isRunningActivity = (profileInfo.sport == Activity.SPORT_RUNNING);
-            } else {
-                isRunningActivity = false;
+                activityProfileResolved = true;
+                return;
             }
         } catch (e) {
-            isRunningActivity = false;
         }
 
-        activityProfileResolved = true;
+        // Do not stay stuck in WAIT forever on devices that never expose
+        // profile metadata for the active data field context.
+        if (mTimerTime >= PROFILE_RESOLVE_TIMEOUT_MS) {
+            isRunningActivity = true;
+            activityProfileResolved = true;
+        }
     }
 
     private function formatPace(speedInMs as Float) as String {
@@ -480,11 +509,12 @@ class EDAView extends WatchUi.DataField {
         }
 
         var deltaMs = timerTime - previousTimer;
-        if (deltaMs <= 0 || deltaMs > 1000) {
+        if (deltaMs <= 0 || deltaMs > SPLIT_BUCKET_MS) {
             return false;
         }
 
-        return (hr - previousHr).abs() > MAX_HR_JUMP_PER_SEC;
+        var allowedJump = MAX_HR_JUMP_PER_SEC * (deltaMs.toFloat() / 1000.0);
+        return (hr - previousHr).abs() > allowedJump;
     }
 
     private function getWorkloadMetric(speed as Float?, power as Float?) as Float? {
@@ -546,6 +576,7 @@ class EDAView extends WatchUi.DataField {
         return value;
     }
 
+    (:high_mem)
     private function ensureBucket(bucketIndex as Number) as Void {
         while (splitWeightedEf.size() <= bucketIndex) {
             splitWeightedEf.add(0.0);
@@ -559,16 +590,50 @@ class EDAView extends WatchUi.DataField {
     }
 
     (:high_mem)
+    private function rebalanceSplitBoundary() as Void {
+        var halfTimerTime = driftActiveMs / 2;
+        var targetBoundaryBucket = 0;
+
+        if (halfTimerTime > 0) {
+            targetBoundaryBucket = ((halfTimerTime + SPLIT_BUCKET_MS - 1) / SPLIT_BUCKET_MS).toNumber();
+        }
+
+        // Move each bucket across the split boundary at most once, so the
+        // running totals stay O(1) per sample over long activities.
+        while (splitBoundaryBucket < targetBoundaryBucket && splitBoundaryBucket < splitWeightedEf.size()) {
+            var bucketWeighted = splitWeightedEf[splitBoundaryBucket] as Float;
+            var bucketMs = splitValidMs[splitBoundaryBucket] as Number;
+
+            split1WeightedTotal += bucketWeighted;
+            split1MsTotal += bucketMs;
+            split2WeightedTotal -= bucketWeighted;
+            split2MsTotal -= bucketMs;
+            splitBoundaryBucket += 1;
+        }
+    }
+
+    (:high_mem)
     private function recordValidSample(timerTime as Number, deltaMs as Number, ef as Float) as Void {
         if (deltaMs <= 0 || ef <= 0.0) {
             return;
         }
 
         var bucketIndex = (timerTime / SPLIT_BUCKET_MS).toNumber();
+        var weightedDelta = ef * deltaMs;
         ensureBucket(bucketIndex);
 
-        splitWeightedEf[bucketIndex] = (splitWeightedEf[bucketIndex] as Float) + (ef * deltaMs);
+        splitWeightedEf[bucketIndex] = (splitWeightedEf[bucketIndex] as Float) + weightedDelta;
         splitValidMs[bucketIndex] = (splitValidMs[bucketIndex] as Number) + deltaMs;
+
+        if (bucketIndex < splitBoundaryBucket) {
+            split1WeightedTotal += weightedDelta;
+            split1MsTotal += deltaMs;
+        } else {
+            split2WeightedTotal += weightedDelta;
+            split2MsTotal += deltaMs;
+        }
+
+        rebalanceSplitBoundary();
     }
 
     (:low_mem)
@@ -606,40 +671,18 @@ class EDAView extends WatchUi.DataField {
 
     (:high_mem)
     private function computeDriftFromSplits() as Float? {
-        var halfTimerTime = driftActiveMs / 2;
-        var split1Weighted = 0.0;
-        var split2Weighted = 0.0;
-        var split1Ms = 0;
-        var split2Ms = 0;
+        rebalanceSplitBoundary();
 
-        for (var i = 0; i < splitWeightedEf.size(); i += 1) {
-            var bucketWeighted = splitWeightedEf[i] as Float;
-            var bucketMs = splitValidMs[i] as Number;
-
-            if (bucketMs <= 0) {
-                continue;
-            }
-
-            var bucketStart = i * SPLIT_BUCKET_MS;
-            if (bucketStart < halfTimerTime) {
-                split1Weighted += bucketWeighted;
-                split1Ms += bucketMs;
-            } else {
-                split2Weighted += bucketWeighted;
-                split2Ms += bucketMs;
-            }
-        }
-
-        if (split1Ms < MIN_SPLIT_VALID_MS || split2Ms < MIN_SPLIT_VALID_MS) {
+        if (split1MsTotal < MIN_SPLIT_VALID_MS || split2MsTotal < MIN_SPLIT_VALID_MS) {
             return null;
         }
 
-        if (split1Ms <= 0 || split2Ms <= 0) {
+        if (split1MsTotal <= 0 || split2MsTotal <= 0) {
             return null;
         }
 
-        var split1Ef = split1Weighted / split1Ms;
-        var split2Ef = split2Weighted / split2Ms;
+        var split1Ef = split1WeightedTotal / split1MsTotal;
+        var split2Ef = split2WeightedTotal / split2MsTotal;
 
         if (split1Ef <= 0.0 || split2Ef <= 0.0) {
             return null;
@@ -738,6 +781,11 @@ class EDAView extends WatchUi.DataField {
     private function resetDriftStorage() as Void {
         splitWeightedEf = [];
         splitValidMs = [];
+        splitBoundaryBucket = 0;
+        split1WeightedTotal = 0.0;
+        split1MsTotal = 0;
+        split2WeightedTotal = 0.0;
+        split2MsTotal = 0;
     }
 
     (:low_mem)
@@ -796,19 +844,18 @@ class EDAView extends WatchUi.DataField {
     }
 
     function onTimerLap() as Void {
-        resetSessionState();
         WatchUi.requestUpdate();
     }
 
     function onNextMultisportLeg() as Void {
+        resetSessionFitSummary();
         resetSessionState();
         WatchUi.requestUpdate();
     }
 
     function compute(info as Activity.Info) as Void {
-        resolveActivityProfile();
-
         mTimerTime = toNumberOrZero(info.timerTime as Numeric?);
+        resolveActivityProfile();
 
         var curSpeed = toFloatOrNull(info.currentSpeed as Numeric?);
         var curHr = toFloatOrNull(info.currentHeartRate as Numeric?);
@@ -825,6 +872,11 @@ class EDAView extends WatchUi.DataField {
 
         var deltaMs = getSampleDelta(mTimerTime);
         if (deltaMs <= 0) {
+            setStatus("WAIT");
+            return;
+        }
+
+        if (!activityProfileResolved) {
             setStatus("WAIT");
             return;
         }
