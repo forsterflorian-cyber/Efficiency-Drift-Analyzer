@@ -1,6 +1,6 @@
 # TODO - Efficiency-Drift-Analyzer
 
-- [ ] Field-Test: Verify EWMA alpha values during high-intensity intervals.
-- [ ] UI: Add optional "Target-Zone" overlay for High-Mem devices.
-- [ ] Logic: Implement auto-calibration of thresholds based on history.
-- [ ] Documentation: Add guide for interpreting drift % in Garmin Connect.
+- [ ] Field-Test: Praxistest der Drift-Werte bei langen Einheiten (>3h).
+- [ ] Research: Automatische Kalibrierung der Schwellenwerte via Historie.
+- [ ] UI: Optionale grafische Trend-Anzeige fuer High-Mem Geraete.
+- [ ] Doku: Interpretations-Guide fuer Drift-Ergebnisse in Garmin Connect.

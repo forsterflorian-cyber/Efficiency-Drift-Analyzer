@@ -1,22 +1,18 @@
 ==============================================================================
-HANDOVER: Efficiency-Drift-Analyzer (EDA) - Status: Release Ready
+HANDOVER: Efficiency-Drift-Analyzer (EDA) - Status: Production Ready
 ==============================================================================
-Status: Core logic and FIT-integration verified. Ready for field testing.
+Status: All audit findings (math, memory, session) resolved and verified.
 
-### MATHEMATICAL MODEL
-- Metabolic Audit: Calculates Aerobic Decoupling (Cardiac Drift) in real-time.
-- Linear Regression: Personalized model using HR = m * v + b.
-- Calibration: Compares current HR against calibrated performance baseline 
-  (Base vs. Threshold).
+### TECHNICAL MILESTONES (09-MAR-2026)
+- Session Integrity: isRunningActivity and resolveActivityProfile() now 
+  hard-reset on every session/lap to prevent sport profile leakage.
+- Math: Regression model uses mDistanceFactor (Miles/Km compatibility).
+- Memory: O(1) Ringbuffer for :low_mem tier eliminates heap growth risk.
+- FIT 2.0: Session average field correctly typed as MESG_TYPE_SESSION.
+- Robustness: Time-discrete EWMA and 180s warm-up blocker implemented.
 
-### ARCHITECTURE & ROBUSTNESS
-- Dual-EWMA Filtering: Independent smoothing for Pace (Alpha 0.20) and 
-  Heart Rate (Alpha 0.03) to account for cardiac lag and GPS noise.
-- Warm-up Blocker: Integrated 180s countdown to ensure steady-state.
-- Memory Tiering: Optimized logic for both High-Mem and 32KB devices.
-
-### PERSISTENCE & DATA
-- FIT 2.0 Integration: Records 'metabolic_drift' (graph) and session 
-  average to Garmin Connect.
-- UI: Dynamic layout that adapts to small or split-screen data fields.
+### ARCHITECTURE
+- Tiers: (:high_mem) full history vs. (:low_mem) fixed-size ring buffer.
+- UI: Active reset to "--" on sensor signal loss (HR/GPS).
+- Reliability: Verified zero-leak and zero-growth heap profile.
 ==============================================================================

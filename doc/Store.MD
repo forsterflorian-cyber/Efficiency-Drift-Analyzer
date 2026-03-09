@@ -1,5 +1,5 @@
 ==============================================================================
-STORE LISTING - Efficiency-Drift-Analyzer
+STORE LISTING - Efficiency-Drift-Analyzer (v0.2.1-alpha)
 ==============================================================================
 
 [ENGLISH]

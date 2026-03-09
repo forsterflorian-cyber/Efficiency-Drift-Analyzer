@@ -1,17 +1,13 @@
 # Changelog - Efficiency-Drift-Analyzer
 
-## [0.2.0-alpha] - 2026-03-09
+## [0.2.2-alpha] - 2026-03-09
+- Behoben: Session-Integritaet fuer isRunningActivity und Sportprofile.
+- Optimierung: resolveActivityProfile() behandelt null-Werte jetzt sicher.
 
-[DEUTSCH]
-- Implementierung der Zwei-Punkt-Linear-Regression (HR/Pace Modell).
-- EWMA-Filterung zur Kompensation von Cardiac Lag hinzugefuegt.
-- Warm-up Schutzmechanismus (180s) integriert.
-- FIT 2.0 Beitraege fuer Echtzeit-Drift-Graphen aktiviert.
-- Dynamisches Layout fuer verschiedene Displaygroessen optimiert.
-
-[ENGLISH]
-- Implemented 2-point linear regression (HR/Pace model).
-- Added dual-EWMA filtering to account for cardiac lag and noise.
-- Integrated 180s warm-up blocker for physiological steady-state.
-- Activated FIT 2.0 contributions for real-time drift graphing.
-- Optimized dynamic layout for various data field sizes.
+## [0.2.1-alpha] - 2026-03-09
+- Korrektur der Regressions-Mathematik fuer Meilen-Einheiten.
+- Umstellung auf festen Ringbuffer fuer :low_mem (Memory Safety).
+- Implementierung von resetSessionState() fuer saubere Intervall-Wechsel.
+- Warm-up Schutz (180s) basierend auf aktiver Zeit finalisiert.
+- FIT-Session-Durchschnitt fuer Garmin Connect korrigiert.
+- UI-Placeholder fuer Signalverlust (HR/GPS) hinzugefuegt.
