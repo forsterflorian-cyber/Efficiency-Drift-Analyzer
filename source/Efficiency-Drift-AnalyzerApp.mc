@@ -15,6 +15,7 @@ class EDAApp extends Application.AppBase {
     }
 
     function onStop(state as Dictionary?) as Void {
+        mView = null;
     }
 
     function getInitialView() as [ Views ] or [ Views, InputDelegates ] {

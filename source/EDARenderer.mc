@@ -3,24 +3,55 @@ import Toybox.Lang;
 
 class EDARenderer {
 
-    private const INVALID_RENDER_VALUE as String = "NaN";
-    private const INVALID_PACE_PLACEHOLDER as String = "--:--";
-    private const INVALID_HR_PLACEHOLDER as String = "--";
+    private const ELLIPSIS as String = "...";
+    private const TEXT_HORIZONTAL_PADDING as Number = 6;
 
-    private function normalizePaceValue(value as String) as String {
-        if (value.equals(INVALID_RENDER_VALUE)) {
-            return INVALID_PACE_PLACEHOLDER;
+    private function getTextBudget(width as Number) as Number {
+        var budget = width - (TEXT_HORIZONTAL_PADDING * 2);
+        if (budget < 0) {
+            return 0;
         }
 
-        return value;
+        return budget;
     }
 
-    private function normalizeHrValue(value as String) as String {
-        if (value.equals(INVALID_RENDER_VALUE)) {
-            return INVALID_HR_PLACEHOLDER;
+    private function selectTextToFit(dc as Graphics.Dc, text as String?, fallbackText as String?, font, maxWidth as Number) as String {
+        if (text == null) {
+            return "";
         }
 
-        return value;
+        var primaryText = text as String;
+        if (primaryText == "") {
+            return "";
+        }
+
+        if (dc.getTextWidthInPixels(primaryText, font) <= maxWidth) {
+            return primaryText;
+        }
+
+        if (fallbackText != null) {
+            var shortText = fallbackText as String;
+            if (shortText != "" && !shortText.equals(primaryText)) {
+                if (dc.getTextWidthInPixels(shortText, font) <= maxWidth) {
+                    return shortText;
+                }
+            }
+        }
+
+        if (dc.getTextWidthInPixels(ELLIPSIS, font) <= maxWidth) {
+            return ELLIPSIS;
+        }
+
+        return "";
+    }
+
+    private function drawResponsiveText(dc as Graphics.Dc, width as Number, y, font, text as String?, fallbackText as String?) as Void {
+        var renderText = selectTextToFit(dc, text, fallbackText, font, getTextBudget(width));
+        if (renderText == "") {
+            return;
+        }
+
+        dc.drawText(width / 2, y, font, renderText, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function drawHighMem(dc as Graphics.Dc, model as Dictionary) as Void {
@@ -33,18 +64,6 @@ class EDARenderer {
         var height = dc.getHeight();
         dc.setColor(fgColor, Graphics.COLOR_TRANSPARENT);
 
-        var paceLabel = model[:paceLabel] as String;
-        var expectedPaceLabel = model[:expectedPaceLabel] as String;
-        var expectedHrLabel = model[:expectedHrLabel] as String;
-        var hrLabel = model[:hrLabel] as String;
-
-        if (width < 180) {
-            paceLabel = model[:paceShortLabel] as String;
-            expectedPaceLabel = model[:expectedPaceShortLabel] as String;
-            expectedHrLabel = model[:expectedHrShortLabel] as String;
-            hrLabel = model[:hrShortLabel] as String;
-        }
-
         var fOuter = Graphics.FONT_XTINY;
         var fInner = (height < 140) ? Graphics.FONT_XTINY : Graphics.FONT_TINY;
         var fDrift = (height < 140) ? Graphics.FONT_SMALL : Graphics.FONT_MEDIUM;
@@ -52,26 +71,24 @@ class EDARenderer {
             fDrift = Graphics.FONT_NUMBER_MEDIUM;
         }
 
-        var currentPaceValue = normalizePaceValue(model[:currentPaceValue] as String);
-        var currentHrValue = normalizeHrValue(model[:currentHrValue] as String);
-        dc.drawText(width / 2, height * 0.12, fOuter, paceLabel + currentPaceValue, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(width / 2, height * 0.30, fInner, expectedPaceLabel + (model[:expectedPaceValue] as String), Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(width / 2, height * 0.48, fDrift, model[:driftLabel] as String, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        drawResponsiveText(dc, width, height * 0.12, fOuter, model[:paceLine] as String, model[:paceShortLine] as String);
+        drawResponsiveText(dc, width, height * 0.30, fInner, model[:expectedPaceLine] as String, model[:expectedPaceShortLine] as String);
+        drawResponsiveText(dc, width, height * 0.48, fDrift, model[:driftLine] as String, model[:driftShortLine] as String?);
 
-        var statusDetail = model[:renderStatusDetail] as String;
+        var statusDetail = model[:renderStatusDetailLine] as String;
         if (statusDetail != "") {
-            dc.drawText(width / 2, height * 0.60, Graphics.FONT_XTINY, statusDetail, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+            drawResponsiveText(dc, width, height * 0.60, Graphics.FONT_XTINY, statusDetail, model[:renderStatusDetailShortLine] as String?);
         } else if (model[:showModelError] as Boolean) {
-            dc.drawText(width / 2, height * 0.60, Graphics.FONT_XTINY, model[:renderModelErrorMessage] as String, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+            drawResponsiveText(dc, width, height * 0.60, Graphics.FONT_XTINY, model[:renderModelErrorLine] as String, null);
         } else {
-            var defaultDetail = model[:defaultDetail] as String?;
+            var defaultDetail = model[:defaultDetailLine] as String?;
             if (defaultDetail != null) {
-                dc.drawText(width / 2, height * 0.60, Graphics.FONT_XTINY, defaultDetail, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+                drawResponsiveText(dc, width, height * 0.60, Graphics.FONT_XTINY, defaultDetail, model[:defaultDetailShortLine] as String?);
             }
         }
 
-        dc.drawText(width / 2, height * 0.72, fInner, expectedHrLabel + (model[:expectedHrValue] as String), Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(width / 2, height * 0.88, fOuter, hrLabel + currentHrValue, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        drawResponsiveText(dc, width, height * 0.72, fInner, model[:expectedHrLine] as String, model[:expectedHrShortLine] as String);
+        drawResponsiveText(dc, width, height * 0.88, fOuter, model[:hrLine] as String, model[:hrShortLine] as String);
     }
 
     function drawLowMem(dc as Graphics.Dc, model as Dictionary) as Void {
@@ -88,21 +105,19 @@ class EDARenderer {
         var fDrift = (height < 180) ? Graphics.FONT_SMALL : Graphics.FONT_MEDIUM;
         var fHr = Graphics.FONT_TINY;
 
-        var currentPaceValue = normalizePaceValue(model[:currentPaceValue] as String);
-        var currentHrValue = normalizeHrValue(model[:currentHrValue] as String);
-        dc.drawText(width / 2, height * 0.20, fPace, (model[:paceShortLabel] as String) + currentPaceValue, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(width / 2, height * 0.50, fDrift, model[:driftLabel] as String, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        drawResponsiveText(dc, width, height * 0.20, fPace, model[:paceLine] as String, model[:paceShortLine] as String);
+        drawResponsiveText(dc, width, height * 0.50, fDrift, model[:driftLine] as String, model[:driftShortLine] as String?);
 
-        var statusDetail = model[:renderStatusDetail] as String;
+        var statusDetail = model[:renderStatusDetailLine] as String;
         if (statusDetail != "") {
-            dc.drawText(width / 2, height * 0.65, Graphics.FONT_XTINY, statusDetail, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+            drawResponsiveText(dc, width, height * 0.65, Graphics.FONT_XTINY, statusDetail, model[:renderStatusDetailShortLine] as String?);
         } else {
-            var defaultDetail = model[:defaultDetail] as String?;
+            var defaultDetail = model[:defaultDetailLine] as String?;
             if (defaultDetail != null) {
-                dc.drawText(width / 2, height * 0.65, Graphics.FONT_XTINY, defaultDetail, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+                drawResponsiveText(dc, width, height * 0.65, Graphics.FONT_XTINY, defaultDetail, model[:defaultDetailShortLine] as String?);
             }
         }
 
-        dc.drawText(width / 2, height * 0.80, fHr, (model[:hrShortLabel] as String) + currentHrValue, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        drawResponsiveText(dc, width, height * 0.80, fHr, model[:hrLine] as String, model[:hrShortLine] as String);
     }
 }

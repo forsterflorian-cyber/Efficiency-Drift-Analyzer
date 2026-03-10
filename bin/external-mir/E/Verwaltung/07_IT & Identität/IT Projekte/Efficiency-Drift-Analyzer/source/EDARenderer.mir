@@ -11,1078 +11,1069 @@ class EDARenderer {
     static
     <init> {
     }
-    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 6; @position = 18; @symbol_constdef = [INVALID_RENDER_VALUE,6,18,38]; @symbol_type<0> = [String,6,42,48]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 6; @position = 18; @symbol_constdef = [ELLIPSIS,6,18,26]; @symbol_type<0> = [String,6,30,36]; ]
     private
-    const INVALID_RENDER_VALUE as String = "NaN";
-    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 7; @position = 18; @symbol_constdef = [INVALID_PACE_PLACEHOLDER,7,18,42]; @symbol_type<0> = [String,7,46,52]; ]
+    const ELLIPSIS as String = "...";
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 7; @position = 18; @symbol_constdef = [TEXT_HORIZONTAL_PADDING,7,18,41]; @symbol_type<0> = [Number,7,45,51]; ]
     private
-    const INVALID_PACE_PLACEHOLDER as String = "--:--";
-    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 8; @position = 18; @symbol_constdef = [INVALID_HR_PLACEHOLDER,8,18,40]; @symbol_type<0> = [String,8,44,50]; ]
+    const TEXT_HORIZONTAL_PADDING as Number = 6;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 9; @symbol_functiondef = [getTextBudget,9,21,34]; @symbol_param<0> = [width,9,35,40]; @symbol_param<0>_type<0> = [Number,9,44,50]; @symbol_return<0> = [Number,9,55,61]; ]
     private
-    const INVALID_HR_PLACEHOLDER as String = "--";
-    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 10; @symbol_functiondef = [normalizePaceValue,10,21,39]; @symbol_param<0> = [value,10,40,45]; @symbol_param<0>_type<0> = [String,10,49,55]; @symbol_return<0> = [String,10,60,66]; ]
-    private
-    function normalizePaceValue(value as String) as String {
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_10_67_16_4_start:
+    function getTextBudget(width as Number) as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_9_62_16_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 10 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_9_62_16_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_9_62_16_4_stop" ]
+        %budget.1 = local;
+        symbol [ budget %budget.1 10 12 18 ];
+        %tmp.1 = lgetv %width;
+        symbol [ width %tmp.1 10 21 26 ];
+        symbol [ TEXT_HORIZONTAL_PADDING %tmp.3 10 30 53 ];
+        %tmp.3 = getv ? :TEXT_HORIZONTAL_PADDING;
+        %tmp.4 = 2;
+        %tmp.5 = mul %tmp.3 %tmp.4;
+        %tmp.6 = sub %tmp.1 %tmp.5;
+        lputv %budget.1 %tmp.6;
+        symbol [ budget %budget.1 10 12 18 ];
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 11 8 ]
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_11_8_13_8_if_stmt:
-        %tmp.1 = lgetv %value;
-        symbol [ value %tmp.1 11 12 17 ];
-        symbol [ equals %tmp.2 11 18 24 ];
-        %tmp.2 = getv function %tmp.1 :equals;
-        symbol [ INVALID_RENDER_VALUE %tmp.4 11 25 45 ];
-        %tmp.4 = getv ? :INVALID_RENDER_VALUE;
-        %tmp.5 = invoke %tmp.1 %tmp.2(%tmp.4);
-        bf %tmp.5 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_11_8_13_8_if_end;
+        %tmp.7 = lgetv %budget.1;
+        symbol [ budget %tmp.7 11 12 18 ];
+        %tmp.8 = 0;
+        %tmp.9 = lt %tmp.7 %tmp.8;
+        bf %tmp.9 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_11_8_13_8_if_end;
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_11_8_13_8_if_true:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_11_48_13_8_start:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_11_24_13_8_start:
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 12 12 ]
-        symbol [ INVALID_PACE_PLACEHOLDER %tmp.7 12 19 43 ];
-        %tmp.7 = getv ? :INVALID_PACE_PLACEHOLDER;
-        ret %tmp.7;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_11_48_13_8_stop:
+        %tmp.10 = 0;
+        ret %tmp.10;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_11_24_13_8_stop:
         goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_11_8_13_8_if_end;
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_11_8_13_8_if_end:
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 15 8 ]
-        %tmp.8 = lgetv %value;
-        symbol [ value %tmp.8 15 15 20 ];
-        ret %tmp.8;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_10_67_16_4_stop:
+        %tmp.11 = lgetv %budget.1;
+        symbol [ budget %tmp.11 15 15 21 ];
+        ret %tmp.11;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_9_62_16_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 18; @symbol_functiondef = [normalizeHrValue,18,21,37]; @symbol_param<0> = [value,18,38,43]; @symbol_param<0>_type<0> = [String,18,47,53]; @symbol_return<0> = [String,18,58,64]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 18; @symbol_functiondef = [selectTextToFit,18,21,36]; @symbol_param<0> = [dc,18,37,39]; @symbol_param<0>_type<0> = [Graphics,18,43,51]; @symbol_param<0>_type<1> = [Dc,18,52,54]; @symbol_param<1> = [text,18,56,60]; @symbol_param<1>_type<0> = [String,18,64,70]; @symbol_param<2> = [fallbackText,18,73,85]; @symbol_param<2>_type<0> = [String,18,89,95]; @symbol_param<3> = [font,18,98,102]; @symbol_param<4> = [maxWidth,18,104,112]; @symbol_param<4>_type<0> = [Number,18,116,122]; @symbol_return<0> = [String,18,127,133]; ]
     private
-    function normalizeHrValue(value as String) as String {
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_18_65_24_4_start:
+    function selectTextToFit(dc as Graphics.Dc, text as String or Null, fallbackText as String or Null, font, maxWidth as Number) as String {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_18_134_46_4_start:
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 19 8 ]
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_19_8_21_8_if_stmt:
-        %tmp.1 = lgetv %value;
-        symbol [ value %tmp.1 19 12 17 ];
-        symbol [ equals %tmp.2 19 18 24 ];
-        %tmp.2 = getv function %tmp.1 :equals;
-        symbol [ INVALID_RENDER_VALUE %tmp.4 19 25 45 ];
-        %tmp.4 = getv ? :INVALID_RENDER_VALUE;
-        %tmp.5 = invoke %tmp.1 %tmp.2(%tmp.4);
-        bf %tmp.5 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_19_8_21_8_if_end;
+        %tmp.1 = lgetv %text;
+        symbol [ text %tmp.1 19 12 16 ];
+        %tmp.2 = null;
+        %tmp.3 = eq %tmp.1 %tmp.2;
+        bf %tmp.3 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_19_8_21_8_if_end;
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_19_8_21_8_if_true:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_19_48_21_8_start:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_19_26_21_8_start:
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 20 12 ]
-        symbol [ INVALID_HR_PLACEHOLDER %tmp.7 20 19 41 ];
-        %tmp.7 = getv ? :INVALID_HR_PLACEHOLDER;
-        ret %tmp.7;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_19_48_21_8_stop:
+        %tmp.4 = "";
+        ret %tmp.4;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_19_26_21_8_stop:
         goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_19_8_21_8_if_end;
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_19_8_21_8_if_end:
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 23 8 ]
-        %tmp.8 = lgetv %value;
-        symbol [ value %tmp.8 23 15 20 ];
-        ret %tmp.8;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_18_65_24_4_stop:
-    }
-    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 26; @symbol_functiondef = [drawHighMem,26,13,24]; @symbol_param<0> = [dc,26,25,27]; @symbol_param<0>_type<0> = [Graphics,26,31,39]; @symbol_param<0>_type<1> = [Dc,26,40,42]; @symbol_param<1> = [model,26,44,49]; @symbol_param<1>_type<0> = [Dictionary,26,53,63]; ]
-    function drawHighMem(dc as Graphics.Dc, model as Dictionary) as Void {
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 27 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %bgColor.1 = local;
-        symbol [ bgColor %bgColor.1 27 12 19 ];
-        %tmp.1 = lgetv %model;
-        symbol [ model %tmp.1 27 22 27 ];
-        %tmp.3 = const :renderBgColor;
-        symbol [ renderBgColor %tmp.3 27 29 42 const ];
-        %tmp.4 = agetv %tmp.1 %tmp.3;
-        %tmp.5 = as %tmp.4 Number;
-        symbol [ Number %tmp.5 27 47 53 ];
-        lputv %bgColor.1 %tmp.5;
-        symbol [ bgColor %bgColor.1 27 12 19 ];
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_18_134_46_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_18_134_46_4_stop" ]
+        %primaryText.1 = local;
+        symbol [ primaryText %primaryText.1 23 12 23 ];
+        %tmp.5 = lgetv %text;
+        symbol [ text %tmp.5 23 26 30 ];
+        %tmp.6 = as %tmp.5 String;
+        symbol [ String %tmp.6 23 34 40 ];
+        lputv %primaryText.1 %tmp.6;
+        symbol [ primaryText %primaryText.1 23 12 23 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 24 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_24_8_26_8_if_stmt:
+        %tmp.7 = lgetv %primaryText.1;
+        symbol [ primaryText %tmp.7 24 12 23 ];
+        %tmp.8 = "";
+        %tmp.9 = eq %tmp.7 %tmp.8;
+        bf %tmp.9 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_24_8_26_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_24_8_26_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_24_31_26_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 25 12 ]
+        %tmp.10 = "";
+        ret %tmp.10;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_24_31_26_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_24_8_26_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_24_8_26_8_if_end:
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 28 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %fgColor.2 = local;
-        symbol [ fgColor %fgColor.2 28 12 19 ];
-        %tmp.6 = lgetv %model;
-        symbol [ model %tmp.6 28 22 27 ];
-        %tmp.8 = const :renderFgColor;
-        symbol [ renderFgColor %tmp.8 28 29 42 const ];
-        %tmp.9 = agetv %tmp.6 %tmp.8;
-        %tmp.10 = as %tmp.9 Number;
-        symbol [ Number %tmp.10 28 47 53 ];
-        lputv %fgColor.2 %tmp.10;
-        symbol [ fgColor %fgColor.2 28 12 19 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 29 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_28_8_30_8_if_stmt:
         %tmp.11 = lgetv %dc;
-        symbol [ dc %tmp.11 29 8 10 ];
-        symbol [ setColor %tmp.12 29 11 19 ];
-        %tmp.12 = getv function %tmp.11 :setColor;
-        symbol [ Graphics %tmp.13 29 20 28 ];
-        %tmp.13 = getm $.Toybox.Graphics;
-        symbol [ COLOR_TRANSPARENT %tmp.14 29 29 46 ];
-        %tmp.14 = getv %tmp.13 :COLOR_TRANSPARENT;
-        %tmp.15 = lgetv %bgColor.1;
-        symbol [ bgColor %tmp.15 29 48 55 ];
-        invoke %tmp.11 %tmp.12(%tmp.14, %tmp.15);
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 30 8 ]
-        %tmp.16 = lgetv %dc;
-        symbol [ dc %tmp.16 30 8 10 ];
-        symbol [ clear %tmp.17 30 11 16 ];
-        %tmp.17 = getv function %tmp.16 :clear;
-        invoke %tmp.16 %tmp.17();
+        symbol [ dc %tmp.11 28 12 14 ];
+        symbol [ getTextWidthInPixels %tmp.12 28 15 35 ];
+        %tmp.12 = getv function %tmp.11 :getTextWidthInPixels;
+        %tmp.13 = lgetv %primaryText.1;
+        symbol [ primaryText %tmp.13 28 36 47 ];
+        %tmp.14 = lgetv %font;
+        symbol [ font %tmp.14 28 49 53 ];
+        %tmp.15 = invoke %tmp.11 %tmp.12(%tmp.13, %tmp.14);
+        %tmp.16 = lgetv %maxWidth;
+        symbol [ maxWidth %tmp.16 28 58 66 ];
+        %tmp.17 = lte %tmp.15 %tmp.16;
+        bf %tmp.17 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_28_8_30_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_28_8_30_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_28_68_30_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 29 12 ]
+        %tmp.18 = lgetv %primaryText.1;
+        symbol [ primaryText %tmp.18 29 19 30 ];
+        ret %tmp.18;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_28_68_30_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_28_8_30_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_28_8_30_8_if_end:
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 32 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %width.3 = local;
-        symbol [ width %width.3 32 12 17 ];
-        %tmp.18 = lgetv %dc;
-        symbol [ dc %tmp.18 32 20 22 ];
-        symbol [ getWidth %tmp.19 32 23 31 ];
-        %tmp.19 = getv function %tmp.18 :getWidth;
-        %tmp.20 = invoke %tmp.18 %tmp.19();
-        lputv %width.3 %tmp.20;
-        symbol [ width %width.3 32 12 17 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 33 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %height.4 = local;
-        symbol [ height %height.4 33 12 18 ];
-        %tmp.21 = lgetv %dc;
-        symbol [ dc %tmp.21 33 21 23 ];
-        symbol [ getHeight %tmp.22 33 24 33 ];
-        %tmp.22 = getv function %tmp.21 :getHeight;
-        %tmp.23 = invoke %tmp.21 %tmp.22();
-        lputv %height.4 %tmp.23;
-        symbol [ height %height.4 33 12 18 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 34 8 ]
-        %tmp.24 = lgetv %dc;
-        symbol [ dc %tmp.24 34 8 10 ];
-        symbol [ setColor %tmp.25 34 11 19 ];
-        %tmp.25 = getv function %tmp.24 :setColor;
-        %tmp.26 = lgetv %fgColor.2;
-        symbol [ fgColor %tmp.26 34 20 27 ];
-        symbol [ Graphics %tmp.27 34 29 37 ];
-        %tmp.27 = getm $.Toybox.Graphics;
-        symbol [ COLOR_TRANSPARENT %tmp.28 34 38 55 ];
-        %tmp.28 = getv %tmp.27 :COLOR_TRANSPARENT;
-        invoke %tmp.24 %tmp.25(%tmp.26, %tmp.28);
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 36 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %paceLabel.5 = local;
-        symbol [ paceLabel %paceLabel.5 36 12 21 ];
-        %tmp.29 = lgetv %model;
-        symbol [ model %tmp.29 36 24 29 ];
-        %tmp.31 = const :paceLabel;
-        symbol [ paceLabel %tmp.31 36 31 40 const ];
-        %tmp.32 = agetv %tmp.29 %tmp.31;
-        %tmp.33 = as %tmp.32 String;
-        symbol [ String %tmp.33 36 45 51 ];
-        lputv %paceLabel.5 %tmp.33;
-        symbol [ paceLabel %paceLabel.5 36 12 21 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 37 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %expectedPaceLabel.6 = local;
-        symbol [ expectedPaceLabel %expectedPaceLabel.6 37 12 29 ];
-        %tmp.34 = lgetv %model;
-        symbol [ model %tmp.34 37 32 37 ];
-        %tmp.36 = const :expectedPaceLabel;
-        symbol [ expectedPaceLabel %tmp.36 37 39 56 const ];
-        %tmp.37 = agetv %tmp.34 %tmp.36;
-        %tmp.38 = as %tmp.37 String;
-        symbol [ String %tmp.38 37 61 67 ];
-        lputv %expectedPaceLabel.6 %tmp.38;
-        symbol [ expectedPaceLabel %expectedPaceLabel.6 37 12 29 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 38 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %expectedHrLabel.7 = local;
-        symbol [ expectedHrLabel %expectedHrLabel.7 38 12 27 ];
-        %tmp.39 = lgetv %model;
-        symbol [ model %tmp.39 38 30 35 ];
-        %tmp.41 = const :expectedHrLabel;
-        symbol [ expectedHrLabel %tmp.41 38 37 52 const ];
-        %tmp.42 = agetv %tmp.39 %tmp.41;
-        %tmp.43 = as %tmp.42 String;
-        symbol [ String %tmp.43 38 57 63 ];
-        lputv %expectedHrLabel.7 %tmp.43;
-        symbol [ expectedHrLabel %expectedHrLabel.7 38 12 27 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 39 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %hrLabel.8 = local;
-        symbol [ hrLabel %hrLabel.8 39 12 19 ];
-        %tmp.44 = lgetv %model;
-        symbol [ model %tmp.44 39 22 27 ];
-        %tmp.46 = const :hrLabel;
-        symbol [ hrLabel %tmp.46 39 29 36 const ];
-        %tmp.47 = agetv %tmp.44 %tmp.46;
-        %tmp.48 = as %tmp.47 String;
-        symbol [ String %tmp.48 39 41 47 ];
-        lputv %hrLabel.8 %tmp.48;
-        symbol [ hrLabel %hrLabel.8 39 12 19 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_32_8_39_8_if_stmt:
+        %tmp.19 = lgetv %fallbackText;
+        symbol [ fallbackText %tmp.19 32 12 24 ];
+        %tmp.20 = null;
+        %tmp.21 = ne %tmp.19 %tmp.20;
+        bf %tmp.21 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_32_8_39_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_32_8_39_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_32_34_39_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 33 12 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_32_34_39_8_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_32_34_39_8_stop" ]
+        %shortText.2 = local;
+        symbol [ shortText %shortText.2 33 16 25 ];
+        %tmp.22 = lgetv %fallbackText;
+        symbol [ fallbackText %tmp.22 33 28 40 ];
+        %tmp.23 = as %tmp.22 { (!Null) };
+        %tmp.24 = as %tmp.23 String;
+        symbol [ String %tmp.24 33 44 50 ];
+        lputv %shortText.2 %tmp.24;
+        symbol [ shortText %shortText.2 33 16 25 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 34 12 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_12_38_12_if_stmt:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_16_34_64_begin:
+        %tmp.25 = lgetv %shortText.2;
+        symbol [ shortText %tmp.25 34 16 25 ];
+        %tmp.26 = "";
+        %tmp.27 = ne %tmp.25 %tmp.26;
+        bf %tmp.27 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_12_38_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_35_34_64_true:
+        %tmp.28 = lgetv %shortText.2;
+        symbol [ shortText %tmp.28 34 36 45 ];
+        symbol [ equals %tmp.29 34 46 52 ];
+        %tmp.29 = getv function %tmp.28 :equals;
+        %tmp.30 = lgetv %primaryText.1;
+        symbol [ primaryText %tmp.30 34 53 64 ];
+        %tmp.31 = invoke %tmp.28 %tmp.29(%tmp.30);
+        %tmp.32 = not %tmp.31;
+        push %tmp.32;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_35_34_64_end:
+        %tmp.33 = phi [%tmp.27 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_16_34_64_begin] [%tmp.32 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_35_34_64_true] [%tmp.33 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_35_34_64_end];
+        bf %tmp.33 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_12_38_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_12_38_12_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_67_38_12_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 35 16 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_35_16_37_16_if_stmt:
+        %tmp.34 = lgetv %dc;
+        symbol [ dc %tmp.34 35 20 22 ];
+        symbol [ getTextWidthInPixels %tmp.35 35 23 43 ];
+        %tmp.35 = getv function %tmp.34 :getTextWidthInPixels;
+        %tmp.36 = lgetv %shortText.2;
+        symbol [ shortText %tmp.36 35 44 53 ];
+        %tmp.37 = lgetv %font;
+        symbol [ font %tmp.37 35 55 59 ];
+        %tmp.38 = invoke %tmp.34 %tmp.35(%tmp.36, %tmp.37);
+        %tmp.39 = lgetv %maxWidth;
+        symbol [ maxWidth %tmp.39 35 64 72 ];
+        %tmp.40 = lte %tmp.38 %tmp.39;
+        bf %tmp.40 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_35_16_37_16_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_35_16_37_16_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_35_74_37_16_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 36 20 ]
+        %tmp.41 = lgetv %shortText.2;
+        symbol [ shortText %tmp.41 36 27 36 ];
+        ret %tmp.41;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_35_74_37_16_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_35_16_37_16_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_35_16_37_16_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_67_38_12_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_12_38_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_34_12_38_12_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_32_34_39_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_32_8_39_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_32_8_39_8_if_end:
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 41 8 ]
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_8_46_8_if_stmt:
-        %tmp.49 = lgetv %width.3;
-        symbol [ width %tmp.49 41 12 17 ];
-        %tmp.50 = 180;
-        %tmp.51 = lt %tmp.49 %tmp.50;
-        bf %tmp.51 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_8_46_8_if_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_8_46_8_if_true:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_25_46_8_start:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_8_43_8_if_stmt:
+        %tmp.42 = lgetv %dc;
+        symbol [ dc %tmp.42 41 12 14 ];
+        symbol [ getTextWidthInPixels %tmp.43 41 15 35 ];
+        %tmp.43 = getv function %tmp.42 :getTextWidthInPixels;
+        symbol [ ELLIPSIS %tmp.45 41 36 44 ];
+        %tmp.45 = getv ? :ELLIPSIS;
+        %tmp.46 = lgetv %font;
+        symbol [ font %tmp.46 41 46 50 ];
+        %tmp.47 = invoke %tmp.42 %tmp.43(%tmp.45, %tmp.46);
+        %tmp.48 = lgetv %maxWidth;
+        symbol [ maxWidth %tmp.48 41 55 63 ];
+        %tmp.49 = lte %tmp.47 %tmp.48;
+        bf %tmp.49 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_8_43_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_8_43_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_65_43_8_start:
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 42 12 ]
-        %tmp.52 = lgetv %model;
-        symbol [ model %tmp.52 42 24 29 ];
-        %tmp.54 = const :paceShortLabel;
-        symbol [ paceShortLabel %tmp.54 42 31 45 const ];
-        %tmp.55 = agetv %tmp.52 %tmp.54;
-        %tmp.56 = as %tmp.55 String;
-        symbol [ String %tmp.56 42 50 56 ];
-        lputv %paceLabel.5 %tmp.56;
-        symbol [ paceLabel %paceLabel.5 42 12 21 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 43 12 ]
-        %tmp.57 = lgetv %model;
-        symbol [ model %tmp.57 43 32 37 ];
-        %tmp.59 = const :expectedPaceShortLabel;
-        symbol [ expectedPaceShortLabel %tmp.59 43 39 61 const ];
-        %tmp.60 = agetv %tmp.57 %tmp.59;
-        %tmp.61 = as %tmp.60 String;
-        symbol [ String %tmp.61 43 66 72 ];
-        lputv %expectedPaceLabel.6 %tmp.61;
-        symbol [ expectedPaceLabel %expectedPaceLabel.6 43 12 29 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 44 12 ]
-        %tmp.62 = lgetv %model;
-        symbol [ model %tmp.62 44 30 35 ];
-        %tmp.64 = const :expectedHrShortLabel;
-        symbol [ expectedHrShortLabel %tmp.64 44 37 57 const ];
-        %tmp.65 = agetv %tmp.62 %tmp.64;
-        %tmp.66 = as %tmp.65 String;
-        symbol [ String %tmp.66 44 62 68 ];
-        lputv %expectedHrLabel.7 %tmp.66;
-        symbol [ expectedHrLabel %expectedHrLabel.7 44 12 27 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 45 12 ]
-        %tmp.67 = lgetv %model;
-        symbol [ model %tmp.67 45 22 27 ];
-        %tmp.69 = const :hrShortLabel;
-        symbol [ hrShortLabel %tmp.69 45 29 41 const ];
-        %tmp.70 = agetv %tmp.67 %tmp.69;
-        %tmp.71 = as %tmp.70 String;
-        symbol [ String %tmp.71 45 46 52 ];
-        lputv %hrLabel.8 %tmp.71;
-        symbol [ hrLabel %hrLabel.8 45 12 19 ];
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_25_46_8_stop:
-        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_8_46_8_if_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_8_46_8_if_end:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 48 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %fOuter.9 = local;
-        symbol [ fOuter %fOuter.9 48 12 18 ];
-        symbol [ Graphics %tmp.72 48 21 29 ];
-        %tmp.72 = getm $.Toybox.Graphics;
-        symbol [ FONT_XTINY %tmp.73 48 30 40 ];
-        %tmp.73 = getv %tmp.72 :FONT_XTINY;
-        lputv %fOuter.9 %tmp.73;
-        symbol [ fOuter %fOuter.9 48 12 18 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 49 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %fInner.10 = local;
-        symbol [ fInner %fInner.10 49 12 18 ];
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_49_21_49_69_begin:
-        %tmp.74 = lgetv %height.4;
-        symbol [ height %tmp.74 49 22 28 ];
-        %tmp.75 = 140;
-        %tmp.76 = lt %tmp.74 %tmp.75;
-        bf %tmp.76 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_49_21_49_69_else_false;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_49_21_49_69_true:
-        symbol [ Graphics %tmp.77 49 38 46 ];
-        %tmp.77 = getm $.Toybox.Graphics;
-        symbol [ FONT_XTINY %tmp.78 49 47 57 ];
-        %tmp.78 = getv %tmp.77 :FONT_XTINY;
-        push %tmp.78;
-        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_49_21_49_69_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_49_21_49_69_else_false:
-        symbol [ Graphics %tmp.79 49 60 68 ];
-        %tmp.79 = getm $.Toybox.Graphics;
-        symbol [ FONT_TINY %tmp.80 49 69 78 ];
-        %tmp.80 = getv %tmp.79 :FONT_TINY;
-        push %tmp.80;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_49_21_49_69_end:
-        %tmp.81 = phi [%tmp.76 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_49_21_49_69_begin] [%tmp.78 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_49_21_49_69_true] [%tmp.80 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_49_21_49_69_else_false] [%tmp.81 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_49_21_49_69_end];
-        lputv %fInner.10 %tmp.81;
-        symbol [ fInner %fInner.10 49 12 18 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 50 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %fDrift.11 = local;
-        symbol [ fDrift %fDrift.11 50 12 18 ];
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_21_50_69_begin:
-        %tmp.82 = lgetv %height.4;
-        symbol [ height %tmp.82 50 22 28 ];
-        %tmp.83 = 140;
-        %tmp.84 = lt %tmp.82 %tmp.83;
-        bf %tmp.84 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_21_50_69_else_false;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_21_50_69_true:
-        symbol [ Graphics %tmp.85 50 38 46 ];
-        %tmp.85 = getm $.Toybox.Graphics;
-        symbol [ FONT_SMALL %tmp.86 50 47 57 ];
-        %tmp.86 = getv %tmp.85 :FONT_SMALL;
-        push %tmp.86;
-        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_21_50_69_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_21_50_69_else_false:
-        symbol [ Graphics %tmp.87 50 60 68 ];
-        %tmp.87 = getm $.Toybox.Graphics;
-        symbol [ FONT_MEDIUM %tmp.88 50 69 80 ];
-        %tmp.88 = getv %tmp.87 :FONT_MEDIUM;
-        push %tmp.88;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_21_50_69_end:
-        %tmp.89 = phi [%tmp.84 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_21_50_69_begin] [%tmp.86 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_21_50_69_true] [%tmp.88 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_21_50_69_else_false] [%tmp.89 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_21_50_69_end];
-        lputv %fDrift.11 %tmp.89;
-        symbol [ fDrift %fDrift.11 50 12 18 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 51 8 ]
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_51_8_53_8_if_stmt:
-        %tmp.90 = lgetv %height.4;
-        symbol [ height %tmp.90 51 12 18 ];
-        %tmp.91 = 200;
-        %tmp.92 = gt %tmp.90 %tmp.91;
-        bf %tmp.92 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_51_8_53_8_if_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_51_8_53_8_if_true:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_51_26_53_8_start:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 52 12 ]
-        symbol [ Graphics %tmp.93 52 21 29 ];
-        %tmp.93 = getm $.Toybox.Graphics;
-        symbol [ FONT_NUMBER_MEDIUM %tmp.94 52 30 48 ];
-        %tmp.94 = getv %tmp.93 :FONT_NUMBER_MEDIUM;
-        lputv %fDrift.11 %tmp.94;
-        symbol [ fDrift %fDrift.11 52 12 18 ];
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_51_26_53_8_stop:
-        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_51_8_53_8_if_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_51_8_53_8_if_end:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 55 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %currentPaceValue.12 = local;
-        symbol [ currentPaceValue %currentPaceValue.12 55 12 28 ];
-        %tmp.95 = self;
-        symbol [ normalizePaceValue %tmp.96 55 31 49 ];
-        %tmp.96 = getv function %tmp.95 :normalizePaceValue;
-        %tmp.97 = lgetv %model;
-        symbol [ model %tmp.97 55 50 55 ];
-        %tmp.99 = const :currentPaceValue;
-        symbol [ currentPaceValue %tmp.99 55 57 73 const ];
-        %tmp.100 = agetv %tmp.97 %tmp.99;
-        %tmp.101 = as %tmp.100 String;
-        symbol [ String %tmp.101 55 78 84 ];
-        %tmp.102 = invoke %tmp.95 %tmp.96(%tmp.101);
-        lputv %currentPaceValue.12 %tmp.102;
-        symbol [ currentPaceValue %currentPaceValue.12 55 12 28 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 56 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %currentHrValue.13 = local;
-        symbol [ currentHrValue %currentHrValue.13 56 12 26 ];
-        %tmp.103 = self;
-        symbol [ normalizeHrValue %tmp.104 56 29 45 ];
-        %tmp.104 = getv function %tmp.103 :normalizeHrValue;
-        %tmp.105 = lgetv %model;
-        symbol [ model %tmp.105 56 46 51 ];
-        %tmp.107 = const :currentHrValue;
-        symbol [ currentHrValue %tmp.107 56 53 67 const ];
-        %tmp.108 = agetv %tmp.105 %tmp.107;
-        %tmp.109 = as %tmp.108 String;
-        symbol [ String %tmp.109 56 72 78 ];
-        %tmp.110 = invoke %tmp.103 %tmp.104(%tmp.109);
-        lputv %currentHrValue.13 %tmp.110;
-        symbol [ currentHrValue %currentHrValue.13 56 12 26 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 57 8 ]
-        %tmp.111 = lgetv %dc;
-        symbol [ dc %tmp.111 57 8 10 ];
-        symbol [ drawText %tmp.112 57 11 19 ];
-        %tmp.112 = getv function %tmp.111 :drawText;
-        %tmp.113 = lgetv %width.3;
-        symbol [ width %tmp.113 57 20 25 ];
-        %tmp.114 = 2;
-        %tmp.115 = div %tmp.113 %tmp.114;
-        %tmp.116 = lgetv %height.4;
-        symbol [ height %tmp.116 57 31 37 ];
-        %tmp.117 = 0.12;
-        %tmp.118 = mul %tmp.116 %tmp.117;
-        %tmp.119 = lgetv %fOuter.9;
-        symbol [ fOuter %tmp.119 57 46 52 ];
-        %tmp.120 = lgetv %paceLabel.5;
-        symbol [ paceLabel %tmp.120 57 54 63 ];
-        %tmp.121 = lgetv %currentPaceValue.12;
-        symbol [ currentPaceValue %tmp.121 57 66 82 ];
-        %tmp.122 = add %tmp.120 %tmp.121;
-        symbol [ Graphics %tmp.123 57 84 92 ];
-        %tmp.123 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.124 57 93 112 ];
-        %tmp.124 = getv %tmp.123 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.125 57 115 123 ];
-        %tmp.125 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.126 57 124 144 ];
-        %tmp.126 = getv %tmp.125 :TEXT_JUSTIFY_VCENTER;
-        %tmp.127 = bitor %tmp.124 %tmp.126;
-        invoke %tmp.111 %tmp.112(%tmp.115, %tmp.118, %tmp.119, %tmp.122, %tmp.127);
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 58 8 ]
-        %tmp.128 = lgetv %dc;
-        symbol [ dc %tmp.128 58 8 10 ];
-        symbol [ drawText %tmp.129 58 11 19 ];
-        %tmp.129 = getv function %tmp.128 :drawText;
-        %tmp.130 = lgetv %width.3;
-        symbol [ width %tmp.130 58 20 25 ];
-        %tmp.131 = 2;
-        %tmp.132 = div %tmp.130 %tmp.131;
-        %tmp.133 = lgetv %height.4;
-        symbol [ height %tmp.133 58 31 37 ];
-        %tmp.134 = 0.30;
-        %tmp.135 = mul %tmp.133 %tmp.134;
-        %tmp.136 = lgetv %fInner.10;
-        symbol [ fInner %tmp.136 58 46 52 ];
-        %tmp.137 = lgetv %expectedPaceLabel.6;
-        symbol [ expectedPaceLabel %tmp.137 58 54 71 ];
-        %tmp.138 = lgetv %model;
-        symbol [ model %tmp.138 58 75 80 ];
-        %tmp.140 = const :expectedPaceValue;
-        symbol [ expectedPaceValue %tmp.140 58 82 99 const ];
-        %tmp.141 = agetv %tmp.138 %tmp.140;
-        %tmp.142 = as %tmp.141 String;
-        symbol [ String %tmp.142 58 104 110 ];
-        %tmp.143 = add %tmp.137 %tmp.142;
-        symbol [ Graphics %tmp.144 58 113 121 ];
-        %tmp.144 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.145 58 122 141 ];
-        %tmp.145 = getv %tmp.144 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.146 58 144 152 ];
-        %tmp.146 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.147 58 153 173 ];
-        %tmp.147 = getv %tmp.146 :TEXT_JUSTIFY_VCENTER;
-        %tmp.148 = bitor %tmp.145 %tmp.147;
-        invoke %tmp.128 %tmp.129(%tmp.132, %tmp.135, %tmp.136, %tmp.143, %tmp.148);
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 59 8 ]
-        %tmp.149 = lgetv %dc;
-        symbol [ dc %tmp.149 59 8 10 ];
-        symbol [ drawText %tmp.150 59 11 19 ];
-        %tmp.150 = getv function %tmp.149 :drawText;
-        %tmp.151 = lgetv %width.3;
-        symbol [ width %tmp.151 59 20 25 ];
-        %tmp.152 = 2;
-        %tmp.153 = div %tmp.151 %tmp.152;
-        %tmp.154 = lgetv %height.4;
-        symbol [ height %tmp.154 59 31 37 ];
-        %tmp.155 = 0.48;
-        %tmp.156 = mul %tmp.154 %tmp.155;
-        %tmp.157 = lgetv %fDrift.11;
-        symbol [ fDrift %tmp.157 59 46 52 ];
-        %tmp.158 = lgetv %model;
-        symbol [ model %tmp.158 59 54 59 ];
-        %tmp.160 = const :driftLabel;
-        symbol [ driftLabel %tmp.160 59 61 71 const ];
-        %tmp.161 = agetv %tmp.158 %tmp.160;
-        %tmp.162 = as %tmp.161 String;
-        symbol [ String %tmp.162 59 76 82 ];
-        symbol [ Graphics %tmp.163 59 84 92 ];
-        %tmp.163 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.164 59 93 112 ];
-        %tmp.164 = getv %tmp.163 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.165 59 115 123 ];
-        %tmp.165 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.166 59 124 144 ];
-        %tmp.166 = getv %tmp.165 :TEXT_JUSTIFY_VCENTER;
-        %tmp.167 = bitor %tmp.164 %tmp.166;
-        invoke %tmp.149 %tmp.150(%tmp.153, %tmp.156, %tmp.157, %tmp.162, %tmp.167);
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 61 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop" ]
-        %statusDetail.14 = local;
-        symbol [ statusDetail %statusDetail.14 61 12 24 ];
-        %tmp.168 = lgetv %model;
-        symbol [ model %tmp.168 61 27 32 ];
-        %tmp.170 = const :renderStatusDetail;
-        symbol [ renderStatusDetail %tmp.170 61 34 52 const ];
-        %tmp.171 = agetv %tmp.168 %tmp.170;
-        %tmp.172 = as %tmp.171 String;
-        symbol [ String %tmp.172 61 57 63 ];
-        lputv %statusDetail.14 %tmp.172;
-        symbol [ statusDetail %statusDetail.14 61 12 24 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 62 8 ]
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_62_8_71_8_if_stmt:
-        %tmp.173 = lgetv %statusDetail.14;
-        symbol [ statusDetail %tmp.173 62 12 24 ];
-        %tmp.174 = "";
-        %tmp.175 = ne %tmp.173 %tmp.174;
-        bf %tmp.175 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_62_8_71_8_if_false;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_62_8_71_8_if_true:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_62_32_64_8_start:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 63 12 ]
-        %tmp.176 = lgetv %dc;
-        symbol [ dc %tmp.176 63 12 14 ];
-        symbol [ drawText %tmp.177 63 15 23 ];
-        %tmp.177 = getv function %tmp.176 :drawText;
-        %tmp.178 = lgetv %width.3;
-        symbol [ width %tmp.178 63 24 29 ];
-        %tmp.179 = 2;
-        %tmp.180 = div %tmp.178 %tmp.179;
-        %tmp.181 = lgetv %height.4;
-        symbol [ height %tmp.181 63 35 41 ];
-        %tmp.182 = 0.60;
-        %tmp.183 = mul %tmp.181 %tmp.182;
-        symbol [ Graphics %tmp.184 63 50 58 ];
-        %tmp.184 = getm $.Toybox.Graphics;
-        symbol [ FONT_XTINY %tmp.185 63 59 69 ];
-        %tmp.185 = getv %tmp.184 :FONT_XTINY;
-        %tmp.186 = lgetv %statusDetail.14;
-        symbol [ statusDetail %tmp.186 63 71 83 ];
-        symbol [ Graphics %tmp.187 63 85 93 ];
-        %tmp.187 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.188 63 94 113 ];
-        %tmp.188 = getv %tmp.187 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.189 63 116 124 ];
-        %tmp.189 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.190 63 125 145 ];
-        %tmp.190 = getv %tmp.189 :TEXT_JUSTIFY_VCENTER;
-        %tmp.191 = bitor %tmp.188 %tmp.190;
-        invoke %tmp.176 %tmp.177(%tmp.180, %tmp.183, %tmp.185, %tmp.186, %tmp.191);
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_62_32_64_8_stop:
-        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_62_8_71_8_if_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_62_8_71_8_if_false:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 64 15 ]
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_64_15_71_8_if_stmt:
-        %tmp.192 = lgetv %model;
-        symbol [ model %tmp.192 64 19 24 ];
-        %tmp.194 = const :showModelError;
-        symbol [ showModelError %tmp.194 64 26 40 const ];
-        %tmp.195 = agetv %tmp.192 %tmp.194;
-        %tmp.196 = as %tmp.195 Boolean;
-        symbol [ Boolean %tmp.196 64 45 52 ];
-        bf %tmp.196 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_64_15_71_8_if_else_false;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_64_15_71_8_if_true:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_64_54_66_8_start:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 65 12 ]
-        %tmp.197 = lgetv %dc;
-        symbol [ dc %tmp.197 65 12 14 ];
-        symbol [ drawText %tmp.198 65 15 23 ];
-        %tmp.198 = getv function %tmp.197 :drawText;
-        %tmp.199 = lgetv %width.3;
-        symbol [ width %tmp.199 65 24 29 ];
-        %tmp.200 = 2;
-        %tmp.201 = div %tmp.199 %tmp.200;
-        %tmp.202 = lgetv %height.4;
-        symbol [ height %tmp.202 65 35 41 ];
-        %tmp.203 = 0.60;
-        %tmp.204 = mul %tmp.202 %tmp.203;
-        symbol [ Graphics %tmp.205 65 50 58 ];
-        %tmp.205 = getm $.Toybox.Graphics;
-        symbol [ FONT_XTINY %tmp.206 65 59 69 ];
-        %tmp.206 = getv %tmp.205 :FONT_XTINY;
-        %tmp.207 = lgetv %model;
-        symbol [ model %tmp.207 65 71 76 ];
-        %tmp.209 = const :renderModelErrorMessage;
-        symbol [ renderModelErrorMessage %tmp.209 65 78 101 const ];
-        %tmp.210 = agetv %tmp.207 %tmp.209;
-        %tmp.211 = as %tmp.210 String;
-        symbol [ String %tmp.211 65 106 112 ];
-        symbol [ Graphics %tmp.212 65 114 122 ];
-        %tmp.212 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.213 65 123 142 ];
-        %tmp.213 = getv %tmp.212 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.214 65 145 153 ];
-        %tmp.214 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.215 65 154 174 ];
-        %tmp.215 = getv %tmp.214 :TEXT_JUSTIFY_VCENTER;
-        %tmp.216 = bitor %tmp.213 %tmp.215;
-        invoke %tmp.197 %tmp.198(%tmp.201, %tmp.204, %tmp.206, %tmp.211, %tmp.216);
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_64_54_66_8_stop:
-        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_64_15_71_8_if_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_64_15_71_8_if_else_false:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_66_15_71_8_start:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 67 12 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_66_15_71_8_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_66_15_71_8_stop" ]
-        %defaultDetail.15 = local;
-        symbol [ defaultDetail %defaultDetail.15 67 16 29 ];
-        %tmp.217 = lgetv %model;
-        symbol [ model %tmp.217 67 32 37 ];
-        %tmp.219 = const :defaultDetail;
-        symbol [ defaultDetail %tmp.219 67 39 52 const ];
-        %tmp.220 = agetv %tmp.217 %tmp.219;
-        %tmp.221 = as %tmp.220 String or Null;
-        symbol [ String %tmp.221 67 57 63 ];
-        lputv %defaultDetail.15 %tmp.221;
-        symbol [ defaultDetail %defaultDetail.15 67 16 29 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 68 12 ]
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_12_70_12_if_stmt:
-        %tmp.222 = lgetv %defaultDetail.15;
-        symbol [ defaultDetail %tmp.222 68 16 29 ];
-        %tmp.223 = null;
-        %tmp.224 = ne %tmp.222 %tmp.223;
-        bf %tmp.224 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_12_70_12_if_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_12_70_12_if_true:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_39_70_12_start:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 69 16 ]
-        %tmp.225 = lgetv %dc;
-        symbol [ dc %tmp.225 69 16 18 ];
-        symbol [ drawText %tmp.226 69 19 27 ];
-        %tmp.226 = getv function %tmp.225 :drawText;
-        %tmp.227 = lgetv %width.3;
-        symbol [ width %tmp.227 69 28 33 ];
-        %tmp.228 = 2;
-        %tmp.229 = div %tmp.227 %tmp.228;
-        %tmp.230 = lgetv %height.4;
-        symbol [ height %tmp.230 69 39 45 ];
-        %tmp.231 = 0.60;
-        %tmp.232 = mul %tmp.230 %tmp.231;
-        symbol [ Graphics %tmp.233 69 54 62 ];
-        %tmp.233 = getm $.Toybox.Graphics;
-        symbol [ FONT_XTINY %tmp.234 69 63 73 ];
-        %tmp.234 = getv %tmp.233 :FONT_XTINY;
-        %tmp.235 = lgetv %defaultDetail.15;
-        symbol [ defaultDetail %tmp.235 69 75 88 ];
-        %tmp.236 = as %tmp.235 { (!Null) };
-        symbol [ Graphics %tmp.237 69 90 98 ];
-        %tmp.237 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.238 69 99 118 ];
-        %tmp.238 = getv %tmp.237 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.239 69 121 129 ];
-        %tmp.239 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.240 69 130 150 ];
-        %tmp.240 = getv %tmp.239 :TEXT_JUSTIFY_VCENTER;
-        %tmp.241 = bitor %tmp.238 %tmp.240;
-        invoke %tmp.225 %tmp.226(%tmp.229, %tmp.232, %tmp.234, %tmp.236, %tmp.241);
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_39_70_12_stop:
-        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_12_70_12_if_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_12_70_12_if_end:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_66_15_71_8_stop:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_64_15_71_8_if_end:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_62_8_71_8_if_end:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 73 8 ]
-        %tmp.242 = lgetv %dc;
-        symbol [ dc %tmp.242 73 8 10 ];
-        symbol [ drawText %tmp.243 73 11 19 ];
-        %tmp.243 = getv function %tmp.242 :drawText;
-        %tmp.244 = lgetv %width.3;
-        symbol [ width %tmp.244 73 20 25 ];
-        %tmp.245 = 2;
-        %tmp.246 = div %tmp.244 %tmp.245;
-        %tmp.247 = lgetv %height.4;
-        symbol [ height %tmp.247 73 31 37 ];
-        %tmp.248 = 0.72;
-        %tmp.249 = mul %tmp.247 %tmp.248;
-        %tmp.250 = lgetv %fInner.10;
-        symbol [ fInner %tmp.250 73 46 52 ];
-        %tmp.251 = lgetv %expectedHrLabel.7;
-        symbol [ expectedHrLabel %tmp.251 73 54 69 ];
-        %tmp.252 = lgetv %model;
-        symbol [ model %tmp.252 73 73 78 ];
-        %tmp.254 = const :expectedHrValue;
-        symbol [ expectedHrValue %tmp.254 73 80 95 const ];
-        %tmp.255 = agetv %tmp.252 %tmp.254;
-        %tmp.256 = as %tmp.255 String;
-        symbol [ String %tmp.256 73 100 106 ];
-        %tmp.257 = add %tmp.251 %tmp.256;
-        symbol [ Graphics %tmp.258 73 109 117 ];
-        %tmp.258 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.259 73 118 137 ];
-        %tmp.259 = getv %tmp.258 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.260 73 140 148 ];
-        %tmp.260 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.261 73 149 169 ];
-        %tmp.261 = getv %tmp.260 :TEXT_JUSTIFY_VCENTER;
-        %tmp.262 = bitor %tmp.259 %tmp.261;
-        invoke %tmp.242 %tmp.243(%tmp.246, %tmp.249, %tmp.250, %tmp.257, %tmp.262);
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 74 8 ]
-        %tmp.263 = lgetv %dc;
-        symbol [ dc %tmp.263 74 8 10 ];
-        symbol [ drawText %tmp.264 74 11 19 ];
-        %tmp.264 = getv function %tmp.263 :drawText;
-        %tmp.265 = lgetv %width.3;
-        symbol [ width %tmp.265 74 20 25 ];
-        %tmp.266 = 2;
-        %tmp.267 = div %tmp.265 %tmp.266;
-        %tmp.268 = lgetv %height.4;
-        symbol [ height %tmp.268 74 31 37 ];
-        %tmp.269 = 0.88;
-        %tmp.270 = mul %tmp.268 %tmp.269;
-        %tmp.271 = lgetv %fOuter.9;
-        symbol [ fOuter %tmp.271 74 46 52 ];
-        %tmp.272 = lgetv %hrLabel.8;
-        symbol [ hrLabel %tmp.272 74 54 61 ];
-        %tmp.273 = lgetv %currentHrValue.13;
-        symbol [ currentHrValue %tmp.273 74 64 78 ];
-        %tmp.274 = add %tmp.272 %tmp.273;
-        symbol [ Graphics %tmp.275 74 80 88 ];
-        %tmp.275 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.276 74 89 108 ];
-        %tmp.276 = getv %tmp.275 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.277 74 111 119 ];
-        %tmp.277 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.278 74 120 140 ];
-        %tmp.278 = getv %tmp.277 :TEXT_JUSTIFY_VCENTER;
-        %tmp.279 = bitor %tmp.276 %tmp.278;
-        invoke %tmp.263 %tmp.264(%tmp.267, %tmp.270, %tmp.271, %tmp.274, %tmp.279);
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_26_73_75_4_stop:
+        symbol [ ELLIPSIS %tmp.51 42 19 27 ];
+        %tmp.51 = getv ? :ELLIPSIS;
+        ret %tmp.51;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_65_43_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_8_43_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_41_8_43_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 45 8 ]
+        %tmp.52 = "";
+        ret %tmp.52;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_18_134_46_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 77; @symbol_functiondef = [drawLowMem,77,13,23]; @symbol_param<0> = [dc,77,24,26]; @symbol_param<0>_type<0> = [Graphics,77,30,38]; @symbol_param<0>_type<1> = [Dc,77,39,41]; @symbol_param<1> = [model,77,43,48]; @symbol_param<1>_type<0> = [Dictionary,77,52,62]; ]
-    function drawLowMem(dc as Graphics.Dc, model as Dictionary) as Void {
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_start:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 78 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_stop" ]
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 48; @symbol_functiondef = [drawResponsiveText,48,21,39]; @symbol_param<0> = [dc,48,40,42]; @symbol_param<0>_type<0> = [Graphics,48,46,54]; @symbol_param<0>_type<1> = [Dc,48,55,57]; @symbol_param<1> = [width,48,59,64]; @symbol_param<1>_type<0> = [Number,48,68,74]; @symbol_param<2> = [y,48,76,77]; @symbol_param<3> = [font,48,79,83]; @symbol_param<4> = [text,48,85,89]; @symbol_param<4>_type<0> = [String,48,93,99]; @symbol_param<5> = [fallbackText,48,102,114]; @symbol_param<5>_type<0> = [String,48,118,124]; ]
+    private
+    function drawResponsiveText(dc as Graphics.Dc, width as Number, y, font, text as String or Null, fallbackText as String or Null) as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_48_135_55_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 49 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_48_135_55_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_48_135_55_4_stop" ]
+        %renderText.1 = local;
+        symbol [ renderText %renderText.1 49 12 22 ];
+        %tmp.1 = self;
+        symbol [ selectTextToFit %tmp.2 49 25 40 ];
+        %tmp.2 = getv function %tmp.1 :selectTextToFit;
+        %tmp.3 = lgetv %dc;
+        symbol [ dc %tmp.3 49 41 43 ];
+        %tmp.4 = lgetv %text;
+        symbol [ text %tmp.4 49 45 49 ];
+        %tmp.5 = lgetv %fallbackText;
+        symbol [ fallbackText %tmp.5 49 51 63 ];
+        %tmp.6 = lgetv %font;
+        symbol [ font %tmp.6 49 65 69 ];
+        %tmp.7 = self;
+        symbol [ getTextBudget %tmp.8 49 71 84 ];
+        %tmp.8 = getv function %tmp.7 :getTextBudget;
+        %tmp.9 = lgetv %width;
+        symbol [ width %tmp.9 49 85 90 ];
+        %tmp.10 = invoke %tmp.7 %tmp.8(%tmp.9);
+        %tmp.11 = invoke %tmp.1 %tmp.2(%tmp.3, %tmp.4, %tmp.5, %tmp.6, %tmp.10);
+        lputv %renderText.1 %tmp.11;
+        symbol [ renderText %renderText.1 49 12 22 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 50 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_8_52_8_if_stmt:
+        %tmp.12 = lgetv %renderText.1;
+        symbol [ renderText %tmp.12 50 12 22 ];
+        %tmp.13 = "";
+        %tmp.14 = eq %tmp.12 %tmp.13;
+        bf %tmp.14 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_8_52_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_8_52_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_30_52_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 51 12 ]
+        ret ?;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_30_52_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_8_52_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_50_8_52_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 54 8 ]
+        %tmp.15 = lgetv %dc;
+        symbol [ dc %tmp.15 54 8 10 ];
+        symbol [ drawText %tmp.16 54 11 19 ];
+        %tmp.16 = getv function %tmp.15 :drawText;
+        %tmp.17 = lgetv %width;
+        symbol [ width %tmp.17 54 20 25 ];
+        %tmp.18 = 2;
+        %tmp.19 = div %tmp.17 %tmp.18;
+        %tmp.20 = lgetv %y;
+        symbol [ y %tmp.20 54 31 32 ];
+        %tmp.21 = lgetv %font;
+        symbol [ font %tmp.21 54 34 38 ];
+        %tmp.22 = lgetv %renderText.1;
+        symbol [ renderText %tmp.22 54 40 50 ];
+        symbol [ Graphics %tmp.23 54 52 60 ];
+        %tmp.23 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.24 54 61 80 ];
+        %tmp.24 = getv %tmp.23 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.25 54 83 91 ];
+        %tmp.25 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.26 54 92 112 ];
+        %tmp.26 = getv %tmp.25 :TEXT_JUSTIFY_VCENTER;
+        %tmp.27 = bitor %tmp.24 %tmp.26;
+        invoke %tmp.15 %tmp.16(%tmp.19, %tmp.20, %tmp.21, %tmp.22, %tmp.27);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_48_135_55_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 57; @symbol_functiondef = [drawHighMem,57,13,24]; @symbol_param<0> = [dc,57,25,27]; @symbol_param<0>_type<0> = [Graphics,57,31,39]; @symbol_param<0>_type<1> = [Dc,57,40,42]; @symbol_param<1> = [model,57,44,49]; @symbol_param<1>_type<0> = [Dictionary,57,53,63]; ]
+    function drawHighMem(dc as Graphics.Dc, model as Dictionary) as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 58 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_stop" ]
         %bgColor.1 = local;
-        symbol [ bgColor %bgColor.1 78 12 19 ];
+        symbol [ bgColor %bgColor.1 58 12 19 ];
         %tmp.1 = lgetv %model;
-        symbol [ model %tmp.1 78 22 27 ];
+        symbol [ model %tmp.1 58 22 27 ];
         %tmp.3 = const :renderBgColor;
-        symbol [ renderBgColor %tmp.3 78 29 42 const ];
+        symbol [ renderBgColor %tmp.3 58 29 42 const ];
         %tmp.4 = agetv %tmp.1 %tmp.3;
         %tmp.5 = as %tmp.4 Number;
-        symbol [ Number %tmp.5 78 47 53 ];
+        symbol [ Number %tmp.5 58 47 53 ];
         lputv %bgColor.1 %tmp.5;
-        symbol [ bgColor %bgColor.1 78 12 19 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 79 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_stop" ]
+        symbol [ bgColor %bgColor.1 58 12 19 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 59 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_stop" ]
         %fgColor.2 = local;
-        symbol [ fgColor %fgColor.2 79 12 19 ];
+        symbol [ fgColor %fgColor.2 59 12 19 ];
         %tmp.6 = lgetv %model;
-        symbol [ model %tmp.6 79 22 27 ];
+        symbol [ model %tmp.6 59 22 27 ];
         %tmp.8 = const :renderFgColor;
-        symbol [ renderFgColor %tmp.8 79 29 42 const ];
+        symbol [ renderFgColor %tmp.8 59 29 42 const ];
         %tmp.9 = agetv %tmp.6 %tmp.8;
         %tmp.10 = as %tmp.9 Number;
-        symbol [ Number %tmp.10 79 47 53 ];
+        symbol [ Number %tmp.10 59 47 53 ];
         lputv %fgColor.2 %tmp.10;
-        symbol [ fgColor %fgColor.2 79 12 19 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 80 8 ]
+        symbol [ fgColor %fgColor.2 59 12 19 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 60 8 ]
         %tmp.11 = lgetv %dc;
-        symbol [ dc %tmp.11 80 8 10 ];
-        symbol [ setColor %tmp.12 80 11 19 ];
+        symbol [ dc %tmp.11 60 8 10 ];
+        symbol [ setColor %tmp.12 60 11 19 ];
         %tmp.12 = getv function %tmp.11 :setColor;
-        symbol [ Graphics %tmp.13 80 20 28 ];
+        symbol [ Graphics %tmp.13 60 20 28 ];
         %tmp.13 = getm $.Toybox.Graphics;
-        symbol [ COLOR_TRANSPARENT %tmp.14 80 29 46 ];
+        symbol [ COLOR_TRANSPARENT %tmp.14 60 29 46 ];
         %tmp.14 = getv %tmp.13 :COLOR_TRANSPARENT;
         %tmp.15 = lgetv %bgColor.1;
-        symbol [ bgColor %tmp.15 80 48 55 ];
+        symbol [ bgColor %tmp.15 60 48 55 ];
         invoke %tmp.11 %tmp.12(%tmp.14, %tmp.15);
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 81 8 ]
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 61 8 ]
         %tmp.16 = lgetv %dc;
-        symbol [ dc %tmp.16 81 8 10 ];
-        symbol [ clear %tmp.17 81 11 16 ];
+        symbol [ dc %tmp.16 61 8 10 ];
+        symbol [ clear %tmp.17 61 11 16 ];
         %tmp.17 = getv function %tmp.16 :clear;
         invoke %tmp.16 %tmp.17();
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 83 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_stop" ]
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 63 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_stop" ]
         %width.3 = local;
-        symbol [ width %width.3 83 12 17 ];
+        symbol [ width %width.3 63 12 17 ];
         %tmp.18 = lgetv %dc;
-        symbol [ dc %tmp.18 83 20 22 ];
-        symbol [ getWidth %tmp.19 83 23 31 ];
+        symbol [ dc %tmp.18 63 20 22 ];
+        symbol [ getWidth %tmp.19 63 23 31 ];
         %tmp.19 = getv function %tmp.18 :getWidth;
         %tmp.20 = invoke %tmp.18 %tmp.19();
         lputv %width.3 %tmp.20;
-        symbol [ width %width.3 83 12 17 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 84 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_stop" ]
+        symbol [ width %width.3 63 12 17 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 64 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_stop" ]
         %height.4 = local;
-        symbol [ height %height.4 84 12 18 ];
+        symbol [ height %height.4 64 12 18 ];
         %tmp.21 = lgetv %dc;
-        symbol [ dc %tmp.21 84 21 23 ];
-        symbol [ getHeight %tmp.22 84 24 33 ];
+        symbol [ dc %tmp.21 64 21 23 ];
+        symbol [ getHeight %tmp.22 64 24 33 ];
         %tmp.22 = getv function %tmp.21 :getHeight;
         %tmp.23 = invoke %tmp.21 %tmp.22();
         lputv %height.4 %tmp.23;
-        symbol [ height %height.4 84 12 18 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 85 8 ]
+        symbol [ height %height.4 64 12 18 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 65 8 ]
         %tmp.24 = lgetv %dc;
-        symbol [ dc %tmp.24 85 8 10 ];
-        symbol [ setColor %tmp.25 85 11 19 ];
+        symbol [ dc %tmp.24 65 8 10 ];
+        symbol [ setColor %tmp.25 65 11 19 ];
         %tmp.25 = getv function %tmp.24 :setColor;
         %tmp.26 = lgetv %fgColor.2;
-        symbol [ fgColor %tmp.26 85 20 27 ];
-        symbol [ Graphics %tmp.27 85 29 37 ];
+        symbol [ fgColor %tmp.26 65 20 27 ];
+        symbol [ Graphics %tmp.27 65 29 37 ];
         %tmp.27 = getm $.Toybox.Graphics;
-        symbol [ COLOR_TRANSPARENT %tmp.28 85 38 55 ];
+        symbol [ COLOR_TRANSPARENT %tmp.28 65 38 55 ];
         %tmp.28 = getv %tmp.27 :COLOR_TRANSPARENT;
         invoke %tmp.24 %tmp.25(%tmp.26, %tmp.28);
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 87 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_stop" ]
-        %fPace.5 = local;
-        symbol [ fPace %fPace.5 87 12 17 ];
-        symbol [ Graphics %tmp.29 87 20 28 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 67 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_stop" ]
+        %fOuter.5 = local;
+        symbol [ fOuter %fOuter.5 67 12 18 ];
+        symbol [ Graphics %tmp.29 67 21 29 ];
         %tmp.29 = getm $.Toybox.Graphics;
-        symbol [ FONT_TINY %tmp.30 87 29 38 ];
+        symbol [ FONT_XTINY %tmp.30 67 30 40 ];
+        %tmp.30 = getv %tmp.29 :FONT_XTINY;
+        lputv %fOuter.5 %tmp.30;
+        symbol [ fOuter %fOuter.5 67 12 18 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 68 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_stop" ]
+        %fInner.6 = local;
+        symbol [ fInner %fInner.6 68 12 18 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_21_68_69_begin:
+        %tmp.31 = lgetv %height.4;
+        symbol [ height %tmp.31 68 22 28 ];
+        %tmp.32 = 140;
+        %tmp.33 = lt %tmp.31 %tmp.32;
+        bf %tmp.33 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_21_68_69_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_21_68_69_true:
+        symbol [ Graphics %tmp.34 68 38 46 ];
+        %tmp.34 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.35 68 47 57 ];
+        %tmp.35 = getv %tmp.34 :FONT_XTINY;
+        push %tmp.35;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_21_68_69_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_21_68_69_else_false:
+        symbol [ Graphics %tmp.36 68 60 68 ];
+        %tmp.36 = getm $.Toybox.Graphics;
+        symbol [ FONT_TINY %tmp.37 68 69 78 ];
+        %tmp.37 = getv %tmp.36 :FONT_TINY;
+        push %tmp.37;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_21_68_69_end:
+        %tmp.38 = phi [%tmp.33 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_21_68_69_begin] [%tmp.35 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_21_68_69_true] [%tmp.37 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_21_68_69_else_false] [%tmp.38 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_68_21_68_69_end];
+        lputv %fInner.6 %tmp.38;
+        symbol [ fInner %fInner.6 68 12 18 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 69 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_stop" ]
+        %fDrift.7 = local;
+        symbol [ fDrift %fDrift.7 69 12 18 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_69_21_69_69_begin:
+        %tmp.39 = lgetv %height.4;
+        symbol [ height %tmp.39 69 22 28 ];
+        %tmp.40 = 140;
+        %tmp.41 = lt %tmp.39 %tmp.40;
+        bf %tmp.41 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_69_21_69_69_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_69_21_69_69_true:
+        symbol [ Graphics %tmp.42 69 38 46 ];
+        %tmp.42 = getm $.Toybox.Graphics;
+        symbol [ FONT_SMALL %tmp.43 69 47 57 ];
+        %tmp.43 = getv %tmp.42 :FONT_SMALL;
+        push %tmp.43;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_69_21_69_69_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_69_21_69_69_else_false:
+        symbol [ Graphics %tmp.44 69 60 68 ];
+        %tmp.44 = getm $.Toybox.Graphics;
+        symbol [ FONT_MEDIUM %tmp.45 69 69 80 ];
+        %tmp.45 = getv %tmp.44 :FONT_MEDIUM;
+        push %tmp.45;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_69_21_69_69_end:
+        %tmp.46 = phi [%tmp.41 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_69_21_69_69_begin] [%tmp.43 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_69_21_69_69_true] [%tmp.45 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_69_21_69_69_else_false] [%tmp.46 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_69_21_69_69_end];
+        lputv %fDrift.7 %tmp.46;
+        symbol [ fDrift %fDrift.7 69 12 18 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 70 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_70_8_72_8_if_stmt:
+        %tmp.47 = lgetv %height.4;
+        symbol [ height %tmp.47 70 12 18 ];
+        %tmp.48 = 200;
+        %tmp.49 = gt %tmp.47 %tmp.48;
+        bf %tmp.49 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_70_8_72_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_70_8_72_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_70_26_72_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 71 12 ]
+        symbol [ Graphics %tmp.50 71 21 29 ];
+        %tmp.50 = getm $.Toybox.Graphics;
+        symbol [ FONT_NUMBER_MEDIUM %tmp.51 71 30 48 ];
+        %tmp.51 = getv %tmp.50 :FONT_NUMBER_MEDIUM;
+        lputv %fDrift.7 %tmp.51;
+        symbol [ fDrift %fDrift.7 71 12 18 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_70_26_72_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_70_8_72_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_70_8_72_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 74 8 ]
+        %tmp.52 = self;
+        symbol [ drawResponsiveText %tmp.53 74 8 26 ];
+        %tmp.53 = getv function %tmp.52 :drawResponsiveText;
+        %tmp.54 = lgetv %dc;
+        symbol [ dc %tmp.54 74 27 29 ];
+        %tmp.55 = lgetv %width.3;
+        symbol [ width %tmp.55 74 31 36 ];
+        %tmp.56 = lgetv %height.4;
+        symbol [ height %tmp.56 74 38 44 ];
+        %tmp.57 = 0.12;
+        %tmp.58 = mul %tmp.56 %tmp.57;
+        %tmp.59 = lgetv %fOuter.5;
+        symbol [ fOuter %tmp.59 74 53 59 ];
+        %tmp.60 = lgetv %model;
+        symbol [ model %tmp.60 74 61 66 ];
+        %tmp.62 = const :paceLine;
+        symbol [ paceLine %tmp.62 74 68 76 const ];
+        %tmp.63 = agetv %tmp.60 %tmp.62;
+        %tmp.64 = as %tmp.63 String;
+        symbol [ String %tmp.64 74 81 87 ];
+        %tmp.65 = lgetv %model;
+        symbol [ model %tmp.65 74 89 94 ];
+        %tmp.67 = const :paceShortLine;
+        symbol [ paceShortLine %tmp.67 74 96 109 const ];
+        %tmp.68 = agetv %tmp.65 %tmp.67;
+        %tmp.69 = as %tmp.68 String;
+        symbol [ String %tmp.69 74 114 120 ];
+        invoke %tmp.52 %tmp.53(%tmp.54, %tmp.55, %tmp.58, %tmp.59, %tmp.64, %tmp.69);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 75 8 ]
+        %tmp.70 = self;
+        symbol [ drawResponsiveText %tmp.71 75 8 26 ];
+        %tmp.71 = getv function %tmp.70 :drawResponsiveText;
+        %tmp.72 = lgetv %dc;
+        symbol [ dc %tmp.72 75 27 29 ];
+        %tmp.73 = lgetv %width.3;
+        symbol [ width %tmp.73 75 31 36 ];
+        %tmp.74 = lgetv %height.4;
+        symbol [ height %tmp.74 75 38 44 ];
+        %tmp.75 = 0.30;
+        %tmp.76 = mul %tmp.74 %tmp.75;
+        %tmp.77 = lgetv %fInner.6;
+        symbol [ fInner %tmp.77 75 53 59 ];
+        %tmp.78 = lgetv %model;
+        symbol [ model %tmp.78 75 61 66 ];
+        %tmp.80 = const :expectedPaceLine;
+        symbol [ expectedPaceLine %tmp.80 75 68 84 const ];
+        %tmp.81 = agetv %tmp.78 %tmp.80;
+        %tmp.82 = as %tmp.81 String;
+        symbol [ String %tmp.82 75 89 95 ];
+        %tmp.83 = lgetv %model;
+        symbol [ model %tmp.83 75 97 102 ];
+        %tmp.85 = const :expectedPaceShortLine;
+        symbol [ expectedPaceShortLine %tmp.85 75 104 125 const ];
+        %tmp.86 = agetv %tmp.83 %tmp.85;
+        %tmp.87 = as %tmp.86 String;
+        symbol [ String %tmp.87 75 130 136 ];
+        invoke %tmp.70 %tmp.71(%tmp.72, %tmp.73, %tmp.76, %tmp.77, %tmp.82, %tmp.87);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 76 8 ]
+        %tmp.88 = self;
+        symbol [ drawResponsiveText %tmp.89 76 8 26 ];
+        %tmp.89 = getv function %tmp.88 :drawResponsiveText;
+        %tmp.90 = lgetv %dc;
+        symbol [ dc %tmp.90 76 27 29 ];
+        %tmp.91 = lgetv %width.3;
+        symbol [ width %tmp.91 76 31 36 ];
+        %tmp.92 = lgetv %height.4;
+        symbol [ height %tmp.92 76 38 44 ];
+        %tmp.93 = 0.48;
+        %tmp.94 = mul %tmp.92 %tmp.93;
+        %tmp.95 = lgetv %fDrift.7;
+        symbol [ fDrift %tmp.95 76 53 59 ];
+        %tmp.96 = lgetv %model;
+        symbol [ model %tmp.96 76 61 66 ];
+        %tmp.98 = const :driftLine;
+        symbol [ driftLine %tmp.98 76 68 77 const ];
+        %tmp.99 = agetv %tmp.96 %tmp.98;
+        %tmp.100 = as %tmp.99 String;
+        symbol [ String %tmp.100 76 82 88 ];
+        %tmp.101 = lgetv %model;
+        symbol [ model %tmp.101 76 90 95 ];
+        %tmp.103 = const :driftShortLine;
+        symbol [ driftShortLine %tmp.103 76 97 111 const ];
+        %tmp.104 = agetv %tmp.101 %tmp.103;
+        %tmp.105 = as %tmp.104 String or Null;
+        symbol [ String %tmp.105 76 116 122 ];
+        invoke %tmp.88 %tmp.89(%tmp.90, %tmp.91, %tmp.94, %tmp.95, %tmp.100, %tmp.105);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 78 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_stop" ]
+        %statusDetail.8 = local;
+        symbol [ statusDetail %statusDetail.8 78 12 24 ];
+        %tmp.106 = lgetv %model;
+        symbol [ model %tmp.106 78 27 32 ];
+        %tmp.108 = const :renderStatusDetailLine;
+        symbol [ renderStatusDetailLine %tmp.108 78 34 56 const ];
+        %tmp.109 = agetv %tmp.106 %tmp.108;
+        %tmp.110 = as %tmp.109 String;
+        symbol [ String %tmp.110 78 61 67 ];
+        lputv %statusDetail.8 %tmp.110;
+        symbol [ statusDetail %statusDetail.8 78 12 24 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 79 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_79_8_88_8_if_stmt:
+        %tmp.111 = lgetv %statusDetail.8;
+        symbol [ statusDetail %tmp.111 79 12 24 ];
+        %tmp.112 = "";
+        %tmp.113 = ne %tmp.111 %tmp.112;
+        bf %tmp.113 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_79_8_88_8_if_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_79_8_88_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_79_32_81_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 80 12 ]
+        %tmp.114 = self;
+        symbol [ drawResponsiveText %tmp.115 80 12 30 ];
+        %tmp.115 = getv function %tmp.114 :drawResponsiveText;
+        %tmp.116 = lgetv %dc;
+        symbol [ dc %tmp.116 80 31 33 ];
+        %tmp.117 = lgetv %width.3;
+        symbol [ width %tmp.117 80 35 40 ];
+        %tmp.118 = lgetv %height.4;
+        symbol [ height %tmp.118 80 42 48 ];
+        %tmp.119 = 0.60;
+        %tmp.120 = mul %tmp.118 %tmp.119;
+        symbol [ Graphics %tmp.121 80 57 65 ];
+        %tmp.121 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.122 80 66 76 ];
+        %tmp.122 = getv %tmp.121 :FONT_XTINY;
+        %tmp.123 = lgetv %statusDetail.8;
+        symbol [ statusDetail %tmp.123 80 78 90 ];
+        %tmp.124 = lgetv %model;
+        symbol [ model %tmp.124 80 92 97 ];
+        %tmp.126 = const :renderStatusDetailShortLine;
+        symbol [ renderStatusDetailShortLine %tmp.126 80 99 126 const ];
+        %tmp.127 = agetv %tmp.124 %tmp.126;
+        %tmp.128 = as %tmp.127 String or Null;
+        symbol [ String %tmp.128 80 131 137 ];
+        invoke %tmp.114 %tmp.115(%tmp.116, %tmp.117, %tmp.120, %tmp.122, %tmp.123, %tmp.128);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_79_32_81_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_79_8_88_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_79_8_88_8_if_false:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 81 15 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_81_15_88_8_if_stmt:
+        %tmp.129 = lgetv %model;
+        symbol [ model %tmp.129 81 19 24 ];
+        %tmp.131 = const :showModelError;
+        symbol [ showModelError %tmp.131 81 26 40 const ];
+        %tmp.132 = agetv %tmp.129 %tmp.131;
+        %tmp.133 = as %tmp.132 Boolean;
+        symbol [ Boolean %tmp.133 81 45 52 ];
+        bf %tmp.133 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_81_15_88_8_if_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_81_15_88_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_81_54_83_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 82 12 ]
+        %tmp.134 = self;
+        symbol [ drawResponsiveText %tmp.135 82 12 30 ];
+        %tmp.135 = getv function %tmp.134 :drawResponsiveText;
+        %tmp.136 = lgetv %dc;
+        symbol [ dc %tmp.136 82 31 33 ];
+        %tmp.137 = lgetv %width.3;
+        symbol [ width %tmp.137 82 35 40 ];
+        %tmp.138 = lgetv %height.4;
+        symbol [ height %tmp.138 82 42 48 ];
+        %tmp.139 = 0.60;
+        %tmp.140 = mul %tmp.138 %tmp.139;
+        symbol [ Graphics %tmp.141 82 57 65 ];
+        %tmp.141 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.142 82 66 76 ];
+        %tmp.142 = getv %tmp.141 :FONT_XTINY;
+        %tmp.143 = lgetv %model;
+        symbol [ model %tmp.143 82 78 83 ];
+        %tmp.145 = const :renderModelErrorLine;
+        symbol [ renderModelErrorLine %tmp.145 82 85 105 const ];
+        %tmp.146 = agetv %tmp.143 %tmp.145;
+        %tmp.147 = as %tmp.146 String;
+        symbol [ String %tmp.147 82 110 116 ];
+        %tmp.148 = null;
+        invoke %tmp.134 %tmp.135(%tmp.136, %tmp.137, %tmp.140, %tmp.142, %tmp.147, %tmp.148);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_81_54_83_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_81_15_88_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_81_15_88_8_if_else_false:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_83_15_88_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 84 12 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_83_15_88_8_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_83_15_88_8_stop" ]
+        %defaultDetail.9 = local;
+        symbol [ defaultDetail %defaultDetail.9 84 16 29 ];
+        %tmp.149 = lgetv %model;
+        symbol [ model %tmp.149 84 32 37 ];
+        %tmp.151 = const :defaultDetailLine;
+        symbol [ defaultDetailLine %tmp.151 84 39 56 const ];
+        %tmp.152 = agetv %tmp.149 %tmp.151;
+        %tmp.153 = as %tmp.152 String or Null;
+        symbol [ String %tmp.153 84 61 67 ];
+        lputv %defaultDetail.9 %tmp.153;
+        symbol [ defaultDetail %defaultDetail.9 84 16 29 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 85 12 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_85_12_87_12_if_stmt:
+        %tmp.154 = lgetv %defaultDetail.9;
+        symbol [ defaultDetail %tmp.154 85 16 29 ];
+        %tmp.155 = null;
+        %tmp.156 = ne %tmp.154 %tmp.155;
+        bf %tmp.156 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_85_12_87_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_85_12_87_12_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_85_39_87_12_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 86 16 ]
+        %tmp.157 = self;
+        symbol [ drawResponsiveText %tmp.158 86 16 34 ];
+        %tmp.158 = getv function %tmp.157 :drawResponsiveText;
+        %tmp.159 = lgetv %dc;
+        symbol [ dc %tmp.159 86 35 37 ];
+        %tmp.160 = lgetv %width.3;
+        symbol [ width %tmp.160 86 39 44 ];
+        %tmp.161 = lgetv %height.4;
+        symbol [ height %tmp.161 86 46 52 ];
+        %tmp.162 = 0.60;
+        %tmp.163 = mul %tmp.161 %tmp.162;
+        symbol [ Graphics %tmp.164 86 61 69 ];
+        %tmp.164 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.165 86 70 80 ];
+        %tmp.165 = getv %tmp.164 :FONT_XTINY;
+        %tmp.166 = lgetv %defaultDetail.9;
+        symbol [ defaultDetail %tmp.166 86 82 95 ];
+        %tmp.167 = as %tmp.166 { (!Null) };
+        %tmp.168 = lgetv %model;
+        symbol [ model %tmp.168 86 97 102 ];
+        %tmp.170 = const :defaultDetailShortLine;
+        symbol [ defaultDetailShortLine %tmp.170 86 104 126 const ];
+        %tmp.171 = agetv %tmp.168 %tmp.170;
+        %tmp.172 = as %tmp.171 String or Null;
+        symbol [ String %tmp.172 86 131 137 ];
+        invoke %tmp.157 %tmp.158(%tmp.159, %tmp.160, %tmp.163, %tmp.165, %tmp.167, %tmp.172);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_85_39_87_12_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_85_12_87_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_85_12_87_12_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_83_15_88_8_stop:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_81_15_88_8_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_79_8_88_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 90 8 ]
+        %tmp.173 = self;
+        symbol [ drawResponsiveText %tmp.174 90 8 26 ];
+        %tmp.174 = getv function %tmp.173 :drawResponsiveText;
+        %tmp.175 = lgetv %dc;
+        symbol [ dc %tmp.175 90 27 29 ];
+        %tmp.176 = lgetv %width.3;
+        symbol [ width %tmp.176 90 31 36 ];
+        %tmp.177 = lgetv %height.4;
+        symbol [ height %tmp.177 90 38 44 ];
+        %tmp.178 = 0.72;
+        %tmp.179 = mul %tmp.177 %tmp.178;
+        %tmp.180 = lgetv %fInner.6;
+        symbol [ fInner %tmp.180 90 53 59 ];
+        %tmp.181 = lgetv %model;
+        symbol [ model %tmp.181 90 61 66 ];
+        %tmp.183 = const :expectedHrLine;
+        symbol [ expectedHrLine %tmp.183 90 68 82 const ];
+        %tmp.184 = agetv %tmp.181 %tmp.183;
+        %tmp.185 = as %tmp.184 String;
+        symbol [ String %tmp.185 90 87 93 ];
+        %tmp.186 = lgetv %model;
+        symbol [ model %tmp.186 90 95 100 ];
+        %tmp.188 = const :expectedHrShortLine;
+        symbol [ expectedHrShortLine %tmp.188 90 102 121 const ];
+        %tmp.189 = agetv %tmp.186 %tmp.188;
+        %tmp.190 = as %tmp.189 String;
+        symbol [ String %tmp.190 90 126 132 ];
+        invoke %tmp.173 %tmp.174(%tmp.175, %tmp.176, %tmp.179, %tmp.180, %tmp.185, %tmp.190);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 91 8 ]
+        %tmp.191 = self;
+        symbol [ drawResponsiveText %tmp.192 91 8 26 ];
+        %tmp.192 = getv function %tmp.191 :drawResponsiveText;
+        %tmp.193 = lgetv %dc;
+        symbol [ dc %tmp.193 91 27 29 ];
+        %tmp.194 = lgetv %width.3;
+        symbol [ width %tmp.194 91 31 36 ];
+        %tmp.195 = lgetv %height.4;
+        symbol [ height %tmp.195 91 38 44 ];
+        %tmp.196 = 0.88;
+        %tmp.197 = mul %tmp.195 %tmp.196;
+        %tmp.198 = lgetv %fOuter.5;
+        symbol [ fOuter %tmp.198 91 53 59 ];
+        %tmp.199 = lgetv %model;
+        symbol [ model %tmp.199 91 61 66 ];
+        %tmp.201 = const :hrLine;
+        symbol [ hrLine %tmp.201 91 68 74 const ];
+        %tmp.202 = agetv %tmp.199 %tmp.201;
+        %tmp.203 = as %tmp.202 String;
+        symbol [ String %tmp.203 91 79 85 ];
+        %tmp.204 = lgetv %model;
+        symbol [ model %tmp.204 91 87 92 ];
+        %tmp.206 = const :hrShortLine;
+        symbol [ hrShortLine %tmp.206 91 94 105 const ];
+        %tmp.207 = agetv %tmp.204 %tmp.206;
+        %tmp.208 = as %tmp.207 String;
+        symbol [ String %tmp.208 91 110 116 ];
+        invoke %tmp.191 %tmp.192(%tmp.193, %tmp.194, %tmp.197, %tmp.198, %tmp.203, %tmp.208);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_57_73_92_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 94; @symbol_functiondef = [drawLowMem,94,13,23]; @symbol_param<0> = [dc,94,24,26]; @symbol_param<0>_type<0> = [Graphics,94,30,38]; @symbol_param<0>_type<1> = [Dc,94,39,41]; @symbol_param<1> = [model,94,43,48]; @symbol_param<1>_type<0> = [Dictionary,94,52,62]; ]
+    function drawLowMem(dc as Graphics.Dc, model as Dictionary) as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 95 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_stop" ]
+        %bgColor.1 = local;
+        symbol [ bgColor %bgColor.1 95 12 19 ];
+        %tmp.1 = lgetv %model;
+        symbol [ model %tmp.1 95 22 27 ];
+        %tmp.3 = const :renderBgColor;
+        symbol [ renderBgColor %tmp.3 95 29 42 const ];
+        %tmp.4 = agetv %tmp.1 %tmp.3;
+        %tmp.5 = as %tmp.4 Number;
+        symbol [ Number %tmp.5 95 47 53 ];
+        lputv %bgColor.1 %tmp.5;
+        symbol [ bgColor %bgColor.1 95 12 19 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 96 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_stop" ]
+        %fgColor.2 = local;
+        symbol [ fgColor %fgColor.2 96 12 19 ];
+        %tmp.6 = lgetv %model;
+        symbol [ model %tmp.6 96 22 27 ];
+        %tmp.8 = const :renderFgColor;
+        symbol [ renderFgColor %tmp.8 96 29 42 const ];
+        %tmp.9 = agetv %tmp.6 %tmp.8;
+        %tmp.10 = as %tmp.9 Number;
+        symbol [ Number %tmp.10 96 47 53 ];
+        lputv %fgColor.2 %tmp.10;
+        symbol [ fgColor %fgColor.2 96 12 19 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 97 8 ]
+        %tmp.11 = lgetv %dc;
+        symbol [ dc %tmp.11 97 8 10 ];
+        symbol [ setColor %tmp.12 97 11 19 ];
+        %tmp.12 = getv function %tmp.11 :setColor;
+        symbol [ Graphics %tmp.13 97 20 28 ];
+        %tmp.13 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.14 97 29 46 ];
+        %tmp.14 = getv %tmp.13 :COLOR_TRANSPARENT;
+        %tmp.15 = lgetv %bgColor.1;
+        symbol [ bgColor %tmp.15 97 48 55 ];
+        invoke %tmp.11 %tmp.12(%tmp.14, %tmp.15);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 98 8 ]
+        %tmp.16 = lgetv %dc;
+        symbol [ dc %tmp.16 98 8 10 ];
+        symbol [ clear %tmp.17 98 11 16 ];
+        %tmp.17 = getv function %tmp.16 :clear;
+        invoke %tmp.16 %tmp.17();
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 100 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_stop" ]
+        %width.3 = local;
+        symbol [ width %width.3 100 12 17 ];
+        %tmp.18 = lgetv %dc;
+        symbol [ dc %tmp.18 100 20 22 ];
+        symbol [ getWidth %tmp.19 100 23 31 ];
+        %tmp.19 = getv function %tmp.18 :getWidth;
+        %tmp.20 = invoke %tmp.18 %tmp.19();
+        lputv %width.3 %tmp.20;
+        symbol [ width %width.3 100 12 17 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 101 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_stop" ]
+        %height.4 = local;
+        symbol [ height %height.4 101 12 18 ];
+        %tmp.21 = lgetv %dc;
+        symbol [ dc %tmp.21 101 21 23 ];
+        symbol [ getHeight %tmp.22 101 24 33 ];
+        %tmp.22 = getv function %tmp.21 :getHeight;
+        %tmp.23 = invoke %tmp.21 %tmp.22();
+        lputv %height.4 %tmp.23;
+        symbol [ height %height.4 101 12 18 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 102 8 ]
+        %tmp.24 = lgetv %dc;
+        symbol [ dc %tmp.24 102 8 10 ];
+        symbol [ setColor %tmp.25 102 11 19 ];
+        %tmp.25 = getv function %tmp.24 :setColor;
+        %tmp.26 = lgetv %fgColor.2;
+        symbol [ fgColor %tmp.26 102 20 27 ];
+        symbol [ Graphics %tmp.27 102 29 37 ];
+        %tmp.27 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.28 102 38 55 ];
+        %tmp.28 = getv %tmp.27 :COLOR_TRANSPARENT;
+        invoke %tmp.24 %tmp.25(%tmp.26, %tmp.28);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 104 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_stop" ]
+        %fPace.5 = local;
+        symbol [ fPace %fPace.5 104 12 17 ];
+        symbol [ Graphics %tmp.29 104 20 28 ];
+        %tmp.29 = getm $.Toybox.Graphics;
+        symbol [ FONT_TINY %tmp.30 104 29 38 ];
         %tmp.30 = getv %tmp.29 :FONT_TINY;
         lputv %fPace.5 %tmp.30;
-        symbol [ fPace %fPace.5 87 12 17 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 88 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_stop" ]
+        symbol [ fPace %fPace.5 104 12 17 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 105 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_stop" ]
         %fDrift.6 = local;
-        symbol [ fDrift %fDrift.6 88 12 18 ];
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_88_21_88_69_begin:
+        symbol [ fDrift %fDrift.6 105 12 18 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_105_21_105_69_begin:
         %tmp.31 = lgetv %height.4;
-        symbol [ height %tmp.31 88 22 28 ];
+        symbol [ height %tmp.31 105 22 28 ];
         %tmp.32 = 180;
         %tmp.33 = lt %tmp.31 %tmp.32;
-        bf %tmp.33 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_88_21_88_69_else_false;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_88_21_88_69_true:
-        symbol [ Graphics %tmp.34 88 38 46 ];
+        bf %tmp.33 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_105_21_105_69_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_105_21_105_69_true:
+        symbol [ Graphics %tmp.34 105 38 46 ];
         %tmp.34 = getm $.Toybox.Graphics;
-        symbol [ FONT_SMALL %tmp.35 88 47 57 ];
+        symbol [ FONT_SMALL %tmp.35 105 47 57 ];
         %tmp.35 = getv %tmp.34 :FONT_SMALL;
         push %tmp.35;
-        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_88_21_88_69_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_88_21_88_69_else_false:
-        symbol [ Graphics %tmp.36 88 60 68 ];
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_105_21_105_69_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_105_21_105_69_else_false:
+        symbol [ Graphics %tmp.36 105 60 68 ];
         %tmp.36 = getm $.Toybox.Graphics;
-        symbol [ FONT_MEDIUM %tmp.37 88 69 80 ];
+        symbol [ FONT_MEDIUM %tmp.37 105 69 80 ];
         %tmp.37 = getv %tmp.36 :FONT_MEDIUM;
         push %tmp.37;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_88_21_88_69_end:
-        %tmp.38 = phi [%tmp.33 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_88_21_88_69_begin] [%tmp.35 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_88_21_88_69_true] [%tmp.37 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_88_21_88_69_else_false] [%tmp.38 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_88_21_88_69_end];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_105_21_105_69_end:
+        %tmp.38 = phi [%tmp.33 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_105_21_105_69_begin] [%tmp.35 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_105_21_105_69_true] [%tmp.37 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_105_21_105_69_else_false] [%tmp.38 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_105_21_105_69_end];
         lputv %fDrift.6 %tmp.38;
-        symbol [ fDrift %fDrift.6 88 12 18 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 89 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_stop" ]
+        symbol [ fDrift %fDrift.6 105 12 18 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 106 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_stop" ]
         %fHr.7 = local;
-        symbol [ fHr %fHr.7 89 12 15 ];
-        symbol [ Graphics %tmp.39 89 18 26 ];
+        symbol [ fHr %fHr.7 106 12 15 ];
+        symbol [ Graphics %tmp.39 106 18 26 ];
         %tmp.39 = getm $.Toybox.Graphics;
-        symbol [ FONT_TINY %tmp.40 89 27 36 ];
+        symbol [ FONT_TINY %tmp.40 106 27 36 ];
         %tmp.40 = getv %tmp.39 :FONT_TINY;
         lputv %fHr.7 %tmp.40;
-        symbol [ fHr %fHr.7 89 12 15 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 91 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_stop" ]
-        %currentPaceValue.8 = local;
-        symbol [ currentPaceValue %currentPaceValue.8 91 12 28 ];
+        symbol [ fHr %fHr.7 106 12 15 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 108 8 ]
         %tmp.41 = self;
-        symbol [ normalizePaceValue %tmp.42 91 31 49 ];
-        %tmp.42 = getv function %tmp.41 :normalizePaceValue;
-        %tmp.43 = lgetv %model;
-        symbol [ model %tmp.43 91 50 55 ];
-        %tmp.45 = const :currentPaceValue;
-        symbol [ currentPaceValue %tmp.45 91 57 73 const ];
-        %tmp.46 = agetv %tmp.43 %tmp.45;
-        %tmp.47 = as %tmp.46 String;
-        symbol [ String %tmp.47 91 78 84 ];
-        %tmp.48 = invoke %tmp.41 %tmp.42(%tmp.47);
-        lputv %currentPaceValue.8 %tmp.48;
-        symbol [ currentPaceValue %currentPaceValue.8 91 12 28 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 92 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_stop" ]
-        %currentHrValue.9 = local;
-        symbol [ currentHrValue %currentHrValue.9 92 12 26 ];
-        %tmp.49 = self;
-        symbol [ normalizeHrValue %tmp.50 92 29 45 ];
-        %tmp.50 = getv function %tmp.49 :normalizeHrValue;
-        %tmp.51 = lgetv %model;
-        symbol [ model %tmp.51 92 46 51 ];
-        %tmp.53 = const :currentHrValue;
-        symbol [ currentHrValue %tmp.53 92 53 67 const ];
-        %tmp.54 = agetv %tmp.51 %tmp.53;
-        %tmp.55 = as %tmp.54 String;
-        symbol [ String %tmp.55 92 72 78 ];
-        %tmp.56 = invoke %tmp.49 %tmp.50(%tmp.55);
-        lputv %currentHrValue.9 %tmp.56;
-        symbol [ currentHrValue %currentHrValue.9 92 12 26 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 93 8 ]
-        %tmp.57 = lgetv %dc;
-        symbol [ dc %tmp.57 93 8 10 ];
-        symbol [ drawText %tmp.58 93 11 19 ];
-        %tmp.58 = getv function %tmp.57 :drawText;
-        %tmp.59 = lgetv %width.3;
-        symbol [ width %tmp.59 93 20 25 ];
-        %tmp.60 = 2;
-        %tmp.61 = div %tmp.59 %tmp.60;
-        %tmp.62 = lgetv %height.4;
-        symbol [ height %tmp.62 93 31 37 ];
-        %tmp.63 = 0.20;
-        %tmp.64 = mul %tmp.62 %tmp.63;
-        %tmp.65 = lgetv %fPace.5;
-        symbol [ fPace %tmp.65 93 46 51 ];
-        %tmp.66 = lgetv %model;
-        symbol [ model %tmp.66 93 54 59 ];
-        %tmp.68 = const :paceShortLabel;
-        symbol [ paceShortLabel %tmp.68 93 61 75 const ];
-        %tmp.69 = agetv %tmp.66 %tmp.68;
-        %tmp.70 = as %tmp.69 String;
-        symbol [ String %tmp.70 93 80 86 ];
-        %tmp.71 = lgetv %currentPaceValue.8;
-        symbol [ currentPaceValue %tmp.71 93 90 106 ];
-        %tmp.72 = add %tmp.70 %tmp.71;
-        symbol [ Graphics %tmp.73 93 108 116 ];
-        %tmp.73 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.74 93 117 136 ];
-        %tmp.74 = getv %tmp.73 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.75 93 139 147 ];
-        %tmp.75 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.76 93 148 168 ];
-        %tmp.76 = getv %tmp.75 :TEXT_JUSTIFY_VCENTER;
-        %tmp.77 = bitor %tmp.74 %tmp.76;
-        invoke %tmp.57 %tmp.58(%tmp.61, %tmp.64, %tmp.65, %tmp.72, %tmp.77);
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 94 8 ]
-        %tmp.78 = lgetv %dc;
-        symbol [ dc %tmp.78 94 8 10 ];
-        symbol [ drawText %tmp.79 94 11 19 ];
-        %tmp.79 = getv function %tmp.78 :drawText;
-        %tmp.80 = lgetv %width.3;
-        symbol [ width %tmp.80 94 20 25 ];
-        %tmp.81 = 2;
-        %tmp.82 = div %tmp.80 %tmp.81;
-        %tmp.83 = lgetv %height.4;
-        symbol [ height %tmp.83 94 31 37 ];
-        %tmp.84 = 0.50;
-        %tmp.85 = mul %tmp.83 %tmp.84;
-        %tmp.86 = lgetv %fDrift.6;
-        symbol [ fDrift %tmp.86 94 46 52 ];
-        %tmp.87 = lgetv %model;
-        symbol [ model %tmp.87 94 54 59 ];
-        %tmp.89 = const :driftLabel;
-        symbol [ driftLabel %tmp.89 94 61 71 const ];
-        %tmp.90 = agetv %tmp.87 %tmp.89;
-        %tmp.91 = as %tmp.90 String;
-        symbol [ String %tmp.91 94 76 82 ];
-        symbol [ Graphics %tmp.92 94 84 92 ];
+        symbol [ drawResponsiveText %tmp.42 108 8 26 ];
+        %tmp.42 = getv function %tmp.41 :drawResponsiveText;
+        %tmp.43 = lgetv %dc;
+        symbol [ dc %tmp.43 108 27 29 ];
+        %tmp.44 = lgetv %width.3;
+        symbol [ width %tmp.44 108 31 36 ];
+        %tmp.45 = lgetv %height.4;
+        symbol [ height %tmp.45 108 38 44 ];
+        %tmp.46 = 0.20;
+        %tmp.47 = mul %tmp.45 %tmp.46;
+        %tmp.48 = lgetv %fPace.5;
+        symbol [ fPace %tmp.48 108 53 58 ];
+        %tmp.49 = lgetv %model;
+        symbol [ model %tmp.49 108 60 65 ];
+        %tmp.51 = const :paceLine;
+        symbol [ paceLine %tmp.51 108 67 75 const ];
+        %tmp.52 = agetv %tmp.49 %tmp.51;
+        %tmp.53 = as %tmp.52 String;
+        symbol [ String %tmp.53 108 80 86 ];
+        %tmp.54 = lgetv %model;
+        symbol [ model %tmp.54 108 88 93 ];
+        %tmp.56 = const :paceShortLine;
+        symbol [ paceShortLine %tmp.56 108 95 108 const ];
+        %tmp.57 = agetv %tmp.54 %tmp.56;
+        %tmp.58 = as %tmp.57 String;
+        symbol [ String %tmp.58 108 113 119 ];
+        invoke %tmp.41 %tmp.42(%tmp.43, %tmp.44, %tmp.47, %tmp.48, %tmp.53, %tmp.58);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 109 8 ]
+        %tmp.59 = self;
+        symbol [ drawResponsiveText %tmp.60 109 8 26 ];
+        %tmp.60 = getv function %tmp.59 :drawResponsiveText;
+        %tmp.61 = lgetv %dc;
+        symbol [ dc %tmp.61 109 27 29 ];
+        %tmp.62 = lgetv %width.3;
+        symbol [ width %tmp.62 109 31 36 ];
+        %tmp.63 = lgetv %height.4;
+        symbol [ height %tmp.63 109 38 44 ];
+        %tmp.64 = 0.50;
+        %tmp.65 = mul %tmp.63 %tmp.64;
+        %tmp.66 = lgetv %fDrift.6;
+        symbol [ fDrift %tmp.66 109 53 59 ];
+        %tmp.67 = lgetv %model;
+        symbol [ model %tmp.67 109 61 66 ];
+        %tmp.69 = const :driftLine;
+        symbol [ driftLine %tmp.69 109 68 77 const ];
+        %tmp.70 = agetv %tmp.67 %tmp.69;
+        %tmp.71 = as %tmp.70 String;
+        symbol [ String %tmp.71 109 82 88 ];
+        %tmp.72 = lgetv %model;
+        symbol [ model %tmp.72 109 90 95 ];
+        %tmp.74 = const :driftShortLine;
+        symbol [ driftShortLine %tmp.74 109 97 111 const ];
+        %tmp.75 = agetv %tmp.72 %tmp.74;
+        %tmp.76 = as %tmp.75 String or Null;
+        symbol [ String %tmp.76 109 116 122 ];
+        invoke %tmp.59 %tmp.60(%tmp.61, %tmp.62, %tmp.65, %tmp.66, %tmp.71, %tmp.76);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 111 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_stop" ]
+        %statusDetail.8 = local;
+        symbol [ statusDetail %statusDetail.8 111 12 24 ];
+        %tmp.77 = lgetv %model;
+        symbol [ model %tmp.77 111 27 32 ];
+        %tmp.79 = const :renderStatusDetailLine;
+        symbol [ renderStatusDetailLine %tmp.79 111 34 56 const ];
+        %tmp.80 = agetv %tmp.77 %tmp.79;
+        %tmp.81 = as %tmp.80 String;
+        symbol [ String %tmp.81 111 61 67 ];
+        lputv %statusDetail.8 %tmp.81;
+        symbol [ statusDetail %statusDetail.8 111 12 24 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 112 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_112_8_119_8_if_stmt:
+        %tmp.82 = lgetv %statusDetail.8;
+        symbol [ statusDetail %tmp.82 112 12 24 ];
+        %tmp.83 = "";
+        %tmp.84 = ne %tmp.82 %tmp.83;
+        bf %tmp.84 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_112_8_119_8_if_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_112_8_119_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_112_32_114_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 113 12 ]
+        %tmp.85 = self;
+        symbol [ drawResponsiveText %tmp.86 113 12 30 ];
+        %tmp.86 = getv function %tmp.85 :drawResponsiveText;
+        %tmp.87 = lgetv %dc;
+        symbol [ dc %tmp.87 113 31 33 ];
+        %tmp.88 = lgetv %width.3;
+        symbol [ width %tmp.88 113 35 40 ];
+        %tmp.89 = lgetv %height.4;
+        symbol [ height %tmp.89 113 42 48 ];
+        %tmp.90 = 0.65;
+        %tmp.91 = mul %tmp.89 %tmp.90;
+        symbol [ Graphics %tmp.92 113 57 65 ];
         %tmp.92 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.93 94 93 112 ];
-        %tmp.93 = getv %tmp.92 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.94 94 115 123 ];
-        %tmp.94 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.95 94 124 144 ];
-        %tmp.95 = getv %tmp.94 :TEXT_JUSTIFY_VCENTER;
-        %tmp.96 = bitor %tmp.93 %tmp.95;
-        invoke %tmp.78 %tmp.79(%tmp.82, %tmp.85, %tmp.86, %tmp.91, %tmp.96);
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 96 8 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_stop" ]
-        %statusDetail.10 = local;
-        symbol [ statusDetail %statusDetail.10 96 12 24 ];
-        %tmp.97 = lgetv %model;
-        symbol [ model %tmp.97 96 27 32 ];
-        %tmp.99 = const :renderStatusDetail;
-        symbol [ renderStatusDetail %tmp.99 96 34 52 const ];
-        %tmp.100 = agetv %tmp.97 %tmp.99;
-        %tmp.101 = as %tmp.100 String;
-        symbol [ String %tmp.101 96 57 63 ];
-        lputv %statusDetail.10 %tmp.101;
-        symbol [ statusDetail %statusDetail.10 96 12 24 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 97 8 ]
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_97_8_104_8_if_stmt:
-        %tmp.102 = lgetv %statusDetail.10;
-        symbol [ statusDetail %tmp.102 97 12 24 ];
-        %tmp.103 = "";
-        %tmp.104 = ne %tmp.102 %tmp.103;
-        bf %tmp.104 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_97_8_104_8_if_else_false;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_97_8_104_8_if_true:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_97_32_99_8_start:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 98 12 ]
-        %tmp.105 = lgetv %dc;
-        symbol [ dc %tmp.105 98 12 14 ];
-        symbol [ drawText %tmp.106 98 15 23 ];
-        %tmp.106 = getv function %tmp.105 :drawText;
-        %tmp.107 = lgetv %width.3;
-        symbol [ width %tmp.107 98 24 29 ];
-        %tmp.108 = 2;
-        %tmp.109 = div %tmp.107 %tmp.108;
-        %tmp.110 = lgetv %height.4;
-        symbol [ height %tmp.110 98 35 41 ];
-        %tmp.111 = 0.65;
-        %tmp.112 = mul %tmp.110 %tmp.111;
-        symbol [ Graphics %tmp.113 98 50 58 ];
-        %tmp.113 = getm $.Toybox.Graphics;
-        symbol [ FONT_XTINY %tmp.114 98 59 69 ];
-        %tmp.114 = getv %tmp.113 :FONT_XTINY;
-        %tmp.115 = lgetv %statusDetail.10;
-        symbol [ statusDetail %tmp.115 98 71 83 ];
-        symbol [ Graphics %tmp.116 98 85 93 ];
-        %tmp.116 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.117 98 94 113 ];
-        %tmp.117 = getv %tmp.116 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.118 98 116 124 ];
-        %tmp.118 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.119 98 125 145 ];
-        %tmp.119 = getv %tmp.118 :TEXT_JUSTIFY_VCENTER;
-        %tmp.120 = bitor %tmp.117 %tmp.119;
-        invoke %tmp.105 %tmp.106(%tmp.109, %tmp.112, %tmp.114, %tmp.115, %tmp.120);
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_97_32_99_8_stop:
-        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_97_8_104_8_if_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_97_8_104_8_if_else_false:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_99_15_104_8_start:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 100 12 ]
-        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_99_15_104_8_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_99_15_104_8_stop" ]
-        %defaultDetail.11 = local;
-        symbol [ defaultDetail %defaultDetail.11 100 16 29 ];
-        %tmp.121 = lgetv %model;
-        symbol [ model %tmp.121 100 32 37 ];
-        %tmp.123 = const :defaultDetail;
-        symbol [ defaultDetail %tmp.123 100 39 52 const ];
-        %tmp.124 = agetv %tmp.121 %tmp.123;
-        %tmp.125 = as %tmp.124 String or Null;
-        symbol [ String %tmp.125 100 57 63 ];
-        lputv %defaultDetail.11 %tmp.125;
-        symbol [ defaultDetail %defaultDetail.11 100 16 29 ];
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 101 12 ]
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_101_12_103_12_if_stmt:
-        %tmp.126 = lgetv %defaultDetail.11;
-        symbol [ defaultDetail %tmp.126 101 16 29 ];
-        %tmp.127 = null;
-        %tmp.128 = ne %tmp.126 %tmp.127;
-        bf %tmp.128 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_101_12_103_12_if_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_101_12_103_12_if_true:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_101_39_103_12_start:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 102 16 ]
-        %tmp.129 = lgetv %dc;
-        symbol [ dc %tmp.129 102 16 18 ];
-        symbol [ drawText %tmp.130 102 19 27 ];
-        %tmp.130 = getv function %tmp.129 :drawText;
-        %tmp.131 = lgetv %width.3;
-        symbol [ width %tmp.131 102 28 33 ];
-        %tmp.132 = 2;
-        %tmp.133 = div %tmp.131 %tmp.132;
-        %tmp.134 = lgetv %height.4;
-        symbol [ height %tmp.134 102 39 45 ];
-        %tmp.135 = 0.65;
-        %tmp.136 = mul %tmp.134 %tmp.135;
-        symbol [ Graphics %tmp.137 102 54 62 ];
-        %tmp.137 = getm $.Toybox.Graphics;
-        symbol [ FONT_XTINY %tmp.138 102 63 73 ];
-        %tmp.138 = getv %tmp.137 :FONT_XTINY;
-        %tmp.139 = lgetv %defaultDetail.11;
-        symbol [ defaultDetail %tmp.139 102 75 88 ];
-        %tmp.140 = as %tmp.139 { (!Null) };
-        symbol [ Graphics %tmp.141 102 90 98 ];
-        %tmp.141 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.142 102 99 118 ];
-        %tmp.142 = getv %tmp.141 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.143 102 121 129 ];
-        %tmp.143 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.144 102 130 150 ];
-        %tmp.144 = getv %tmp.143 :TEXT_JUSTIFY_VCENTER;
-        %tmp.145 = bitor %tmp.142 %tmp.144;
-        invoke %tmp.129 %tmp.130(%tmp.133, %tmp.136, %tmp.138, %tmp.140, %tmp.145);
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_101_39_103_12_stop:
-        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_101_12_103_12_if_end;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_101_12_103_12_if_end:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_99_15_104_8_stop:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_97_8_104_8_if_end:
-[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 106 8 ]
-        %tmp.146 = lgetv %dc;
-        symbol [ dc %tmp.146 106 8 10 ];
-        symbol [ drawText %tmp.147 106 11 19 ];
-        %tmp.147 = getv function %tmp.146 :drawText;
-        %tmp.148 = lgetv %width.3;
-        symbol [ width %tmp.148 106 20 25 ];
-        %tmp.149 = 2;
-        %tmp.150 = div %tmp.148 %tmp.149;
-        %tmp.151 = lgetv %height.4;
-        symbol [ height %tmp.151 106 31 37 ];
-        %tmp.152 = 0.80;
-        %tmp.153 = mul %tmp.151 %tmp.152;
-        %tmp.154 = lgetv %fHr.7;
-        symbol [ fHr %tmp.154 106 46 49 ];
-        %tmp.155 = lgetv %model;
-        symbol [ model %tmp.155 106 52 57 ];
-        %tmp.157 = const :hrShortLabel;
-        symbol [ hrShortLabel %tmp.157 106 59 71 const ];
-        %tmp.158 = agetv %tmp.155 %tmp.157;
-        %tmp.159 = as %tmp.158 String;
-        symbol [ String %tmp.159 106 76 82 ];
-        %tmp.160 = lgetv %currentHrValue.9;
-        symbol [ currentHrValue %tmp.160 106 86 100 ];
-        %tmp.161 = add %tmp.159 %tmp.160;
-        symbol [ Graphics %tmp.162 106 102 110 ];
-        %tmp.162 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_CENTER %tmp.163 106 111 130 ];
-        %tmp.163 = getv %tmp.162 :TEXT_JUSTIFY_CENTER;
-        symbol [ Graphics %tmp.164 106 133 141 ];
-        %tmp.164 = getm $.Toybox.Graphics;
-        symbol [ TEXT_JUSTIFY_VCENTER %tmp.165 106 142 162 ];
-        %tmp.165 = getv %tmp.164 :TEXT_JUSTIFY_VCENTER;
-        %tmp.166 = bitor %tmp.163 %tmp.165;
-        invoke %tmp.146 %tmp.147(%tmp.150, %tmp.153, %tmp.154, %tmp.161, %tmp.166);
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_77_72_107_4_stop:
+        symbol [ FONT_XTINY %tmp.93 113 66 76 ];
+        %tmp.93 = getv %tmp.92 :FONT_XTINY;
+        %tmp.94 = lgetv %statusDetail.8;
+        symbol [ statusDetail %tmp.94 113 78 90 ];
+        %tmp.95 = lgetv %model;
+        symbol [ model %tmp.95 113 92 97 ];
+        %tmp.97 = const :renderStatusDetailShortLine;
+        symbol [ renderStatusDetailShortLine %tmp.97 113 99 126 const ];
+        %tmp.98 = agetv %tmp.95 %tmp.97;
+        %tmp.99 = as %tmp.98 String or Null;
+        symbol [ String %tmp.99 113 131 137 ];
+        invoke %tmp.85 %tmp.86(%tmp.87, %tmp.88, %tmp.91, %tmp.93, %tmp.94, %tmp.99);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_112_32_114_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_112_8_119_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_112_8_119_8_if_else_false:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_114_15_119_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 115 12 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_114_15_119_8_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_114_15_119_8_stop" ]
+        %defaultDetail.9 = local;
+        symbol [ defaultDetail %defaultDetail.9 115 16 29 ];
+        %tmp.100 = lgetv %model;
+        symbol [ model %tmp.100 115 32 37 ];
+        %tmp.102 = const :defaultDetailLine;
+        symbol [ defaultDetailLine %tmp.102 115 39 56 const ];
+        %tmp.103 = agetv %tmp.100 %tmp.102;
+        %tmp.104 = as %tmp.103 String or Null;
+        symbol [ String %tmp.104 115 61 67 ];
+        lputv %defaultDetail.9 %tmp.104;
+        symbol [ defaultDetail %defaultDetail.9 115 16 29 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 116 12 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_116_12_118_12_if_stmt:
+        %tmp.105 = lgetv %defaultDetail.9;
+        symbol [ defaultDetail %tmp.105 116 16 29 ];
+        %tmp.106 = null;
+        %tmp.107 = ne %tmp.105 %tmp.106;
+        bf %tmp.107 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_116_12_118_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_116_12_118_12_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_116_39_118_12_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 117 16 ]
+        %tmp.108 = self;
+        symbol [ drawResponsiveText %tmp.109 117 16 34 ];
+        %tmp.109 = getv function %tmp.108 :drawResponsiveText;
+        %tmp.110 = lgetv %dc;
+        symbol [ dc %tmp.110 117 35 37 ];
+        %tmp.111 = lgetv %width.3;
+        symbol [ width %tmp.111 117 39 44 ];
+        %tmp.112 = lgetv %height.4;
+        symbol [ height %tmp.112 117 46 52 ];
+        %tmp.113 = 0.65;
+        %tmp.114 = mul %tmp.112 %tmp.113;
+        symbol [ Graphics %tmp.115 117 61 69 ];
+        %tmp.115 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.116 117 70 80 ];
+        %tmp.116 = getv %tmp.115 :FONT_XTINY;
+        %tmp.117 = lgetv %defaultDetail.9;
+        symbol [ defaultDetail %tmp.117 117 82 95 ];
+        %tmp.118 = as %tmp.117 { (!Null) };
+        %tmp.119 = lgetv %model;
+        symbol [ model %tmp.119 117 97 102 ];
+        %tmp.121 = const :defaultDetailShortLine;
+        symbol [ defaultDetailShortLine %tmp.121 117 104 126 const ];
+        %tmp.122 = agetv %tmp.119 %tmp.121;
+        %tmp.123 = as %tmp.122 String or Null;
+        symbol [ String %tmp.123 117 131 137 ];
+        invoke %tmp.108 %tmp.109(%tmp.110, %tmp.111, %tmp.114, %tmp.116, %tmp.118, %tmp.123);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_116_39_118_12_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_116_12_118_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_116_12_118_12_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_114_15_119_8_stop:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_112_8_119_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc" 121 8 ]
+        %tmp.124 = self;
+        symbol [ drawResponsiveText %tmp.125 121 8 26 ];
+        %tmp.125 = getv function %tmp.124 :drawResponsiveText;
+        %tmp.126 = lgetv %dc;
+        symbol [ dc %tmp.126 121 27 29 ];
+        %tmp.127 = lgetv %width.3;
+        symbol [ width %tmp.127 121 31 36 ];
+        %tmp.128 = lgetv %height.4;
+        symbol [ height %tmp.128 121 38 44 ];
+        %tmp.129 = 0.80;
+        %tmp.130 = mul %tmp.128 %tmp.129;
+        %tmp.131 = lgetv %fHr.7;
+        symbol [ fHr %tmp.131 121 53 56 ];
+        %tmp.132 = lgetv %model;
+        symbol [ model %tmp.132 121 58 63 ];
+        %tmp.134 = const :hrLine;
+        symbol [ hrLine %tmp.134 121 65 71 const ];
+        %tmp.135 = agetv %tmp.132 %tmp.134;
+        %tmp.136 = as %tmp.135 String;
+        symbol [ String %tmp.136 121 76 82 ];
+        %tmp.137 = lgetv %model;
+        symbol [ model %tmp.137 121 84 89 ];
+        %tmp.139 = const :hrShortLine;
+        symbol [ hrShortLine %tmp.139 121 91 102 const ];
+        %tmp.140 = agetv %tmp.137 %tmp.139;
+        %tmp.141 = as %tmp.140 String;
+        symbol [ String %tmp.141 121 107 113 ];
+        invoke %tmp.124 %tmp.125(%tmp.126, %tmp.127, %tmp.130, %tmp.131, %tmp.136, %tmp.141);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDARenderer_mc_94_72_122_4_stop:
     }
 }
 [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDARenderer.mc"; @line = 1; ]

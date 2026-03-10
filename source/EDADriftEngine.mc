@@ -3,7 +3,7 @@ import Toybox.Math;
 
 class EDADriftEngine {
 
-    private const MIN_SPLIT_VALID_MS as Number = 600000;
+    private const MIN_VALID_TIME_MS as Number = 180000;
     private const MAX_DRIFT_PERCENT as Float = 50.0;
     private const SPLIT_BUCKET_MS as Number = 10000;
     private const MAX_VALID_SAMPLE_GAP_MS as Number = 5000;
@@ -84,7 +84,7 @@ class EDADriftEngine {
             return Math.sqrt(-1.0);
         }
 
-        if (driftActiveMs < DRIFT_WINDOW_MS) {
+        if (driftActiveMs < MIN_VALID_TIME_MS) {
             return null;
         }
 
@@ -94,8 +94,14 @@ class EDADriftEngine {
         var split2Weighted = 0.0;
         var split1Ms = 0;
         var split2Ms = 0;
-        var windowStart = driftActiveMs - DRIFT_WINDOW_MS;
-        var windowMid = driftActiveMs - MIN_SPLIT_VALID_MS;
+        var split1SlotCount = 0;
+        var split2SlotCount = 0;
+        var windowSizeMs = driftActiveMs;
+        if (windowSizeMs > DRIFT_WINDOW_MS) {
+            windowSizeMs = DRIFT_WINDOW_MS;
+        }
+        var windowStart = driftActiveMs - windowSizeMs;
+        var windowMid = windowStart + ((windowSizeMs / 2).toNumber());
 
         for (var i = 0; i < DRIFT_BUCKET_COUNT; i += 1) {
             var bucketKey = mDriftBucketKeys[i] as Number;
@@ -117,18 +123,20 @@ class EDADriftEngine {
             if (bucketStart < windowMid) {
                 split1Weighted += bucketWeighted;
                 split1Ms += bucketMs;
+                split1SlotCount += 1;
             } else {
                 split2Weighted += bucketWeighted;
                 split2Ms += bucketMs;
+                split2SlotCount += 1;
             }
         }
 
-        if (split1Ms < MIN_SPLIT_VALID_MS || split2Ms < MIN_SPLIT_VALID_MS) {
+        if (split1SlotCount <= 0 || split2SlotCount <= 0 || split1Ms <= 0 || split2Ms <= 0) {
             return null;
         }
 
-        var split1Ef = split1Weighted / split1Ms;
-        var split2Ef = split2Weighted / split2Ms;
+        var split1Ef = split1Weighted / split1Ms.toFloat();
+        var split2Ef = split2Weighted / split2Ms.toFloat();
         if (split1Ef <= 0.0 || split2Ef <= 0.0) {
             return null;
         }

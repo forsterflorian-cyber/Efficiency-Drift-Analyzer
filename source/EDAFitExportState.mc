@@ -90,19 +90,17 @@ class EDAFitExportState {
 
     function updateFitFields(profileState as Number, canExport as Boolean, driftPercent as Float, intervalMs as Number, workloadSource as Number) as Void {
         updateProfileStateField(profileState);
+        addSessionDriftSample(driftPercent, intervalMs, workloadSource);
+        updateSessionSummaryField();
 
         if (!canExport) {
             clearRealtimeDriftField();
-            clearSessionSummaryField();
             return;
         }
 
         if (mDriftField != null) {
             mDriftField.setData(driftPercent);
         }
-
-        addSessionDriftSample(driftPercent, intervalMs, workloadSource);
-        updateSessionSummaryField();
     }
 
     function resetSessionFitSummary() as Void {
@@ -111,5 +109,9 @@ class EDAFitExportState {
         mSessionSpeedDriftWeightedSum = 0.0;
         mSessionSpeedDriftMs = 0;
         clearSessionSummaryField();
+    }
+
+    function getSessionAverageDriftForDiagnostics() as Float? {
+        return getSessionAverageDrift();
     }
 }

@@ -1,25 +1,25 @@
 ==============================================================================
-HANDOVER: EDA - Status: LOGIC REPAIRED / STAGING (v0.9.9)
+HANDOVER: EDA - Status: RESPONSIVE UI & TEXT BUDGETING (v0.9.13)
 ==============================================================================
 
-### ARCHITEKTUR-UPDATE (10-MAI-2026)
-- Timer-Integritaet: Implementierung der "Catch-up Rule". Rollbacks < 5s 
-  frieren den Zeitanker ein, anstatt Daten zu korrumpieren oder die Session 
-  vorzeitig zu resetten.
-- Soft Config Guard: Fehlende Kalibrierungswerte (hrA/paceA) blockieren nur 
-  noch die Drift-Berechnung (Engine), nicht mehr das gesamte App-Lifecycle.
-- Profil-Resilienz: STALE-Zustand (ID 4) puffert transiente API-Fehler. 
-  Aktivitaetstypen werden nur beibehalten, wenn sie zuvor zweifelsfrei 
-  AUTHORITATIVE waren.
-- Speicherprofil: Strikt O(1). 120 Slots im Ringpuffer (10s Samples).
+### ARCHITEKTUR-UPDATE (10-MAR-2026)
+- Responsive Rendering: EDARenderer misst Textbreiten dynamisch via 
+  getTextWidthInPixels() vor dem Zeichnen.
+- Fallback-Logik: Einfuehrung von Short-Strings und dynamischer Truncation 
+  (...) zur Vermeidung von UI-Clipping auf Low-Memory-Geraeten (z. B. fr245).
+- View-Entlastung: Die View liefert parallele Full- und Short-Varianten 
+  an die Render-Modelle, um Laufzeit-Overhead im OnUpdate-Zyklus zu minimieren.
+- Lokalisierung: 'resources' und 'resources-de' um explizite Kurzformen fuer 
+  Status- und Fehlermeldungen erweitert.
 
 ### STATUS-HIERARCHIE (UI)
-1. CFG MISSING (Keine Kalibrierung vorhanden)
-2. NOT SAVED (FIT-Export noch blockiert/Fallback-Phase)
-3. TYPE UNKN (Fallback aktiv, Typ unbestaetigt)
-4. STALE (Revalidierung temporaer fehlgeschlagen)
+1. CFG MISSING (Kurz: KONFIG FEHLT / NO CFG)
+2. NOT SAVED (Kurz: NO SAV)
+3. TYPE UNKN (Kurz: UNKN)
+4. STALE (Degraded Mode)
+5. WARMUP / WAIT
 
 ### KONFORMITAET
-- SDK: 8.4.1 (Static Analysis bereinigt)
-- FIT-IDs: profile_state (ID 2), avg_metabolic_drift (ID 1)
+- Design: Relative Design-Vorgaben fuer alle Displaygroessen erfuellt.
+- Build: Verifiziert fuer fr245 (Low-Mem) und fr955 (High-Mem).
 ==============================================================================

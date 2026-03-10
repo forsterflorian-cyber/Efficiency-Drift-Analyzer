@@ -1,0 +1,81 @@
+import Toybox.Lang;
+import Toybox.Test;
+
+(:typecheck(false) :languageServer(do_not_complete))
+function getTestObject() as RunNoEvil {
+    return new RunNoEvil();
+}
+
+(:typecheck(false) :languageServer(do_not_complete))
+class RunNoEvil extends Test.Test {
+    private var logger as Logger;
+    private var idToName as Array;
+
+    function initialize() {
+        Test.Test.initialize();
+        logger = new Test.Logger();
+        idToName = new [3];
+        populate_test_entries_0_to_3();
+    }
+
+    function getIndexOf(name as String) as Number {
+        if (idToName has :indexOf) {
+            return idToName.indexOf(name);
+        }
+
+        var j = idToName.size();
+        for (var i = 0; i < j; ++i) {
+            if (idToName[i].equals(name)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    function getTestName(id as Number) as String {
+        return idToName[id];
+    }
+
+    function getNumberOfTests() as Number {
+        return idToName.size();
+    }
+
+    function populate_test_entries_0_to_3() as Void {
+        idToName[0] = "sessionSummaryResetsOnProfileUpgrade";
+        idToName[1] = "staleProfileRecoversAfter121Seconds";
+        idToName[2] = "driftWeightingPrefersLongerIntervals";
+    }
+
+    function evaluate_test_entries_0_to_3(id as Number, logger as Logger) {
+        var result = false;
+        if (id == 0) {
+            result = $.sessionSummaryResetsOnProfileUpgrade(logger);
+        } else if (id == 1) {
+            result = $.staleProfileRecoversAfter121Seconds(logger);
+        } else if (id == 2) {
+            result = $.driftWeightingPrefersLongerIntervals(logger);
+        }
+
+        return result;
+    }
+
+    function runTest(test as String or Number) as Boolean {
+        var id = test;
+        if (test instanceof Lang.String) {
+            id = getIndexOf(test);
+        }
+
+        assertMessage(id >= 0, "Could not find '" + test + "'");
+        var result = false;
+        if (id < 3) {
+            result = self.evaluate_test_entries_0_to_3(id, logger);
+        }
+
+        if (result instanceof Boolean) {
+            return result;
+        }
+
+        return false;
+    }
+}

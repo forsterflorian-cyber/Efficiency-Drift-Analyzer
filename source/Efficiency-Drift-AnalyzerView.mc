@@ -9,21 +9,22 @@ import Toybox.System;
 
 class EDAView extends WatchUi.DataField {
 
-    private const STATUS_WAIT as String = "WAIT";
-    private const STATUS_PAUSE as String = "PAUSE";
-    private const STATUS_WARMUP as String = "WARMUP";
-    private const STATUS_PROVISIONAL as String = "PROVISIONAL";
-    private const STATUS_PROFILE_TIMEOUT as String = "PROFILE TIMEOUT";
-    private const STATUS_CFG_ERR as String = "CFG ERR";
-    private const STATUS_NO_HR as String = "NO HR";
-    private const STATUS_LOW_HR as String = "LOW HR";
-    private const STATUS_SPIKE as String = "SPIKE";
-    private const STATUS_LOW_POWER as String = "LOW P";
-    private const STATUS_LOW_PACE as String = "LOW PACE";
-    private const STATUS_NO_POWER as String = "NO PWR";
-    private const STATUS_NO_SPEED as String = "NO SPD";
-    private const STATUS_INVALID_SPEED as String = "INV SPD";
-    private const STATUS_GAP as String = "GAP";
+    private const STATUS_VALUE as Number = 0;
+    private const STATUS_WAIT as Number = 1;
+    private const STATUS_PAUSE as Number = 2;
+    private const STATUS_WARMUP as Number = 3;
+    private const STATUS_PROVISIONAL as Number = 4;
+    private const STATUS_PROFILE_TIMEOUT as Number = 5;
+    private const STATUS_CFG_ERR as Number = 6;
+    private const STATUS_NO_HR as Number = 7;
+    private const STATUS_LOW_HR as Number = 8;
+    private const STATUS_SPIKE as Number = 9;
+    private const STATUS_LOW_POWER as Number = 10;
+    private const STATUS_LOW_PACE as Number = 11;
+    private const STATUS_NO_POWER as Number = 12;
+    private const STATUS_NO_SPEED as Number = 13;
+    private const STATUS_INVALID_SPEED as Number = 14;
+    private const STATUS_GAP as Number = 15;
     private const INVALID_RENDER_VALUE as String = "NaN";
 
     private const DEFAULT_RUNNING_MIN_HR as Float = 80.0;
@@ -97,6 +98,8 @@ class EDAView extends WatchUi.DataField {
     private var lastAcceptedHr as Float? = null;
     private var lastAcceptedSpeed as Float? = null;
     private var lastValidSpeedSignalTime as Number? = null;
+    private var lastLiveSpeed as Float? = null;
+    private var lastLiveHr as Float? = null;
     private var validActiveMs as Number = 0;
     private var driftActiveMs as Number = 0;
     private var currentWorkloadSource as Number = SOURCE_NONE;
@@ -105,36 +108,64 @@ class EDAView extends WatchUi.DataField {
     private var lastPauseSystemTimer as Number? = null;
 
     private var statusDetail as String = "";
+    private var statusDetailShort as String = "";
 
     private var lblAktPace as String = "";
     private var lblAktHr as String = "";
     private var lblAktPaceShort as String = "";
     private var lblAktHrShort as String = "";
     private var lblStatusWait as String = "";
+    private var lblStatusWaitShort as String = "";
     private var lblStatusPause as String = "";
+    private var lblStatusPauseShort as String = "";
     private var lblStatusWarmup as String = "";
+    private var lblStatusWarmupShort as String = "";
     private var lblStatusProvisional as String = "";
+    private var lblStatusProvisionalShort as String = "";
     private var lblStatusProfileTimeout as String = "";
+    private var lblStatusProfileTimeoutShort as String = "";
     private var lblStatusConfigError as String = "";
+    private var lblStatusConfigErrorShort as String = "";
     private var lblStatusNoHr as String = "";
+    private var lblStatusNoHrShort as String = "";
     private var lblStatusLowHr as String = "";
+    private var lblStatusLowHrShort as String = "";
     private var lblStatusSpike as String = "";
+    private var lblStatusSpikeShort as String = "";
     private var lblStatusLowPower as String = "";
+    private var lblStatusLowPowerShort as String = "";
     private var lblStatusLowPace as String = "";
+    private var lblStatusLowPaceShort as String = "";
     private var lblStatusNoPower as String = "";
+    private var lblStatusNoPowerShort as String = "";
     private var lblStatusNoSpeed as String = "";
+    private var lblStatusNoSpeedShort as String = "";
     private var lblStatusInvalidSpeed as String = "";
+    private var lblStatusInvalidSpeedShort as String = "";
     private var lblStatusGap as String = "";
+    private var lblStatusGapShort as String = "";
     private var lblNotSaved as String = "";
+    private var lblNotSavedShort as String = "";
     private var lblTypeUnknown as String = "";
+    private var lblTypeUnknownShort as String = "";
     private var msgCollectingData as String = "";
+    private var msgCollectingDataShort as String = "";
     private var msgPowerRequired as String = "";
+    private var msgPowerRequiredShort as String = "";
     private var msgNoSpeed as String = "";
+    private var msgNoSpeedShort as String = "";
     private var msgInvalidSpeed as String = "";
+    private var msgInvalidSpeedShort as String = "";
     private var msgProfileRetry as String = "";
+    private var msgProfileRetryShort as String = "";
     private var msgProfileErrorPrefix as String = "";
+    private var msgProfileErrorPrefixShort as String = "";
     private var msgProvisionalProfile as String = "";
+    private var msgProvisionalProfileShort as String = "";
     private var msgProfileTimeout as String = "";
+    private var msgProfileTimeoutShort as String = "";
+    private var msgConfigRequired as String = "";
+    private var msgConfigRequiredShort as String = "";
     private var msgWarmupValidSuffix as String = "";
 
     (:high_mem)
@@ -153,6 +184,7 @@ class EDAView extends WatchUi.DataField {
 
     private var valAktPace as String = "--:--";
     private var strDrift as String = "--";
+    private var driftStatus as Number = STATUS_WAIT;
     private var valAktHr as String = "--";
 
     (:high_mem)
@@ -167,6 +199,31 @@ class EDAView extends WatchUi.DataField {
     (:high_mem)
     private var modelErrorMessage as String = "";
 
+    private var renderPaceLine as String = "";
+    private var renderPaceShortLine as String = "";
+    private var renderDriftLine as String = "";
+    private var renderDriftShortLine as String = "";
+    private var renderStatusDetailLine as String = "";
+    private var renderStatusDetailShortLine as String = "";
+    private var renderDefaultDetailLine as String = "";
+    private var renderDefaultDetailShortLine as String = "";
+    private var renderHrLine as String = "";
+    private var renderHrShortLine as String = "";
+    private var renderModelErrorLine as String = "";
+    private var renderShowModelError as Boolean = false;
+
+    (:high_mem)
+    private var renderExpectedPaceLine as String = "";
+
+    (:high_mem)
+    private var renderExpectedPaceShortLine as String = "";
+
+    (:high_mem)
+    private var renderExpectedHrLine as String = "";
+
+    (:high_mem)
+    private var renderExpectedHrShortLine as String = "";
+
     private var bgColor as Number = Graphics.COLOR_WHITE;
     private var fgColor as Number = Graphics.COLOR_BLACK;
 
@@ -174,13 +231,15 @@ class EDAView extends WatchUi.DataField {
     private var profileResolver as EDAProfileResolver? = null;
     private var driftEngine as EDADriftEngine? = null;
     private var renderer as EDARenderer? = null;
+    private var highMemRenderModel as Dictionary? = null;
+    private var lowMemRenderModel as Dictionary? = null;
+    private var areStringsLoaded as Boolean = false;
     private const DRIFT_GRAPH_ID = 0;
     private const DRIFT_AVG_ID = 1;
     private const PROFILE_STATE_ID = 2;
 
     function initialize() {
         DataField.initialize();
-        loadStrings();
         loadSettings();
         setNeutralColors();
 
@@ -202,6 +261,7 @@ class EDAView extends WatchUi.DataField {
         profileResolver = new EDAProfileResolver();
         driftEngine = new EDADriftEngine();
         renderer = new EDARenderer();
+        initializeRenderModels();
         refreshEngineCalibrationState();
 
         resetSessionFitSummary();
@@ -220,32 +280,59 @@ class EDAView extends WatchUi.DataField {
         lblAktHr = WatchUi.loadResource(Rez.Strings.lblAktHr) as String;
         lblAktHrShort = WatchUi.loadResource(Rez.Strings.lblAktHrShort) as String;
         lblStatusWait = WatchUi.loadResource(Rez.Strings.lblStatusWait) as String;
+        lblStatusWaitShort = WatchUi.loadResource(Rez.Strings.lblStatusWaitShort) as String;
         lblStatusPause = WatchUi.loadResource(Rez.Strings.lblStatusPause) as String;
+        lblStatusPauseShort = WatchUi.loadResource(Rez.Strings.lblStatusPauseShort) as String;
         lblStatusWarmup = WatchUi.loadResource(Rez.Strings.lblStatusWarmup) as String;
+        lblStatusWarmupShort = WatchUi.loadResource(Rez.Strings.lblStatusWarmupShort) as String;
         lblStatusProvisional = WatchUi.loadResource(Rez.Strings.lblStatusProvisional) as String;
+        lblStatusProvisionalShort = WatchUi.loadResource(Rez.Strings.lblStatusProvisionalShort) as String;
         lblStatusProfileTimeout = WatchUi.loadResource(Rez.Strings.lblStatusProfileTimeout) as String;
+        lblStatusProfileTimeoutShort = WatchUi.loadResource(Rez.Strings.lblStatusProfileTimeoutShort) as String;
         lblStatusConfigError = WatchUi.loadResource(Rez.Strings.lblStatusConfigError) as String;
+        lblStatusConfigErrorShort = WatchUi.loadResource(Rez.Strings.lblStatusConfigErrorShort) as String;
         lblStatusNoHr = WatchUi.loadResource(Rez.Strings.lblStatusNoHr) as String;
+        lblStatusNoHrShort = WatchUi.loadResource(Rez.Strings.lblStatusNoHrShort) as String;
         lblStatusLowHr = WatchUi.loadResource(Rez.Strings.lblStatusLowHr) as String;
+        lblStatusLowHrShort = WatchUi.loadResource(Rez.Strings.lblStatusLowHrShort) as String;
         lblStatusSpike = WatchUi.loadResource(Rez.Strings.lblStatusSpike) as String;
+        lblStatusSpikeShort = WatchUi.loadResource(Rez.Strings.lblStatusSpikeShort) as String;
         lblStatusLowPower = WatchUi.loadResource(Rez.Strings.lblStatusLowPower) as String;
+        lblStatusLowPowerShort = WatchUi.loadResource(Rez.Strings.lblStatusLowPowerShort) as String;
         lblStatusLowPace = WatchUi.loadResource(Rez.Strings.lblStatusLowPace) as String;
+        lblStatusLowPaceShort = WatchUi.loadResource(Rez.Strings.lblStatusLowPaceShort) as String;
         lblStatusNoPower = WatchUi.loadResource(Rez.Strings.lblStatusNoPower) as String;
+        lblStatusNoPowerShort = WatchUi.loadResource(Rez.Strings.lblStatusNoPowerShort) as String;
         lblStatusNoSpeed = WatchUi.loadResource(Rez.Strings.lblStatusNoSpeed) as String;
+        lblStatusNoSpeedShort = WatchUi.loadResource(Rez.Strings.lblStatusNoSpeedShort) as String;
         lblStatusInvalidSpeed = WatchUi.loadResource(Rez.Strings.lblStatusInvalidSpeed) as String;
+        lblStatusInvalidSpeedShort = WatchUi.loadResource(Rez.Strings.lblStatusInvalidSpeedShort) as String;
         lblStatusGap = WatchUi.loadResource(Rez.Strings.lblStatusGap) as String;
+        lblStatusGapShort = WatchUi.loadResource(Rez.Strings.lblStatusGapShort) as String;
         lblNotSaved = WatchUi.loadResource(Rez.Strings.label_not_saved) as String;
+        lblNotSavedShort = WatchUi.loadResource(Rez.Strings.label_not_saved_short) as String;
         lblTypeUnknown = WatchUi.loadResource(Rez.Strings.label_type_unknown) as String;
-        lblCalibrationError = WatchUi.loadResource(Rez.Strings.lblCalibrationError) as String;
+        lblTypeUnknownShort = WatchUi.loadResource(Rez.Strings.label_type_unknown_short) as String;
         msgCollectingData = WatchUi.loadResource(Rez.Strings.msgCollectingData) as String;
+        msgCollectingDataShort = WatchUi.loadResource(Rez.Strings.msgCollectingDataShort) as String;
         msgPowerRequired = WatchUi.loadResource(Rez.Strings.msgPowerRequired) as String;
+        msgPowerRequiredShort = WatchUi.loadResource(Rez.Strings.msgPowerRequiredShort) as String;
         msgNoSpeed = WatchUi.loadResource(Rez.Strings.msgNoSpeed) as String;
+        msgNoSpeedShort = WatchUi.loadResource(Rez.Strings.msgNoSpeedShort) as String;
         msgInvalidSpeed = WatchUi.loadResource(Rez.Strings.msgInvalidSpeed) as String;
+        msgInvalidSpeedShort = WatchUi.loadResource(Rez.Strings.msgInvalidSpeedShort) as String;
         msgProfileRetry = WatchUi.loadResource(Rez.Strings.msgProfileRetry) as String;
+        msgProfileRetryShort = WatchUi.loadResource(Rez.Strings.msgProfileRetryShort) as String;
         msgProfileErrorPrefix = WatchUi.loadResource(Rez.Strings.msgProfileErrorPrefix) as String;
+        msgProfileErrorPrefixShort = WatchUi.loadResource(Rez.Strings.msgProfileErrorPrefixShort) as String;
         msgProvisionalProfile = WatchUi.loadResource(Rez.Strings.msgProvisionalProfile) as String;
+        msgProvisionalProfileShort = WatchUi.loadResource(Rez.Strings.msgProvisionalProfileShort) as String;
         msgProfileTimeout = WatchUi.loadResource(Rez.Strings.msgProfileTimeout) as String;
+        msgProfileTimeoutShort = WatchUi.loadResource(Rez.Strings.msgProfileTimeoutShort) as String;
+        msgConfigRequired = WatchUi.loadResource(Rez.Strings.msgConfigRequired) as String;
+        msgConfigRequiredShort = WatchUi.loadResource(Rez.Strings.msgConfigRequiredShort) as String;
         msgWarmupValidSuffix = WatchUi.loadResource(Rez.Strings.msgWarmupValidSuffix) as String;
+        areStringsLoaded = true;
     }
 
     (:low_mem)
@@ -254,33 +341,61 @@ class EDAView extends WatchUi.DataField {
         lblAktHr = WatchUi.loadResource(Rez.Strings.lblAktHrShort) as String;
         lblAktPaceShort = lblAktPace;
         lblAktHrShort = lblAktHr;
-        lblStatusWait = WatchUi.loadResource(Rez.Strings.lblStatusWait) as String;
-        lblStatusPause = WatchUi.loadResource(Rez.Strings.lblStatusPause) as String;
-        lblStatusWarmup = WatchUi.loadResource(Rez.Strings.lblStatusWarmup) as String;
-        lblStatusProvisional = WatchUi.loadResource(Rez.Strings.lblStatusProvisional) as String;
-        lblStatusProfileTimeout = WatchUi.loadResource(Rez.Strings.lblStatusProfileTimeout) as String;
-        lblStatusConfigError = WatchUi.loadResource(Rez.Strings.lblStatusConfigError) as String;
-        lblStatusNoHr = WatchUi.loadResource(Rez.Strings.lblStatusNoHr) as String;
-        lblStatusLowHr = WatchUi.loadResource(Rez.Strings.lblStatusLowHr) as String;
-        lblStatusSpike = WatchUi.loadResource(Rez.Strings.lblStatusSpike) as String;
-        lblStatusLowPower = WatchUi.loadResource(Rez.Strings.lblStatusLowPower) as String;
-        lblStatusLowPace = WatchUi.loadResource(Rez.Strings.lblStatusLowPace) as String;
-        lblStatusNoPower = WatchUi.loadResource(Rez.Strings.lblStatusNoPower) as String;
-        lblStatusNoSpeed = WatchUi.loadResource(Rez.Strings.lblStatusNoSpeed) as String;
-        lblStatusInvalidSpeed = WatchUi.loadResource(Rez.Strings.lblStatusInvalidSpeed) as String;
-        lblStatusGap = WatchUi.loadResource(Rez.Strings.lblStatusGap) as String;
-        lblNotSaved = WatchUi.loadResource(Rez.Strings.label_not_saved) as String;
-        lblTypeUnknown = WatchUi.loadResource(Rez.Strings.label_type_unknown) as String;
+        lblStatusWaitShort = WatchUi.loadResource(Rez.Strings.lblStatusWaitShort) as String;
+        lblStatusWait = lblStatusWaitShort;
+        lblStatusPauseShort = WatchUi.loadResource(Rez.Strings.lblStatusPauseShort) as String;
+        lblStatusPause = lblStatusPauseShort;
+        lblStatusWarmupShort = WatchUi.loadResource(Rez.Strings.lblStatusWarmupShort) as String;
+        lblStatusWarmup = lblStatusWarmupShort;
+        lblStatusProvisionalShort = WatchUi.loadResource(Rez.Strings.lblStatusProvisionalShort) as String;
+        lblStatusProvisional = lblStatusProvisionalShort;
+        lblStatusProfileTimeoutShort = WatchUi.loadResource(Rez.Strings.lblStatusProfileTimeoutShort) as String;
+        lblStatusProfileTimeout = lblStatusProfileTimeoutShort;
+        lblStatusConfigErrorShort = WatchUi.loadResource(Rez.Strings.lblStatusConfigErrorShort) as String;
+        lblStatusConfigError = lblStatusConfigErrorShort;
+        lblStatusNoHrShort = WatchUi.loadResource(Rez.Strings.lblStatusNoHrShort) as String;
+        lblStatusNoHr = lblStatusNoHrShort;
+        lblStatusLowHrShort = WatchUi.loadResource(Rez.Strings.lblStatusLowHrShort) as String;
+        lblStatusLowHr = lblStatusLowHrShort;
+        lblStatusSpikeShort = WatchUi.loadResource(Rez.Strings.lblStatusSpikeShort) as String;
+        lblStatusSpike = lblStatusSpikeShort;
+        lblStatusLowPowerShort = WatchUi.loadResource(Rez.Strings.lblStatusLowPowerShort) as String;
+        lblStatusLowPower = lblStatusLowPowerShort;
+        lblStatusLowPaceShort = WatchUi.loadResource(Rez.Strings.lblStatusLowPaceShort) as String;
+        lblStatusLowPace = lblStatusLowPaceShort;
+        lblStatusNoPowerShort = WatchUi.loadResource(Rez.Strings.lblStatusNoPowerShort) as String;
+        lblStatusNoPower = lblStatusNoPowerShort;
+        lblStatusNoSpeedShort = WatchUi.loadResource(Rez.Strings.lblStatusNoSpeedShort) as String;
+        lblStatusNoSpeed = lblStatusNoSpeedShort;
+        lblStatusInvalidSpeedShort = WatchUi.loadResource(Rez.Strings.lblStatusInvalidSpeedShort) as String;
+        lblStatusInvalidSpeed = lblStatusInvalidSpeedShort;
+        lblStatusGapShort = WatchUi.loadResource(Rez.Strings.lblStatusGapShort) as String;
+        lblStatusGap = lblStatusGapShort;
+        lblNotSavedShort = WatchUi.loadResource(Rez.Strings.label_not_saved_short) as String;
+        lblNotSaved = lblNotSavedShort;
+        lblTypeUnknownShort = WatchUi.loadResource(Rez.Strings.label_type_unknown_short) as String;
+        lblTypeUnknown = lblTypeUnknownShort;
         lblCalibrationError = WatchUi.loadResource(Rez.Strings.lblCalibrationError) as String;
-        msgCollectingData = WatchUi.loadResource(Rez.Strings.msgCollectingData) as String;
-        msgPowerRequired = WatchUi.loadResource(Rez.Strings.msgPowerRequired) as String;
-        msgNoSpeed = WatchUi.loadResource(Rez.Strings.msgNoSpeed) as String;
-        msgInvalidSpeed = WatchUi.loadResource(Rez.Strings.msgInvalidSpeed) as String;
-        msgProfileRetry = WatchUi.loadResource(Rez.Strings.msgProfileRetry) as String;
-        msgProfileErrorPrefix = WatchUi.loadResource(Rez.Strings.msgProfileErrorPrefix) as String;
-        msgProvisionalProfile = WatchUi.loadResource(Rez.Strings.msgProvisionalProfile) as String;
-        msgProfileTimeout = WatchUi.loadResource(Rez.Strings.msgProfileTimeout) as String;
+        msgCollectingDataShort = WatchUi.loadResource(Rez.Strings.msgCollectingDataShort) as String;
+        msgCollectingData = msgCollectingDataShort;
+        msgPowerRequiredShort = WatchUi.loadResource(Rez.Strings.msgPowerRequiredShort) as String;
+        msgPowerRequired = msgPowerRequiredShort;
+        msgNoSpeedShort = WatchUi.loadResource(Rez.Strings.msgNoSpeedShort) as String;
+        msgNoSpeed = msgNoSpeedShort;
+        msgInvalidSpeedShort = WatchUi.loadResource(Rez.Strings.msgInvalidSpeedShort) as String;
+        msgInvalidSpeed = msgInvalidSpeedShort;
+        msgProfileRetryShort = WatchUi.loadResource(Rez.Strings.msgProfileRetryShort) as String;
+        msgProfileRetry = msgProfileRetryShort;
+        msgProfileErrorPrefixShort = WatchUi.loadResource(Rez.Strings.msgProfileErrorPrefixShort) as String;
+        msgProfileErrorPrefix = msgProfileErrorPrefixShort;
+        msgProvisionalProfileShort = WatchUi.loadResource(Rez.Strings.msgProvisionalProfileShort) as String;
+        msgProvisionalProfile = msgProvisionalProfileShort;
+        msgProfileTimeoutShort = WatchUi.loadResource(Rez.Strings.msgProfileTimeoutShort) as String;
+        msgProfileTimeout = msgProfileTimeoutShort;
+        msgConfigRequiredShort = WatchUi.loadResource(Rez.Strings.msgConfigRequiredShort) as String;
+        msgConfigRequired = msgConfigRequiredShort;
         msgWarmupValidSuffix = WatchUi.loadResource(Rez.Strings.msgWarmupValidSuffix) as String;
+        areStringsLoaded = true;
     }
 
     (:high_mem)
@@ -309,20 +424,70 @@ class EDAView extends WatchUi.DataField {
         refreshEngineCalibrationState();
     }
 
-    private function loadDistanceFactor() as Void {
+    private function loadDistanceFactor() as Boolean {
+        var previousDistanceFactor = mDistanceFactor;
         var deviceSettings = System.getDeviceSettings();
         if (deviceSettings.paceUnits == System.UNIT_STATUTE) {
             mDistanceFactor = 1609.34;
-            return;
+            return previousDistanceFactor != mDistanceFactor;
         }
 
         mDistanceFactor = 1000.0;
+        return previousDistanceFactor != mDistanceFactor;
+    }
+
+    (:high_mem)
+    private function handleDistanceFactorChange() as Void {
+        calculateLinearModel();
+        refreshRenderCache();
+    }
+
+    (:low_mem)
+    private function handleDistanceFactorChange() as Void {
+        refreshRenderCache();
+    }
+
+    (:high_mem)
+    private function getCurrentBaselineHr() as Float {
+        return hrA;
+    }
+
+    (:low_mem)
+    private function getCurrentBaselineHr() as Float {
+        return referenceHr;
+    }
+
+    (:high_mem)
+    private function getCurrentBaselineWorkload() as Float {
+        return paceA;
+    }
+
+    (:low_mem)
+    private function getCurrentBaselineWorkload() as Float {
+        return referenceWorkload;
+    }
+
+    private function hasBaselineChanged(previousHr as Float, previousWorkload as Float) as Boolean {
+        return (previousHr - getCurrentBaselineHr()).abs() > 0.0001
+            || (previousWorkload - getCurrentBaselineWorkload()).abs() > 0.0001;
     }
 
     function applySettingsChange() as Void {
+        var previousMinHr = minValidHrSetting;
+        var previousHr = getCurrentBaselineHr();
+        var previousWorkload = getCurrentBaselineWorkload();
+        loadStrings();
         loadSettings();
-        resetSessionFitSummary();
-        resetSessionState();
+        if ((previousMinHr - minValidHrSetting).abs() > 0.0001 || hasBaselineChanged(previousHr, previousWorkload)) {
+            resetSessionFitSummary();
+            resetSessionState();
+            return;
+        }
+
+        if (isTargetModelSupported() && !isInvalidDisplayState()) {
+            updateTargetDisplay(getDisplaySpeed(lastLiveSpeed), getDisplayHr(lastLiveHr));
+        }
+        refreshRenderCache();
     }
 
     private function getNumericProperty(key as String) as Float {
@@ -394,9 +559,13 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function refreshEngineCalibrationState() as Void {
+        var previousCalibrationState = isEngineCalibrated;
         isEngineCalibrated = hasValidConfiguration();
         if (driftEngine != null) {
             getDriftEngine().setCalibrated(isEngineCalibrated);
+        }
+        if (previousCalibrationState != isEngineCalibrated && renderer != null) {
+            refreshRenderCache();
         }
     }
 
@@ -426,40 +595,76 @@ class EDAView extends WatchUi.DataField {
         return hasAuthoritativeProfile() || (isFallbackProfileConfirmed() && mTimerTime >= FALLBACK_EXPORT_TIMEOUT_MS);
     }
 
-    private function getStatusLabel(statusText as String) as String {
-        if (statusText.equals(STATUS_WAIT)) {
+    private function getStatusLabel(statusCode as Number) as String {
+        if (statusCode == STATUS_WAIT) {
             return lblStatusWait;
-        } else if (statusText.equals(STATUS_PAUSE)) {
+        } else if (statusCode == STATUS_PAUSE) {
             return lblStatusPause;
-        } else if (statusText.equals(STATUS_WARMUP)) {
+        } else if (statusCode == STATUS_WARMUP) {
             return lblStatusWarmup;
-        } else if (statusText.equals(STATUS_PROVISIONAL)) {
+        } else if (statusCode == STATUS_PROVISIONAL) {
             return lblStatusProvisional;
-        } else if (statusText.equals(STATUS_PROFILE_TIMEOUT)) {
+        } else if (statusCode == STATUS_PROFILE_TIMEOUT) {
             return lblStatusProfileTimeout;
-        } else if (statusText.equals(STATUS_CFG_ERR)) {
+        } else if (statusCode == STATUS_CFG_ERR) {
             return lblStatusConfigError;
-        } else if (statusText.equals(STATUS_NO_HR)) {
+        } else if (statusCode == STATUS_NO_HR) {
             return lblStatusNoHr;
-        } else if (statusText.equals(STATUS_LOW_HR)) {
+        } else if (statusCode == STATUS_LOW_HR) {
             return lblStatusLowHr;
-        } else if (statusText.equals(STATUS_SPIKE)) {
+        } else if (statusCode == STATUS_SPIKE) {
             return lblStatusSpike;
-        } else if (statusText.equals(STATUS_LOW_POWER)) {
+        } else if (statusCode == STATUS_LOW_POWER) {
             return lblStatusLowPower;
-        } else if (statusText.equals(STATUS_LOW_PACE)) {
+        } else if (statusCode == STATUS_LOW_PACE) {
             return lblStatusLowPace;
-        } else if (statusText.equals(STATUS_NO_POWER)) {
+        } else if (statusCode == STATUS_NO_POWER) {
             return lblStatusNoPower;
-        } else if (statusText.equals(STATUS_NO_SPEED)) {
+        } else if (statusCode == STATUS_NO_SPEED) {
             return lblStatusNoSpeed;
-        } else if (statusText.equals(STATUS_INVALID_SPEED)) {
+        } else if (statusCode == STATUS_INVALID_SPEED) {
             return lblStatusInvalidSpeed;
-        } else if (statusText.equals(STATUS_GAP)) {
+        } else if (statusCode == STATUS_GAP) {
             return lblStatusGap;
         }
 
-        return statusText;
+        return strDrift;
+    }
+
+    private function getStatusShortLabel(statusCode as Number) as String {
+        if (statusCode == STATUS_WAIT) {
+            return lblStatusWaitShort;
+        } else if (statusCode == STATUS_PAUSE) {
+            return lblStatusPauseShort;
+        } else if (statusCode == STATUS_WARMUP) {
+            return lblStatusWarmupShort;
+        } else if (statusCode == STATUS_PROVISIONAL) {
+            return lblStatusProvisionalShort;
+        } else if (statusCode == STATUS_PROFILE_TIMEOUT) {
+            return lblStatusProfileTimeoutShort;
+        } else if (statusCode == STATUS_CFG_ERR) {
+            return lblStatusConfigErrorShort;
+        } else if (statusCode == STATUS_NO_HR) {
+            return lblStatusNoHrShort;
+        } else if (statusCode == STATUS_LOW_HR) {
+            return lblStatusLowHrShort;
+        } else if (statusCode == STATUS_SPIKE) {
+            return lblStatusSpikeShort;
+        } else if (statusCode == STATUS_LOW_POWER) {
+            return lblStatusLowPowerShort;
+        } else if (statusCode == STATUS_LOW_PACE) {
+            return lblStatusLowPaceShort;
+        } else if (statusCode == STATUS_NO_POWER) {
+            return lblStatusNoPowerShort;
+        } else if (statusCode == STATUS_NO_SPEED) {
+            return lblStatusNoSpeedShort;
+        } else if (statusCode == STATUS_INVALID_SPEED) {
+            return lblStatusInvalidSpeedShort;
+        } else if (statusCode == STATUS_GAP) {
+            return lblStatusGapShort;
+        }
+
+        return strDrift;
     }
 
     private function getRenderedDriftLabel() as String {
@@ -467,7 +672,7 @@ class EDAView extends WatchUi.DataField {
             return lblStatusConfigError;
         }
 
-        var driftLabel = getStatusLabel(strDrift);
+        var driftLabel = (driftStatus == STATUS_VALUE) ? strDrift : getStatusLabel(driftStatus);
         if (!canExportFitData()) {
             return lblNotSaved + " " + driftLabel;
         }
@@ -479,32 +684,76 @@ class EDAView extends WatchUi.DataField {
         return driftLabel;
     }
 
+    private function getRenderedDriftShortLabel() as String {
+        if (!isEngineCalibrated) {
+            return lblStatusConfigErrorShort;
+        }
+
+        var driftLabel = (driftStatus == STATUS_VALUE) ? strDrift : getStatusShortLabel(driftStatus);
+        if (!canExportFitData()) {
+            return lblNotSavedShort + " " + driftLabel;
+        }
+
+        if (isFallbackProfileConfirmed()) {
+            return lblTypeUnknownShort + " " + driftLabel;
+        }
+
+        return driftLabel;
+    }
+
     private function shouldShowProfileErrorDetail() as Boolean {
         if (hasAuthoritativeProfile()) {
             return false;
         }
 
-        return strDrift.equals(STATUS_WAIT) || strDrift.equals(STATUS_PROVISIONAL) || strDrift.equals(STATUS_PROFILE_TIMEOUT);
+        return driftStatus == STATUS_WAIT || driftStatus == STATUS_PROVISIONAL || driftStatus == STATUS_PROFILE_TIMEOUT;
     }
 
     private function getDefaultStatusDetail() as String? {
-        if (strDrift.equals(STATUS_WAIT)) {
+        if (driftStatus == STATUS_WAIT) {
             return msgCollectingData;
-        } else if (strDrift.equals(STATUS_NO_POWER)) {
+        } else if (driftStatus == STATUS_CFG_ERR) {
+            return msgConfigRequired;
+        } else if (driftStatus == STATUS_NO_POWER) {
             return msgPowerRequired;
-        } else if (strDrift.equals(STATUS_NO_SPEED)) {
+        } else if (driftStatus == STATUS_NO_SPEED) {
             return msgNoSpeed;
-        } else if (strDrift.equals(STATUS_INVALID_SPEED)) {
+        } else if (driftStatus == STATUS_INVALID_SPEED) {
             return msgInvalidSpeed;
-        } else if (strDrift.equals(STATUS_PROVISIONAL)) {
+        } else if (driftStatus == STATUS_PROVISIONAL) {
             return msgProvisionalProfile;
-        } else if (strDrift.equals(STATUS_PROFILE_TIMEOUT)) {
+        } else if (driftStatus == STATUS_PROFILE_TIMEOUT) {
             return msgProfileTimeout;
         }
 
         var lastErrorCode = getProfileResolver().getLastErrorCode();
         if (lastErrorCode != "" && shouldShowProfileErrorDetail()) {
             return msgProfileErrorPrefix + ": " + lastErrorCode;
+        }
+
+        return null;
+    }
+
+    private function getDefaultStatusDetailShort() as String? {
+        if (driftStatus == STATUS_WAIT) {
+            return msgCollectingDataShort;
+        } else if (driftStatus == STATUS_CFG_ERR) {
+            return msgConfigRequiredShort;
+        } else if (driftStatus == STATUS_NO_POWER) {
+            return msgPowerRequiredShort;
+        } else if (driftStatus == STATUS_NO_SPEED) {
+            return msgNoSpeedShort;
+        } else if (driftStatus == STATUS_INVALID_SPEED) {
+            return msgInvalidSpeedShort;
+        } else if (driftStatus == STATUS_PROVISIONAL) {
+            return msgProvisionalProfileShort;
+        } else if (driftStatus == STATUS_PROFILE_TIMEOUT) {
+            return msgProfileTimeoutShort;
+        }
+
+        var lastErrorCode = getProfileResolver().getLastErrorCode();
+        if (lastErrorCode != "" && shouldShowProfileErrorDetail()) {
+            return msgProfileErrorPrefixShort + ": " + lastErrorCode;
         }
 
         return null;
@@ -526,6 +775,120 @@ class EDAView extends WatchUi.DataField {
         return renderer as EDARenderer;
     }
 
+    (:high_mem)
+    private function initializeRenderModels() as Void {
+        highMemRenderModel = {};
+        lowMemRenderModel = null;
+        refreshRenderCache();
+    }
+
+    (:low_mem)
+    private function initializeRenderModels() as Void {
+        highMemRenderModel = null;
+        lowMemRenderModel = {};
+        refreshRenderCache();
+    }
+
+    private function getRenderSafePaceValue() as String {
+        var currentPaceValue = getRenderedCurrentPaceValue();
+        if (currentPaceValue.equals(INVALID_RENDER_VALUE)) {
+            return "--:--";
+        }
+
+        return currentPaceValue;
+    }
+
+    private function getRenderSafeHrValue() as String {
+        var currentHrValue = getRenderedCurrentHrValue();
+        if (currentHrValue.equals(INVALID_RENDER_VALUE)) {
+            return "--";
+        }
+
+        return currentHrValue;
+    }
+
+    (:high_mem)
+    private function refreshRenderCache() as Void {
+        var currentPaceValue = getRenderSafePaceValue();
+        var currentHrValue = getRenderSafeHrValue();
+        renderPaceLine = lblAktPace + currentPaceValue;
+        renderPaceShortLine = lblAktPaceShort + currentPaceValue;
+        renderExpectedPaceLine = lblSollPace + valSollPace;
+        renderExpectedPaceShortLine = lblSollPaceShort + valSollPace;
+        renderExpectedHrLine = lblSollHr + valSollHr;
+        renderExpectedHrShortLine = lblSollHrShort + valSollHr;
+        renderDriftLine = getRenderedDriftLabel();
+        renderDriftShortLine = getRenderedDriftShortLabel();
+        renderStatusDetailLine = statusDetail;
+        renderStatusDetailShortLine = statusDetailShort != "" ? statusDetailShort : statusDetail;
+
+        var defaultDetail = getDefaultStatusDetail();
+        renderDefaultDetailLine = (defaultDetail == null) ? "" : defaultDetail;
+        var defaultDetailShort = getDefaultStatusDetailShort();
+        renderDefaultDetailShortLine = (defaultDetailShort == null) ? renderDefaultDetailLine : defaultDetailShort;
+
+        renderHrLine = lblAktHr + currentHrValue;
+        renderHrShortLine = lblAktHrShort + currentHrValue;
+        renderShowModelError = isRunningProfile() && modelErrorMessage != "";
+        renderModelErrorLine = modelErrorMessage;
+
+        var model = highMemRenderModel as Dictionary;
+        model[:renderBgColor] = bgColor;
+        model[:renderFgColor] = fgColor;
+        model[:paceLine] = renderPaceLine;
+        model[:paceShortLine] = renderPaceShortLine;
+        model[:expectedPaceLine] = renderExpectedPaceLine;
+        model[:expectedPaceShortLine] = renderExpectedPaceShortLine;
+        model[:driftLine] = renderDriftLine;
+        model[:driftShortLine] = renderDriftShortLine;
+        model[:renderStatusDetailLine] = renderStatusDetailLine;
+        model[:renderStatusDetailShortLine] = renderStatusDetailShortLine;
+        model[:showModelError] = renderShowModelError;
+        model[:renderModelErrorLine] = renderModelErrorLine;
+        model[:defaultDetailLine] = renderDefaultDetailLine;
+        model[:defaultDetailShortLine] = renderDefaultDetailShortLine;
+        model[:expectedHrLine] = renderExpectedHrLine;
+        model[:expectedHrShortLine] = renderExpectedHrShortLine;
+        model[:hrLine] = renderHrLine;
+        model[:hrShortLine] = renderHrShortLine;
+    }
+
+    (:low_mem)
+    private function refreshRenderCache() as Void {
+        var currentPaceValue = getRenderSafePaceValue();
+        var currentHrValue = getRenderSafeHrValue();
+        renderPaceLine = lblAktPace + currentPaceValue;
+        renderPaceShortLine = lblAktPaceShort + currentPaceValue;
+        renderDriftLine = getRenderedDriftLabel();
+        renderDriftShortLine = getRenderedDriftShortLabel();
+        renderStatusDetailLine = statusDetail;
+        renderStatusDetailShortLine = statusDetailShort != "" ? statusDetailShort : statusDetail;
+
+        var defaultDetail = getDefaultStatusDetail();
+        renderDefaultDetailLine = (defaultDetail == null) ? "" : defaultDetail;
+        var defaultDetailShort = getDefaultStatusDetailShort();
+        renderDefaultDetailShortLine = (defaultDetailShort == null) ? renderDefaultDetailLine : defaultDetailShort;
+
+        renderHrLine = lblAktHr + currentHrValue;
+        renderHrShortLine = lblAktHrShort + currentHrValue;
+        renderShowModelError = false;
+        renderModelErrorLine = "";
+
+        var model = lowMemRenderModel as Dictionary;
+        model[:renderBgColor] = bgColor;
+        model[:renderFgColor] = fgColor;
+        model[:paceLine] = renderPaceLine;
+        model[:paceShortLine] = renderPaceShortLine;
+        model[:driftLine] = renderDriftLine;
+        model[:driftShortLine] = renderDriftShortLine;
+        model[:renderStatusDetailLine] = renderStatusDetailLine;
+        model[:renderStatusDetailShortLine] = renderStatusDetailShortLine;
+        model[:defaultDetailLine] = renderDefaultDetailLine;
+        model[:defaultDetailShortLine] = renderDefaultDetailShortLine;
+        model[:hrLine] = renderHrLine;
+        model[:hrShortLine] = renderHrShortLine;
+    }
+
     private function writeInvalidRecord() as Void {
         getFitExportState().writeInvalidRecord(getProfileResolver().getState());
     }
@@ -539,17 +902,35 @@ class EDAView extends WatchUi.DataField {
         return msgProfileRetry + ": " + lastErrorCode;
     }
 
-    private function setInvalidStatus(statusText as String) as Void {
-        setStatus(statusText);
+    private function getProfileRetryDetailShort() as String {
+        var lastErrorCode = getProfileResolver().getLastErrorCode();
+        if (lastErrorCode == "") {
+            return msgProfileRetryShort;
+        }
+
+        return msgProfileErrorPrefixShort + ": " + lastErrorCode;
     }
 
-    private function setInvalidStatusWithDetail(statusText as String, detailText as String) as Void {
-        setStatusWithDetail(statusText, detailText);
+    private function setInvalidStatus(statusCode as Number) as Void {
+        setStatus(statusCode);
+    }
+
+    private function setInvalidStatusWithDetail(statusCode as Number, detailText as String) as Void {
+        setStatusWithDetail(statusCode, detailText, detailText);
+    }
+
+    private function setInvalidStatusWithShortDetail(statusCode as Number, detailText as String, shortDetailText as String) as Void {
+        setStatusWithDetail(statusCode, detailText, shortDetailText);
     }
 
     private function setCollectingStatus() as Void {
+        if (!isEngineCalibrated) {
+            setStatusWithDetail(STATUS_CFG_ERR, msgConfigRequired, msgConfigRequiredShort);
+            return;
+        }
+
         if (isProfileProvisional()) {
-            setStatusWithDetail(STATUS_PROVISIONAL, msgProvisionalProfile);
+            setStatusWithDetail(STATUS_PROVISIONAL, msgProvisionalProfile, msgProvisionalProfileShort);
         } else {
             setStatus(STATUS_WAIT);
         }
@@ -581,26 +962,59 @@ class EDAView extends WatchUi.DataField {
         resetFilterState();
         updateLiveDisplay(speed, hr);
         resetTargetDisplay();
+        refreshRenderCache();
     }
 
     private function isInvalidDisplayState() as Boolean {
-        return strDrift.equals(STATUS_WAIT)
-            || strDrift.equals(STATUS_PAUSE)
-            || strDrift.equals(STATUS_WARMUP)
-            || strDrift.equals(STATUS_PROVISIONAL)
-            || strDrift.equals(STATUS_PROFILE_TIMEOUT)
-            || strDrift.equals(STATUS_NO_HR)
-            || strDrift.equals(STATUS_LOW_HR)
-            || strDrift.equals(STATUS_SPIKE)
-            || strDrift.equals(STATUS_LOW_POWER)
-            || strDrift.equals(STATUS_LOW_PACE)
-            || strDrift.equals(STATUS_NO_POWER)
-            || strDrift.equals(STATUS_NO_SPEED)
-            || strDrift.equals(STATUS_INVALID_SPEED)
-            || strDrift.equals(STATUS_GAP);
+        return driftStatus != STATUS_VALUE;
+    }
+
+    private function shouldUseLiveRenderFallback() as Boolean {
+        return driftStatus == STATUS_WAIT || driftStatus == STATUS_WARMUP;
+    }
+
+    (:high_mem)
+    private function getRenderModelSpeed() as Float? {
+        if (!filterInitialized || validActiveMs < WARMUP_VALID_MS) {
+            return Math.sqrt(-1.0);
+        }
+
+        return ewmaSpeed;
+    }
+
+    (:low_mem)
+    private function getRenderModelSpeed() as Float? {
+        return null;
+    }
+
+    (:high_mem)
+    private function getRenderModelHr() as Float? {
+        if (!filterInitialized || validActiveMs < WARMUP_VALID_MS) {
+            return Math.sqrt(-1.0);
+        }
+
+        return ewmaHr;
+    }
+
+    (:low_mem)
+    private function getRenderModelHr() as Float? {
+        return null;
     }
 
     private function getRenderedCurrentPaceValue() as String {
+        if (shouldUseLiveRenderFallback()) {
+            var displaySpeed = getRenderModelSpeed();
+            if (displaySpeed != null && displaySpeed == displaySpeed && displaySpeed > 0.0) {
+                return formatPace(displaySpeed);
+            }
+
+            if (lastLiveSpeed != null && (lastLiveSpeed as Float) > 0.0) {
+                return formatPace(lastLiveSpeed as Float);
+            }
+
+            return INVALID_RENDER_VALUE;
+        }
+
         if (isInvalidDisplayState()) {
             return INVALID_RENDER_VALUE;
         }
@@ -609,6 +1023,19 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function getRenderedCurrentHrValue() as String {
+        if (shouldUseLiveRenderFallback()) {
+            var displayHr = getRenderModelHr();
+            if (displayHr != null && displayHr == displayHr && displayHr > 0.0) {
+                return displayHr.toNumber().toString();
+            }
+
+            if (lastLiveHr != null && (lastLiveHr as Float) > 0.0) {
+                return (lastLiveHr as Float).toNumber().toString();
+            }
+
+            return INVALID_RENDER_VALUE;
+        }
+
         if (isInvalidDisplayState()) {
             return INVALID_RENDER_VALUE;
         }
@@ -669,12 +1096,20 @@ class EDAView extends WatchUi.DataField {
         resetResumeSensitiveState();
         validActiveMs = 0;
         driftActiveMs = 0;
+        lastLiveSpeed = null;
+        lastLiveHr = null;
         currentWorkloadSource = SOURCE_NONE;
         valAktPace = "--:--";
         valAktHr = "--";
         resetTargetDisplay();
         statusDetail = "";
+        statusDetailShort = "";
         getDriftEngine().reset();
+        if (!isEngineCalibrated) {
+            setStatusWithDetail(STATUS_CFG_ERR, msgConfigRequired, msgConfigRequiredShort);
+            return;
+        }
+
         setStatus(STATUS_WAIT);
     }
 
@@ -686,8 +1121,20 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function resolveActivityProfile() as Void {
+        var previousMinValidHr = getMinValidHr();
+        var previousCanUseSpeedWorkload = canUseSpeedWorkload();
+        var previouslyAuthoritative = hasAuthoritativeProfile();
         if (getProfileResolver().resolveActivityProfile(mTimerTime)) {
-            resetSessionFitSummary();
+            if (EDASessionPolicy.shouldResetSessionFitSummaryForProfileChange(
+                previousMinValidHr,
+                previousCanUseSpeedWorkload,
+                previouslyAuthoritative,
+                getMinValidHr(),
+                canUseSpeedWorkload(),
+                hasAuthoritativeProfile()
+            )) {
+                resetSessionFitSummary();
+            }
             resetAnalysisState();
         }
     }
@@ -708,18 +1155,26 @@ class EDAView extends WatchUi.DataField {
         fgColor = (bgColor == Graphics.COLOR_BLACK) ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK;
     }
 
-    private function setStatus(statusText as String) as Void {
+    private function setStatus(statusCode as Number) as Void {
         writeInvalidRecord();
-        strDrift = statusText;
+        resetTargetDisplay();
+        driftStatus = statusCode;
+        strDrift = "--";
         statusDetail = "";
+        statusDetailShort = "";
         setNeutralColors();
+        refreshRenderCache();
     }
 
-    private function setStatusWithDetail(statusText as String, detailText as String) as Void {
+    private function setStatusWithDetail(statusCode as Number, detailText as String, shortDetailText as String) as Void {
         writeInvalidRecord();
-        strDrift = statusText;
+        resetTargetDisplay();
+        driftStatus = statusCode;
+        strDrift = "--";
         statusDetail = detailText;
+        statusDetailShort = shortDetailText;
         setNeutralColors();
+        refreshRenderCache();
     }
 
     (:high_mem)
@@ -736,6 +1191,7 @@ class EDAView extends WatchUi.DataField {
             } else {
                 valAktHr = "--";
             }
+            refreshRenderCache();
             return;
         }
 
@@ -750,6 +1206,7 @@ class EDAView extends WatchUi.DataField {
         } else {
             valAktHr = "--";
         }
+        refreshRenderCache();
     }
 
     (:low_mem)
@@ -765,6 +1222,7 @@ class EDAView extends WatchUi.DataField {
         } else {
             valAktHr = "--";
         }
+        refreshRenderCache();
     }
 
     (:high_mem)
@@ -857,6 +1315,7 @@ class EDAView extends WatchUi.DataField {
         resetTargetDisplay();
 
         if (!isRunningProfile() || displaySpeed == null || displayHr == null || !modelValid || m.abs() <= MODEL_DELTA_EPSILON) {
+            refreshRenderCache();
             return;
         }
 
@@ -869,11 +1328,13 @@ class EDAView extends WatchUi.DataField {
         if (vSoll > 0.2) {
             valSollPace = formatPace(vSoll);
         }
+        refreshRenderCache();
     }
 
     (:low_mem)
     private function updateTargetDisplay(displaySpeed as Float?, displayHr as Float?) as Void {
         resetTargetDisplay();
+        refreshRenderCache();
     }
 
     private function getSampleDelta(timerTime as Number) as Number {
@@ -943,7 +1404,7 @@ class EDAView extends WatchUi.DataField {
         return power >= MIN_VALID_POWER && power <= MAX_VALID_POWER;
     }
 
-    private function getPowerValidationError(power as Float?) as String? {
+    private function getPowerValidationError(power as Float?) as Number? {
         if (power == null) {
             return null;
         }
@@ -976,7 +1437,7 @@ class EDAView extends WatchUi.DataField {
         return runPace != null && runPace <= MAX_RUNNING_PACE_PER_KM;
     }
 
-    private function getSpeedValidationError(speed as Float?, timerTime as Number) as String? {
+    private function getSpeedValidationError(speed as Float?, timerTime as Number) as Number? {
         if (!canUseSpeedWorkload()) {
             return null;
         }
@@ -1009,7 +1470,7 @@ class EDAView extends WatchUi.DataField {
         return null;
     }
 
-    private function updateValidSpeedSignal(speed as Float?, timerTime as Number, speedValidationError as String?) as Void {
+    private function updateValidSpeedSignal(speed as Float?, timerTime as Number, speedValidationError as Number?) as Void {
         if (!canUseSpeedWorkload() || speed == null || speedValidationError != null) {
             return;
         }
@@ -1018,7 +1479,7 @@ class EDAView extends WatchUi.DataField {
         lastValidSpeedSignalTime = timerTime;
     }
 
-    private function getWorkloadValidationError(speedError as String?, power as Float?) as String? {
+    private function getWorkloadValidationError(speedError as Number?, power as Float?) as Number? {
         if (hasUsablePower(power)) {
             return null;
         }
@@ -1071,7 +1532,7 @@ class EDAView extends WatchUi.DataField {
         return SOURCE_NONE;
     }
 
-    private function validateSample(speed as Float?, hr as Float?, power as Float?, timerTime as Number) as String? {
+    private function validateSample(speed as Float?, hr as Float?, power as Float?, timerTime as Number) as Number? {
         if (hr == null) {
             return STATUS_NO_HR;
         }
@@ -1113,7 +1574,6 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function restartAnalysisAfterGap(timerTime as Number, speed as Float?, hr as Float?, workloadSource as Number) as Void {
-        resetSessionFitSummary();
         resetAnalysisState();
         if (hr != null && workloadSource != SOURCE_NONE) {
             primeAnalysisBaseline(timerTime, speed, hr, workloadSource);
@@ -1121,9 +1581,14 @@ class EDAView extends WatchUi.DataField {
         setInvalidStatus(STATUS_GAP);
     }
 
-    private function resetEpochWithoutPrimingWithDetail(statusText as String, detailText as String) as Void {
+    private function resetEpochWithoutPrimingWithDetail(statusCode as Number, detailText as String) as Void {
         resetAnalysisState();
-        setInvalidStatusWithDetail(statusText, detailText);
+        setInvalidStatusWithDetail(statusCode, detailText);
+    }
+
+    private function resetEpochWithoutPrimingWithShortDetail(statusCode as Number, detailText as String, shortDetailText as String) as Void {
+        resetAnalysisState();
+        setInvalidStatusWithShortDetail(statusCode, detailText, shortDetailText);
     }
 
     private function validateSourceConsistency(timerTime as Number, speed as Float?, hr as Float, workloadSource as Number, deltaMs as Number) as Boolean {
@@ -1157,8 +1622,10 @@ class EDAView extends WatchUi.DataField {
 
     private function updateDriftDisplay(driftPercent as Float) as Void {
         var sign = driftPercent > 0.0 ? "+" : "";
+        driftStatus = STATUS_VALUE;
         strDrift = sign + driftPercent.format("%.1f") + "%";
         statusDetail = "";
+        statusDetailShort = "";
 
         if (driftPercent < 3.0) {
             bgColor = Graphics.COLOR_GREEN;
@@ -1170,6 +1637,7 @@ class EDAView extends WatchUi.DataField {
             bgColor = Graphics.COLOR_RED;
             fgColor = Graphics.COLOR_WHITE;
         }
+        refreshRenderCache();
     }
 
     private function updateFitFields(driftPercent as Float, intervalMs as Number) as Void {
@@ -1182,42 +1650,12 @@ class EDAView extends WatchUi.DataField {
 
     (:high_mem)
     private function buildHighMemRenderModel() as Dictionary {
-        return {
-            :renderBgColor => bgColor,
-            :renderFgColor => fgColor,
-            :paceLabel => lblAktPace,
-            :paceShortLabel => lblAktPaceShort,
-            :expectedPaceLabel => lblSollPace,
-            :expectedPaceShortLabel => lblSollPaceShort,
-            :expectedHrLabel => lblSollHr,
-            :expectedHrShortLabel => lblSollHrShort,
-            :hrLabel => lblAktHr,
-            :hrShortLabel => lblAktHrShort,
-            :currentPaceValue => getRenderedCurrentPaceValue(),
-            :expectedPaceValue => valSollPace,
-            :driftLabel => getRenderedDriftLabel(),
-            :renderStatusDetail => statusDetail,
-            :showModelError => isRunningProfile() && modelErrorMessage != "",
-            :renderModelErrorMessage => modelErrorMessage,
-            :defaultDetail => getDefaultStatusDetail(),
-            :expectedHrValue => valSollHr,
-            :currentHrValue => getRenderedCurrentHrValue()
-        };
+        return highMemRenderModel as Dictionary;
     }
 
     (:low_mem)
     private function buildLowMemRenderModel() as Dictionary {
-        return {
-            :renderBgColor => bgColor,
-            :renderFgColor => fgColor,
-            :paceShortLabel => lblAktPaceShort,
-            :currentPaceValue => getRenderedCurrentPaceValue(),
-            :driftLabel => getRenderedDriftLabel(),
-            :renderStatusDetail => statusDetail,
-            :defaultDetail => getDefaultStatusDetail(),
-            :hrShortLabel => lblAktHrShort,
-            :currentHrValue => getRenderedCurrentHrValue()
-        };
+        return lowMemRenderModel as Dictionary;
     }
 
     (:high_mem)
@@ -1270,6 +1708,9 @@ class EDAView extends WatchUi.DataField {
     }
 
     function compute(info as Activity.Info) as Void {
+        if (loadDistanceFactor()) {
+            handleDistanceFactorChange();
+        }
         refreshEngineCalibrationState();
 
         var currentTimerTime = toNumberOrNull(info.timerTime as Numeric?);
@@ -1279,6 +1720,13 @@ class EDAView extends WatchUi.DataField {
         var curSpeed = toFloatOrNull(info.currentSpeed as Numeric?);
         var curHr = toFloatOrNull(info.currentHeartRate as Numeric?);
         var curPower = toFloatOrNull(info.currentPower as Numeric?);
+        lastLiveSpeed = curSpeed;
+        lastLiveHr = curHr;
+
+        if (!isEngineCalibrated) {
+            setStatusWithDetail(STATUS_CFG_ERR, msgConfigRequired, msgConfigRequiredShort);
+            return;
+        }
 
         if (info.timerState != Activity.TIMER_STATE_ON) {
             rememberPauseTimestamp();
@@ -1318,7 +1766,7 @@ class EDAView extends WatchUi.DataField {
 
         if (!hasUsableActivityProfile()) {
             if (getProfileResolver().isRetryPending()) {
-                setInvalidStatusWithDetail(STATUS_WAIT, getProfileRetryDetail());
+                setInvalidStatusWithShortDetail(STATUS_WAIT, getProfileRetryDetail(), getProfileRetryDetailShort());
             } else {
                 setCollectingStatus();
             }
@@ -1332,12 +1780,12 @@ class EDAView extends WatchUi.DataField {
 
         var validationError = validateSample(curSpeed, curHr, curPower, mTimerTime);
         if (validationError != null) {
-            if (validationError.equals(STATUS_NO_HR) || validationError.equals(STATUS_NO_POWER) || validationError.equals(STATUS_INVALID_SPEED)) {
+            if (validationError == STATUS_NO_HR || validationError == STATUS_NO_POWER || validationError == STATUS_INVALID_SPEED) {
                 syncDisplayWithCurrentSample(curSpeed, curHr);
             }
             if (getProfileResolver().hasTimeoutNoticePending()) {
                 getProfileResolver().clearTimeoutNoticePending();
-                resetEpochWithoutPrimingWithDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout);
+                resetEpochWithoutPrimingWithShortDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
                 return;
             }
             setInvalidStatus(validationError);
@@ -1348,7 +1796,7 @@ class EDAView extends WatchUi.DataField {
         if (curHr == null || workload == null || curHr <= 0.0 || workload <= 0.0) {
             if (getProfileResolver().hasTimeoutNoticePending()) {
                 getProfileResolver().clearTimeoutNoticePending();
-                resetEpochWithoutPrimingWithDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout);
+                resetEpochWithoutPrimingWithShortDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
                 return;
             }
             setCollectingStatus();
@@ -1359,7 +1807,7 @@ class EDAView extends WatchUi.DataField {
         if (getProfileResolver().hasTimeoutNoticePending()) {
             getProfileResolver().clearTimeoutNoticePending();
             restartAnalysisAfterGap(mTimerTime, curSpeed, curHr, workloadSource);
-            setInvalidStatusWithDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout);
+            setInvalidStatusWithShortDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
             return;
         }
 
@@ -1377,26 +1825,22 @@ class EDAView extends WatchUi.DataField {
         currentWorkloadSource = workloadSource;
         validActiveMs += deltaMs;
         var previousDriftActiveMs = driftActiveMs;
-        if (validActiveMs > WARMUP_VALID_MS) {
-            driftActiveMs = validActiveMs - WARMUP_VALID_MS;
-        } else {
-            driftActiveMs = 0;
-        }
+        driftActiveMs = validActiveMs;
 
         updateDisplayFilters(curSpeed, curHr, deltaMs);
         if (isTargetModelSupported()) {
             updateTargetDisplay(getDisplaySpeed(curSpeed), getDisplayHr(curHr));
         }
 
-        if (driftActiveMs <= 0) {
-            var remainingMs = WARMUP_VALID_MS - validActiveMs;
+        var driftDeltaMs = driftActiveMs - previousDriftActiveMs;
+        getDriftEngine().recordValidSample(driftActiveMs, driftDeltaMs, ef);
+
+        if (driftActiveMs < WARMUP_VALID_MS) {
+            var remainingMs = WARMUP_VALID_MS - driftActiveMs;
             var remainingSeconds = ((remainingMs + 999) / 1000).toNumber();
             setInvalidStatusWithDetail(STATUS_WARMUP, remainingSeconds.toString() + msgWarmupValidSuffix);
             return;
         }
-
-        var driftDeltaMs = driftActiveMs - previousDriftActiveMs;
-        getDriftEngine().recordValidSample(driftActiveMs, driftDeltaMs, ef);
 
         var driftPercent = getDriftEngine().computeDrift(driftActiveMs);
         if (driftPercent == null) {
@@ -1412,8 +1856,19 @@ class EDAView extends WatchUi.DataField {
         updateDriftDisplay(driftPercent);
         if (isProfileProvisional()) {
             statusDetail = msgProvisionalProfile;
+            statusDetailShort = msgProvisionalProfileShort;
+            refreshRenderCache();
         }
         updateFitFields(driftPercent, driftDeltaMs);
+    }
+
+    function onLayout(dc as Graphics.Dc) as Void {
+        if (!areStringsLoaded) {
+            loadStrings();
+            loadSettings();
+        }
+
+        refreshRenderCache();
     }
 
     (:high_mem)

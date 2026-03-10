@@ -1,0 +1,63 @@
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDASessionPolicy.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Lang,1,14,18]; ]
+import Toybox.Lang;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDASessionPolicy.mc"; @line = 3; @symbol_moduledef = [EDASessionPolicy,3,7,23]; ]
+module EDASessionPolicy {
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDASessionPolicy.mc"; @line = 3; ]
+    <init> {
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDASessionPolicy.mc"; @line = 5; @symbol_functiondef = [shouldResetSessionFitSummaryForProfileChange,5,13,57]; @symbol_param<0> = [previousMinValidHr,6,8,26]; @symbol_param<0>_type<0> = [Float,6,30,35]; @symbol_param<1> = [previousCanUseSpeedWorkload,7,8,35]; @symbol_param<1>_type<0> = [Boolean,7,39,46]; @symbol_param<2> = [previouslyAuthoritative,8,8,31]; @symbol_param<2>_type<0> = [Boolean,8,35,42]; @symbol_param<3> = [currentMinValidHr,9,8,25]; @symbol_param<3>_type<0> = [Float,9,29,34]; @symbol_param<4> = [currentCanUseSpeedWorkload,10,8,34]; @symbol_param<4>_type<0> = [Boolean,10,38,45]; @symbol_param<5> = [currentlyAuthoritative,11,8,30]; @symbol_param<5>_type<0> = [Boolean,11,34,41]; @symbol_return<0> = [Boolean,12,9,16]; ]
+    function shouldResetSessionFitSummaryForProfileChange(previousMinValidHr as Float, previousCanUseSpeedWorkload as Boolean, previouslyAuthoritative as Boolean, currentMinValidHr as Float, currentCanUseSpeedWorkload as Boolean, currentlyAuthoritative as Boolean) as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_12_17_19_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDASessionPolicy.mc" 13 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_8_15_8_if_stmt:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_12_13_40_begin:
+        %tmp.1 = lgetv %previouslyAuthoritative;
+        symbol [ previouslyAuthoritative %tmp.1 13 13 36 ];
+        %tmp.2 = not %tmp.1;
+        bf %tmp.2 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_8_15_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_40_13_40_true:
+        %tmp.3 = lgetv %currentlyAuthoritative;
+        symbol [ currentlyAuthoritative %tmp.3 13 40 62 ];
+        push %tmp.3;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_40_13_40_end:
+        %tmp.4 = phi [%tmp.2 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_12_13_40_begin] [%tmp.3 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_40_13_40_true] [%tmp.4 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_40_13_40_end];
+        bf %tmp.4 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_8_15_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_8_15_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_64_15_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDASessionPolicy.mc" 14 12 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_64_15_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_8_15_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_13_8_15_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDASessionPolicy.mc" 17 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_17_15_18_46_begin:
+        %tmp.6 = lgetv %previousMinValidHr;
+        symbol [ previousMinValidHr %tmp.6 17 16 34 ];
+        %tmp.7 = lgetv %currentMinValidHr;
+        symbol [ currentMinValidHr %tmp.7 17 37 54 ];
+        %tmp.8 = sub %tmp.6 %tmp.7;
+        symbol [ abs %tmp.9 17 56 59 ];
+        %tmp.9 = getv function %tmp.8 :abs;
+        %tmp.10 = invoke %tmp.8 %tmp.9();
+        %tmp.11 = 0.0001;
+        %tmp.12 = gt %tmp.10 %tmp.11;
+        %tmp.13 = dup %tmp.12;
+        bt %tmp.13 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_18_15_18_46_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_18_15_18_46_false:
+        %tmp.14 = lgetv %previousCanUseSpeedWorkload;
+        symbol [ previousCanUseSpeedWorkload %tmp.14 18 15 42 ];
+        %tmp.15 = lgetv %currentCanUseSpeedWorkload;
+        symbol [ currentCanUseSpeedWorkload %tmp.15 18 46 72 ];
+        %tmp.16 = ne %tmp.14 %tmp.15;
+        %tmp.17 = or %tmp.12 %tmp.16;
+        push %tmp.17;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_18_15_18_46_end:
+        %tmp.18 = phi [%tmp.13 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_17_15_18_46_begin] [%tmp.17 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_18_15_18_46_false] [%tmp.18 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_18_15_18_46_end];
+        ret %tmp.18;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDASessionPolicy_mc_12_17_19_4_stop:
+    }
+}
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDASessionPolicy.mc"; @line = 1; ]
+<init> {
+}

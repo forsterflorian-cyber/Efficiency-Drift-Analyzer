@@ -19,6 +19,7 @@ class EDAProfileResolver {
     private const PROFILE_EXCEPTION_RETRY_MAX_MS as Number = 30000;
     private const PROFILE_AUTHORITATIVE_REVALIDATE_MS as Number = 15000;
     private const PROFILE_REVALIDATION_LOSS_THRESHOLD as Number = 3;
+    private const PROFILE_STALE_RECOVERY_MS as Number = 120000;
 
     private var mState as Number = PROFILE_STATE_UNRESOLVED;
     private var mRetryPending as Boolean = false;
@@ -26,13 +27,16 @@ class EDAProfileResolver {
     private var mExceptionBackoffMs as Number = PROFILE_EXCEPTION_RETRY_BASE_MS;
     private var mLastErrorCode as String = "";
     private var mActivityKind as Number = ACTIVITY_UNKNOWN;
-    private var mHasAuthoritativeProfileHistory as Boolean = false;
     private var mTimeoutNoticePending as Boolean = false;
     private var mNextAuthoritativeRefreshTime as Number = 0;
     private var mRevalidationLossCount as Number = 0;
+    private var mStaleSinceTime as Number = 0;
 
     function hasUsableActivityProfile() as Boolean {
-        return mState != PROFILE_STATE_UNRESOLVED;
+        return mState == PROFILE_STATE_PROVISIONAL
+            || mState == PROFILE_STATE_FALLBACK_CONFIRMED
+            || mState == PROFILE_STATE_AUTHORITATIVE
+            || (mState == PROFILE_STATE_STALE && mActivityKind != ACTIVITY_UNKNOWN);
     }
 
     function isProfileProvisional() as Boolean {
@@ -43,16 +47,12 @@ class EDAProfileResolver {
         return mState == PROFILE_STATE_AUTHORITATIVE;
     }
 
-    function isStaleProfile() as Boolean {
-        return mState == PROFILE_STATE_STALE;
-    }
-
     function isFallbackConfirmed() as Boolean {
         return mState == PROFILE_STATE_FALLBACK_CONFIRMED;
     }
 
     function isRunningActivity() as Boolean {
-        return mActivityKind == ACTIVITY_RUNNING;
+        return hasUsableActivityProfile() && mActivityKind == ACTIVITY_RUNNING;
     }
 
     function isRetryPending() as Boolean {
@@ -75,12 +75,22 @@ class EDAProfileResolver {
         mTimeoutNoticePending = false;
     }
 
+    function forceStaleStateForDiagnostics(isRunning as Boolean, staleSinceTime as Number, nextRetryTime as Number) as Void {
+        mState = PROFILE_STATE_STALE;
+        mActivityKind = isRunning ? ACTIVITY_RUNNING : ACTIVITY_OTHER;
+        mRetryPending = true;
+        mNextRetryTime = nextRetryTime;
+        mTimeoutNoticePending = false;
+        mNextAuthoritativeRefreshTime = 0;
+        mStaleSinceTime = staleSinceTime;
+    }
+
     function resetSession() as Void {
         mState = PROFILE_STATE_UNRESOLVED;
         mActivityKind = ACTIVITY_UNKNOWN;
-        mHasAuthoritativeProfileHistory = false;
         mTimeoutNoticePending = false;
         mNextAuthoritativeRefreshTime = 0;
+        mStaleSinceTime = 0;
         clearRetryState();
     }
 
@@ -138,12 +148,27 @@ class EDAProfileResolver {
         var profileChanged = ((mState != PROFILE_STATE_UNRESOLVED) && (mState != PROFILE_STATE_AUTHORITATIVE))
             || (hasUsableActivityProfile() && (mActivityKind != resolvedActivityKind));
         mActivityKind = resolvedActivityKind;
-        mHasAuthoritativeProfileHistory = true;
         mState = PROFILE_STATE_AUTHORITATIVE;
         mTimeoutNoticePending = false;
+        mStaleSinceTime = 0;
         clearRetryState();
         mNextAuthoritativeRefreshTime = timerTime + PROFILE_AUTHORITATIVE_REVALIDATE_MS;
         return profileChanged;
+    }
+
+    private function promoteStaleProfileToFallback(timerTime as Number) as Boolean {
+        if (mState != PROFILE_STATE_STALE || mActivityKind == ACTIVITY_UNKNOWN || mStaleSinceTime <= 0) {
+            return false;
+        }
+
+        if ((timerTime - mStaleSinceTime) < PROFILE_STALE_RECOVERY_MS) {
+            return false;
+        }
+
+        mState = PROFILE_STATE_FALLBACK_CONFIRMED;
+        mTimeoutNoticePending = true;
+        mStaleSinceTime = 0;
+        return true;
     }
 
     private function updateFallbackProfileState(timerTime as Number) as Void {
@@ -166,12 +191,10 @@ class EDAProfileResolver {
         }
 
         scheduleExceptionRetry(timerTime, errorCode, false);
-        if (!mHasAuthoritativeProfileHistory) {
-            mActivityKind = ACTIVITY_UNKNOWN;
-        }
         mState = PROFILE_STATE_STALE;
         mTimeoutNoticePending = false;
         mNextAuthoritativeRefreshTime = 0;
+        mStaleSinceTime = timerTime;
         return true;
     }
 
@@ -185,6 +208,10 @@ class EDAProfileResolver {
     }
 
     function resolveActivityProfile(timerTime as Number) as Boolean {
+        if (promoteStaleProfileToFallback(timerTime)) {
+            return false;
+        }
+
         if (hasAuthoritativeProfile()) {
             if (timerTime < mNextAuthoritativeRefreshTime) {
                 return false;
@@ -194,7 +221,9 @@ class EDAProfileResolver {
         }
 
         if (mRetryPending && timerTime < mNextRetryTime) {
-            updateFallbackProfileState(timerTime);
+            if (!promoteStaleProfileToFallback(timerTime)) {
+                updateFallbackProfileState(timerTime);
+            }
             return false;
         }
 
@@ -205,7 +234,9 @@ class EDAProfileResolver {
             scheduleExceptionRetry(timerTime, getProfileErrorCode(e), false);
         }
 
-        updateFallbackProfileState(timerTime);
+        if (!promoteStaleProfileToFallback(timerTime)) {
+            updateFallbackProfileState(timerTime);
+        }
         return false;
     }
 }
