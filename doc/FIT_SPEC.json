@@ -1,0 +1,18 @@
+{
+  "profile_state": {
+    "field_id": 2,
+    "type": "uint8",
+    "mapping": {
+      "0": "unresolved",
+      "1": "provisional",
+      "2": "fallback_confirmed",
+      "3": "authoritative",
+      "4": "stale"
+    },
+    "rules": {
+      "profile_state": "written for every sample, including invalid drift samples",
+      "metabolic_drift": "written for authoritative samples and for fallback_confirmed samples once timerTime >= 120000",
+      "avg_metabolic_drift": "derived only from record samples that were actually exported under the same gate"
+    }
+  }
+}

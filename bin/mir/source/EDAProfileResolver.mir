@@ -1,0 +1,804 @@
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Activity,1,14,22]; ]
+import Toybox.Activity;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [Lang,2,14,18]; ]
+import Toybox.Lang;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 4; @symbol_classdef = [EDAProfileResolver,4,6,24]; ]
+class EDAProfileResolver {
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 4; ]
+    <init> {
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 21 16 ]
+        symbol [ PROFILE_STATE_UNRESOLVED %tmp.2 21 35 59 ];
+        %tmp.2 = getv ? :PROFILE_STATE_UNRESOLVED;
+        putv self :mState %tmp.2;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 24 16 ]
+        symbol [ PROFILE_EXCEPTION_RETRY_BASE_MS %tmp.4 24 48 79 ];
+        %tmp.4 = getv ? :PROFILE_EXCEPTION_RETRY_BASE_MS;
+        putv self :mExceptionBackoffMs %tmp.4;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 26 16 ]
+        symbol [ ACTIVITY_UNKNOWN %tmp.6 26 42 58 ];
+        %tmp.6 = getv ? :ACTIVITY_UNKNOWN;
+        putv self :mActivityKind %tmp.6;
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 4; ]
+    static
+    <init> {
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 6; @position = 18; @symbol_constdef = [PROFILE_STATE_UNRESOLVED,6,18,42]; @symbol_type<0> = [Number,6,46,52]; ]
+    private
+    const PROFILE_STATE_UNRESOLVED as Number = 0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 7; @position = 18; @symbol_constdef = [PROFILE_STATE_PROVISIONAL,7,18,43]; @symbol_type<0> = [Number,7,47,53]; ]
+    private
+    const PROFILE_STATE_PROVISIONAL as Number = 1;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 8; @position = 18; @symbol_constdef = [PROFILE_STATE_FALLBACK_CONFIRMED,8,18,50]; @symbol_type<0> = [Number,8,54,60]; ]
+    private
+    const PROFILE_STATE_FALLBACK_CONFIRMED as Number = 2;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 9; @position = 18; @symbol_constdef = [PROFILE_STATE_AUTHORITATIVE,9,18,45]; @symbol_type<0> = [Number,9,49,55]; ]
+    private
+    const PROFILE_STATE_AUTHORITATIVE as Number = 3;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 11; @position = 18; @symbol_constdef = [ACTIVITY_UNKNOWN,11,18,34]; @symbol_type<0> = [Number,11,38,44]; ]
+    private
+    const ACTIVITY_UNKNOWN as Number = 0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 12; @position = 18; @symbol_constdef = [ACTIVITY_RUNNING,12,18,34]; @symbol_type<0> = [Number,12,38,44]; ]
+    private
+    const ACTIVITY_RUNNING as Number = 1;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 13; @position = 18; @symbol_constdef = [ACTIVITY_OTHER,13,18,32]; @symbol_type<0> = [Number,13,36,42]; ]
+    private
+    const ACTIVITY_OTHER as Number = 2;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 15; @position = 18; @symbol_constdef = [PROFILE_RESOLVE_TIMEOUT_MS,15,18,44]; @symbol_type<0> = [Number,15,48,54]; ]
+    private
+    const PROFILE_RESOLVE_TIMEOUT_MS as Number = 30000;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 16; @position = 18; @symbol_constdef = [PROFILE_CONFIRM_TIMEOUT_MS,16,18,44]; @symbol_type<0> = [Number,16,48,54]; ]
+    private
+    const PROFILE_CONFIRM_TIMEOUT_MS as Number = 60000;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 17; @position = 18; @symbol_constdef = [PROFILE_EXCEPTION_RETRY_BASE_MS,17,18,49]; @symbol_type<0> = [Number,17,53,59]; ]
+    private
+    const PROFILE_EXCEPTION_RETRY_BASE_MS as Number = 5000;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 18; @position = 18; @symbol_constdef = [PROFILE_EXCEPTION_RETRY_MAX_MS,18,18,48]; @symbol_type<0> = [Number,18,52,58]; ]
+    private
+    const PROFILE_EXCEPTION_RETRY_MAX_MS as Number = 30000;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 19; @position = 18; @symbol_constdef = [PROFILE_AUTHORITATIVE_REVALIDATE_MS,19,18,53]; @symbol_type<0> = [Number,19,57,63]; ]
+    private
+    const PROFILE_AUTHORITATIVE_REVALIDATE_MS as Number = 15000;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 21; @position = 16; @symbol_vardef = [mState,21,16,22]; @symbol_type<0> = [Number,21,26,32]; ]
+    private
+    var mState as Number;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 22; @position = 16; @symbol_vardef = [mRetryPending,22,16,29]; @symbol_type<0> = [Boolean,22,33,40]; ]
+    private
+    var mRetryPending as Boolean = false;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 23; @position = 16; @symbol_vardef = [mNextRetryTime,23,16,30]; @symbol_type<0> = [Number,23,34,40]; ]
+    private
+    var mNextRetryTime as Number = 0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 24; @position = 16; @symbol_vardef = [mExceptionBackoffMs,24,16,35]; @symbol_type<0> = [Number,24,39,45]; ]
+    private
+    var mExceptionBackoffMs as Number;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 25; @position = 16; @symbol_vardef = [mLastErrorCode,25,16,30]; @symbol_type<0> = [String,25,34,40]; ]
+    private
+    var mLastErrorCode as String = "";
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 26; @position = 16; @symbol_vardef = [mActivityKind,26,16,29]; @symbol_type<0> = [Number,26,33,39]; ]
+    private
+    var mActivityKind as Number;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 27; @position = 16; @symbol_vardef = [mTimeoutNoticePending,27,16,37]; @symbol_type<0> = [Boolean,27,41,48]; ]
+    private
+    var mTimeoutNoticePending as Boolean = false;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 28; @position = 16; @symbol_vardef = [mNextAuthoritativeRefreshTime,28,16,45]; @symbol_type<0> = [Number,28,49,55]; ]
+    private
+    var mNextAuthoritativeRefreshTime as Number = 0;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 30; @symbol_functiondef = [hasUsableActivityProfile,30,13,37]; @symbol_return<0> = [Boolean,30,43,50]; ]
+    function hasUsableActivityProfile() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_30_51_32_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 31 8 ]
+        symbol [ mState %tmp.2 31 15 21 ];
+        %tmp.2 = getv ? :mState;
+        symbol [ PROFILE_STATE_UNRESOLVED %tmp.4 31 25 49 ];
+        %tmp.4 = getv ? :PROFILE_STATE_UNRESOLVED;
+        %tmp.5 = ne %tmp.2 %tmp.4;
+        ret %tmp.5;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_30_51_32_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 34; @symbol_functiondef = [isProfileProvisional,34,13,33]; @symbol_return<0> = [Boolean,34,39,46]; ]
+    function isProfileProvisional() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_34_47_36_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 35 8 ]
+        symbol [ mState %tmp.2 35 15 21 ];
+        %tmp.2 = getv ? :mState;
+        symbol [ PROFILE_STATE_PROVISIONAL %tmp.4 35 25 50 ];
+        %tmp.4 = getv ? :PROFILE_STATE_PROVISIONAL;
+        %tmp.5 = eq %tmp.2 %tmp.4;
+        ret %tmp.5;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_34_47_36_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 38; @symbol_functiondef = [hasAuthoritativeProfile,38,13,36]; @symbol_return<0> = [Boolean,38,42,49]; ]
+    function hasAuthoritativeProfile() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_38_50_40_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 39 8 ]
+        symbol [ mState %tmp.2 39 15 21 ];
+        %tmp.2 = getv ? :mState;
+        symbol [ PROFILE_STATE_AUTHORITATIVE %tmp.4 39 25 52 ];
+        %tmp.4 = getv ? :PROFILE_STATE_AUTHORITATIVE;
+        %tmp.5 = eq %tmp.2 %tmp.4;
+        ret %tmp.5;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_38_50_40_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 42; @symbol_functiondef = [isFallbackConfirmed,42,13,32]; @symbol_return<0> = [Boolean,42,38,45]; ]
+    function isFallbackConfirmed() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_42_46_44_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 43 8 ]
+        symbol [ mState %tmp.2 43 15 21 ];
+        %tmp.2 = getv ? :mState;
+        symbol [ PROFILE_STATE_FALLBACK_CONFIRMED %tmp.4 43 25 57 ];
+        %tmp.4 = getv ? :PROFILE_STATE_FALLBACK_CONFIRMED;
+        %tmp.5 = eq %tmp.2 %tmp.4;
+        ret %tmp.5;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_42_46_44_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 46; @symbol_functiondef = [isRunningActivity,46,13,30]; @symbol_return<0> = [Boolean,46,36,43]; ]
+    function isRunningActivity() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_46_44_48_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 47 8 ]
+        symbol [ mActivityKind %tmp.2 47 15 28 ];
+        %tmp.2 = getv ? :mActivityKind;
+        symbol [ ACTIVITY_RUNNING %tmp.4 47 32 48 ];
+        %tmp.4 = getv ? :ACTIVITY_RUNNING;
+        %tmp.5 = eq %tmp.2 %tmp.4;
+        ret %tmp.5;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_46_44_48_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 50; @symbol_functiondef = [isRetryPending,50,13,27]; @symbol_return<0> = [Boolean,50,33,40]; ]
+    function isRetryPending() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_50_41_52_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 51 8 ]
+        symbol [ mRetryPending %tmp.2 51 15 28 ];
+        %tmp.2 = getv ? :mRetryPending;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_50_41_52_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 54; @symbol_functiondef = [getLastErrorCode,54,13,29]; @symbol_return<0> = [String,54,35,41]; ]
+    function getLastErrorCode() as String {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_54_42_56_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 55 8 ]
+        symbol [ mLastErrorCode %tmp.2 55 15 29 ];
+        %tmp.2 = getv ? :mLastErrorCode;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_54_42_56_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 58; @symbol_functiondef = [getState,58,13,21]; @symbol_return<0> = [Number,58,27,33]; ]
+    function getState() as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_58_34_60_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 59 8 ]
+        symbol [ mState %tmp.2 59 15 21 ];
+        %tmp.2 = getv ? :mState;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_58_34_60_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 62; @symbol_functiondef = [hasTimeoutNoticePending,62,13,36]; @symbol_return<0> = [Boolean,62,42,49]; ]
+    function hasTimeoutNoticePending() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_62_50_64_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 63 8 ]
+        symbol [ mTimeoutNoticePending %tmp.2 63 15 36 ];
+        %tmp.2 = getv ? :mTimeoutNoticePending;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_62_50_64_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 66; @symbol_functiondef = [clearTimeoutNoticePending,66,13,38]; ]
+    function clearTimeoutNoticePending() as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_66_49_68_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 67 8 ]
+        %tmp.1 = false;
+        symbol [ mTimeoutNoticePending ? 67 8 29 ];
+        putv self :mTimeoutNoticePending %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_66_49_68_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 70; @symbol_functiondef = [resetSession,70,13,25]; ]
+    function resetSession() as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_70_36_76_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 71 8 ]
+        symbol [ PROFILE_STATE_UNRESOLVED %tmp.2 71 17 41 ];
+        %tmp.2 = getv ? :PROFILE_STATE_UNRESOLVED;
+        symbol [ mState ? 71 8 14 ];
+        putv self :mState %tmp.2;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 72 8 ]
+        symbol [ ACTIVITY_UNKNOWN %tmp.4 72 24 40 ];
+        %tmp.4 = getv ? :ACTIVITY_UNKNOWN;
+        symbol [ mActivityKind ? 72 8 21 ];
+        putv self :mActivityKind %tmp.4;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 73 8 ]
+        %tmp.5 = false;
+        symbol [ mTimeoutNoticePending ? 73 8 29 ];
+        putv self :mTimeoutNoticePending %tmp.5;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 74 8 ]
+        %tmp.6 = 0;
+        symbol [ mNextAuthoritativeRefreshTime ? 74 8 37 ];
+        putv self :mNextAuthoritativeRefreshTime %tmp.6;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 75 8 ]
+        %tmp.7 = self;
+        symbol [ clearRetryState %tmp.8 75 8 23 ];
+        %tmp.8 = getv function %tmp.7 :clearRetryState;
+        invoke %tmp.7 %tmp.8();
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_70_36_76_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 78; @symbol_functiondef = [handleImplicitSessionReset,78,13,39]; ]
+    function handleImplicitSessionReset() as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_78_50_80_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 79 8 ]
+        %tmp.1 = self;
+        symbol [ resetSession %tmp.2 79 8 20 ];
+        %tmp.2 = getv function %tmp.1 :resetSession;
+        invoke %tmp.1 %tmp.2();
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_78_50_80_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 82; @symbol_functiondef = [clearRetryState,82,21,36]; ]
+    private
+    function clearRetryState() as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_82_47_87_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 83 8 ]
+        %tmp.1 = false;
+        symbol [ mRetryPending ? 83 8 21 ];
+        putv self :mRetryPending %tmp.1;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 84 8 ]
+        %tmp.2 = 0;
+        symbol [ mNextRetryTime ? 84 8 22 ];
+        putv self :mNextRetryTime %tmp.2;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 85 8 ]
+        symbol [ PROFILE_EXCEPTION_RETRY_BASE_MS %tmp.4 85 30 61 ];
+        %tmp.4 = getv ? :PROFILE_EXCEPTION_RETRY_BASE_MS;
+        symbol [ mExceptionBackoffMs ? 85 8 27 ];
+        putv self :mExceptionBackoffMs %tmp.4;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 86 8 ]
+        %tmp.5 = "";
+        symbol [ mLastErrorCode ? 86 8 22 ];
+        putv self :mLastErrorCode %tmp.5;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_82_47_87_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 89; @symbol_functiondef = [getProfileErrorCode,89,21,40]; @symbol_param<0> = [error,89,41,46]; @symbol_param<0>_type<0> = [Lang,89,50,54]; @symbol_param<0>_type<1> = [Object,89,55,61]; @symbol_return<0> = [String,89,66,72]; ]
+    private
+    function getProfileErrorCode(error as Lang.Object) as String {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_89_73_96_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 90 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_89_73_96_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_89_73_96_4_stop" ]
+        %errorCode.1 = local;
+        symbol [ errorCode %errorCode.1 90 12 21 ];
+        %tmp.1 = lgetv %error;
+        symbol [ error %tmp.1 90 24 29 ];
+        symbol [ toString %tmp.2 90 30 38 ];
+        %tmp.2 = getv function %tmp.1 :toString;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %errorCode.1 %tmp.3;
+        symbol [ errorCode %errorCode.1 90 12 21 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 91 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_91_8_93_8_if_stmt:
+        %tmp.4 = lgetv %errorCode.1;
+        symbol [ errorCode %tmp.4 91 12 21 ];
+        %tmp.5 = "";
+        %tmp.6 = eq %tmp.4 %tmp.5;
+        bf %tmp.6 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_91_8_93_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_91_8_93_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_91_29_93_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 92 12 ]
+        %tmp.7 = "exception";
+        ret %tmp.7;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_91_29_93_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_91_8_93_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_91_8_93_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 95 8 ]
+        %tmp.8 = lgetv %errorCode.1;
+        symbol [ errorCode %tmp.8 95 15 24 ];
+        ret %tmp.8;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_89_73_96_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 98; @symbol_functiondef = [scheduleExceptionRetry,98,21,43]; @symbol_param<0> = [timerTime,98,44,53]; @symbol_param<0>_type<0> = [Number,98,57,63]; @symbol_param<1> = [errorCode,98,65,74]; @symbol_param<1>_type<0> = [String,98,78,84]; @symbol_param<2> = [keepAuthoritative,98,86,103]; @symbol_param<2>_type<0> = [Boolean,98,107,114]; ]
+    private
+    function scheduleExceptionRetry(timerTime as Number, errorCode as String, keepAuthoritative as Boolean) as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_98_124_116_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 99 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_8_106_8_if_stmt:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_12_99_44_begin:
+        %tmp.1 = lgetv %errorCode;
+        symbol [ errorCode %tmp.1 99 12 21 ];
+        %tmp.2 = "";
+        %tmp.3 = ne %tmp.1 %tmp.2;
+        bf %tmp.3 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_8_106_8_if_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_31_99_44_true:
+        %tmp.4 = lgetv %errorCode;
+        symbol [ errorCode %tmp.4 99 31 40 ];
+        symbol [ mLastErrorCode %tmp.6 99 44 58 ];
+        %tmp.6 = getv ? :mLastErrorCode;
+        %tmp.7 = eq %tmp.4 %tmp.6;
+        push %tmp.7;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_31_99_44_end:
+        %tmp.8 = phi [%tmp.3 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_12_99_44_begin] [%tmp.7 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_31_99_44_true] [%tmp.8 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_31_99_44_end];
+        bf %tmp.8 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_8_106_8_if_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_8_106_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_60_104_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 100 12 ]
+        symbol [ mExceptionBackoffMs %tmp.9 100 12 31 ];
+        %tmp.9 = getv self :mExceptionBackoffMs;
+        %tmp.10 = 2;
+        %tmp.11 = mul %tmp.9 %tmp.10;
+        symbol [ mExceptionBackoffMs ? 100 12 31 ];
+        putv self :mExceptionBackoffMs dup %tmp.11;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 101 12 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_101_12_103_12_if_stmt:
+        symbol [ mExceptionBackoffMs %tmp.13 101 16 35 ];
+        %tmp.13 = getv ? :mExceptionBackoffMs;
+        symbol [ PROFILE_EXCEPTION_RETRY_MAX_MS %tmp.15 101 38 68 ];
+        %tmp.15 = getv ? :PROFILE_EXCEPTION_RETRY_MAX_MS;
+        %tmp.16 = gt %tmp.13 %tmp.15;
+        bf %tmp.16 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_101_12_103_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_101_12_103_12_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_101_70_103_12_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 102 16 ]
+        symbol [ PROFILE_EXCEPTION_RETRY_MAX_MS %tmp.18 102 38 68 ];
+        %tmp.18 = getv ? :PROFILE_EXCEPTION_RETRY_MAX_MS;
+        symbol [ mExceptionBackoffMs ? 102 16 35 ];
+        putv self :mExceptionBackoffMs %tmp.18;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_101_70_103_12_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_101_12_103_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_101_12_103_12_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_60_104_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_8_106_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_8_106_8_if_else_false:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_104_15_106_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 105 12 ]
+        symbol [ PROFILE_EXCEPTION_RETRY_BASE_MS %tmp.20 105 34 65 ];
+        %tmp.20 = getv ? :PROFILE_EXCEPTION_RETRY_BASE_MS;
+        symbol [ mExceptionBackoffMs ? 105 12 31 ];
+        putv self :mExceptionBackoffMs %tmp.20;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_104_15_106_8_stop:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_99_8_106_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 108 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_108_8_113_8_if_stmt:
+        %tmp.21 = lgetv %keepAuthoritative;
+        symbol [ keepAuthoritative %tmp.21 108 12 29 ];
+        bf %tmp.21 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_108_8_113_8_if_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_108_8_113_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_108_31_110_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 109 12 ]
+        %tmp.22 = lgetv %timerTime;
+        symbol [ timerTime %tmp.22 109 44 53 ];
+        symbol [ mExceptionBackoffMs %tmp.24 109 56 75 ];
+        %tmp.24 = getv ? :mExceptionBackoffMs;
+        %tmp.25 = add %tmp.22 %tmp.24;
+        symbol [ mNextAuthoritativeRefreshTime ? 109 12 41 ];
+        putv self :mNextAuthoritativeRefreshTime %tmp.25;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_108_31_110_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_108_8_113_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_108_8_113_8_if_else_false:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_110_15_113_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 111 12 ]
+        %tmp.26 = true;
+        symbol [ mRetryPending ? 111 12 25 ];
+        putv self :mRetryPending %tmp.26;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 112 12 ]
+        %tmp.27 = lgetv %timerTime;
+        symbol [ timerTime %tmp.27 112 29 38 ];
+        symbol [ mExceptionBackoffMs %tmp.29 112 41 60 ];
+        %tmp.29 = getv ? :mExceptionBackoffMs;
+        %tmp.30 = add %tmp.27 %tmp.29;
+        symbol [ mNextRetryTime ? 112 12 26 ];
+        putv self :mNextRetryTime %tmp.30;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_110_15_113_8_stop:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_108_8_113_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 115 8 ]
+        %tmp.31 = lgetv %errorCode;
+        symbol [ errorCode %tmp.31 115 25 34 ];
+        symbol [ mLastErrorCode ? 115 8 22 ];
+        putv self :mLastErrorCode %tmp.31;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_98_124_116_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 118; @symbol_functiondef = [getResolvedActivityKind,118,21,44]; @symbol_param<0> = [resolvedRunning,118,45,60]; @symbol_param<0>_type<0> = [Boolean,118,64,71]; @symbol_return<0> = [Number,118,76,82]; ]
+    private
+    function getResolvedActivityKind(resolvedRunning as Boolean) as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_118_83_124_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 119 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_119_8_121_8_if_stmt:
+        %tmp.1 = lgetv %resolvedRunning;
+        symbol [ resolvedRunning %tmp.1 119 12 27 ];
+        bf %tmp.1 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_119_8_121_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_119_8_121_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_119_29_121_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 120 12 ]
+        symbol [ ACTIVITY_RUNNING %tmp.3 120 19 35 ];
+        %tmp.3 = getv ? :ACTIVITY_RUNNING;
+        ret %tmp.3;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_119_29_121_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_119_8_121_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_119_8_121_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 123 8 ]
+        symbol [ ACTIVITY_OTHER %tmp.5 123 15 29 ];
+        %tmp.5 = getv ? :ACTIVITY_OTHER;
+        ret %tmp.5;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_118_83_124_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 126; @symbol_functiondef = [applyAuthoritativeActivityProfile,126,21,54]; @symbol_param<0> = [resolvedRunning,126,55,70]; @symbol_param<0>_type<0> = [Boolean,126,74,81]; @symbol_param<1> = [timerTime,126,83,92]; @symbol_param<1>_type<0> = [Number,126,96,102]; @symbol_return<0> = [Boolean,126,107,114]; ]
+    private
+    function applyAuthoritativeActivityProfile(resolvedRunning as Boolean, timerTime as Number) as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_126_115_135_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 127 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_126_115_135_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_126_115_135_4_stop" ]
+        %resolvedActivityKind.1 = local;
+        symbol [ resolvedActivityKind %resolvedActivityKind.1 127 12 32 ];
+        %tmp.1 = self;
+        symbol [ getResolvedActivityKind %tmp.2 127 35 58 ];
+        %tmp.2 = getv function %tmp.1 :getResolvedActivityKind;
+        %tmp.3 = lgetv %resolvedRunning;
+        symbol [ resolvedRunning %tmp.3 127 59 74 ];
+        %tmp.4 = invoke %tmp.1 %tmp.2(%tmp.3);
+        lputv %resolvedActivityKind.1 %tmp.4;
+        symbol [ resolvedActivityKind %resolvedActivityKind.1 127 12 32 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 128 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_126_115_135_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_126_115_135_4_stop" ]
+        %profileChanged.2 = local;
+        symbol [ profileChanged %profileChanged.2 128 12 26 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_128_29_128_97_begin:
+        %tmp.5 = self;
+        symbol [ hasUsableActivityProfile %tmp.6 128 29 53 ];
+        %tmp.6 = getv function %tmp.5 :hasUsableActivityProfile;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        %tmp.8 = dup %tmp.7;
+        bf %tmp.8 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_128_59_128_97_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_128_59_128_97_true:
+        symbol [ mActivityKind %tmp.10 128 60 73 ];
+        %tmp.10 = getv ? :mActivityKind;
+        %tmp.11 = lgetv %resolvedActivityKind.1;
+        symbol [ resolvedActivityKind %tmp.11 128 77 97 ];
+        %tmp.12 = ne %tmp.10 %tmp.11;
+        %tmp.13 = and %tmp.7 %tmp.12;
+        push %tmp.13;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_128_59_128_97_end:
+        %tmp.14 = phi [%tmp.8 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_128_29_128_97_begin] [%tmp.13 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_128_59_128_97_true] [%tmp.14 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_128_59_128_97_end];
+        lputv %profileChanged.2 %tmp.14;
+        symbol [ profileChanged %profileChanged.2 128 12 26 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 129 8 ]
+        %tmp.15 = lgetv %resolvedActivityKind.1;
+        symbol [ resolvedActivityKind %tmp.15 129 24 44 ];
+        symbol [ mActivityKind ? 129 8 21 ];
+        putv self :mActivityKind %tmp.15;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 130 8 ]
+        symbol [ PROFILE_STATE_AUTHORITATIVE %tmp.17 130 17 44 ];
+        %tmp.17 = getv ? :PROFILE_STATE_AUTHORITATIVE;
+        symbol [ mState ? 130 8 14 ];
+        putv self :mState %tmp.17;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 131 8 ]
+        %tmp.18 = false;
+        symbol [ mTimeoutNoticePending ? 131 8 29 ];
+        putv self :mTimeoutNoticePending %tmp.18;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 132 8 ]
+        %tmp.19 = self;
+        symbol [ clearRetryState %tmp.20 132 8 23 ];
+        %tmp.20 = getv function %tmp.19 :clearRetryState;
+        invoke %tmp.19 %tmp.20();
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 133 8 ]
+        %tmp.21 = lgetv %timerTime;
+        symbol [ timerTime %tmp.21 133 40 49 ];
+        symbol [ PROFILE_AUTHORITATIVE_REVALIDATE_MS %tmp.23 133 52 87 ];
+        %tmp.23 = getv ? :PROFILE_AUTHORITATIVE_REVALIDATE_MS;
+        %tmp.24 = add %tmp.21 %tmp.23;
+        symbol [ mNextAuthoritativeRefreshTime ? 133 8 37 ];
+        putv self :mNextAuthoritativeRefreshTime %tmp.24;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 134 8 ]
+        %tmp.25 = lgetv %profileChanged.2;
+        symbol [ profileChanged %tmp.25 134 15 29 ];
+        ret %tmp.25;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_126_115_135_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 137; @symbol_functiondef = [updateFallbackProfileState,137,21,47]; @symbol_param<0> = [timerTime,137,48,57]; @symbol_param<0>_type<0> = [Number,137,61,67]; ]
+    private
+    function updateFallbackProfileState(timerTime as Number) as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_137_77_144_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 138 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_8_143_8_if_stmt:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_12_138_112_begin:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_12_138_68_begin:
+        symbol [ mState %tmp.2 138 12 18 ];
+        %tmp.2 = getv ? :mState;
+        symbol [ PROFILE_STATE_FALLBACK_CONFIRMED %tmp.4 138 22 54 ];
+        %tmp.4 = getv ? :PROFILE_STATE_FALLBACK_CONFIRMED;
+        %tmp.5 = ne %tmp.2 %tmp.4;
+        bf %tmp.5 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_8_143_8_if_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_58_138_68_true:
+        symbol [ mState %tmp.7 138 58 64 ];
+        %tmp.7 = getv ? :mState;
+        symbol [ PROFILE_STATE_AUTHORITATIVE %tmp.9 138 68 95 ];
+        %tmp.9 = getv ? :PROFILE_STATE_AUTHORITATIVE;
+        %tmp.10 = ne %tmp.7 %tmp.9;
+        push %tmp.10;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_58_138_68_end:
+        %tmp.11 = phi [%tmp.5 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_12_138_68_begin] [%tmp.10 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_58_138_68_true] [%tmp.11 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_58_138_68_end];
+        bf %tmp.11 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_8_143_8_if_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_99_138_112_true:
+        %tmp.12 = lgetv %timerTime;
+        symbol [ timerTime %tmp.12 138 99 108 ];
+        symbol [ PROFILE_CONFIRM_TIMEOUT_MS %tmp.14 138 112 138 ];
+        %tmp.14 = getv ? :PROFILE_CONFIRM_TIMEOUT_MS;
+        %tmp.15 = gte %tmp.12 %tmp.14;
+        push %tmp.15;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_99_138_112_end:
+        %tmp.16 = phi [%tmp.11 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_12_138_112_begin] [%tmp.15 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_99_138_112_true] [%tmp.16 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_99_138_112_end];
+        bf %tmp.16 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_8_143_8_if_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_8_143_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_140_141_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 139 12 ]
+        symbol [ PROFILE_STATE_FALLBACK_CONFIRMED %tmp.18 139 21 53 ];
+        %tmp.18 = getv ? :PROFILE_STATE_FALLBACK_CONFIRMED;
+        symbol [ mState ? 139 12 18 ];
+        putv self :mState %tmp.18;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 140 12 ]
+        %tmp.19 = true;
+        symbol [ mTimeoutNoticePending ? 140 12 33 ];
+        putv self :mTimeoutNoticePending %tmp.19;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_140_141_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_8_143_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_8_143_8_if_false:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 141 15 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_15_143_8_if_stmt:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_19_141_70_begin:
+        symbol [ mState %tmp.21 141 19 25 ];
+        %tmp.21 = getv ? :mState;
+        symbol [ PROFILE_STATE_UNRESOLVED %tmp.23 141 29 53 ];
+        %tmp.23 = getv ? :PROFILE_STATE_UNRESOLVED;
+        %tmp.24 = eq %tmp.21 %tmp.23;
+        bf %tmp.24 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_15_143_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_57_141_70_true:
+        %tmp.25 = lgetv %timerTime;
+        symbol [ timerTime %tmp.25 141 57 66 ];
+        symbol [ PROFILE_RESOLVE_TIMEOUT_MS %tmp.27 141 70 96 ];
+        %tmp.27 = getv ? :PROFILE_RESOLVE_TIMEOUT_MS;
+        %tmp.28 = gte %tmp.25 %tmp.27;
+        push %tmp.28;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_57_141_70_end:
+        %tmp.29 = phi [%tmp.24 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_19_141_70_begin] [%tmp.28 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_57_141_70_true] [%tmp.29 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_57_141_70_end];
+        bf %tmp.29 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_15_143_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_15_143_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_98_143_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 142 12 ]
+        symbol [ PROFILE_STATE_PROVISIONAL %tmp.31 142 21 46 ];
+        %tmp.31 = getv ? :PROFILE_STATE_PROVISIONAL;
+        symbol [ mState ? 142 12 18 ];
+        putv self :mState %tmp.31;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_98_143_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_15_143_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_141_15_143_8_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_138_8_143_8_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_137_77_144_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 146; @symbol_functiondef = [revalidateAuthoritativeProfile,146,21,51]; @symbol_param<0> = [timerTime,146,52,61]; @symbol_param<0>_type<0> = [Number,146,65,71]; @symbol_return<0> = [Boolean,146,76,83]; ]
+    private
+    function revalidateAuthoritativeProfile(timerTime as Number) as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_146_84_155_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 147 8 ]
+        try @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_beginTry @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_endTry @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_catch @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_finally;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_beginTry:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_12_150_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 148 12 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_12_150_8_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_12_150_8_stop" ]
+        %profileInfo.1 = local;
+        symbol [ profileInfo %profileInfo.1 148 16 27 ];
+        symbol [ Activity %tmp.1 148 30 38 ];
+        %tmp.1 = getm $.Toybox.Activity;
+        symbol [ getProfileInfo %tmp.2 148 39 53 ];
+        %tmp.2 = getv function %tmp.1 :getProfileInfo;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %profileInfo.1 %tmp.3;
+        symbol [ profileInfo %profileInfo.1 148 16 27 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 149 12 ]
+        %tmp.4 = self;
+        symbol [ applyAuthoritativeActivityProfile %tmp.5 149 19 52 ];
+        %tmp.5 = getv function %tmp.4 :applyAuthoritativeActivityProfile;
+        %tmp.6 = lgetv %profileInfo.1;
+        symbol [ profileInfo %tmp.6 149 53 64 ];
+        symbol [ sport %tmp.7 149 65 70 ];
+        %tmp.7 = getv %tmp.6 :sport;
+        symbol [ Activity %tmp.8 149 74 82 ];
+        %tmp.8 = getm $.Toybox.Activity;
+        symbol [ SPORT_RUNNING %tmp.9 149 83 96 ];
+        %tmp.9 = getv %tmp.8 :SPORT_RUNNING;
+        %tmp.10 = eq %tmp.7 %tmp.9;
+        %tmp.11 = lgetv %timerTime;
+        symbol [ timerTime %tmp.11 149 98 107 ];
+        %tmp.12 = invoke %tmp.4 %tmp.5(%tmp.10, %tmp.11);
+        jsr @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_finally;
+        ret %tmp.12;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_12_150_8_stop:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_endTry:
+        jsr @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_finally;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_catch:
+        %tmp.13 = exception;
+        push %tmp.13;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 150 10 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_catch" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_150_10_152_8_end" ]
+        %e.2 = local;
+        symbol [ e %e.2 150 17 18 ];
+        %tmp.14 = dup %tmp.13;
+        lputv %e.2 %tmp.14;
+        symbol [ e %e.2 150 17 18 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_150_20_152_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 151 12 ]
+        %tmp.15 = self;
+        symbol [ scheduleExceptionRetry %tmp.16 151 12 34 ];
+        %tmp.16 = getv function %tmp.15 :scheduleExceptionRetry;
+        %tmp.17 = lgetv %timerTime;
+        symbol [ timerTime %tmp.17 151 35 44 ];
+        %tmp.18 = self;
+        symbol [ getProfileErrorCode %tmp.19 151 46 65 ];
+        %tmp.19 = getv function %tmp.18 :getProfileErrorCode;
+        %tmp.20 = lgetv %e.2;
+        symbol [ e %tmp.20 151 66 67 ];
+        %tmp.21 = invoke %tmp.18 %tmp.19(%tmp.20);
+        %tmp.22 = true;
+        invoke %tmp.15 %tmp.16(%tmp.17, %tmp.21, %tmp.22);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_150_20_152_8_stop:
+        jsr @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_finally;
+        pop;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_150_10_152_8_end:
+        try @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_catch @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_150_10_152_8_end @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_150_10_152_8_end @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_finally;
+        jsr @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_finally;
+        throw %tmp.13;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_finally:
+        jsrret;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_147_8_152_8_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 154 8 ]
+        %tmp.23 = false;
+        ret %tmp.23;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_146_84_155_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 157; @symbol_functiondef = [resolveActivityProfile,157,13,35]; @symbol_param<0> = [timerTime,157,36,45]; @symbol_param<0>_type<0> = [Number,157,49,55]; @symbol_return<0> = [Boolean,157,60,67]; ]
+    function resolveActivityProfile(timerTime as Number) as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_157_68_180_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 158 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_158_8_164_8_if_stmt:
+        %tmp.1 = self;
+        symbol [ hasAuthoritativeProfile %tmp.2 158 12 35 ];
+        %tmp.2 = getv function %tmp.1 :hasAuthoritativeProfile;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        bf %tmp.3 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_158_8_164_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_158_8_164_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_158_39_164_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 159 12 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_159_12_161_12_if_stmt:
+        %tmp.4 = lgetv %timerTime;
+        symbol [ timerTime %tmp.4 159 16 25 ];
+        symbol [ mNextAuthoritativeRefreshTime %tmp.6 159 28 57 ];
+        %tmp.6 = getv ? :mNextAuthoritativeRefreshTime;
+        %tmp.7 = lt %tmp.4 %tmp.6;
+        bf %tmp.7 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_159_12_161_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_159_12_161_12_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_159_59_161_12_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 160 16 ]
+        %tmp.8 = false;
+        ret %tmp.8;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_159_59_161_12_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_159_12_161_12_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_159_12_161_12_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 163 12 ]
+        %tmp.9 = self;
+        symbol [ revalidateAuthoritativeProfile %tmp.10 163 19 49 ];
+        %tmp.10 = getv function %tmp.9 :revalidateAuthoritativeProfile;
+        %tmp.11 = lgetv %timerTime;
+        symbol [ timerTime %tmp.11 163 50 59 ];
+        %tmp.12 = invoke %tmp.9 %tmp.10(%tmp.11);
+        ret %tmp.12;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_158_39_164_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_158_8_164_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_158_8_164_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 166 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_8_169_8_if_stmt:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_12_166_41_begin:
+        symbol [ mRetryPending %tmp.14 166 12 25 ];
+        %tmp.14 = getv ? :mRetryPending;
+        bf %tmp.14 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_8_169_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_29_166_41_true:
+        %tmp.15 = lgetv %timerTime;
+        symbol [ timerTime %tmp.15 166 29 38 ];
+        symbol [ mNextRetryTime %tmp.17 166 41 55 ];
+        %tmp.17 = getv ? :mNextRetryTime;
+        %tmp.18 = lt %tmp.15 %tmp.17;
+        push %tmp.18;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_29_166_41_end:
+        %tmp.19 = phi [%tmp.14 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_12_166_41_begin] [%tmp.18 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_29_166_41_true] [%tmp.19 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_29_166_41_end];
+        bf %tmp.19 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_8_169_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_8_169_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_57_169_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 167 12 ]
+        %tmp.20 = self;
+        symbol [ updateFallbackProfileState %tmp.21 167 12 38 ];
+        %tmp.21 = getv function %tmp.20 :updateFallbackProfileState;
+        %tmp.22 = lgetv %timerTime;
+        symbol [ timerTime %tmp.22 167 39 48 ];
+        invoke %tmp.20 %tmp.21(%tmp.22);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 168 12 ]
+        %tmp.23 = false;
+        ret %tmp.23;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_57_169_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_8_169_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_166_8_169_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 171 8 ]
+        try @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_beginTry @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_endTry @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_catch @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_finally;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_beginTry:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_12_174_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 172 12 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_12_174_8_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_12_174_8_stop" ]
+        %profileInfo.1 = local;
+        symbol [ profileInfo %profileInfo.1 172 16 27 ];
+        symbol [ Activity %tmp.24 172 30 38 ];
+        %tmp.24 = getm $.Toybox.Activity;
+        symbol [ getProfileInfo %tmp.25 172 39 53 ];
+        %tmp.25 = getv function %tmp.24 :getProfileInfo;
+        %tmp.26 = invoke %tmp.24 %tmp.25();
+        lputv %profileInfo.1 %tmp.26;
+        symbol [ profileInfo %profileInfo.1 172 16 27 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 173 12 ]
+        %tmp.27 = self;
+        symbol [ applyAuthoritativeActivityProfile %tmp.28 173 19 52 ];
+        %tmp.28 = getv function %tmp.27 :applyAuthoritativeActivityProfile;
+        %tmp.29 = lgetv %profileInfo.1;
+        symbol [ profileInfo %tmp.29 173 53 64 ];
+        symbol [ sport %tmp.30 173 65 70 ];
+        %tmp.30 = getv %tmp.29 :sport;
+        symbol [ Activity %tmp.31 173 74 82 ];
+        %tmp.31 = getm $.Toybox.Activity;
+        symbol [ SPORT_RUNNING %tmp.32 173 83 96 ];
+        %tmp.32 = getv %tmp.31 :SPORT_RUNNING;
+        %tmp.33 = eq %tmp.30 %tmp.32;
+        %tmp.34 = lgetv %timerTime;
+        symbol [ timerTime %tmp.34 173 98 107 ];
+        %tmp.35 = invoke %tmp.27 %tmp.28(%tmp.33, %tmp.34);
+        jsr @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_finally;
+        ret %tmp.35;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_12_174_8_stop:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_endTry:
+        jsr @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_finally;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_catch:
+        %tmp.36 = exception;
+        push %tmp.36;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 174 10 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_catch" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_174_10_176_8_end" ]
+        %e.2 = local;
+        symbol [ e %e.2 174 17 18 ];
+        %tmp.37 = dup %tmp.36;
+        lputv %e.2 %tmp.37;
+        symbol [ e %e.2 174 17 18 ];
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_174_20_176_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 175 12 ]
+        %tmp.38 = self;
+        symbol [ scheduleExceptionRetry %tmp.39 175 12 34 ];
+        %tmp.39 = getv function %tmp.38 :scheduleExceptionRetry;
+        %tmp.40 = lgetv %timerTime;
+        symbol [ timerTime %tmp.40 175 35 44 ];
+        %tmp.41 = self;
+        symbol [ getProfileErrorCode %tmp.42 175 46 65 ];
+        %tmp.42 = getv function %tmp.41 :getProfileErrorCode;
+        %tmp.43 = lgetv %e.2;
+        symbol [ e %tmp.43 175 66 67 ];
+        %tmp.44 = invoke %tmp.41 %tmp.42(%tmp.43);
+        %tmp.45 = false;
+        invoke %tmp.38 %tmp.39(%tmp.40, %tmp.44, %tmp.45);
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_174_20_176_8_stop:
+        jsr @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_finally;
+        pop;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_174_10_176_8_end:
+        try @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_catch @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_174_10_176_8_end @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_174_10_176_8_end @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_finally;
+        jsr @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_finally;
+        throw %tmp.36;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_finally:
+        jsrret;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_171_8_176_8_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 178 8 ]
+        %tmp.46 = self;
+        symbol [ updateFallbackProfileState %tmp.47 178 8 34 ];
+        %tmp.47 = getv function %tmp.46 :updateFallbackProfileState;
+        %tmp.48 = lgetv %timerTime;
+        symbol [ timerTime %tmp.48 178 35 44 ];
+        invoke %tmp.46 %tmp.47(%tmp.48);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc" 179 8 ]
+        %tmp.49 = false;
+        ret %tmp.49;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAProfileResolver_mc_157_68_180_4_stop:
+    }
+}
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAProfileResolver.mc"; @line = 1; ]
+<init> {
+}

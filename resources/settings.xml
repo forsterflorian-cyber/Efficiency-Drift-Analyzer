@@ -1,4 +1,7 @@
 <settings>
+    <setting propertyKey="@Properties.minHr" title="@Strings.minHrTitle" prompt="@Strings.minHrPrompt">
+        <settingConfig type="numeric" required="true" min="40" max="180" errorMessage="@Strings.minHrValidationError" />
+    </setting>
     <setting propertyKey="@Properties.hrA" title="@Strings.hrATitle" prompt="@Strings.hrAPrompt">
         <settingConfig type="numeric" required="true" min="40" max="240" errorMessage="@Strings.hrValidationError" />
     </setting>

@@ -21,13 +21,26 @@
     "sort-order" : 1,
     "precision" : 1,
     "fill-color" : null
+  }, {
+    "id" : 2,
+    "chart-visible" : false,
+    "activity-visible" : false,
+    "lap-visible" : false,
+    "chart-title-key" : null,
+    "label-key" : "lblFitProfileState",
+    "unit-label-key" : "unitState",
+    "sort-order" : 2,
+    "precision" : null,
+    "fill-color" : null
   } ],
   "strings" : {
     "default" : {
       "lblFitDriftChart" : "Efficiency Analysis",
       "lblFitDrift" : "Metabolic Drift",
       "unitPercent" : "%",
-      "lblFitAvgDrift" : "Avg. Metabolic Drift"
+      "lblFitAvgDrift" : "Avg. Metabolic Drift",
+      "lblFitProfileState" : "Profile State (0=Unresolved...",
+      "unitState" : "state"
     }
   }
 }

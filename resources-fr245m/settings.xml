@@ -1,0 +1,5 @@
+<settings>
+    <setting propertyKey="@Properties.minHr" title="@Strings.minHrTitle" prompt="@Strings.minHrPrompt">
+        <settingConfig type="numeric" required="true" min="40" max="180" errorMessage="@Strings.minHrValidationError" />
+    </setting>
+</settings>

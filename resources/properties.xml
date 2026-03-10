@@ -1,4 +1,5 @@
 <properties>
+    <property id="minHr" type="number">80</property>
     <property id="hrA" type="number">0</property>
     <property id="paceA" type="number">0</property>
     <property id="hrB" type="number">0</property>

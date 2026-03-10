@@ -1,6 +1,7 @@
 # TODO - Efficiency-Drift-Analyzer
 
-- [ ] Field-Test: Long-term validation of O(1) sums on 4h+ sessions.
-- [ ] Research: Automatic threshold calibration based on activity history.
-- [ ] UI: Optional visual trend gauge for high-resolution displays.
-- [ ] Docs: Guide for interpreting drift results in Garmin Connect.
+- [ ] Field-Test: Validierung der Triple-Safety-Logik bei langen Pausen.
+- [ ] Research: Auto-Kalibrierung basierend auf dem 4-Wochen-Trend.
+- [ ] UI: Instinct-spezifische Visualisierung (Bezel/Sub-Window).
+- [ ] Doku: Finaler Interpretation-Guide fuer Store-Nutzer.
+- [ ] Refactor: EDAView in dedizierte Model- und Controller-Klassen zerlegen.

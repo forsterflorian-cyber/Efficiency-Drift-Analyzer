@@ -9,20 +9,38 @@ import Toybox.System;
 
 class EDAView extends WatchUi.DataField {
 
-    private const MIN_VALID_HR as Float = 100.0;
+    private const STATUS_WAIT as String = "WAIT";
+    private const STATUS_PAUSE as String = "PAUSE";
+    private const STATUS_WARMUP as String = "WARMUP";
+    private const STATUS_PROVISIONAL as String = "PROVISIONAL";
+    private const STATUS_PROFILE_TIMEOUT as String = "PROFILE TIMEOUT";
+    private const STATUS_CFG_ERR as String = "CFG ERR";
+    private const STATUS_NO_HR as String = "NO HR";
+    private const STATUS_LOW_HR as String = "LOW HR";
+    private const STATUS_SPIKE as String = "SPIKE";
+    private const STATUS_LOW_POWER as String = "LOW P";
+    private const STATUS_LOW_PACE as String = "LOW PACE";
+    private const STATUS_NO_POWER as String = "NO PWR";
+    private const STATUS_NO_SPEED as String = "NO SPD";
+    private const STATUS_INVALID_SPEED as String = "INV SPD";
+    private const STATUS_GAP as String = "GAP";
+    private const INVALID_RENDER_VALUE as String = "NaN";
+
+    private const DEFAULT_RUNNING_MIN_HR as Float = 80.0;
+    private const DEFAULT_GENERIC_MIN_HR as Float = 70.0;
     private const MIN_VALID_POWER as Float = 30.0;
     private const MAX_VALID_POWER as Float = 700.0;
     private const MAX_RUNNING_PACE_PER_KM as Float = 480.0;
+    private const MAX_SPEED_MS as Float = 12.0;
     private const MAX_HR_JUMP_PER_SEC as Float = 20.0;
-    private const MIN_SPLIT_VALID_MS as Number = 600000;
-    private const MAX_DRIFT_PERCENT as Float = 50.0;
-    private const SPLIT_BUCKET_MS as Number = 10000;
+    private const MAX_SPEED_JUMP_PER_SEC as Float = 4.0;
     private const CALIBRATION_DISTANCE_FACTOR as Float = 1000.0;
     private const WARMUP_VALID_MS as Number = 180000;
-    private const PROFILE_RESOLVE_TIMEOUT_MS as Number = 30000;
-
-    (:low_mem)
-    private const LOW_MEM_WINDOW_MS as Number = 1200000;
+    private const MAX_VALID_SAMPLE_GAP_MS as Number = 5000;
+    private const MAX_DATA_DRIVEN_GAP_MS as Number = 20000;
+    private const MAX_RESUME_GAP_RESET_MS as Number = 300000;
+    private const FALLBACK_EXPORT_TIMEOUT_MS as Number = 120000;
+    private const IMPLICIT_TIMER_RESET_TOLERANCE_MS as Number = 5000;
 
     (:high_mem)
     private const MODEL_DELTA_EPSILON as Float = 0.0001;
@@ -35,10 +53,16 @@ class EDAView extends WatchUi.DataField {
     (:high_mem)
     private const EWMA_HR_TAU_MS as Float = 9491.0;
 
-    (:low_mem)
-    private const LOW_MEM_BUCKET_COUNT as Number = 120;
+    private const SOURCE_NONE as Number = 0;
+    private const SOURCE_POWER as Number = 1;
+    private const SOURCE_SPEED as Number = 2;
+    private const SOURCE_SWITCH_CONFIRM_SAMPLES as Number = 3;
 
     private var mDistanceFactor as Float = 1000.0;
+    private var minValidHrSetting as Float = 0.0;
+    private var referenceHr as Float = 0.0;
+    private var referenceWorkload as Float = 0.0;
+    private var isEngineCalibrated as Boolean = false;
 
     (:high_mem)
     private var hrA as Float = 0.0;
@@ -68,51 +92,50 @@ class EDAView extends WatchUi.DataField {
     private var filterInitialized as Boolean = false;
 
     private var mTimerTime as Number = 0;
-    private var activityProfileResolved as Boolean = false;
-    private var isRunningActivity as Boolean = true;
     private var lastActiveTimerTime as Number? = null;
-    private var lastAcceptedTimerTime as Number? = null;
+    private var lastAcceptedDriftSampleTime as Number? = null;
     private var lastAcceptedHr as Float? = null;
+    private var lastAcceptedSpeed as Float? = null;
+    private var lastValidSpeedSignalTime as Number? = null;
     private var validActiveMs as Number = 0;
     private var driftActiveMs as Number = 0;
+    private var currentWorkloadSource as Number = SOURCE_NONE;
+    private var pendingWorkloadSource as Number = SOURCE_NONE;
+    private var pendingWorkloadSourceSamples as Number = 0;
+    private var lastPauseSystemTimer as Number? = null;
 
-    (:high_mem)
-    private var splitWeightedEf as Array<Float> = [];
-
-    (:high_mem)
-    private var splitValidMs as Array<Number> = [];
-
-    (:high_mem)
-    private var splitBoundaryBucket as Number = 0;
-
-    (:high_mem)
-    private var split1WeightedTotal as Float = 0.0;
-
-    (:high_mem)
-    private var split1MsTotal as Number = 0;
-
-    (:high_mem)
-    private var split2WeightedTotal as Float = 0.0;
-
-    (:high_mem)
-    private var split2MsTotal as Number = 0;
-    private var driftSum as Float = 0.0;
-    private var driftCount as Number = 0;
-    private var sessionDriftSum as Float = 0.0;
-    private var sessionDriftCount as Number = 0;
     private var statusDetail as String = "";
-
-    (:low_mem)
-    private var lowMemWeightedBuckets as Array<Float> = [];
-
-    (:low_mem)
-    private var lowMemValidBuckets as Array<Number> = [];
-
-    (:low_mem)
-    private var lowMemBucketKeys as Array<Number> = [];
 
     private var lblAktPace as String = "";
     private var lblAktHr as String = "";
+    private var lblAktPaceShort as String = "";
+    private var lblAktHrShort as String = "";
+    private var lblStatusWait as String = "";
+    private var lblStatusPause as String = "";
+    private var lblStatusWarmup as String = "";
+    private var lblStatusProvisional as String = "";
+    private var lblStatusProfileTimeout as String = "";
+    private var lblStatusConfigError as String = "";
+    private var lblStatusNoHr as String = "";
+    private var lblStatusLowHr as String = "";
+    private var lblStatusSpike as String = "";
+    private var lblStatusLowPower as String = "";
+    private var lblStatusLowPace as String = "";
+    private var lblStatusNoPower as String = "";
+    private var lblStatusNoSpeed as String = "";
+    private var lblStatusInvalidSpeed as String = "";
+    private var lblStatusGap as String = "";
+    private var lblNotSaved as String = "";
+    private var lblTypeUnknown as String = "";
+    private var msgCollectingData as String = "";
+    private var msgPowerRequired as String = "";
+    private var msgNoSpeed as String = "";
+    private var msgInvalidSpeed as String = "";
+    private var msgProfileRetry as String = "";
+    private var msgProfileErrorPrefix as String = "";
+    private var msgProvisionalProfile as String = "";
+    private var msgProfileTimeout as String = "";
+    private var msgWarmupValidSuffix as String = "";
 
     (:high_mem)
     private var lblSollPace as String = "";
@@ -121,7 +144,12 @@ class EDAView extends WatchUi.DataField {
     private var lblSollHr as String = "";
 
     (:high_mem)
-    private var isGerman as Boolean = false;
+    private var lblSollPaceShort as String = "";
+
+    (:high_mem)
+    private var lblSollHrShort as String = "";
+
+    private var lblCalibrationError as String = "";
 
     private var valAktPace as String = "--:--";
     private var strDrift as String = "--";
@@ -136,13 +164,19 @@ class EDAView extends WatchUi.DataField {
     (:high_mem)
     private var modelValid as Boolean = false;
 
+    (:high_mem)
+    private var modelErrorMessage as String = "";
+
     private var bgColor as Number = Graphics.COLOR_WHITE;
     private var fgColor as Number = Graphics.COLOR_BLACK;
 
-    private var driftField as Toybox.FitContributor.Field? = null;
-    private var avgDriftField as Toybox.FitContributor.Field? = null;
+    private var fitExportState as EDAFitExportState? = null;
+    private var profileResolver as EDAProfileResolver? = null;
+    private var driftEngine as EDADriftEngine? = null;
+    private var renderer as EDARenderer? = null;
     private const DRIFT_GRAPH_ID = 0;
     private const DRIFT_AVG_ID = 1;
+    private const PROFILE_STATE_ID = 2;
 
     function initialize() {
         DataField.initialize();
@@ -150,16 +184,25 @@ class EDAView extends WatchUi.DataField {
         loadSettings();
         setNeutralColors();
 
-        driftField = createField("metabolic_drift", DRIFT_GRAPH_ID, FitContributor.DATA_TYPE_FLOAT, {
+        var driftField = createField("metabolic_drift", DRIFT_GRAPH_ID, FitContributor.DATA_TYPE_FLOAT, {
             :displayLabel => "Drift",
             :mesgType => FitContributor.MESG_TYPE_RECORD,
             :units => "%"
         });
-        avgDriftField = createField("avg_metabolic_drift", DRIFT_AVG_ID, FitContributor.DATA_TYPE_FLOAT, {
+        var avgDriftField = createField("avg_metabolic_drift", DRIFT_AVG_ID, FitContributor.DATA_TYPE_FLOAT, {
             :displayLabel => "Avg Drift",
             :mesgType => FitContributor.MESG_TYPE_SESSION,
             :units => "%"
         });
+        var profileStateField = createField("profile_state", PROFILE_STATE_ID, FitContributor.DATA_TYPE_UINT8, {
+            :displayLabel => "Profile State (0=Unresolved,1=Provisional,2=Fallback,3=Authoritative,4=Stale)",
+            :mesgType => FitContributor.MESG_TYPE_RECORD
+        });
+        fitExportState = new EDAFitExportState(driftField, avgDriftField, profileStateField);
+        profileResolver = new EDAProfileResolver();
+        driftEngine = new EDADriftEngine();
+        renderer = new EDARenderer();
+        refreshEngineCalibrationState();
 
         resetSessionFitSummary();
         resetSessionState();
@@ -168,32 +211,102 @@ class EDAView extends WatchUi.DataField {
     (:high_mem)
     private function loadStrings() as Void {
         lblAktPace = WatchUi.loadResource(Rez.Strings.lblAktPace) as String;
+        lblAktPaceShort = WatchUi.loadResource(Rez.Strings.lblAktPaceShort) as String;
         lblSollPace = WatchUi.loadResource(Rez.Strings.lblSollPace) as String;
         lblSollHr = WatchUi.loadResource(Rez.Strings.lblSollHr) as String;
+        lblSollPaceShort = WatchUi.loadResource(Rez.Strings.lblSollPaceShort) as String;
+        lblSollHrShort = WatchUi.loadResource(Rez.Strings.lblSollHrShort) as String;
+        lblCalibrationError = WatchUi.loadResource(Rez.Strings.lblCalibrationError) as String;
         lblAktHr = WatchUi.loadResource(Rez.Strings.lblAktHr) as String;
-        isGerman = true;
+        lblAktHrShort = WatchUi.loadResource(Rez.Strings.lblAktHrShort) as String;
+        lblStatusWait = WatchUi.loadResource(Rez.Strings.lblStatusWait) as String;
+        lblStatusPause = WatchUi.loadResource(Rez.Strings.lblStatusPause) as String;
+        lblStatusWarmup = WatchUi.loadResource(Rez.Strings.lblStatusWarmup) as String;
+        lblStatusProvisional = WatchUi.loadResource(Rez.Strings.lblStatusProvisional) as String;
+        lblStatusProfileTimeout = WatchUi.loadResource(Rez.Strings.lblStatusProfileTimeout) as String;
+        lblStatusConfigError = WatchUi.loadResource(Rez.Strings.lblStatusConfigError) as String;
+        lblStatusNoHr = WatchUi.loadResource(Rez.Strings.lblStatusNoHr) as String;
+        lblStatusLowHr = WatchUi.loadResource(Rez.Strings.lblStatusLowHr) as String;
+        lblStatusSpike = WatchUi.loadResource(Rez.Strings.lblStatusSpike) as String;
+        lblStatusLowPower = WatchUi.loadResource(Rez.Strings.lblStatusLowPower) as String;
+        lblStatusLowPace = WatchUi.loadResource(Rez.Strings.lblStatusLowPace) as String;
+        lblStatusNoPower = WatchUi.loadResource(Rez.Strings.lblStatusNoPower) as String;
+        lblStatusNoSpeed = WatchUi.loadResource(Rez.Strings.lblStatusNoSpeed) as String;
+        lblStatusInvalidSpeed = WatchUi.loadResource(Rez.Strings.lblStatusInvalidSpeed) as String;
+        lblStatusGap = WatchUi.loadResource(Rez.Strings.lblStatusGap) as String;
+        lblNotSaved = WatchUi.loadResource(Rez.Strings.label_not_saved) as String;
+        lblTypeUnknown = WatchUi.loadResource(Rez.Strings.label_type_unknown) as String;
+        lblCalibrationError = WatchUi.loadResource(Rez.Strings.lblCalibrationError) as String;
+        msgCollectingData = WatchUi.loadResource(Rez.Strings.msgCollectingData) as String;
+        msgPowerRequired = WatchUi.loadResource(Rez.Strings.msgPowerRequired) as String;
+        msgNoSpeed = WatchUi.loadResource(Rez.Strings.msgNoSpeed) as String;
+        msgInvalidSpeed = WatchUi.loadResource(Rez.Strings.msgInvalidSpeed) as String;
+        msgProfileRetry = WatchUi.loadResource(Rez.Strings.msgProfileRetry) as String;
+        msgProfileErrorPrefix = WatchUi.loadResource(Rez.Strings.msgProfileErrorPrefix) as String;
+        msgProvisionalProfile = WatchUi.loadResource(Rez.Strings.msgProvisionalProfile) as String;
+        msgProfileTimeout = WatchUi.loadResource(Rez.Strings.msgProfileTimeout) as String;
+        msgWarmupValidSuffix = WatchUi.loadResource(Rez.Strings.msgWarmupValidSuffix) as String;
     }
 
     (:low_mem)
     private function loadStrings() as Void {
-        lblAktPace = "P:";
-        lblAktHr = "H:";
+        lblAktPace = WatchUi.loadResource(Rez.Strings.lblAktPaceShort) as String;
+        lblAktHr = WatchUi.loadResource(Rez.Strings.lblAktHrShort) as String;
+        lblAktPaceShort = lblAktPace;
+        lblAktHrShort = lblAktHr;
+        lblStatusWait = WatchUi.loadResource(Rez.Strings.lblStatusWait) as String;
+        lblStatusPause = WatchUi.loadResource(Rez.Strings.lblStatusPause) as String;
+        lblStatusWarmup = WatchUi.loadResource(Rez.Strings.lblStatusWarmup) as String;
+        lblStatusProvisional = WatchUi.loadResource(Rez.Strings.lblStatusProvisional) as String;
+        lblStatusProfileTimeout = WatchUi.loadResource(Rez.Strings.lblStatusProfileTimeout) as String;
+        lblStatusConfigError = WatchUi.loadResource(Rez.Strings.lblStatusConfigError) as String;
+        lblStatusNoHr = WatchUi.loadResource(Rez.Strings.lblStatusNoHr) as String;
+        lblStatusLowHr = WatchUi.loadResource(Rez.Strings.lblStatusLowHr) as String;
+        lblStatusSpike = WatchUi.loadResource(Rez.Strings.lblStatusSpike) as String;
+        lblStatusLowPower = WatchUi.loadResource(Rez.Strings.lblStatusLowPower) as String;
+        lblStatusLowPace = WatchUi.loadResource(Rez.Strings.lblStatusLowPace) as String;
+        lblStatusNoPower = WatchUi.loadResource(Rez.Strings.lblStatusNoPower) as String;
+        lblStatusNoSpeed = WatchUi.loadResource(Rez.Strings.lblStatusNoSpeed) as String;
+        lblStatusInvalidSpeed = WatchUi.loadResource(Rez.Strings.lblStatusInvalidSpeed) as String;
+        lblStatusGap = WatchUi.loadResource(Rez.Strings.lblStatusGap) as String;
+        lblNotSaved = WatchUi.loadResource(Rez.Strings.label_not_saved) as String;
+        lblTypeUnknown = WatchUi.loadResource(Rez.Strings.label_type_unknown) as String;
+        lblCalibrationError = WatchUi.loadResource(Rez.Strings.lblCalibrationError) as String;
+        msgCollectingData = WatchUi.loadResource(Rez.Strings.msgCollectingData) as String;
+        msgPowerRequired = WatchUi.loadResource(Rez.Strings.msgPowerRequired) as String;
+        msgNoSpeed = WatchUi.loadResource(Rez.Strings.msgNoSpeed) as String;
+        msgInvalidSpeed = WatchUi.loadResource(Rez.Strings.msgInvalidSpeed) as String;
+        msgProfileRetry = WatchUi.loadResource(Rez.Strings.msgProfileRetry) as String;
+        msgProfileErrorPrefix = WatchUi.loadResource(Rez.Strings.msgProfileErrorPrefix) as String;
+        msgProvisionalProfile = WatchUi.loadResource(Rez.Strings.msgProvisionalProfile) as String;
+        msgProfileTimeout = WatchUi.loadResource(Rez.Strings.msgProfileTimeout) as String;
+        msgWarmupValidSuffix = WatchUi.loadResource(Rez.Strings.msgWarmupValidSuffix) as String;
     }
 
     (:high_mem)
     function loadSettings() as Void {
         loadDistanceFactor();
+        minValidHrSetting = getNumericProperty("minHr");
+        referenceHr = getNumericProperty("hrA");
+        referenceWorkload = getNumericProperty("paceA");
 
-        hrA = getNumericProperty("hrA");
-        paceA = getNumericProperty("paceA");
+        hrA = referenceHr;
+        paceA = referenceWorkload;
         hrB = getNumericProperty("hrB");
         paceB = getNumericProperty("paceB");
         calculateLinearModel();
+        refreshEngineCalibrationState();
     }
 
     (:low_mem)
     function loadSettings() as Void {
         loadDistanceFactor();
+        minValidHrSetting = getNumericProperty("minHr");
+        referenceHr = getNumericProperty("hrA");
+        referenceWorkload = getNumericProperty("paceA");
+        // Calibration targets are intentionally ignored on low-memory builds
+        // because the target-model UI is not part of this tier.
+        refreshEngineCalibrationState();
     }
 
     private function loadDistanceFactor() as Void {
@@ -212,7 +325,6 @@ class EDAView extends WatchUi.DataField {
         resetSessionState();
     }
 
-    (:high_mem)
     private function getNumericProperty(key as String) as Float {
         var value = Properties.getValue(key) as Numeric?;
         if (value == null) {
@@ -230,9 +342,9 @@ class EDAView extends WatchUi.DataField {
         return value.toFloat();
     }
 
-    private function toNumberOrZero(value as Numeric?) as Number {
+    private function toNumberOrNull(value as Numeric?) as Number? {
         if (value == null) {
-            return 0;
+            return null;
         }
 
         return value.toNumber();
@@ -243,12 +355,14 @@ class EDAView extends WatchUi.DataField {
         m = 0.0;
         b = 0.0;
         modelValid = false;
+        modelErrorMessage = "";
 
         if (paceA <= 0.0 || paceB <= 0.0 || hrA <= 0.0 || hrB <= 0.0) {
             return;
         }
 
         if (paceA <= paceB || hrA >= hrB) {
+            modelErrorMessage = lblCalibrationError;
             return;
         }
 
@@ -260,6 +374,8 @@ class EDAView extends WatchUi.DataField {
             m = (hrB - hrA) / deltaV;
             b = hrA - (m * v1);
             modelValid = true;
+        } else {
+            modelErrorMessage = lblCalibrationError;
         }
     }
 
@@ -273,30 +389,306 @@ class EDAView extends WatchUi.DataField {
     private function resetTargetDisplay() as Void {
     }
 
+    private function hasValidConfiguration() as Boolean {
+        return referenceHr > 0.0 && referenceWorkload > 0.0;
+    }
+
+    private function refreshEngineCalibrationState() as Void {
+        isEngineCalibrated = hasValidConfiguration();
+        if (driftEngine != null) {
+            getDriftEngine().setCalibrated(isEngineCalibrated);
+        }
+    }
+
+    private function hasUsableActivityProfile() as Boolean {
+        return getProfileResolver().hasUsableActivityProfile();
+    }
+
+    private function isProfileProvisional() as Boolean {
+        return getProfileResolver().isProfileProvisional();
+    }
+
+    private function hasAuthoritativeProfile() as Boolean {
+        return getProfileResolver().hasAuthoritativeProfile();
+    }
+
+    private function isFallbackProfileConfirmed() as Boolean {
+        return getProfileResolver().isFallbackConfirmed();
+    }
+
+    private function isRunningProfile() as Boolean {
+        return getProfileResolver().isRunningActivity();
+    }
+
+    private function canExportFitData() as Boolean {
+        // Record developer fields are forward-only; unresolved fallback samples
+        // cannot be backfilled into older FIT record messages.
+        return hasAuthoritativeProfile() || (isFallbackProfileConfirmed() && mTimerTime >= FALLBACK_EXPORT_TIMEOUT_MS);
+    }
+
+    private function getStatusLabel(statusText as String) as String {
+        if (statusText.equals(STATUS_WAIT)) {
+            return lblStatusWait;
+        } else if (statusText.equals(STATUS_PAUSE)) {
+            return lblStatusPause;
+        } else if (statusText.equals(STATUS_WARMUP)) {
+            return lblStatusWarmup;
+        } else if (statusText.equals(STATUS_PROVISIONAL)) {
+            return lblStatusProvisional;
+        } else if (statusText.equals(STATUS_PROFILE_TIMEOUT)) {
+            return lblStatusProfileTimeout;
+        } else if (statusText.equals(STATUS_CFG_ERR)) {
+            return lblStatusConfigError;
+        } else if (statusText.equals(STATUS_NO_HR)) {
+            return lblStatusNoHr;
+        } else if (statusText.equals(STATUS_LOW_HR)) {
+            return lblStatusLowHr;
+        } else if (statusText.equals(STATUS_SPIKE)) {
+            return lblStatusSpike;
+        } else if (statusText.equals(STATUS_LOW_POWER)) {
+            return lblStatusLowPower;
+        } else if (statusText.equals(STATUS_LOW_PACE)) {
+            return lblStatusLowPace;
+        } else if (statusText.equals(STATUS_NO_POWER)) {
+            return lblStatusNoPower;
+        } else if (statusText.equals(STATUS_NO_SPEED)) {
+            return lblStatusNoSpeed;
+        } else if (statusText.equals(STATUS_INVALID_SPEED)) {
+            return lblStatusInvalidSpeed;
+        } else if (statusText.equals(STATUS_GAP)) {
+            return lblStatusGap;
+        }
+
+        return statusText;
+    }
+
+    private function getRenderedDriftLabel() as String {
+        if (!isEngineCalibrated) {
+            return lblStatusConfigError;
+        }
+
+        var driftLabel = getStatusLabel(strDrift);
+        if (!canExportFitData()) {
+            return lblNotSaved + " " + driftLabel;
+        }
+
+        if (isFallbackProfileConfirmed()) {
+            return lblTypeUnknown + " " + driftLabel;
+        }
+
+        return driftLabel;
+    }
+
+    private function shouldShowProfileErrorDetail() as Boolean {
+        if (hasAuthoritativeProfile()) {
+            return false;
+        }
+
+        return strDrift.equals(STATUS_WAIT) || strDrift.equals(STATUS_PROVISIONAL) || strDrift.equals(STATUS_PROFILE_TIMEOUT);
+    }
+
+    private function getDefaultStatusDetail() as String? {
+        if (strDrift.equals(STATUS_WAIT)) {
+            return msgCollectingData;
+        } else if (strDrift.equals(STATUS_NO_POWER)) {
+            return msgPowerRequired;
+        } else if (strDrift.equals(STATUS_NO_SPEED)) {
+            return msgNoSpeed;
+        } else if (strDrift.equals(STATUS_INVALID_SPEED)) {
+            return msgInvalidSpeed;
+        } else if (strDrift.equals(STATUS_PROVISIONAL)) {
+            return msgProvisionalProfile;
+        } else if (strDrift.equals(STATUS_PROFILE_TIMEOUT)) {
+            return msgProfileTimeout;
+        }
+
+        var lastErrorCode = getProfileResolver().getLastErrorCode();
+        if (lastErrorCode != "" && shouldShowProfileErrorDetail()) {
+            return msgProfileErrorPrefix + ": " + lastErrorCode;
+        }
+
+        return null;
+    }
+
+    private function getFitExportState() as EDAFitExportState {
+        return fitExportState as EDAFitExportState;
+    }
+
+    private function getProfileResolver() as EDAProfileResolver {
+        return profileResolver as EDAProfileResolver;
+    }
+
+    private function getDriftEngine() as EDADriftEngine {
+        return driftEngine as EDADriftEngine;
+    }
+
+    private function getRenderer() as EDARenderer {
+        return renderer as EDARenderer;
+    }
+
+    private function writeInvalidRecord() as Void {
+        getFitExportState().writeInvalidRecord(getProfileResolver().getState());
+    }
+
+    private function getProfileRetryDetail() as String {
+        var lastErrorCode = getProfileResolver().getLastErrorCode();
+        if (lastErrorCode == "") {
+            return msgProfileRetry;
+        }
+
+        return msgProfileRetry + ": " + lastErrorCode;
+    }
+
+    private function setInvalidStatus(statusText as String) as Void {
+        setStatus(statusText);
+    }
+
+    private function setInvalidStatusWithDetail(statusText as String, detailText as String) as Void {
+        setStatusWithDetail(statusText, detailText);
+    }
+
+    private function setCollectingStatus() as Void {
+        if (isProfileProvisional()) {
+            setStatusWithDetail(STATUS_PROVISIONAL, msgProvisionalProfile);
+        } else {
+            setStatus(STATUS_WAIT);
+        }
+    }
+
+    (:high_mem)
+    private function isTargetModelSupported() as Boolean {
+        return true;
+    }
+
+    (:low_mem)
+    private function isTargetModelSupported() as Boolean {
+        return false;
+    }
+
+    private function getMinValidHr() as Float {
+        if (minValidHrSetting >= 40.0) {
+            return minValidHrSetting;
+        }
+
+        if (isRunningProfile()) {
+            return DEFAULT_RUNNING_MIN_HR;
+        }
+
+        return DEFAULT_GENERIC_MIN_HR;
+    }
+
+    private function syncDisplayWithCurrentSample(speed as Float?, hr as Float?) as Void {
+        resetFilterState();
+        updateLiveDisplay(speed, hr);
+        resetTargetDisplay();
+    }
+
+    private function isInvalidDisplayState() as Boolean {
+        return strDrift.equals(STATUS_WAIT)
+            || strDrift.equals(STATUS_PAUSE)
+            || strDrift.equals(STATUS_WARMUP)
+            || strDrift.equals(STATUS_PROVISIONAL)
+            || strDrift.equals(STATUS_PROFILE_TIMEOUT)
+            || strDrift.equals(STATUS_NO_HR)
+            || strDrift.equals(STATUS_LOW_HR)
+            || strDrift.equals(STATUS_SPIKE)
+            || strDrift.equals(STATUS_LOW_POWER)
+            || strDrift.equals(STATUS_LOW_PACE)
+            || strDrift.equals(STATUS_NO_POWER)
+            || strDrift.equals(STATUS_NO_SPEED)
+            || strDrift.equals(STATUS_INVALID_SPEED)
+            || strDrift.equals(STATUS_GAP);
+    }
+
+    private function getRenderedCurrentPaceValue() as String {
+        if (isInvalidDisplayState()) {
+            return INVALID_RENDER_VALUE;
+        }
+
+        return valAktPace;
+    }
+
+    private function getRenderedCurrentHrValue() as String {
+        if (isInvalidDisplayState()) {
+            return INVALID_RENDER_VALUE;
+        }
+
+        return valAktHr;
+    }
+
+    private function clearPendingWorkloadSourceSwitch() as Void {
+        pendingWorkloadSource = SOURCE_NONE;
+        pendingWorkloadSourceSamples = 0;
+    }
+
+    private function rememberPauseTimestamp() as Void {
+        if (lastPauseSystemTimer == null) {
+            lastPauseSystemTimer = System.getTimer();
+        }
+    }
+
+    private function shouldResetAfterResumePause() as Boolean {
+        var pausedAt = lastPauseSystemTimer;
+        lastPauseSystemTimer = null;
+        if (pausedAt == null) {
+            return false;
+        }
+
+        var currentSystemTimer = System.getTimer();
+        if (currentSystemTimer < pausedAt) {
+            return true;
+        }
+
+        return (currentSystemTimer - pausedAt) >= MAX_RESUME_GAP_RESET_MS;
+    }
+
+    private function hasAcceptedDataGap(timerTime as Number) as Boolean {
+        var previousAcceptedTimerTime = lastAcceptedDriftSampleTime;
+        if (previousAcceptedTimerTime == null || timerTime <= previousAcceptedTimerTime) {
+            return false;
+        }
+
+        return (timerTime - previousAcceptedTimerTime) > MAX_DATA_DRIVEN_GAP_MS;
+    }
+
+    private function clearLifecyclePauseState() as Void {
+        lastPauseSystemTimer = null;
+    }
+
+    private function resetResumeSensitiveState() as Void {
+        lastActiveTimerTime = null;
+        lastAcceptedDriftSampleTime = null;
+        lastAcceptedHr = null;
+        lastAcceptedSpeed = null;
+        lastValidSpeedSignalTime = null;
+        clearPendingWorkloadSourceSwitch();
+        resetFilterState();
+    }
+
+    private function resetAnalysisState() as Void {
+        resetResumeSensitiveState();
+        validActiveMs = 0;
+        driftActiveMs = 0;
+        currentWorkloadSource = SOURCE_NONE;
+        valAktPace = "--:--";
+        valAktHr = "--";
+        resetTargetDisplay();
+        statusDetail = "";
+        getDriftEngine().reset();
+        setStatus(STATUS_WAIT);
+    }
+
+    private function handleImplicitSessionReset() as Void {
+        clearLifecyclePauseState();
+        getProfileResolver().handleImplicitSessionReset();
+        resetSessionFitSummary();
+        resetAnalysisState();
+    }
+
     private function resolveActivityProfile() as Void {
-        if (activityProfileResolved) {
-            return;
-        }
-
-        // Always start from a safe default so profile lookups cannot leak the
-        // previous activity type into a new session or multisport leg.
-        isRunningActivity = false;
-
-        try {
-            var profileInfo = Activity.getProfileInfo();
-            if (profileInfo != null) {
-                isRunningActivity = (profileInfo.sport == Activity.SPORT_RUNNING);
-                activityProfileResolved = true;
-                return;
-            }
-        } catch (e) {
-        }
-
-        // Do not stay stuck in WAIT forever on devices that never expose
-        // profile metadata for the active data field context.
-        if (mTimerTime >= PROFILE_RESOLVE_TIMEOUT_MS) {
-            isRunningActivity = true;
-            activityProfileResolved = true;
+        if (getProfileResolver().resolveActivityProfile(mTimerTime)) {
+            resetSessionFitSummary();
+            resetAnalysisState();
         }
     }
 
@@ -317,12 +709,14 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function setStatus(statusText as String) as Void {
+        writeInvalidRecord();
         strDrift = statusText;
         statusDetail = "";
         setNeutralColors();
     }
 
     private function setStatusWithDetail(statusText as String, detailText as String) as Void {
+        writeInvalidRecord();
         strDrift = statusText;
         statusDetail = detailText;
         setNeutralColors();
@@ -462,7 +856,7 @@ class EDAView extends WatchUi.DataField {
     private function updateTargetDisplay(displaySpeed as Float?, displayHr as Float?) as Void {
         resetTargetDisplay();
 
-        if (!isRunningActivity || displaySpeed == null || displayHr == null || !modelValid || m.abs() <= MODEL_DELTA_EPSILON) {
+        if (!isRunningProfile() || displaySpeed == null || displayHr == null || !modelValid || m.abs() <= MODEL_DELTA_EPSILON) {
             return;
         }
 
@@ -484,13 +878,21 @@ class EDAView extends WatchUi.DataField {
 
     private function getSampleDelta(timerTime as Number) as Number {
         var previous = lastActiveTimerTime;
-        lastActiveTimerTime = timerTime;
-
-        if (previous == null || timerTime <= previous) {
+        if (previous == null) {
+            lastActiveTimerTime = timerTime;
             return 0;
         }
 
+        if (timerTime <= previous) {
+            return 0;
+        }
+
+        lastActiveTimerTime = timerTime;
         return timerTime - previous;
+    }
+
+    private function isInvalidDriftValue(driftPercent as Float?) as Boolean {
+        return driftPercent == null || driftPercent != driftPercent;
     }
 
     private function pacePerKmSeconds(speed as Float?) as Float? {
@@ -503,13 +905,13 @@ class EDAView extends WatchUi.DataField {
 
     private function isHrOutlier(hr as Float, timerTime as Number) as Boolean {
         var previousHr = lastAcceptedHr;
-        var previousTimer = lastAcceptedTimerTime;
+        var previousTimer = lastAcceptedDriftSampleTime;
         if (previousHr == null || previousTimer == null) {
             return false;
         }
 
         var deltaMs = timerTime - previousTimer;
-        if (deltaMs <= 0 || deltaMs > SPLIT_BUCKET_MS) {
+        if (deltaMs <= 0 || deltaMs > MAX_VALID_SAMPLE_GAP_MS) {
             return false;
         }
 
@@ -517,232 +919,240 @@ class EDAView extends WatchUi.DataField {
         return (hr - previousHr).abs() > allowedJump;
     }
 
+    private function isSpeedOutlier(speed as Float, timerTime as Number) as Boolean {
+        var previousSpeed = lastAcceptedSpeed;
+        var previousTimer = lastValidSpeedSignalTime;
+        if (previousSpeed == null || previousTimer == null) {
+            return false;
+        }
+
+        var deltaMs = timerTime - previousTimer;
+        if (deltaMs <= 0 || deltaMs > MAX_VALID_SAMPLE_GAP_MS) {
+            return false;
+        }
+
+        var allowedJump = MAX_SPEED_JUMP_PER_SEC * (deltaMs.toFloat() / 1000.0);
+        return (speed - previousSpeed).abs() > allowedJump;
+    }
+
+    private function hasUsablePower(power as Float?) as Boolean {
+        if (power == null) {
+            return false;
+        }
+
+        return power >= MIN_VALID_POWER && power <= MAX_VALID_POWER;
+    }
+
+    private function getPowerValidationError(power as Float?) as String? {
+        if (power == null) {
+            return null;
+        }
+
+        if (power < MIN_VALID_POWER) {
+            return STATUS_LOW_POWER;
+        }
+
+        if (power > MAX_VALID_POWER) {
+            return STATUS_SPIKE;
+        }
+
+        return null;
+    }
+
+    private function canUseSpeedWorkload() as Boolean {
+        return isRunningProfile();
+    }
+
+    private function hasUsableSpeedWorkload(speed as Float?) as Boolean {
+        if (!canUseSpeedWorkload()) {
+            return false;
+        }
+
+        if (speed == null || speed > MAX_SPEED_MS) {
+            return false;
+        }
+
+        var runPace = pacePerKmSeconds(speed);
+        return runPace != null && runPace <= MAX_RUNNING_PACE_PER_KM;
+    }
+
+    private function getSpeedValidationError(speed as Float?, timerTime as Number) as String? {
+        if (!canUseSpeedWorkload()) {
+            return null;
+        }
+
+        if (speed == null) {
+            return STATUS_NO_SPEED;
+        }
+
+        if (speed <= 0.0) {
+            return STATUS_LOW_PACE;
+        }
+
+        if (speed > MAX_SPEED_MS) {
+            return STATUS_INVALID_SPEED;
+        }
+
+        var runPace = pacePerKmSeconds(speed);
+        if (runPace == null) {
+            return STATUS_INVALID_SPEED;
+        }
+
+        if (runPace > MAX_RUNNING_PACE_PER_KM) {
+            return STATUS_LOW_PACE;
+        }
+
+        if (isSpeedOutlier(speed, timerTime)) {
+            return STATUS_INVALID_SPEED;
+        }
+
+        return null;
+    }
+
+    private function updateValidSpeedSignal(speed as Float?, timerTime as Number, speedValidationError as String?) as Void {
+        if (!canUseSpeedWorkload() || speed == null || speedValidationError != null) {
+            return;
+        }
+
+        lastAcceptedSpeed = speed;
+        lastValidSpeedSignalTime = timerTime;
+    }
+
+    private function getWorkloadValidationError(speedError as String?, power as Float?) as String? {
+        if (hasUsablePower(power)) {
+            return null;
+        }
+
+        var powerError = getPowerValidationError(power);
+        if (!canUseSpeedWorkload()) {
+            if (powerError != null) {
+                return powerError;
+            }
+
+            return STATUS_NO_POWER;
+        }
+
+        if (speedError == null) {
+            return null;
+        }
+
+        if (powerError != null) {
+            return powerError;
+        }
+
+        if (canUseSpeedWorkload()) {
+            return speedError;
+        }
+
+        return STATUS_NO_POWER;
+    }
+
     private function getWorkloadMetric(speed as Float?, power as Float?) as Float? {
-        if (power != null) {
+        if (hasUsablePower(power)) {
             return power;
         }
 
-        if (isRunningActivity && speed != null && speed > 0.0) {
+        if (hasUsableSpeedWorkload(speed) && speed != null) {
             return speed;
         }
 
         return null;
     }
 
-    private function validateSample(speed as Float?, hr as Float?, power as Float?, timerTime as Number) as String? {
-        if (hr == null) {
-            return "NO HR";
+    private function determineWorkloadSource(speed as Float?, power as Float?) as Number {
+        if (hasUsablePower(power)) {
+            return SOURCE_POWER;
         }
 
-        if (hr < MIN_VALID_HR) {
-            return "LOW HR";
+        if (hasUsableSpeedWorkload(speed)) {
+            return SOURCE_SPEED;
+        }
+
+        return SOURCE_NONE;
+    }
+
+    private function validateSample(speed as Float?, hr as Float?, power as Float?, timerTime as Number) as String? {
+        if (hr == null) {
+            return STATUS_NO_HR;
+        }
+
+        if (hr < getMinValidHr()) {
+            return STATUS_LOW_HR;
         }
 
         if (isHrOutlier(hr, timerTime)) {
-            return "SPIKE";
+            return STATUS_SPIKE;
         }
 
-        if (power != null) {
-            if (power < MIN_VALID_POWER) {
-                return "LOW P";
-            }
-
-            if (power > MAX_VALID_POWER) {
-                return "SPIKE";
-            }
-        }
-
-        if (isRunningActivity) {
-            var runPace = pacePerKmSeconds(speed);
-            if (runPace == null || runPace > MAX_RUNNING_PACE_PER_KM) {
-                return "LOW PACE";
-            }
-        } else if (power == null) {
-            return "NO PWR";
-        }
-
-        return null;
-    }
-
-    private function clampDrift(value as Float) as Float {
-        if (value > MAX_DRIFT_PERCENT) {
-            return MAX_DRIFT_PERCENT;
-        }
-
-        if (value < -MAX_DRIFT_PERCENT) {
-            return -MAX_DRIFT_PERCENT;
-        }
-
-        return value;
-    }
-
-    (:high_mem)
-    private function ensureBucket(bucketIndex as Number) as Void {
-        while (splitWeightedEf.size() <= bucketIndex) {
-            splitWeightedEf.add(0.0);
-            splitValidMs.add(0);
-        }
+        var speedError = getSpeedValidationError(speed, timerTime);
+        updateValidSpeedSignal(speed, timerTime, speedError);
+        return getWorkloadValidationError(speedError, power);
     }
 
     private function markAcceptedSample(timerTime as Number, hr as Float) as Void {
-        lastAcceptedTimerTime = timerTime;
+        lastAcceptedDriftSampleTime = timerTime;
         lastAcceptedHr = hr;
     }
 
-    (:high_mem)
-    private function rebalanceSplitBoundary() as Void {
-        var halfTimerTime = driftActiveMs / 2;
-        var targetBoundaryBucket = 0;
-
-        if (halfTimerTime > 0) {
-            targetBoundaryBucket = ((halfTimerTime + SPLIT_BUCKET_MS - 1) / SPLIT_BUCKET_MS).toNumber();
-        }
-
-        // Move each bucket across the split boundary at most once, so the
-        // running totals stay O(1) per sample over long activities.
-        while (splitBoundaryBucket < targetBoundaryBucket && splitBoundaryBucket < splitWeightedEf.size()) {
-            var bucketWeighted = splitWeightedEf[splitBoundaryBucket] as Float;
-            var bucketMs = splitValidMs[splitBoundaryBucket] as Number;
-
-            split1WeightedTotal += bucketWeighted;
-            split1MsTotal += bucketMs;
-            split2WeightedTotal -= bucketWeighted;
-            split2MsTotal -= bucketMs;
-            splitBoundaryBucket += 1;
+    private function primeAnalysisBaseline(timerTime as Number, speed as Float?, hr as Float, workloadSource as Number) as Void {
+        lastActiveTimerTime = timerTime;
+        markAcceptedSample(timerTime, hr);
+        currentWorkloadSource = workloadSource;
+        clearPendingWorkloadSourceSwitch();
+        updateDisplayFilters(speed, hr, 0);
+        if (isTargetModelSupported()) {
+            updateTargetDisplay(getDisplaySpeed(speed), getDisplayHr(hr));
         }
     }
 
-    (:high_mem)
-    private function recordValidSample(timerTime as Number, deltaMs as Number, ef as Float) as Void {
-        if (deltaMs <= 0 || ef <= 0.0) {
-            return;
+    private function restartAnalysisAfterSourceSwitch(timerTime as Number, speed as Float?, hr as Float, workloadSource as Number) as Void {
+        resetSessionFitSummary();
+        resetAnalysisState();
+        primeAnalysisBaseline(timerTime, speed, hr, workloadSource);
+        setCollectingStatus();
+    }
+
+    private function restartAnalysisAfterGap(timerTime as Number, speed as Float?, hr as Float?, workloadSource as Number) as Void {
+        resetSessionFitSummary();
+        resetAnalysisState();
+        if (hr != null && workloadSource != SOURCE_NONE) {
+            primeAnalysisBaseline(timerTime, speed, hr, workloadSource);
+        }
+        setInvalidStatus(STATUS_GAP);
+    }
+
+    private function resetEpochWithoutPrimingWithDetail(statusText as String, detailText as String) as Void {
+        resetAnalysisState();
+        setInvalidStatusWithDetail(statusText, detailText);
+    }
+
+    private function validateSourceConsistency(timerTime as Number, speed as Float?, hr as Float, workloadSource as Number, deltaMs as Number) as Boolean {
+        if (deltaMs > MAX_VALID_SAMPLE_GAP_MS) {
+            clearPendingWorkloadSourceSwitch();
+            restartAnalysisAfterGap(timerTime, speed, hr, workloadSource);
+            return false;
         }
 
-        var bucketIndex = (timerTime / SPLIT_BUCKET_MS).toNumber();
-        var weightedDelta = ef * deltaMs;
-        ensureBucket(bucketIndex);
+        if (currentWorkloadSource == SOURCE_NONE || workloadSource == currentWorkloadSource) {
+            clearPendingWorkloadSourceSwitch();
+            return true;
+        }
 
-        splitWeightedEf[bucketIndex] = (splitWeightedEf[bucketIndex] as Float) + weightedDelta;
-        splitValidMs[bucketIndex] = (splitValidMs[bucketIndex] as Number) + deltaMs;
-
-        if (bucketIndex < splitBoundaryBucket) {
-            split1WeightedTotal += weightedDelta;
-            split1MsTotal += deltaMs;
+        if (pendingWorkloadSource != workloadSource) {
+            pendingWorkloadSource = workloadSource;
+            pendingWorkloadSourceSamples = 1;
         } else {
-            split2WeightedTotal += weightedDelta;
-            split2MsTotal += deltaMs;
+            pendingWorkloadSourceSamples += 1;
         }
 
-        rebalanceSplitBoundary();
-    }
-
-    (:low_mem)
-    private function initializeLowMemBuffers() as Void {
-        if (lowMemWeightedBuckets.size() > 0) {
-            return;
+        if (pendingWorkloadSourceSamples < SOURCE_SWITCH_CONFIRM_SAMPLES) {
+            setCollectingStatus();
+            return false;
         }
 
-        for (var i = 0; i < LOW_MEM_BUCKET_COUNT; i += 1) {
-            lowMemWeightedBuckets.add(0.0);
-            lowMemValidBuckets.add(0);
-            lowMemBucketKeys.add(-1);
-        }
-    }
-
-    (:low_mem)
-    private function recordValidSample(timerTime as Number, deltaMs as Number, ef as Float) as Void {
-        if (deltaMs <= 0 || ef <= 0.0) {
-            return;
-        }
-
-        initializeLowMemBuffers();
-
-        var bucketKey = (timerTime / SPLIT_BUCKET_MS).toNumber();
-        var slot = bucketKey % LOW_MEM_BUCKET_COUNT;
-        if ((lowMemBucketKeys[slot] as Number) != bucketKey) {
-            lowMemBucketKeys[slot] = bucketKey;
-            lowMemWeightedBuckets[slot] = 0.0;
-            lowMemValidBuckets[slot] = 0;
-        }
-
-        lowMemWeightedBuckets[slot] = (lowMemWeightedBuckets[slot] as Float) + (ef * deltaMs);
-        lowMemValidBuckets[slot] = (lowMemValidBuckets[slot] as Number) + deltaMs;
-    }
-
-    (:high_mem)
-    private function computeDriftFromSplits() as Float? {
-        rebalanceSplitBoundary();
-
-        if (split1MsTotal < MIN_SPLIT_VALID_MS || split2MsTotal < MIN_SPLIT_VALID_MS) {
-            return null;
-        }
-
-        if (split1MsTotal <= 0 || split2MsTotal <= 0) {
-            return null;
-        }
-
-        var split1Ef = split1WeightedTotal / split1MsTotal;
-        var split2Ef = split2WeightedTotal / split2MsTotal;
-
-        if (split1Ef <= 0.0 || split2Ef <= 0.0) {
-            return null;
-        }
-
-        return clampDrift(((split1Ef / split2Ef) - 1.0) * 100.0);
-    }
-
-    (:low_mem)
-    private function computeDriftFromSplits() as Float? {
-        if (driftActiveMs < LOW_MEM_WINDOW_MS) {
-            return null;
-        }
-
-        initializeLowMemBuffers();
-
-        var split1Weighted = 0.0;
-        var split2Weighted = 0.0;
-        var split1Ms = 0;
-        var split2Ms = 0;
-        var windowStart = driftActiveMs - LOW_MEM_WINDOW_MS;
-        var windowMid = driftActiveMs - MIN_SPLIT_VALID_MS;
-
-        for (var i = 0; i < LOW_MEM_BUCKET_COUNT; i += 1) {
-            var bucketKey = lowMemBucketKeys[i] as Number;
-            if (bucketKey < 0) {
-                continue;
-            }
-
-            var bucketStart = bucketKey * SPLIT_BUCKET_MS;
-            if (bucketStart < windowStart || bucketStart >= driftActiveMs) {
-                continue;
-            }
-
-            var bucketWeighted = lowMemWeightedBuckets[i] as Float;
-            var bucketMs = lowMemValidBuckets[i] as Number;
-            if (bucketMs <= 0) {
-                continue;
-            }
-
-            if (bucketStart < windowMid) {
-                split1Weighted += bucketWeighted;
-                split1Ms += bucketMs;
-            } else {
-                split2Weighted += bucketWeighted;
-                split2Ms += bucketMs;
-            }
-        }
-
-        if (split1Ms < MIN_SPLIT_VALID_MS || split2Ms < MIN_SPLIT_VALID_MS) {
-            return null;
-        }
-
-        var split1Ef = split1Weighted / split1Ms;
-        var split2Ef = split2Weighted / split2Ms;
-        if (split1Ef <= 0.0 || split2Ef <= 0.0) {
-            return null;
-        }
-
-        return clampDrift(((split1Ef / split2Ef) - 1.0) * 100.0);
+        clearPendingWorkloadSourceSwitch();
+        restartAnalysisAfterSourceSwitch(timerTime, speed, hr, workloadSource);
+        return false;
     }
 
     private function updateDriftDisplay(driftPercent as Float) as Void {
@@ -762,46 +1172,52 @@ class EDAView extends WatchUi.DataField {
         }
     }
 
-    private function updateFitFields(driftPercent as Float) as Void {
-        if (driftField != null) {
-            driftField.setData(driftPercent);
-        }
-
-        driftSum += driftPercent;
-        driftCount += 1;
-        sessionDriftSum += driftPercent;
-        sessionDriftCount += 1;
-
-        if (avgDriftField != null && sessionDriftCount > 0) {
-            avgDriftField.setData(sessionDriftSum / sessionDriftCount);
-        }
-    }
-
-    (:high_mem)
-    private function resetDriftStorage() as Void {
-        splitWeightedEf = [];
-        splitValidMs = [];
-        splitBoundaryBucket = 0;
-        split1WeightedTotal = 0.0;
-        split1MsTotal = 0;
-        split2WeightedTotal = 0.0;
-        split2MsTotal = 0;
-    }
-
-    (:low_mem)
-    private function resetDriftStorage() as Void {
-        initializeLowMemBuffers();
-
-        for (var i = 0; i < LOW_MEM_BUCKET_COUNT; i += 1) {
-            lowMemWeightedBuckets[i] = 0.0;
-            lowMemValidBuckets[i] = 0;
-            lowMemBucketKeys[i] = -1;
-        }
+    private function updateFitFields(driftPercent as Float, intervalMs as Number) as Void {
+        getFitExportState().updateFitFields(getProfileResolver().getState(), canExportFitData(), driftPercent, intervalMs, currentWorkloadSource);
     }
 
     private function resetSessionFitSummary() as Void {
-        sessionDriftSum = 0.0;
-        sessionDriftCount = 0;
+        getFitExportState().resetSessionFitSummary();
+    }
+
+    (:high_mem)
+    private function buildHighMemRenderModel() as Dictionary {
+        return {
+            :renderBgColor => bgColor,
+            :renderFgColor => fgColor,
+            :paceLabel => lblAktPace,
+            :paceShortLabel => lblAktPaceShort,
+            :expectedPaceLabel => lblSollPace,
+            :expectedPaceShortLabel => lblSollPaceShort,
+            :expectedHrLabel => lblSollHr,
+            :expectedHrShortLabel => lblSollHrShort,
+            :hrLabel => lblAktHr,
+            :hrShortLabel => lblAktHrShort,
+            :currentPaceValue => getRenderedCurrentPaceValue(),
+            :expectedPaceValue => valSollPace,
+            :driftLabel => getRenderedDriftLabel(),
+            :renderStatusDetail => statusDetail,
+            :showModelError => isRunningProfile() && modelErrorMessage != "",
+            :renderModelErrorMessage => modelErrorMessage,
+            :defaultDetail => getDefaultStatusDetail(),
+            :expectedHrValue => valSollHr,
+            :currentHrValue => getRenderedCurrentHrValue()
+        };
+    }
+
+    (:low_mem)
+    private function buildLowMemRenderModel() as Dictionary {
+        return {
+            :renderBgColor => bgColor,
+            :renderFgColor => fgColor,
+            :paceShortLabel => lblAktPaceShort,
+            :currentPaceValue => getRenderedCurrentPaceValue(),
+            :driftLabel => getRenderedDriftLabel(),
+            :renderStatusDetail => statusDetail,
+            :defaultDetail => getDefaultStatusDetail(),
+            :hrShortLabel => lblAktHrShort,
+            :currentHrValue => getRenderedCurrentHrValue()
+        };
     }
 
     (:high_mem)
@@ -815,26 +1231,11 @@ class EDAView extends WatchUi.DataField {
     private function resetFilterState() as Void {
     }
 
-    // Reset all transient activity state so new laps, legs and activities
-    // start from a clean baseline.
     private function resetSessionState() as Void {
         mTimerTime = 0;
-        lastActiveTimerTime = null;
-        lastAcceptedTimerTime = null;
-        lastAcceptedHr = null;
-        validActiveMs = 0;
-        driftActiveMs = 0;
-        driftSum = 0.0;
-        driftCount = 0;
-        isRunningActivity = false;
-        activityProfileResolved = false;
-        resetFilterState();
-        valAktPace = "--:--";
-        valAktHr = "--";
-        resetTargetDisplay();
-        statusDetail = "";
-        resetDriftStorage();
-        setStatus("WAIT");
+        clearLifecyclePauseState();
+        getProfileResolver().resetSession();
+        resetAnalysisState();
     }
 
     function onTimerReset() as Void {
@@ -847,6 +1248,21 @@ class EDAView extends WatchUi.DataField {
         WatchUi.requestUpdate();
     }
 
+    function onTimerPause() as Void {
+        rememberPauseTimestamp();
+        setInvalidStatus(STATUS_PAUSE);
+        WatchUi.requestUpdate();
+    }
+
+    function onTimerResume() as Void {
+        if (shouldResetAfterResumePause()) {
+            restartAnalysisAfterGap(mTimerTime, null, null, SOURCE_NONE);
+        } else {
+            setCollectingStatus();
+        }
+        WatchUi.requestUpdate();
+    }
+
     function onNextMultisportLeg() as Void {
         resetSessionFitSummary();
         resetSessionState();
@@ -854,52 +1270,111 @@ class EDAView extends WatchUi.DataField {
     }
 
     function compute(info as Activity.Info) as Void {
-        mTimerTime = toNumberOrZero(info.timerTime as Numeric?);
-        resolveActivityProfile();
+        refreshEngineCalibrationState();
 
+        var currentTimerTime = toNumberOrNull(info.timerTime as Numeric?);
+        if (currentTimerTime == null) {
+            return;
+        }
         var curSpeed = toFloatOrNull(info.currentSpeed as Numeric?);
         var curHr = toFloatOrNull(info.currentHeartRate as Numeric?);
         var curPower = toFloatOrNull(info.currentPower as Numeric?);
 
-        updateLiveDisplay(curSpeed, curHr);
-        updateTargetDisplay(getDisplaySpeed(curSpeed), getDisplayHr(curHr));
-
         if (info.timerState != Activity.TIMER_STATE_ON) {
-            lastActiveTimerTime = null;
-            setStatus("PAUSE");
+            rememberPauseTimestamp();
+            setInvalidStatus(STATUS_PAUSE);
             return;
+        }
+
+        var previousTimerTime = lastActiveTimerTime;
+        if (previousTimerTime != null && currentTimerTime < previousTimerTime) {
+            var rollbackMs = previousTimerTime - currentTimerTime;
+            if (rollbackMs > IMPLICIT_TIMER_RESET_TOLERANCE_MS) {
+                handleImplicitSessionReset();
+            } else {
+                return;
+            }
+        }
+
+        mTimerTime = currentTimerTime;
+
+        if (lastPauseSystemTimer != null && shouldResetAfterResumePause()) {
+            restartAnalysisAfterGap(mTimerTime, null, null, SOURCE_NONE);
+            return;
+        }
+
+        resolveActivityProfile();
+
+        updateLiveDisplay(curSpeed, curHr);
+        if (isTargetModelSupported()) {
+            updateTargetDisplay(getDisplaySpeed(curSpeed), getDisplayHr(curHr));
         }
 
         var deltaMs = getSampleDelta(mTimerTime);
         if (deltaMs <= 0) {
-            setStatus("WAIT");
+            setCollectingStatus();
             return;
         }
 
-        if (!activityProfileResolved) {
-            setStatus("WAIT");
+        if (!hasUsableActivityProfile()) {
+            if (getProfileResolver().isRetryPending()) {
+                setInvalidStatusWithDetail(STATUS_WAIT, getProfileRetryDetail());
+            } else {
+                setCollectingStatus();
+            }
+            return;
+        }
+
+        if (hasAcceptedDataGap(mTimerTime)) {
+            restartAnalysisAfterGap(mTimerTime, curSpeed, curHr, determineWorkloadSource(curSpeed, curPower));
             return;
         }
 
         var validationError = validateSample(curSpeed, curHr, curPower, mTimerTime);
         if (validationError != null) {
-            setStatus(validationError);
+            if (validationError.equals(STATUS_NO_HR) || validationError.equals(STATUS_NO_POWER) || validationError.equals(STATUS_INVALID_SPEED)) {
+                syncDisplayWithCurrentSample(curSpeed, curHr);
+            }
+            if (getProfileResolver().hasTimeoutNoticePending()) {
+                getProfileResolver().clearTimeoutNoticePending();
+                resetEpochWithoutPrimingWithDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout);
+                return;
+            }
+            setInvalidStatus(validationError);
             return;
         }
 
         var workload = getWorkloadMetric(curSpeed, curPower);
         if (curHr == null || workload == null || curHr <= 0.0 || workload <= 0.0) {
-            setStatus("WAIT");
+            if (getProfileResolver().hasTimeoutNoticePending()) {
+                getProfileResolver().clearTimeoutNoticePending();
+                resetEpochWithoutPrimingWithDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout);
+                return;
+            }
+            setCollectingStatus();
+            return;
+        }
+
+        var workloadSource = determineWorkloadSource(curSpeed, curPower);
+        if (getProfileResolver().hasTimeoutNoticePending()) {
+            getProfileResolver().clearTimeoutNoticePending();
+            restartAnalysisAfterGap(mTimerTime, curSpeed, curHr, workloadSource);
+            setInvalidStatusWithDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout);
+            return;
+        }
+
+        if (!validateSourceConsistency(mTimerTime, curSpeed, curHr, workloadSource, deltaMs)) {
             return;
         }
 
         var ef = workload / curHr;
         if (ef <= 0.0) {
-            setStatus("WAIT");
+            setCollectingStatus();
             return;
         }
 
         markAcceptedSample(mTimerTime, curHr);
+        currentWorkloadSource = workloadSource;
         validActiveMs += deltaMs;
         var previousDriftActiveMs = driftActiveMs;
         if (validActiveMs > WARMUP_VALID_MS) {
@@ -909,90 +1384,45 @@ class EDAView extends WatchUi.DataField {
         }
 
         updateDisplayFilters(curSpeed, curHr, deltaMs);
-        updateTargetDisplay(getDisplaySpeed(curSpeed), getDisplayHr(curHr));
+        if (isTargetModelSupported()) {
+            updateTargetDisplay(getDisplaySpeed(curSpeed), getDisplayHr(curHr));
+        }
 
         if (driftActiveMs <= 0) {
             var remainingMs = WARMUP_VALID_MS - validActiveMs;
             var remainingSeconds = ((remainingMs + 999) / 1000).toNumber();
-            setStatusWithDetail("WARMUP", remainingSeconds.toString() + "S VALID");
+            setInvalidStatusWithDetail(STATUS_WARMUP, remainingSeconds.toString() + msgWarmupValidSuffix);
             return;
         }
 
         var driftDeltaMs = driftActiveMs - previousDriftActiveMs;
-        recordValidSample(driftActiveMs, driftDeltaMs, ef);
+        getDriftEngine().recordValidSample(driftActiveMs, driftDeltaMs, ef);
 
-        var driftPercent = computeDriftFromSplits();
+        var driftPercent = getDriftEngine().computeDrift(driftActiveMs);
         if (driftPercent == null) {
-            setStatus("WAIT");
+            setCollectingStatus();
+            return;
+        }
+
+        if (isInvalidDriftValue(driftPercent)) {
+            writeInvalidRecord();
             return;
         }
 
         updateDriftDisplay(driftPercent);
-        updateFitFields(driftPercent);
+        if (isProfileProvisional()) {
+            statusDetail = msgProvisionalProfile;
+        }
+        updateFitFields(driftPercent, driftDeltaMs);
     }
 
     (:high_mem)
     function onUpdate(dc as Graphics.Dc) as Void {
-        dc.setColor(Graphics.COLOR_TRANSPARENT, bgColor);
-        dc.clear();
-
-        var width = dc.getWidth();
-        var height = dc.getHeight();
-        dc.setColor(fgColor, Graphics.COLOR_TRANSPARENT);
-
-        var pL = lblAktPace;
-        var sPL = lblSollPace;
-        var sHL = lblSollHr;
-        var hL = lblAktHr;
-
-        if (width < 180) {
-            pL = "P:";
-            sPL = isGerman ? "Erw.P:" : "Exp.P:";
-            sHL = isGerman ? "Erw.H:" : "Exp.H:";
-            hL = "H:";
-        }
-
-        var fOuter = Graphics.FONT_XTINY;
-        var fInner = (height < 140) ? Graphics.FONT_XTINY : Graphics.FONT_TINY;
-        var fDrift = (height < 140) ? Graphics.FONT_SMALL : Graphics.FONT_MEDIUM;
-        if (height > 200) {
-            fDrift = Graphics.FONT_NUMBER_MEDIUM;
-        }
-
-        dc.drawText(width / 2, height * 0.12, fOuter, pL + valAktPace, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(width / 2, height * 0.30, fInner, sPL + valSollPace, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(width / 2, height * 0.48, fDrift, strDrift, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-
-        if (statusDetail != "") {
-            dc.drawText(width / 2, height * 0.60, Graphics.FONT_XTINY, statusDetail, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        } else if (strDrift.equals("WAIT")) {
-            dc.drawText(width / 2, height * 0.60, Graphics.FONT_XTINY, "COLLECTING VALID DATA", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        } else if (strDrift.equals("NO PWR")) {
-            dc.drawText(width / 2, height * 0.60, Graphics.FONT_XTINY, "POWER REQUIRED", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        }
-
-        dc.drawText(width / 2, height * 0.72, fInner, sHL + valSollHr, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(width / 2, height * 0.88, fOuter, hL + valAktHr, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        getRenderer().drawHighMem(dc, buildHighMemRenderModel());
     }
 
     (:low_mem)
     function onUpdate(dc as Graphics.Dc) as Void {
-        dc.setColor(Graphics.COLOR_TRANSPARENT, bgColor);
-        dc.clear();
-
-        var width = dc.getWidth();
-        var height = dc.getHeight();
-        dc.setColor(fgColor, Graphics.COLOR_TRANSPARENT);
-
-        var fPace = Graphics.FONT_TINY;
-        var fDrift = (height < 180) ? Graphics.FONT_SMALL : Graphics.FONT_MEDIUM;
-        var fHr = Graphics.FONT_TINY;
-
-        dc.drawText(width / 2, height * 0.20, fPace, lblAktPace + valAktPace, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(width / 2, height * 0.50, fDrift, strDrift, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        if (statusDetail != "") {
-            dc.drawText(width / 2, height * 0.65, Graphics.FONT_XTINY, statusDetail, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        }
-        dc.drawText(width / 2, height * 0.80, fHr, lblAktHr + valAktHr, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        getRenderer().drawLowMem(dc, buildLowMemRenderModel());
     }
 }

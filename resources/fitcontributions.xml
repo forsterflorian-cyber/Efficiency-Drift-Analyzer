@@ -14,4 +14,10 @@
               precision="1" 
               displayInChart="false"
               sortOrder="1" />
+    
+    <fitField id="2"
+              dataLabel="@Strings.lblFitProfileState"
+              unitLabel="@Strings.unitState"
+              displayInChart="false"
+              sortOrder="2" />
 </fitContributions>
