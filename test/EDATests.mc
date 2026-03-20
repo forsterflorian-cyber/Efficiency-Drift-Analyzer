@@ -63,3 +63,37 @@ function driftWeightingPrefersLongerIntervals(logger as Test.Logger) as Boolean 
     );
     return true;
 }
+
+(:test)
+function mixedSourceSessionSummaryRemainsContinuous(logger as Test.Logger) as Boolean {
+    var fitExportState = new EDAFitExportState(null, null, null);
+
+    fitExportState.updateFitFields(3, true, 4.0, 10000, 1);
+    fitExportState.updateFitFields(3, true, 6.0, 20000, 2);
+
+    var averageDrift = fitExportState.getSessionAverageDriftForDiagnostics();
+    Test.assertMessage(averageDrift != null, "Expected a mixed-source session summary.");
+
+    var actual = averageDrift as Float;
+    var expected = 5.3333;
+    logger.debug("mixedSourceAvg=" + actual.format("%.4f"));
+    Test.assertMessage(
+        (actual - expected).abs() < 0.05,
+        "Session summary should keep both power and speed contributions without a reset."
+    );
+    return true;
+}
+
+(:test)
+function midSessionResetKeepsCollectingStatusOutOfWarmup(logger as Test.Logger) as Boolean {
+    Test.assertMessage(
+        EDASessionPolicy.shouldShowWarmupStatus(false, false),
+        "Initial collection should still use WARMUP."
+    );
+    logger.debug("midSessionWarmupGate=" + EDASessionPolicy.shouldShowWarmupStatus(true, true).toString());
+    Test.assertMessage(
+        !EDASessionPolicy.shouldShowWarmupStatus(true, true),
+        "A post-reset recollection after completed warmup should not reuse WARMUP."
+    );
+    return true;
+}

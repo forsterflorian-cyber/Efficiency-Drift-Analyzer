@@ -100,12 +100,21 @@ class EDAView extends WatchUi.DataField {
     private var lastValidSpeedSignalTime as Number? = null;
     private var lastLiveSpeed as Float? = null;
     private var lastLiveHr as Float? = null;
+    private var lastDisplaySpeed as Float? = null;
+    private var lastDisplayHr as Float? = null;
     private var validActiveMs as Number = 0;
     private var driftActiveMs as Number = 0;
     private var currentWorkloadSource as Number = SOURCE_NONE;
     private var pendingWorkloadSource as Number = SOURCE_NONE;
     private var pendingWorkloadSourceSamples as Number = 0;
     private var lastPauseSystemTimer as Number? = null;
+    private var isRenderCacheRefreshDeferred as Boolean = false;
+    private var isRenderCacheDirty as Boolean = false;
+    private var hasCompletedWarmupThisSession as Boolean = false;
+    private var hasPostResetCollectingStatus as Boolean = false;
+    private var postResetCollectingStatus as Number = STATUS_WAIT;
+    private var postResetCollectingDetail as String = "";
+    private var postResetCollectingDetailShort as String = "";
 
     private var statusDetail as String = "";
     private var statusDetailShort as String = "";
@@ -439,12 +448,12 @@ class EDAView extends WatchUi.DataField {
     (:high_mem)
     private function handleDistanceFactorChange() as Void {
         calculateLinearModel();
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     (:low_mem)
     private function handleDistanceFactorChange() as Void {
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     (:high_mem)
@@ -485,9 +494,9 @@ class EDAView extends WatchUi.DataField {
         }
 
         if (isTargetModelSupported() && !isInvalidDisplayState()) {
-            updateTargetDisplay(getDisplaySpeed(lastLiveSpeed), getDisplayHr(lastLiveHr));
+            updateTargetDisplay(getDisplaySpeed(lastDisplaySpeed), getDisplayHr(lastDisplayHr));
         }
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     private function getNumericProperty(key as String) as Float {
@@ -565,7 +574,7 @@ class EDAView extends WatchUi.DataField {
             getDriftEngine().setCalibrated(isEngineCalibrated);
         }
         if (previousCalibrationState != isEngineCalibrated && renderer != null) {
-            refreshRenderCache();
+            requestRenderCacheRefresh();
         }
     }
 
@@ -589,10 +598,42 @@ class EDAView extends WatchUi.DataField {
         return getProfileResolver().isRunningActivity();
     }
 
+    private function hasFallbackExportWindowElapsed() as Boolean {
+        return mTimerTime >= FALLBACK_EXPORT_TIMEOUT_MS;
+    }
+
     private function canExportFitData() as Boolean {
         // Record developer fields are forward-only; unresolved fallback samples
         // cannot be backfilled into older FIT record messages.
-        return hasAuthoritativeProfile() || (isFallbackProfileConfirmed() && mTimerTime >= FALLBACK_EXPORT_TIMEOUT_MS);
+        if (hasAuthoritativeProfile()) {
+            return true;
+        }
+
+        if (!isFallbackProfileConfirmed()) {
+            return false;
+        }
+
+        return hasFallbackExportWindowElapsed();
+    }
+
+    private function getRenderedDriftValuePrefix(isShort as Boolean) as String? {
+        if (driftStatus != STATUS_VALUE) {
+            return null;
+        }
+
+        if (isProfileProvisional()) {
+            return isShort ? lblStatusProvisionalShort : lblStatusProvisional;
+        }
+
+        if (isFallbackProfileConfirmed()) {
+            return isShort ? lblTypeUnknownShort : lblTypeUnknown;
+        }
+
+        if (!canExportFitData()) {
+            return isShort ? lblNotSavedShort : lblNotSaved;
+        }
+
+        return null;
     }
 
     private function getStatusLabel(statusCode as Number) as String {
@@ -672,16 +713,16 @@ class EDAView extends WatchUi.DataField {
             return lblStatusConfigError;
         }
 
-        var driftLabel = (driftStatus == STATUS_VALUE) ? strDrift : getStatusLabel(driftStatus);
-        if (!canExportFitData()) {
-            return lblNotSaved + " " + driftLabel;
+        if (driftStatus != STATUS_VALUE) {
+            return getStatusLabel(driftStatus);
         }
 
-        if (isFallbackProfileConfirmed()) {
-            return lblTypeUnknown + " " + driftLabel;
+        var driftPrefix = getRenderedDriftValuePrefix(false);
+        if (driftPrefix != null && (driftPrefix as String) != "") {
+            return (driftPrefix as String) + " " + strDrift;
         }
 
-        return driftLabel;
+        return strDrift;
     }
 
     private function getRenderedDriftShortLabel() as String {
@@ -689,16 +730,16 @@ class EDAView extends WatchUi.DataField {
             return lblStatusConfigErrorShort;
         }
 
-        var driftLabel = (driftStatus == STATUS_VALUE) ? strDrift : getStatusShortLabel(driftStatus);
-        if (!canExportFitData()) {
-            return lblNotSavedShort + " " + driftLabel;
+        if (driftStatus != STATUS_VALUE) {
+            return getStatusShortLabel(driftStatus);
         }
 
-        if (isFallbackProfileConfirmed()) {
-            return lblTypeUnknownShort + " " + driftLabel;
+        var driftPrefix = getRenderedDriftValuePrefix(true);
+        if (driftPrefix != null && (driftPrefix as String) != "") {
+            return (driftPrefix as String) + " " + strDrift;
         }
 
-        return driftLabel;
+        return strDrift;
     }
 
     private function shouldShowProfileErrorDetail() as Boolean {
@@ -779,14 +820,111 @@ class EDAView extends WatchUi.DataField {
     private function initializeRenderModels() as Void {
         highMemRenderModel = {};
         lowMemRenderModel = null;
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     (:low_mem)
     private function initializeRenderModels() as Void {
         highMemRenderModel = null;
         lowMemRenderModel = {};
+        requestRenderCacheRefresh();
+    }
+
+    private function requestRenderCacheRefresh() as Void {
+        isRenderCacheDirty = true;
+        if (!isRenderCacheRefreshDeferred) {
+            flushRenderCacheRefresh();
+        }
+    }
+
+    private function flushRenderCacheRefresh() as Void {
+        if (!isRenderCacheDirty) {
+            return;
+        }
+
         refreshRenderCache();
+        isRenderCacheDirty = false;
+    }
+
+    private function beginDeferredRenderCacheRefresh() as Void {
+        isRenderCacheRefreshDeferred = true;
+    }
+
+    private function endDeferredRenderCacheRefresh() as Void {
+        isRenderCacheRefreshDeferred = false;
+        flushRenderCacheRefresh();
+    }
+
+    private function clearRawLiveSampleState() as Void {
+        lastLiveSpeed = null;
+        lastLiveHr = null;
+    }
+
+    private function clearDisplaySampleState() as Void {
+        lastDisplaySpeed = null;
+        lastDisplayHr = null;
+    }
+
+    private function updateDisplaySampleState(speed as Float?, hr as Float?) as Void {
+        lastDisplaySpeed = (lastLiveSpeed != null) ? lastLiveSpeed : speed;
+        lastDisplayHr = (lastLiveHr != null) ? lastLiveHr : hr;
+    }
+
+    private function shouldRetainDisplaySampleState(statusCode as Number) as Boolean {
+        return statusCode == STATUS_WAIT || statusCode == STATUS_WARMUP;
+    }
+
+    private function clearPostResetCollectingStatus() as Void {
+        hasPostResetCollectingStatus = false;
+        postResetCollectingStatus = STATUS_WAIT;
+        postResetCollectingDetail = "";
+        postResetCollectingDetailShort = "";
+    }
+
+    private function clearWarmupSessionState() as Void {
+        hasCompletedWarmupThisSession = false;
+        clearPostResetCollectingStatus();
+    }
+
+    // Preserve why a mid-session reset happened so recollection does not look
+    // like the very first warmup of the activity.
+    private function rememberPostResetCollectingStatus(statusCode as Number, detailText as String, shortDetailText as String) as Void {
+        if (!hasCompletedWarmupThisSession) {
+            clearPostResetCollectingStatus();
+            return;
+        }
+
+        hasPostResetCollectingStatus = true;
+        postResetCollectingStatus = statusCode;
+        postResetCollectingDetail = detailText;
+        postResetCollectingDetailShort = shortDetailText;
+    }
+
+    private function applyPostResetCollectingStatus() as Boolean {
+        if (!hasPostResetCollectingStatus) {
+            return false;
+        }
+
+        if (postResetCollectingStatus == STATUS_WAIT) {
+            setCollectingStatus();
+            return true;
+        }
+
+        if (postResetCollectingDetail != "" || postResetCollectingDetailShort != "") {
+            setStatusWithDetail(postResetCollectingStatus, postResetCollectingDetail, postResetCollectingDetailShort);
+        } else {
+            setStatus(postResetCollectingStatus);
+        }
+        return true;
+    }
+
+    private function shouldShowWarmupStatus() as Boolean {
+        return EDASessionPolicy.shouldShowWarmupStatus(hasCompletedWarmupThisSession, hasPostResetCollectingStatus);
+    }
+
+    private function markWarmupCompleted() as Void {
+        hasCompletedWarmupThisSession = true;
+        clearPostResetCollectingStatus();
     }
 
     private function getRenderSafePaceValue() as String {
@@ -962,7 +1100,7 @@ class EDAView extends WatchUi.DataField {
         resetFilterState();
         updateLiveDisplay(speed, hr);
         resetTargetDisplay();
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     private function isInvalidDisplayState() as Boolean {
@@ -1008,8 +1146,8 @@ class EDAView extends WatchUi.DataField {
                 return formatPace(displaySpeed);
             }
 
-            if (lastLiveSpeed != null && (lastLiveSpeed as Float) > 0.0) {
-                return formatPace(lastLiveSpeed as Float);
+            if (lastDisplaySpeed != null && (lastDisplaySpeed as Float) > 0.0) {
+                return formatPace(lastDisplaySpeed as Float);
             }
 
             return INVALID_RENDER_VALUE;
@@ -1029,8 +1167,8 @@ class EDAView extends WatchUi.DataField {
                 return displayHr.toNumber().toString();
             }
 
-            if (lastLiveHr != null && (lastLiveHr as Float) > 0.0) {
-                return (lastLiveHr as Float).toNumber().toString();
+            if (lastDisplayHr != null && (lastDisplayHr as Float) > 0.0) {
+                return (lastDisplayHr as Float).toNumber().toString();
             }
 
             return INVALID_RENDER_VALUE;
@@ -1052,6 +1190,9 @@ class EDAView extends WatchUi.DataField {
         if (lastPauseSystemTimer == null) {
             lastPauseSystemTimer = System.getTimer();
         }
+
+        clearRawLiveSampleState();
+        clearDisplaySampleState();
     }
 
     private function shouldResetAfterResumePause() as Boolean {
@@ -1096,8 +1237,8 @@ class EDAView extends WatchUi.DataField {
         resetResumeSensitiveState();
         validActiveMs = 0;
         driftActiveMs = 0;
-        lastLiveSpeed = null;
-        lastLiveHr = null;
+        clearRawLiveSampleState();
+        clearDisplaySampleState();
         currentWorkloadSource = SOURCE_NONE;
         valAktPace = "--:--";
         valAktHr = "--";
@@ -1117,6 +1258,7 @@ class EDAView extends WatchUi.DataField {
         clearLifecyclePauseState();
         getProfileResolver().handleImplicitSessionReset();
         resetSessionFitSummary();
+        clearWarmupSessionState();
         resetAnalysisState();
     }
 
@@ -1136,6 +1278,7 @@ class EDAView extends WatchUi.DataField {
                 resetSessionFitSummary();
             }
             resetAnalysisState();
+            rememberPostResetCollectingStatus(STATUS_WAIT, "", "");
         }
     }
 
@@ -1162,8 +1305,11 @@ class EDAView extends WatchUi.DataField {
         strDrift = "--";
         statusDetail = "";
         statusDetailShort = "";
+        if (!shouldRetainDisplaySampleState(statusCode)) {
+            clearDisplaySampleState();
+        }
         setNeutralColors();
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     private function setStatusWithDetail(statusCode as Number, detailText as String, shortDetailText as String) as Void {
@@ -1173,12 +1319,16 @@ class EDAView extends WatchUi.DataField {
         strDrift = "--";
         statusDetail = detailText;
         statusDetailShort = shortDetailText;
+        if (!shouldRetainDisplaySampleState(statusCode)) {
+            clearDisplaySampleState();
+        }
         setNeutralColors();
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     (:high_mem)
     private function updateLiveDisplay(speed as Float?, hr as Float?) as Void {
+        updateDisplaySampleState(speed, hr);
         if (filterInitialized) {
             if (speed != null) {
                 valAktPace = formatPace(ewmaSpeed);
@@ -1191,7 +1341,7 @@ class EDAView extends WatchUi.DataField {
             } else {
                 valAktHr = "--";
             }
-            refreshRenderCache();
+            requestRenderCacheRefresh();
             return;
         }
 
@@ -1206,11 +1356,12 @@ class EDAView extends WatchUi.DataField {
         } else {
             valAktHr = "--";
         }
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     (:low_mem)
     private function updateLiveDisplay(speed as Float?, hr as Float?) as Void {
+        updateDisplaySampleState(speed, hr);
         if (speed != null) {
             valAktPace = formatPace(speed);
         } else {
@@ -1222,7 +1373,7 @@ class EDAView extends WatchUi.DataField {
         } else {
             valAktHr = "--";
         }
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     (:high_mem)
@@ -1315,7 +1466,7 @@ class EDAView extends WatchUi.DataField {
         resetTargetDisplay();
 
         if (!isRunningProfile() || displaySpeed == null || displayHr == null || !modelValid || m.abs() <= MODEL_DELTA_EPSILON) {
-            refreshRenderCache();
+            requestRenderCacheRefresh();
             return;
         }
 
@@ -1328,13 +1479,13 @@ class EDAView extends WatchUi.DataField {
         if (vSoll > 0.2) {
             valSollPace = formatPace(vSoll);
         }
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     (:low_mem)
     private function updateTargetDisplay(displaySpeed as Float?, displayHr as Float?) as Void {
         resetTargetDisplay();
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     private function getSampleDelta(timerTime as Number) as Number {
@@ -1508,19 +1659,7 @@ class EDAView extends WatchUi.DataField {
         return STATUS_NO_POWER;
     }
 
-    private function getWorkloadMetric(speed as Float?, power as Float?) as Float? {
-        if (hasUsablePower(power)) {
-            return power;
-        }
-
-        if (hasUsableSpeedWorkload(speed) && speed != null) {
-            return speed;
-        }
-
-        return null;
-    }
-
-    private function determineWorkloadSource(speed as Float?, power as Float?) as Number {
+    private function determinePreferredWorkloadSource(speed as Float?, power as Float?) as Number {
         if (hasUsablePower(power)) {
             return SOURCE_POWER;
         }
@@ -1530,6 +1669,40 @@ class EDAView extends WatchUi.DataField {
         }
 
         return SOURCE_NONE;
+    }
+
+    private function isWorkloadSourceUsable(workloadSource as Number, speed as Float?, power as Float?) as Boolean {
+        if (workloadSource == SOURCE_POWER) {
+            return hasUsablePower(power);
+        }
+
+        if (workloadSource == SOURCE_SPEED) {
+            return hasUsableSpeedWorkload(speed);
+        }
+
+        return false;
+    }
+
+    private function determineWorkloadSource(speed as Float?, power as Float?) as Number {
+        // Keep using the current source while it remains valid to avoid
+        // oscillating between equally usable sensors.
+        if (currentWorkloadSource != SOURCE_NONE && isWorkloadSourceUsable(currentWorkloadSource, speed, power)) {
+            return currentWorkloadSource;
+        }
+
+        return determinePreferredWorkloadSource(speed, power);
+    }
+
+    private function getWorkloadMetricForSource(workloadSource as Number, speed as Float?, power as Float?) as Float? {
+        if (workloadSource == SOURCE_POWER && power != null && hasUsablePower(power)) {
+            return power;
+        }
+
+        if (workloadSource == SOURCE_SPEED && speed != null && hasUsableSpeedWorkload(speed)) {
+            return speed;
+        }
+
+        return null;
     }
 
     private function validateSample(speed as Float?, hr as Float?, power as Float?, timerTime as Number) as Number? {
@@ -1567,9 +1740,9 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function restartAnalysisAfterSourceSwitch(timerTime as Number, speed as Float?, hr as Float, workloadSource as Number) as Void {
-        resetSessionFitSummary();
         resetAnalysisState();
         primeAnalysisBaseline(timerTime, speed, hr, workloadSource);
+        rememberPostResetCollectingStatus(STATUS_WAIT, "", "");
         setCollectingStatus();
     }
 
@@ -1578,16 +1751,19 @@ class EDAView extends WatchUi.DataField {
         if (hr != null && workloadSource != SOURCE_NONE) {
             primeAnalysisBaseline(timerTime, speed, hr, workloadSource);
         }
+        rememberPostResetCollectingStatus(STATUS_GAP, "", "");
         setInvalidStatus(STATUS_GAP);
     }
 
     private function resetEpochWithoutPrimingWithDetail(statusCode as Number, detailText as String) as Void {
         resetAnalysisState();
+        rememberPostResetCollectingStatus(statusCode, detailText, detailText);
         setInvalidStatusWithDetail(statusCode, detailText);
     }
 
     private function resetEpochWithoutPrimingWithShortDetail(statusCode as Number, detailText as String, shortDetailText as String) as Void {
         resetAnalysisState();
+        rememberPostResetCollectingStatus(statusCode, detailText, shortDetailText);
         setInvalidStatusWithShortDetail(statusCode, detailText, shortDetailText);
     }
 
@@ -1637,7 +1813,7 @@ class EDAView extends WatchUi.DataField {
             bgColor = Graphics.COLOR_RED;
             fgColor = Graphics.COLOR_WHITE;
         }
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     private function updateFitFields(driftPercent as Float, intervalMs as Number) as Void {
@@ -1673,6 +1849,7 @@ class EDAView extends WatchUi.DataField {
         mTimerTime = 0;
         clearLifecyclePauseState();
         getProfileResolver().resetSession();
+        clearWarmupSessionState();
         resetAnalysisState();
     }
 
@@ -1693,11 +1870,13 @@ class EDAView extends WatchUi.DataField {
     }
 
     function onTimerResume() as Void {
-        if (shouldResetAfterResumePause()) {
-            restartAnalysisAfterGap(mTimerTime, null, null, SOURCE_NONE);
-        } else {
-            setCollectingStatus();
+        if (lastPauseSystemTimer == null) {
+            return;
         }
+
+        clearRawLiveSampleState();
+        clearDisplaySampleState();
+        setCollectingStatus();
         WatchUi.requestUpdate();
     }
 
@@ -1708,6 +1887,7 @@ class EDAView extends WatchUi.DataField {
     }
 
     function compute(info as Activity.Info) as Void {
+        beginDeferredRenderCacheRefresh();
         if (loadDistanceFactor()) {
             handleDistanceFactorChange();
         }
@@ -1715,6 +1895,7 @@ class EDAView extends WatchUi.DataField {
 
         var currentTimerTime = toNumberOrNull(info.timerTime as Numeric?);
         if (currentTimerTime == null) {
+            endDeferredRenderCacheRefresh();
             return;
         }
         var curSpeed = toFloatOrNull(info.currentSpeed as Numeric?);
@@ -1725,12 +1906,14 @@ class EDAView extends WatchUi.DataField {
 
         if (!isEngineCalibrated) {
             setStatusWithDetail(STATUS_CFG_ERR, msgConfigRequired, msgConfigRequiredShort);
+            endDeferredRenderCacheRefresh();
             return;
         }
 
         if (info.timerState != Activity.TIMER_STATE_ON) {
             rememberPauseTimestamp();
             setInvalidStatus(STATUS_PAUSE);
+            endDeferredRenderCacheRefresh();
             return;
         }
 
@@ -1740,6 +1923,7 @@ class EDAView extends WatchUi.DataField {
             if (rollbackMs > IMPLICIT_TIMER_RESET_TOLERANCE_MS) {
                 handleImplicitSessionReset();
             } else {
+                endDeferredRenderCacheRefresh();
                 return;
             }
         }
@@ -1748,6 +1932,7 @@ class EDAView extends WatchUi.DataField {
 
         if (lastPauseSystemTimer != null && shouldResetAfterResumePause()) {
             restartAnalysisAfterGap(mTimerTime, null, null, SOURCE_NONE);
+            endDeferredRenderCacheRefresh();
             return;
         }
 
@@ -1761,6 +1946,7 @@ class EDAView extends WatchUi.DataField {
         var deltaMs = getSampleDelta(mTimerTime);
         if (deltaMs <= 0) {
             setCollectingStatus();
+            endDeferredRenderCacheRefresh();
             return;
         }
 
@@ -1770,11 +1956,13 @@ class EDAView extends WatchUi.DataField {
             } else {
                 setCollectingStatus();
             }
+            endDeferredRenderCacheRefresh();
             return;
         }
 
         if (hasAcceptedDataGap(mTimerTime)) {
             restartAnalysisAfterGap(mTimerTime, curSpeed, curHr, determineWorkloadSource(curSpeed, curPower));
+            endDeferredRenderCacheRefresh();
             return;
         }
 
@@ -1786,38 +1974,46 @@ class EDAView extends WatchUi.DataField {
             if (getProfileResolver().hasTimeoutNoticePending()) {
                 getProfileResolver().clearTimeoutNoticePending();
                 resetEpochWithoutPrimingWithShortDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
+                endDeferredRenderCacheRefresh();
                 return;
             }
             setInvalidStatus(validationError);
-            return;
-        }
-
-        var workload = getWorkloadMetric(curSpeed, curPower);
-        if (curHr == null || workload == null || curHr <= 0.0 || workload <= 0.0) {
-            if (getProfileResolver().hasTimeoutNoticePending()) {
-                getProfileResolver().clearTimeoutNoticePending();
-                resetEpochWithoutPrimingWithShortDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
-                return;
-            }
-            setCollectingStatus();
+            endDeferredRenderCacheRefresh();
             return;
         }
 
         var workloadSource = determineWorkloadSource(curSpeed, curPower);
+        var workload = getWorkloadMetricForSource(workloadSource, curSpeed, curPower);
+        if (curHr == null || workload == null || curHr <= 0.0 || workload <= 0.0) {
+            if (getProfileResolver().hasTimeoutNoticePending()) {
+                getProfileResolver().clearTimeoutNoticePending();
+                resetEpochWithoutPrimingWithShortDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
+                endDeferredRenderCacheRefresh();
+                return;
+            }
+            setCollectingStatus();
+            endDeferredRenderCacheRefresh();
+            return;
+        }
+
         if (getProfileResolver().hasTimeoutNoticePending()) {
             getProfileResolver().clearTimeoutNoticePending();
             restartAnalysisAfterGap(mTimerTime, curSpeed, curHr, workloadSource);
+            rememberPostResetCollectingStatus(STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
             setInvalidStatusWithShortDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
+            endDeferredRenderCacheRefresh();
             return;
         }
 
         if (!validateSourceConsistency(mTimerTime, curSpeed, curHr, workloadSource, deltaMs)) {
+            endDeferredRenderCacheRefresh();
             return;
         }
 
         var ef = workload / curHr;
         if (ef <= 0.0) {
             setCollectingStatus();
+            endDeferredRenderCacheRefresh();
             return;
         }
 
@@ -1836,20 +2032,29 @@ class EDAView extends WatchUi.DataField {
         getDriftEngine().recordValidSample(driftActiveMs, driftDeltaMs, ef);
 
         if (driftActiveMs < WARMUP_VALID_MS) {
+            if (!shouldShowWarmupStatus() && applyPostResetCollectingStatus()) {
+                endDeferredRenderCacheRefresh();
+                return;
+            }
             var remainingMs = WARMUP_VALID_MS - driftActiveMs;
             var remainingSeconds = ((remainingMs + 999) / 1000).toNumber();
             setInvalidStatusWithDetail(STATUS_WARMUP, remainingSeconds.toString() + msgWarmupValidSuffix);
+            endDeferredRenderCacheRefresh();
             return;
         }
+
+        markWarmupCompleted();
 
         var driftPercent = getDriftEngine().computeDrift(driftActiveMs);
         if (driftPercent == null) {
             setCollectingStatus();
+            endDeferredRenderCacheRefresh();
             return;
         }
 
         if (isInvalidDriftValue(driftPercent)) {
             writeInvalidRecord();
+            endDeferredRenderCacheRefresh();
             return;
         }
 
@@ -1857,9 +2062,10 @@ class EDAView extends WatchUi.DataField {
         if (isProfileProvisional()) {
             statusDetail = msgProvisionalProfile;
             statusDetailShort = msgProvisionalProfileShort;
-            refreshRenderCache();
+            requestRenderCacheRefresh();
         }
         updateFitFields(driftPercent, driftDeltaMs);
+        endDeferredRenderCacheRefresh();
     }
 
     function onLayout(dc as Graphics.Dc) as Void {
@@ -1868,16 +2074,18 @@ class EDAView extends WatchUi.DataField {
             loadSettings();
         }
 
-        refreshRenderCache();
+        requestRenderCacheRefresh();
     }
 
     (:high_mem)
     function onUpdate(dc as Graphics.Dc) as Void {
+        flushRenderCacheRefresh();
         getRenderer().drawHighMem(dc, buildHighMemRenderModel());
     }
 
     (:low_mem)
     function onUpdate(dc as Graphics.Dc) as Void {
+        flushRenderCacheRefresh();
         getRenderer().drawLowMem(dc, buildLowMemRenderModel());
     }
 }

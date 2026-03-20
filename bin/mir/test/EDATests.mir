@@ -363,6 +363,173 @@ E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATe
     ret %tmp.63;
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_44_80_65_0_stop:
 }
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc"; @line = 68; test = true; @symbol_functiondef = [mixedSourceSessionSummaryRemainsContinuous,68,9,51]; @symbol_param<0> = [logger,68,52,58]; @symbol_param<0>_type<0> = [Test,68,62,66]; @symbol_param<0>_type<1> = [Logger,68,67,73]; @symbol_return<0> = [Boolean,68,78,85]; ]
+function mixedSourceSessionSummaryRemainsContinuous(logger as Test.Logger) as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_68_86_85_0_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 69 4 ]
+    [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_68_86_85_0_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_68_86_85_0_stop" ]
+    %fitExportState.1 = local;
+    symbol [ fitExportState %fitExportState.1 69 8 22 ];
+    symbol [ EDAFitExportState %tmp.4 69 29 46 ];
+    %tmp.4 = getv ? :EDAFitExportState;
+    %tmp.5 = null;
+    %tmp.6 = null;
+    %tmp.7 = null;
+    %tmp.1 = newc %tmp.4 (%tmp.5, %tmp.6, %tmp.7);
+    lputv %fitExportState.1 %tmp.1;
+    symbol [ fitExportState %fitExportState.1 69 8 22 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 71 4 ]
+    %tmp.8 = lgetv %fitExportState.1;
+    symbol [ fitExportState %tmp.8 71 4 18 ];
+    symbol [ updateFitFields %tmp.9 71 19 34 ];
+    %tmp.9 = getv function %tmp.8 :updateFitFields;
+    %tmp.10 = 3;
+    %tmp.11 = true;
+    %tmp.12 = 4.0;
+    %tmp.13 = 10000;
+    %tmp.14 = 1;
+    invoke %tmp.8 %tmp.9(%tmp.10, %tmp.11, %tmp.12, %tmp.13, %tmp.14);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 72 4 ]
+    %tmp.15 = lgetv %fitExportState.1;
+    symbol [ fitExportState %tmp.15 72 4 18 ];
+    symbol [ updateFitFields %tmp.16 72 19 34 ];
+    %tmp.16 = getv function %tmp.15 :updateFitFields;
+    %tmp.17 = 3;
+    %tmp.18 = true;
+    %tmp.19 = 6.0;
+    %tmp.20 = 20000;
+    %tmp.21 = 2;
+    invoke %tmp.15 %tmp.16(%tmp.17, %tmp.18, %tmp.19, %tmp.20, %tmp.21);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 74 4 ]
+    [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_68_86_85_0_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_68_86_85_0_stop" ]
+    %averageDrift.2 = local;
+    symbol [ averageDrift %averageDrift.2 74 8 20 ];
+    %tmp.22 = lgetv %fitExportState.1;
+    symbol [ fitExportState %tmp.22 74 23 37 ];
+    symbol [ getSessionAverageDriftForDiagnostics %tmp.23 74 38 74 ];
+    %tmp.23 = getv function %tmp.22 :getSessionAverageDriftForDiagnostics;
+    %tmp.24 = invoke %tmp.22 %tmp.23();
+    lputv %averageDrift.2 %tmp.24;
+    symbol [ averageDrift %averageDrift.2 74 8 20 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 75 4 ]
+    symbol [ Test %tmp.25 75 4 8 ];
+    %tmp.25 = getm $.Toybox.Test;
+    symbol [ assertMessage %tmp.26 75 9 22 ];
+    %tmp.26 = getv function %tmp.25 :assertMessage;
+    %tmp.27 = lgetv %averageDrift.2;
+    symbol [ averageDrift %tmp.27 75 23 35 ];
+    %tmp.28 = null;
+    %tmp.29 = ne %tmp.27 %tmp.28;
+    %tmp.30 = "Expected a mixed-source session summary.";
+    invoke %tmp.25 %tmp.26(%tmp.29, %tmp.30);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 77 4 ]
+    [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_68_86_85_0_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_68_86_85_0_stop" ]
+    %actual.3 = local;
+    symbol [ actual %actual.3 77 8 14 ];
+    %tmp.31 = lgetv %averageDrift.2;
+    symbol [ averageDrift %tmp.31 77 17 29 ];
+    %tmp.32 = as %tmp.31 Float;
+    symbol [ Float %tmp.32 77 33 38 ];
+    lputv %actual.3 %tmp.32;
+    symbol [ actual %actual.3 77 8 14 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 78 4 ]
+    [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_68_86_85_0_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_68_86_85_0_stop" ]
+    %expected.4 = local;
+    symbol [ expected %expected.4 78 8 16 ];
+    %tmp.33 = 5.3333;
+    lputv %expected.4 %tmp.33;
+    symbol [ expected %expected.4 78 8 16 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 79 4 ]
+    %tmp.34 = lgetv %logger;
+    symbol [ logger %tmp.34 79 4 10 ];
+    symbol [ debug %tmp.35 79 11 16 ];
+    %tmp.35 = getv function %tmp.34 :debug;
+    %tmp.36 = "mixedSourceAvg=";
+    %tmp.37 = lgetv %actual.3;
+    symbol [ actual %tmp.37 79 37 43 ];
+    symbol [ format %tmp.38 79 44 50 ];
+    %tmp.38 = getv function %tmp.37 :format;
+    %tmp.39 = "%.4f";
+    %tmp.40 = invoke %tmp.37 %tmp.38(%tmp.39);
+    %tmp.41 = add %tmp.36 %tmp.40;
+    invoke %tmp.34 %tmp.35(%tmp.41);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 80 4 ]
+    symbol [ Test %tmp.42 80 4 8 ];
+    %tmp.42 = getm $.Toybox.Test;
+    symbol [ assertMessage %tmp.43 80 9 22 ];
+    %tmp.43 = getv function %tmp.42 :assertMessage;
+    %tmp.44 = lgetv %actual.3;
+    symbol [ actual %tmp.44 81 9 15 ];
+    %tmp.45 = lgetv %expected.4;
+    symbol [ expected %tmp.45 81 18 26 ];
+    %tmp.46 = sub %tmp.44 %tmp.45;
+    symbol [ abs %tmp.47 81 28 31 ];
+    %tmp.47 = getv function %tmp.46 :abs;
+    %tmp.48 = invoke %tmp.46 %tmp.47();
+    %tmp.49 = 0.05;
+    %tmp.50 = lt %tmp.48 %tmp.49;
+    %tmp.51 = "Session summary should keep both power and speed contributions without a reset.";
+    invoke %tmp.42 %tmp.43(%tmp.50, %tmp.51);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 84 4 ]
+    %tmp.52 = true;
+    ret %tmp.52;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_68_86_85_0_stop:
+}
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc"; @line = 88; test = true; @symbol_functiondef = [midSessionResetKeepsCollectingStatusOutOfWarmup,88,9,56]; @symbol_param<0> = [logger,88,57,63]; @symbol_param<0>_type<0> = [Test,88,67,71]; @symbol_param<0>_type<1> = [Logger,88,72,78]; @symbol_return<0> = [Boolean,88,83,90]; ]
+function midSessionResetKeepsCollectingStatusOutOfWarmup(logger as Test.Logger) as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_88_91_99_0_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 89 4 ]
+    symbol [ Test %tmp.1 89 4 8 ];
+    %tmp.1 = getm $.Toybox.Test;
+    symbol [ assertMessage %tmp.2 89 9 22 ];
+    %tmp.2 = getv function %tmp.1 :assertMessage;
+    symbol [ EDASessionPolicy %tmp.4 90 8 24 ];
+    %tmp.4 = getv ? :EDASessionPolicy;
+    symbol [ shouldShowWarmupStatus %tmp.5 90 25 47 ];
+    %tmp.5 = getv function %tmp.4 :shouldShowWarmupStatus;
+    %tmp.6 = false;
+    %tmp.7 = false;
+    %tmp.8 = invoke %tmp.4 %tmp.5(%tmp.6, %tmp.7);
+    %tmp.9 = "Initial collection should still use WARMUP.";
+    invoke %tmp.1 %tmp.2(%tmp.8, %tmp.9);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 93 4 ]
+    %tmp.10 = lgetv %logger;
+    symbol [ logger %tmp.10 93 4 10 ];
+    symbol [ debug %tmp.11 93 11 16 ];
+    %tmp.11 = getv function %tmp.10 :debug;
+    %tmp.12 = "midSessionWarmupGate=";
+    symbol [ EDASessionPolicy %tmp.14 93 43 59 ];
+    %tmp.14 = getv ? :EDASessionPolicy;
+    symbol [ shouldShowWarmupStatus %tmp.15 93 60 82 ];
+    %tmp.15 = getv function %tmp.14 :shouldShowWarmupStatus;
+    %tmp.16 = true;
+    %tmp.17 = true;
+    %tmp.18 = invoke %tmp.14 %tmp.15(%tmp.16, %tmp.17);
+    symbol [ toString %tmp.19 93 95 103 ];
+    %tmp.19 = getv function %tmp.18 :toString;
+    %tmp.20 = invoke %tmp.18 %tmp.19();
+    %tmp.21 = add %tmp.12 %tmp.20;
+    invoke %tmp.10 %tmp.11(%tmp.21);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 94 4 ]
+    symbol [ Test %tmp.22 94 4 8 ];
+    %tmp.22 = getm $.Toybox.Test;
+    symbol [ assertMessage %tmp.23 94 9 22 ];
+    %tmp.23 = getv function %tmp.22 :assertMessage;
+    symbol [ EDASessionPolicy %tmp.25 95 9 25 ];
+    %tmp.25 = getv ? :EDASessionPolicy;
+    symbol [ shouldShowWarmupStatus %tmp.26 95 26 48 ];
+    %tmp.26 = getv function %tmp.25 :shouldShowWarmupStatus;
+    %tmp.27 = true;
+    %tmp.28 = true;
+    %tmp.29 = invoke %tmp.25 %tmp.26(%tmp.27, %tmp.28);
+    %tmp.30 = not %tmp.29;
+    %tmp.31 = "A post-reset recollection after completed warmup should not reuse WARMUP.";
+    invoke %tmp.22 %tmp.23(%tmp.30, %tmp.31);
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc" 98 4 ]
+    %tmp.32 = true;
+    ret %tmp.32;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_test_EDATests_mc_88_91_99_0_stop:
+}
 [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\test\EDATests.mc"; @line = 1; ]
 <init> {
 }

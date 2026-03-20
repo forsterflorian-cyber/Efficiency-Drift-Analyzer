@@ -2,6 +2,10 @@ import Toybox.Lang;
 
 module EDASessionPolicy {
 
+    function shouldShowWarmupStatus(hasCompletedWarmupThisSession as Boolean, hasPostResetCollectingStatus as Boolean) as Boolean {
+        return !hasCompletedWarmupThisSession || !hasPostResetCollectingStatus;
+    }
+
     function shouldResetSessionFitSummaryForProfileChange(
         previousMinValidHr as Float,
         previousCanUseSpeedWorkload as Boolean,

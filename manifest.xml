@@ -5,7 +5,7 @@
         Use "Monkey C: Edit Application" from the Visual Studio Code command palette
         to update the application attributes.
     -->
-    <iq:application id="08de7cd8-3e20-418e-9f72-e607f614fad6" type="datafield" name="@Strings.AppName" entry="EDAApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.3.0">
+    <iq:application id="2671eaea-b27c-4048-af3e-33d8eaf67197" type="datafield" name="@Strings.AppName" entry="EDAApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.3.0">
         <!--
             Use the following from the Visual Studio Code comand palette to edit
             the build targets:
@@ -19,9 +19,6 @@
             <iq:product id="epix2pro42mm"/>
             <iq:product id="epix2pro47mm"/>
             <iq:product id="epix2pro51mm"/>
-            <iq:product id="fenix6pro"/>
-            <iq:product id="fenix6spro"/>
-            <iq:product id="fenix6xpro"/>
             <iq:product id="fenix7"/>
             <iq:product id="fenix7pro"/>
             <iq:product id="fenix7pronowifi"/>
@@ -59,8 +56,8 @@
         -->
         <iq:permissions>
             <iq:uses-permission id="FitContributor"/>
-            <iq:uses-permission id="UserProfile"/>
             <iq:uses-permission id="Sensor"/>
+            <iq:uses-permission id="UserProfile"/>
         </iq:permissions>
         <!--
             Use "Monkey C: Edit Languages" from the Visual Studio Code command
