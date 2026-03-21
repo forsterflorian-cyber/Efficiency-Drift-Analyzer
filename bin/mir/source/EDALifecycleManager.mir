@@ -1,0 +1,318 @@
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Lang,1,14,18]; ]
+import Toybox.Lang;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [System,2,14,20]; ]
+import Toybox.System;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 15; @symbol_classdef = [EDALifecycleManager,15,6,25]; ]
+class EDALifecycleManager {
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 15; ]
+    <init> {
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 15; ]
+    static
+    <init> {
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 17; @position = 18; @symbol_constdef = [MAX_RESUME_GAP_RESET_MS,17,18,41]; @symbol_type<0> = [Number,17,45,51]; ]
+    private
+    const MAX_RESUME_GAP_RESET_MS as Number = 300000;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 18; @position = 18; @symbol_constdef = [IMPLICIT_TIMER_RESET_TOLERANCE_MS,18,18,51]; @symbol_type<0> = [Number,18,55,61]; ]
+    private
+    const IMPLICIT_TIMER_RESET_TOLERANCE_MS as Number = 5000;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 20; @position = 16; @symbol_vardef = [mLastPauseSystemTimer,20,16,37]; @symbol_type<0> = [Number,20,41,47]; ]
+    private
+    var mLastPauseSystemTimer as Number or Null = null;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 21; @position = 16; @symbol_vardef = [mLastActiveTimerTime,21,16,36]; @symbol_type<0> = [Number,21,40,46]; ]
+    private
+    var mLastActiveTimerTime as Number or Null = null;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 23; @symbol_functiondef = [initialize,23,13,23]; ]
+    function initialize() as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_23_26_26_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 24 8 ]
+        %tmp.1 = null;
+        symbol [ mLastPauseSystemTimer ? 24 8 29 ];
+        putv self :mLastPauseSystemTimer %tmp.1;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 25 8 ]
+        %tmp.2 = null;
+        symbol [ mLastActiveTimerTime ? 25 8 28 ];
+        putv self :mLastActiveTimerTime %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_23_26_26_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 28; @symbol_functiondef = [reset,28,13,18]; ]
+    function reset() as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_28_29_31_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 29 8 ]
+        %tmp.1 = null;
+        symbol [ mLastPauseSystemTimer ? 29 8 29 ];
+        putv self :mLastPauseSystemTimer %tmp.1;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 30 8 ]
+        %tmp.2 = null;
+        symbol [ mLastActiveTimerTime ? 30 8 28 ];
+        putv self :mLastActiveTimerTime %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_28_29_31_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 37; @symbol_functiondef = [rememberPauseTimestamp,37,13,35]; ]
+    function rememberPauseTimestamp() as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_37_46_41_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 38 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_38_8_40_8_if_stmt:
+        symbol [ mLastPauseSystemTimer %tmp.2 38 12 33 ];
+        %tmp.2 = getv ? :mLastPauseSystemTimer;
+        %tmp.3 = null;
+        %tmp.4 = eq %tmp.2 %tmp.3;
+        bf %tmp.4 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_38_8_40_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_38_8_40_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_38_43_40_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 39 12 ]
+        symbol [ System %tmp.5 39 36 42 ];
+        %tmp.5 = getm $.Toybox.System;
+        symbol [ getTimer %tmp.6 39 43 51 ];
+        %tmp.6 = getv function %tmp.5 :getTimer;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        symbol [ mLastPauseSystemTimer ? 39 12 33 ];
+        putv self :mLastPauseSystemTimer %tmp.7;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_38_43_40_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_38_8_40_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_38_8_40_8_if_end:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_37_46_41_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 43; @symbol_functiondef = [clearLifecyclePauseState,43,13,37]; ]
+    function clearLifecyclePauseState() as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_43_48_45_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 44 8 ]
+        %tmp.1 = null;
+        symbol [ mLastPauseSystemTimer ? 44 8 29 ];
+        putv self :mLastPauseSystemTimer %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_43_48_45_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 47; @symbol_functiondef = [getPauseTimestamp,47,13,30]; @symbol_return<0> = [Number,47,36,42]; ]
+    function getPauseTimestamp() as Number or Null {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_47_44_49_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 48 8 ]
+        symbol [ mLastPauseSystemTimer %tmp.2 48 15 36 ];
+        %tmp.2 = getv ? :mLastPauseSystemTimer;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_47_44_49_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 55; @symbol_functiondef = [shouldResetAfterResumePause,55,13,40]; @symbol_return<0> = [Boolean,55,46,53]; ]
+    function shouldResetAfterResumePause() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_55_54_68_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 56 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_55_54_68_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_55_54_68_4_stop" ]
+        %pausedAt.1 = local;
+        symbol [ pausedAt %pausedAt.1 56 12 20 ];
+        symbol [ mLastPauseSystemTimer %tmp.2 56 23 44 ];
+        %tmp.2 = getv ? :mLastPauseSystemTimer;
+        lputv %pausedAt.1 %tmp.2;
+        symbol [ pausedAt %pausedAt.1 56 12 20 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 57 8 ]
+        %tmp.3 = null;
+        symbol [ mLastPauseSystemTimer ? 57 8 29 ];
+        putv self :mLastPauseSystemTimer %tmp.3;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 58 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_58_8_60_8_if_stmt:
+        %tmp.4 = lgetv %pausedAt.1;
+        symbol [ pausedAt %tmp.4 58 12 20 ];
+        %tmp.5 = null;
+        %tmp.6 = eq %tmp.4 %tmp.5;
+        bf %tmp.6 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_58_8_60_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_58_8_60_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_58_30_60_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 59 12 ]
+        %tmp.7 = false;
+        ret %tmp.7;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_58_30_60_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_58_8_60_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_58_8_60_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 62 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_55_54_68_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_55_54_68_4_stop" ]
+        %currentSystemTimer.2 = local;
+        symbol [ currentSystemTimer %currentSystemTimer.2 62 12 30 ];
+        symbol [ System %tmp.8 62 33 39 ];
+        %tmp.8 = getm $.Toybox.System;
+        symbol [ getTimer %tmp.9 62 40 48 ];
+        %tmp.9 = getv function %tmp.8 :getTimer;
+        %tmp.10 = invoke %tmp.8 %tmp.9();
+        lputv %currentSystemTimer.2 %tmp.10;
+        symbol [ currentSystemTimer %currentSystemTimer.2 62 12 30 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 63 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_63_8_65_8_if_stmt:
+        %tmp.11 = lgetv %currentSystemTimer.2;
+        symbol [ currentSystemTimer %tmp.11 63 12 30 ];
+        %tmp.12 = lgetv %pausedAt.1;
+        symbol [ pausedAt %tmp.12 63 33 41 ];
+        %tmp.13 = lt %tmp.11 %tmp.12;
+        bf %tmp.13 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_63_8_65_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_63_8_65_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_63_43_65_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 64 12 ]
+        %tmp.14 = true;
+        ret %tmp.14;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_63_43_65_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_63_8_65_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_63_8_65_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 67 8 ]
+        %tmp.15 = lgetv %currentSystemTimer.2;
+        symbol [ currentSystemTimer %tmp.15 67 16 34 ];
+        %tmp.16 = lgetv %pausedAt.1;
+        symbol [ pausedAt %tmp.16 67 37 45 ];
+        %tmp.17 = sub %tmp.15 %tmp.16;
+        symbol [ MAX_RESUME_GAP_RESET_MS %tmp.19 67 50 73 ];
+        %tmp.19 = getv ? :MAX_RESUME_GAP_RESET_MS;
+        %tmp.20 = gte %tmp.17 %tmp.19;
+        ret %tmp.20;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_55_54_68_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 74; @symbol_functiondef = [getLastActiveTimerTime,74,13,35]; @symbol_return<0> = [Number,74,41,47]; ]
+    function getLastActiveTimerTime() as Number or Null {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_74_49_76_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 75 8 ]
+        symbol [ mLastActiveTimerTime %tmp.2 75 15 35 ];
+        %tmp.2 = getv ? :mLastActiveTimerTime;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_74_49_76_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 78; @symbol_functiondef = [setLastActiveTimerTime,78,13,35]; @symbol_param<0> = [timerTime,78,36,45]; @symbol_param<0>_type<0> = [Number,78,49,55]; ]
+    function setLastActiveTimerTime(timerTime as Number) as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_78_65_80_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 79 8 ]
+        %tmp.1 = lgetv %timerTime;
+        symbol [ timerTime %tmp.1 79 31 40 ];
+        symbol [ mLastActiveTimerTime ? 79 8 28 ];
+        putv self :mLastActiveTimerTime %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_78_65_80_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 82; @symbol_functiondef = [clearLastActiveTimerTime,82,13,37]; ]
+    function clearLastActiveTimerTime() as Void {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_82_48_84_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 83 8 ]
+        %tmp.1 = null;
+        symbol [ mLastActiveTimerTime ? 83 8 28 ];
+        putv self :mLastActiveTimerTime %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_82_48_84_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 86; @symbol_functiondef = [getSampleDelta,86,13,27]; @symbol_param<0> = [timerTime,86,28,37]; @symbol_param<0>_type<0> = [Number,86,41,47]; @symbol_return<0> = [Number,86,52,58]; ]
+    function getSampleDelta(timerTime as Number) as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_86_59_99_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 87 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_86_59_99_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_86_59_99_4_stop" ]
+        %previous.1 = local;
+        symbol [ previous %previous.1 87 12 20 ];
+        symbol [ mLastActiveTimerTime %tmp.2 87 23 43 ];
+        %tmp.2 = getv ? :mLastActiveTimerTime;
+        lputv %previous.1 %tmp.2;
+        symbol [ previous %previous.1 87 12 20 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 88 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_88_8_91_8_if_stmt:
+        %tmp.3 = lgetv %previous.1;
+        symbol [ previous %tmp.3 88 12 20 ];
+        %tmp.4 = null;
+        %tmp.5 = eq %tmp.3 %tmp.4;
+        bf %tmp.5 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_88_8_91_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_88_8_91_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_88_30_91_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 89 12 ]
+        %tmp.6 = lgetv %timerTime;
+        symbol [ timerTime %tmp.6 89 35 44 ];
+        symbol [ mLastActiveTimerTime ? 89 12 32 ];
+        putv self :mLastActiveTimerTime %tmp.6;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 90 12 ]
+        %tmp.7 = 0;
+        ret %tmp.7;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_88_30_91_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_88_8_91_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_88_8_91_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 93 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_93_8_95_8_if_stmt:
+        %tmp.8 = lgetv %timerTime;
+        symbol [ timerTime %tmp.8 93 12 21 ];
+        %tmp.9 = lgetv %previous.1;
+        symbol [ previous %tmp.9 93 25 33 ];
+        %tmp.10 = lte %tmp.8 %tmp.9;
+        bf %tmp.10 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_93_8_95_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_93_8_95_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_93_35_95_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 94 12 ]
+        %tmp.11 = 0;
+        ret %tmp.11;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_93_35_95_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_93_8_95_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_93_8_95_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 97 8 ]
+        %tmp.12 = lgetv %timerTime;
+        symbol [ timerTime %tmp.12 97 31 40 ];
+        symbol [ mLastActiveTimerTime ? 97 8 28 ];
+        putv self :mLastActiveTimerTime %tmp.12;
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 98 8 ]
+        %tmp.13 = lgetv %timerTime;
+        symbol [ timerTime %tmp.13 98 15 24 ];
+        %tmp.14 = lgetv %previous.1;
+        symbol [ previous %tmp.14 98 27 35 ];
+        %tmp.15 = sub %tmp.13 %tmp.14;
+        ret %tmp.15;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_86_59_99_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 101; @symbol_functiondef = [shouldTriggerImplicitReset,101,13,39]; @symbol_param<0> = [currentTimerTime,101,40,56]; @symbol_param<0>_type<0> = [Number,101,60,66]; @symbol_return<0> = [Boolean,101,71,78]; ]
+    function shouldTriggerImplicitReset(currentTimerTime as Number) as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_101_79_113_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 102 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_101_79_113_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_101_79_113_4_stop" ]
+        %previousTimerTime.1 = local;
+        symbol [ previousTimerTime %previousTimerTime.1 102 12 29 ];
+        symbol [ mLastActiveTimerTime %tmp.2 102 32 52 ];
+        %tmp.2 = getv ? :mLastActiveTimerTime;
+        lputv %previousTimerTime.1 %tmp.2;
+        symbol [ previousTimerTime %previousTimerTime.1 102 12 29 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 103 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_103_8_105_8_if_stmt:
+        %tmp.3 = lgetv %previousTimerTime.1;
+        symbol [ previousTimerTime %tmp.3 103 12 29 ];
+        %tmp.4 = null;
+        %tmp.5 = eq %tmp.3 %tmp.4;
+        bf %tmp.5 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_103_8_105_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_103_8_105_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_103_39_105_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 104 12 ]
+        %tmp.6 = false;
+        ret %tmp.6;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_103_39_105_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_103_8_105_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_103_8_105_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 107 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_107_8_109_8_if_stmt:
+        %tmp.7 = lgetv %currentTimerTime;
+        symbol [ currentTimerTime %tmp.7 107 12 28 ];
+        %tmp.8 = lgetv %previousTimerTime.1;
+        symbol [ previousTimerTime %tmp.8 107 32 49 ];
+        %tmp.9 = gte %tmp.7 %tmp.8;
+        bf %tmp.9 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_107_8_109_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_107_8_109_8_if_true:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_107_51_109_8_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 108 12 ]
+        %tmp.10 = false;
+        ret %tmp.10;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_107_51_109_8_stop:
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_107_8_109_8_if_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_107_8_109_8_if_end:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 111 8 ]
+        [ "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_101_79_113_4_start" "E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_101_79_113_4_stop" ]
+        %rollbackMs.2 = local;
+        symbol [ rollbackMs %rollbackMs.2 111 12 22 ];
+        %tmp.11 = lgetv %previousTimerTime.1;
+        symbol [ previousTimerTime %tmp.11 111 25 42 ];
+        %tmp.12 = lgetv %currentTimerTime;
+        symbol [ currentTimerTime %tmp.12 111 45 61 ];
+        %tmp.13 = sub %tmp.11 %tmp.12;
+        lputv %rollbackMs.2 %tmp.13;
+        symbol [ rollbackMs %rollbackMs.2 111 12 22 ];
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc" 112 8 ]
+        %tmp.14 = lgetv %rollbackMs.2;
+        symbol [ rollbackMs %tmp.14 112 15 25 ];
+        symbol [ IMPLICIT_TIMER_RESET_TOLERANCE_MS %tmp.16 112 28 61 ];
+        %tmp.16 = getv ? :IMPLICIT_TIMER_RESET_TOLERANCE_MS;
+        %tmp.17 = gt %tmp.14 %tmp.16;
+        ret %tmp.17;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDALifecycleManager_mc_101_79_113_4_stop:
+    }
+}
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDALifecycleManager.mc"; @line = 1; ]
+<init> {
+}

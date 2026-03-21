@@ -13,12 +13,6 @@ class EDAFitExportState {
     static
     <init> {
     }
-    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 7; @position = 18; @symbol_constdef = [SOURCE_POWER,7,18,30]; @symbol_type<0> = [Number,7,34,40]; ]
-    private
-    const SOURCE_POWER as Number = 1;
-    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 8; @position = 18; @symbol_constdef = [SOURCE_SPEED,8,18,30]; @symbol_type<0> = [Number,8,34,40]; ]
-    private
-    const SOURCE_SPEED as Number = 2;
     [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 10; @position = 16; @symbol_vardef = [mDriftField,10,16,27]; @symbol_type<0> = [Toybox,10,31,37]; @symbol_type<1> = [FitContributor,10,38,52]; @symbol_type<2> = [Field,10,53,58]; ]
     private
     var mDriftField as Toybox.FitContributor.Field or Null;
@@ -152,70 +146,74 @@ E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDA
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_stmt:
         %tmp.4 = lgetv %workloadSource;
         symbol [ workloadSource %tmp.4 51 12 26 ];
-        symbol [ SOURCE_POWER %tmp.6 51 30 42 ];
-        %tmp.6 = getv ? :SOURCE_POWER;
-        %tmp.7 = eq %tmp.4 %tmp.6;
-        bf %tmp.7 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_false;
+        symbol [ EDATypes %tmp.6 51 30 38 ];
+        %tmp.6 = getv ? :EDATypes;
+        symbol [ SOURCE_POWER %tmp.7 51 39 51 ];
+        %tmp.7 = getv %tmp.6 :SOURCE_POWER;
+        %tmp.8 = eq %tmp.4 %tmp.7;
+        bf %tmp.8 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_false;
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_true:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_44_54_8_start:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_53_54_8_start:
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 52 12 ]
-        symbol [ mSessionPowerDriftWeightedSum %tmp.8 52 12 41 ];
-        %tmp.8 = getv self :mSessionPowerDriftWeightedSum;
-        %tmp.9 = lgetv %driftPercent;
-        symbol [ driftPercent %tmp.9 52 45 57 ];
-        %tmp.10 = lgetv %intervalMs;
-        symbol [ intervalMs %tmp.10 52 60 70 ];
-        symbol [ toFloat %tmp.11 52 71 78 ];
-        %tmp.11 = getv function %tmp.10 :toFloat;
-        %tmp.12 = invoke %tmp.10 %tmp.11();
-        %tmp.13 = mul %tmp.9 %tmp.12;
-        %tmp.14 = add %tmp.8 %tmp.13;
+        symbol [ mSessionPowerDriftWeightedSum %tmp.9 52 12 41 ];
+        %tmp.9 = getv self :mSessionPowerDriftWeightedSum;
+        %tmp.10 = lgetv %driftPercent;
+        symbol [ driftPercent %tmp.10 52 45 57 ];
+        %tmp.11 = lgetv %intervalMs;
+        symbol [ intervalMs %tmp.11 52 60 70 ];
+        symbol [ toFloat %tmp.12 52 71 78 ];
+        %tmp.12 = getv function %tmp.11 :toFloat;
+        %tmp.13 = invoke %tmp.11 %tmp.12();
+        %tmp.14 = mul %tmp.10 %tmp.13;
+        %tmp.15 = add %tmp.9 %tmp.14;
         symbol [ mSessionPowerDriftWeightedSum ? 52 12 41 ];
-        putv self :mSessionPowerDriftWeightedSum dup %tmp.14;
+        putv self :mSessionPowerDriftWeightedSum dup %tmp.15;
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 53 12 ]
-        symbol [ mSessionPowerDriftMs %tmp.15 53 12 32 ];
-        %tmp.15 = getv self :mSessionPowerDriftMs;
-        %tmp.16 = lgetv %intervalMs;
-        symbol [ intervalMs %tmp.16 53 36 46 ];
-        %tmp.17 = add %tmp.15 %tmp.16;
+        symbol [ mSessionPowerDriftMs %tmp.16 53 12 32 ];
+        %tmp.16 = getv self :mSessionPowerDriftMs;
+        %tmp.17 = lgetv %intervalMs;
+        symbol [ intervalMs %tmp.17 53 36 46 ];
+        %tmp.18 = add %tmp.16 %tmp.17;
         symbol [ mSessionPowerDriftMs ? 53 12 32 ];
-        putv self :mSessionPowerDriftMs dup %tmp.17;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_44_54_8_stop:
+        putv self :mSessionPowerDriftMs dup %tmp.18;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_53_54_8_stop:
         goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_end;
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_false:
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 54 15 ]
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_stmt:
-        %tmp.18 = lgetv %workloadSource;
-        symbol [ workloadSource %tmp.18 54 19 33 ];
-        symbol [ SOURCE_SPEED %tmp.20 54 37 49 ];
-        %tmp.20 = getv ? :SOURCE_SPEED;
-        %tmp.21 = eq %tmp.18 %tmp.20;
-        bf %tmp.21 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_end;
+        %tmp.19 = lgetv %workloadSource;
+        symbol [ workloadSource %tmp.19 54 19 33 ];
+        symbol [ EDATypes %tmp.21 54 37 45 ];
+        %tmp.21 = getv ? :EDATypes;
+        symbol [ SOURCE_SPEED %tmp.22 54 46 58 ];
+        %tmp.22 = getv %tmp.21 :SOURCE_SPEED;
+        %tmp.23 = eq %tmp.19 %tmp.22;
+        bf %tmp.23 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_end;
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_true:
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_51_57_8_start:
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_60_57_8_start:
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 55 12 ]
-        symbol [ mSessionSpeedDriftWeightedSum %tmp.22 55 12 41 ];
-        %tmp.22 = getv self :mSessionSpeedDriftWeightedSum;
-        %tmp.23 = lgetv %driftPercent;
-        symbol [ driftPercent %tmp.23 55 45 57 ];
-        %tmp.24 = lgetv %intervalMs;
-        symbol [ intervalMs %tmp.24 55 60 70 ];
-        symbol [ toFloat %tmp.25 55 71 78 ];
-        %tmp.25 = getv function %tmp.24 :toFloat;
-        %tmp.26 = invoke %tmp.24 %tmp.25();
-        %tmp.27 = mul %tmp.23 %tmp.26;
-        %tmp.28 = add %tmp.22 %tmp.27;
+        symbol [ mSessionSpeedDriftWeightedSum %tmp.24 55 12 41 ];
+        %tmp.24 = getv self :mSessionSpeedDriftWeightedSum;
+        %tmp.25 = lgetv %driftPercent;
+        symbol [ driftPercent %tmp.25 55 45 57 ];
+        %tmp.26 = lgetv %intervalMs;
+        symbol [ intervalMs %tmp.26 55 60 70 ];
+        symbol [ toFloat %tmp.27 55 71 78 ];
+        %tmp.27 = getv function %tmp.26 :toFloat;
+        %tmp.28 = invoke %tmp.26 %tmp.27();
+        %tmp.29 = mul %tmp.25 %tmp.28;
+        %tmp.30 = add %tmp.24 %tmp.29;
         symbol [ mSessionSpeedDriftWeightedSum ? 55 12 41 ];
-        putv self :mSessionSpeedDriftWeightedSum dup %tmp.28;
+        putv self :mSessionSpeedDriftWeightedSum dup %tmp.30;
 [ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 56 12 ]
-        symbol [ mSessionSpeedDriftMs %tmp.29 56 12 32 ];
-        %tmp.29 = getv self :mSessionSpeedDriftMs;
-        %tmp.30 = lgetv %intervalMs;
-        symbol [ intervalMs %tmp.30 56 36 46 ];
-        %tmp.31 = add %tmp.29 %tmp.30;
+        symbol [ mSessionSpeedDriftMs %tmp.31 56 12 32 ];
+        %tmp.31 = getv self :mSessionSpeedDriftMs;
+        %tmp.32 = lgetv %intervalMs;
+        symbol [ intervalMs %tmp.32 56 36 46 ];
+        %tmp.33 = add %tmp.31 %tmp.32;
         symbol [ mSessionSpeedDriftMs ? 56 12 32 ];
-        putv self :mSessionSpeedDriftMs dup %tmp.31;
-E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_51_57_8_stop:
+        putv self :mSessionSpeedDriftMs dup %tmp.33;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_60_57_8_stop:
         goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_end;
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_end:
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_end:

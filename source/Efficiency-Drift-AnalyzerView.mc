@@ -9,55 +9,66 @@ import Toybox.System;
 
 class EDAView extends WatchUi.DataField {
 
-    private const STATUS_VALUE as Number = 0;
-    private const STATUS_WAIT as Number = 1;
-    private const STATUS_PAUSE as Number = 2;
-    private const STATUS_WARMUP as Number = 3;
-    private const STATUS_PROVISIONAL as Number = 4;
-    private const STATUS_PROFILE_TIMEOUT as Number = 5;
-    private const STATUS_CFG_ERR as Number = 6;
-    private const STATUS_NO_HR as Number = 7;
-    private const STATUS_LOW_HR as Number = 8;
-    private const STATUS_SPIKE as Number = 9;
-    private const STATUS_LOW_POWER as Number = 10;
-    private const STATUS_LOW_PACE as Number = 11;
-    private const STATUS_NO_POWER as Number = 12;
-    private const STATUS_NO_SPEED as Number = 13;
-    private const STATUS_INVALID_SPEED as Number = 14;
-    private const STATUS_GAP as Number = 15;
+    // Status-Konstanten werden jetzt aus EDATypes importiert
+    // Status-Konstanten werden jetzt aus EDATypes importiert
     private const INVALID_RENDER_VALUE as String = "NaN";
 
+    // Default Minimum HR für Running: 80 bpm
+    // Begründung: Unter 80 bpm ist HR-Sensor wahrscheinlich ungenau oder nicht verbunden
     private const DEFAULT_RUNNING_MIN_HR as Float = 80.0;
+
+    // Default Minimum HR für andere Aktivitäten: 70 bpm
+    // Begründung: Niedrigere Schwelle für Radfahren, Schwimmen etc.
     private const DEFAULT_GENERIC_MIN_HR as Float = 70.0;
-    private const MIN_VALID_POWER as Float = 30.0;
-    private const MAX_VALID_POWER as Float = 700.0;
-    private const MAX_RUNNING_PACE_PER_KM as Float = 480.0;
-    private const MAX_SPEED_MS as Float = 12.0;
-    private const MAX_HR_JUMP_PER_SEC as Float = 20.0;
-    private const MAX_SPEED_JUMP_PER_SEC as Float = 4.0;
+
+    // Kalibrierungs-Distanz-Faktor: 1000m
+    // Begründung: Pace wird in Sekunden pro km/mi berechnet
     private const CALIBRATION_DISTANCE_FACTOR as Float = 1000.0;
-    private const WARMUP_VALID_MS as Number = 180000;
-    private const MAX_VALID_SAMPLE_GAP_MS as Number = 5000;
-    private const MAX_DATA_DRIVEN_GAP_MS as Number = 20000;
-    private const MAX_RESUME_GAP_RESET_MS as Number = 300000;
-    private const FALLBACK_EXPORT_TIMEOUT_MS as Number = 120000;
-    private const IMPLICIT_TIMER_RESET_TOLERANCE_MS as Number = 5000;
+
+    // Konstanten werden aus EDAFeatureFlags bezogen:
+    // - MIN_VALID_POWER → EDAFeatureFlags.getMinValidPower()
+    // - MAX_VALID_POWER → EDAFeatureFlags.getMaxValidPower()
+    // - MAX_RUNNING_PACE_PER_KM → EDAFeatureFlags.getMaxRunningPacePerKm()
+    // - MAX_SPEED_MS → EDAFeatureFlags.getMaxSpeedMs()
+    // - MAX_HR_JUMP_PER_SEC → EDAFeatureFlags.getHrJumpPerSec()
+    // - MAX_SPEED_JUMP_PER_SEC → EDAFeatureFlags.getSpeedJumpPerSec()
+    // - WARMUP_VALID_MS → EDAFeatureFlags.getWarmupValidMs()
+    // - MAX_VALID_SAMPLE_GAP_MS → EDAFeatureFlags.getMaxValidSampleGapMs()
+    // - FALLBACK_EXPORT_TIMEOUT_MS → EDAFeatureFlags.getFallbackExportTimeoutMs()
+    // - IMPLICIT_TIMER_RESET_TOLERANCE_MS → EDAFeatureFlags.getImplicitTimerResetToleranceMs()
 
     (:high_mem)
     private const MODEL_DELTA_EPSILON as Float = 0.0001;
 
-    // These time constants preserve the old 1 s alpha behaviour while
-    // remaining stable if the data field is updated at irregular intervals.
+    // EWMA-Zeitkonstanten (Exponentially Weighted Moving Average)
+    // ---------------------------------------------------------------------------
+    // Herleitung: τ = -Δt / ln(1 - α)
+    //
+    // Speed (α=0.2 für 1s-Updates):
+    //   τ = -1.0 / ln(0.8) = 4.481s
+    //   → Speed-Filter hat ~4.5s "Gedächtnis"
+    //   → Verhindert Sprünge bei GPS-Jitter (~2-3m Genauigkeit)
+    //   → Kalibrierung: α=0.1 wäre zu langsam (9.5s), α=0.3 zu schnell (2.8s)
+    //
+    // HR (α=0.1 für 1s-Updates):
+    //   τ = -1.0 / ln(0.9) = 9.491s
+    //   → HR-Filter hat ~9.5s "Gedächtnis"
+    //   → Verhindert Sprünge bei HR-Sensor-Noise (~5-10bpm)
+    //   → Kalibrierung: α=0.05 wäre zu langsam (19.5s), α=0.2 zu schnell (4.5s)
+    //
+    // Formel: alpha = 1 - e^(-Δt/τ)
+    // Bei Δt=1s: alpha = 1 - e^(-1/4.481) ≈ 0.20 (Speed)
+    // Bei Δt=1s: alpha = 1 - e^(-1/9.491) ≈ 0.10 (HR)
     (:high_mem)
     private const EWMA_SPEED_TAU_MS as Float = 4481.0;
 
     (:high_mem)
     private const EWMA_HR_TAU_MS as Float = 9491.0;
 
-    private const SOURCE_NONE as Number = 0;
-    private const SOURCE_POWER as Number = 1;
-    private const SOURCE_SPEED as Number = 2;
-    private const SOURCE_SWITCH_CONFIRM_SAMPLES as Number = 3;
+    // SOURCE-Konstanten werden jetzt aus EDATypes importiert
+    // SOURCE-Konstanten werden jetzt aus EDATypes importiert
+    // SOURCE-Konstanten werden jetzt aus EDATypes importiert
+    // SOURCE-Konstanten werden jetzt aus EDATypes importiert
 
     private var mDistanceFactor as Float = 1000.0;
     private var minValidHrSetting as Float = 0.0;
@@ -104,15 +115,15 @@ class EDAView extends WatchUi.DataField {
     private var lastDisplayHr as Float? = null;
     private var validActiveMs as Number = 0;
     private var driftActiveMs as Number = 0;
-    private var currentWorkloadSource as Number = SOURCE_NONE;
-    private var pendingWorkloadSource as Number = SOURCE_NONE;
+    private var currentWorkloadSource as Number = EDATypes.SOURCE_NONE;
+    private var pendingWorkloadSource as Number = EDATypes.SOURCE_NONE;
     private var pendingWorkloadSourceSamples as Number = 0;
-    private var lastPauseSystemTimer as Number? = null;
+    // lastPauseSystemTimer wird jetzt von EDALifecycleManager verwaltet
     private var isRenderCacheRefreshDeferred as Boolean = false;
     private var isRenderCacheDirty as Boolean = false;
     private var hasCompletedWarmupThisSession as Boolean = false;
     private var hasPostResetCollectingStatus as Boolean = false;
-    private var postResetCollectingStatus as Number = STATUS_WAIT;
+    private var postResetCollectingStatus as Number = EDATypes.STATUS_WAIT;
     private var postResetCollectingDetail as String = "";
     private var postResetCollectingDetailShort as String = "";
 
@@ -193,7 +204,7 @@ class EDAView extends WatchUi.DataField {
 
     private var valAktPace as String = "--:--";
     private var strDrift as String = "--";
-    private var driftStatus as Number = STATUS_WAIT;
+    private var driftStatus as Number = EDATypes.STATUS_WAIT;
     private var valAktHr as String = "--";
 
     (:high_mem)
@@ -240,6 +251,8 @@ class EDAView extends WatchUi.DataField {
     private var profileResolver as EDAProfileResolver? = null;
     private var driftEngine as EDADriftEngine? = null;
     private var renderer as EDARenderer? = null;
+    private var workloadSourceSelector as EDAWorkloadSourceSelector? = null;
+    private var lifecycleManager as EDALifecycleManager? = null;
     private var highMemRenderModel as Dictionary? = null;
     private var lowMemRenderModel as Dictionary? = null;
     private var areStringsLoaded as Boolean = false;
@@ -270,6 +283,8 @@ class EDAView extends WatchUi.DataField {
         profileResolver = new EDAProfileResolver();
         driftEngine = new EDADriftEngine();
         renderer = new EDARenderer();
+        workloadSourceSelector = new EDAWorkloadSourceSelector();
+        lifecycleManager = new EDALifecycleManager();
         initializeRenderModels();
         refreshEngineCalibrationState();
 
@@ -599,7 +614,7 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function hasFallbackExportWindowElapsed() as Boolean {
-        return mTimerTime >= FALLBACK_EXPORT_TIMEOUT_MS;
+        return mTimerTime >= EDAFeatureFlags.getFallbackExportTimeoutMs();
     }
 
     private function canExportFitData() as Boolean {
@@ -613,11 +628,11 @@ class EDAView extends WatchUi.DataField {
             return false;
         }
 
-        return hasFallbackExportWindowElapsed();
+        return mTimerTime >= EDAFeatureFlags.getFallbackExportTimeoutMs();
     }
 
     private function getRenderedDriftValuePrefix(isShort as Boolean) as String? {
-        if (driftStatus != STATUS_VALUE) {
+        if (driftStatus != EDATypes.STATUS_VALUE) {
             return null;
         }
 
@@ -637,75 +652,25 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function getStatusLabel(statusCode as Number) as String {
-        if (statusCode == STATUS_WAIT) {
-            return lblStatusWait;
-        } else if (statusCode == STATUS_PAUSE) {
-            return lblStatusPause;
-        } else if (statusCode == STATUS_WARMUP) {
-            return lblStatusWarmup;
-        } else if (statusCode == STATUS_PROVISIONAL) {
-            return lblStatusProvisional;
-        } else if (statusCode == STATUS_PROFILE_TIMEOUT) {
-            return lblStatusProfileTimeout;
-        } else if (statusCode == STATUS_CFG_ERR) {
-            return lblStatusConfigError;
-        } else if (statusCode == STATUS_NO_HR) {
-            return lblStatusNoHr;
-        } else if (statusCode == STATUS_LOW_HR) {
-            return lblStatusLowHr;
-        } else if (statusCode == STATUS_SPIKE) {
-            return lblStatusSpike;
-        } else if (statusCode == STATUS_LOW_POWER) {
-            return lblStatusLowPower;
-        } else if (statusCode == STATUS_LOW_PACE) {
-            return lblStatusLowPace;
-        } else if (statusCode == STATUS_NO_POWER) {
-            return lblStatusNoPower;
-        } else if (statusCode == STATUS_NO_SPEED) {
-            return lblStatusNoSpeed;
-        } else if (statusCode == STATUS_INVALID_SPEED) {
-            return lblStatusInvalidSpeed;
-        } else if (statusCode == STATUS_GAP) {
-            return lblStatusGap;
-        }
-
-        return strDrift;
+        return EDAStatusManager.getStatusLabel(
+            statusCode,
+            lblStatusWait, lblStatusPause, lblStatusWarmup, lblStatusProvisional,
+            lblStatusProfileTimeout, lblStatusConfigError, lblStatusNoHr, lblStatusLowHr,
+            lblStatusSpike, lblStatusLowPower, lblStatusLowPace, lblStatusNoPower,
+            lblStatusNoSpeed, lblStatusInvalidSpeed, lblStatusGap,
+            strDrift
+        );
     }
 
     private function getStatusShortLabel(statusCode as Number) as String {
-        if (statusCode == STATUS_WAIT) {
-            return lblStatusWaitShort;
-        } else if (statusCode == STATUS_PAUSE) {
-            return lblStatusPauseShort;
-        } else if (statusCode == STATUS_WARMUP) {
-            return lblStatusWarmupShort;
-        } else if (statusCode == STATUS_PROVISIONAL) {
-            return lblStatusProvisionalShort;
-        } else if (statusCode == STATUS_PROFILE_TIMEOUT) {
-            return lblStatusProfileTimeoutShort;
-        } else if (statusCode == STATUS_CFG_ERR) {
-            return lblStatusConfigErrorShort;
-        } else if (statusCode == STATUS_NO_HR) {
-            return lblStatusNoHrShort;
-        } else if (statusCode == STATUS_LOW_HR) {
-            return lblStatusLowHrShort;
-        } else if (statusCode == STATUS_SPIKE) {
-            return lblStatusSpikeShort;
-        } else if (statusCode == STATUS_LOW_POWER) {
-            return lblStatusLowPowerShort;
-        } else if (statusCode == STATUS_LOW_PACE) {
-            return lblStatusLowPaceShort;
-        } else if (statusCode == STATUS_NO_POWER) {
-            return lblStatusNoPowerShort;
-        } else if (statusCode == STATUS_NO_SPEED) {
-            return lblStatusNoSpeedShort;
-        } else if (statusCode == STATUS_INVALID_SPEED) {
-            return lblStatusInvalidSpeedShort;
-        } else if (statusCode == STATUS_GAP) {
-            return lblStatusGapShort;
-        }
-
-        return strDrift;
+        return EDAStatusManager.getStatusShortLabel(
+            statusCode,
+            lblStatusWaitShort, lblStatusPauseShort, lblStatusWarmupShort, lblStatusProvisionalShort,
+            lblStatusProfileTimeoutShort, lblStatusConfigErrorShort, lblStatusNoHrShort, lblStatusLowHrShort,
+            lblStatusSpikeShort, lblStatusLowPowerShort, lblStatusLowPaceShort, lblStatusNoPowerShort,
+            lblStatusNoSpeedShort, lblStatusInvalidSpeedShort, lblStatusGapShort,
+            strDrift
+        );
     }
 
     private function getRenderedDriftLabel() as String {
@@ -713,7 +678,7 @@ class EDAView extends WatchUi.DataField {
             return lblStatusConfigError;
         }
 
-        if (driftStatus != STATUS_VALUE) {
+        if (driftStatus != EDATypes.STATUS_VALUE) {
             return getStatusLabel(driftStatus);
         }
 
@@ -730,7 +695,7 @@ class EDAView extends WatchUi.DataField {
             return lblStatusConfigErrorShort;
         }
 
-        if (driftStatus != STATUS_VALUE) {
+        if (driftStatus != EDATypes.STATUS_VALUE) {
             return getStatusShortLabel(driftStatus);
         }
 
@@ -747,23 +712,23 @@ class EDAView extends WatchUi.DataField {
             return false;
         }
 
-        return driftStatus == STATUS_WAIT || driftStatus == STATUS_PROVISIONAL || driftStatus == STATUS_PROFILE_TIMEOUT;
+        return driftStatus == EDATypes.STATUS_WAIT || driftStatus == EDATypes.STATUS_PROVISIONAL || driftStatus == EDATypes.STATUS_PROFILE_TIMEOUT;
     }
 
     private function getDefaultStatusDetail() as String? {
-        if (driftStatus == STATUS_WAIT) {
+        if (driftStatus == EDATypes.STATUS_WAIT) {
             return msgCollectingData;
-        } else if (driftStatus == STATUS_CFG_ERR) {
+        } else if (driftStatus == EDATypes.STATUS_CFG_ERR) {
             return msgConfigRequired;
-        } else if (driftStatus == STATUS_NO_POWER) {
+        } else if (driftStatus == EDATypes.STATUS_NO_POWER) {
             return msgPowerRequired;
-        } else if (driftStatus == STATUS_NO_SPEED) {
+        } else if (driftStatus == EDATypes.STATUS_NO_SPEED) {
             return msgNoSpeed;
-        } else if (driftStatus == STATUS_INVALID_SPEED) {
+        } else if (driftStatus == EDATypes.STATUS_INVALID_SPEED) {
             return msgInvalidSpeed;
-        } else if (driftStatus == STATUS_PROVISIONAL) {
+        } else if (driftStatus == EDATypes.STATUS_PROVISIONAL) {
             return msgProvisionalProfile;
-        } else if (driftStatus == STATUS_PROFILE_TIMEOUT) {
+        } else if (driftStatus == EDATypes.STATUS_PROFILE_TIMEOUT) {
             return msgProfileTimeout;
         }
 
@@ -776,19 +741,19 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function getDefaultStatusDetailShort() as String? {
-        if (driftStatus == STATUS_WAIT) {
+        if (driftStatus == EDATypes.STATUS_WAIT) {
             return msgCollectingDataShort;
-        } else if (driftStatus == STATUS_CFG_ERR) {
+        } else if (driftStatus == EDATypes.STATUS_CFG_ERR) {
             return msgConfigRequiredShort;
-        } else if (driftStatus == STATUS_NO_POWER) {
+        } else if (driftStatus == EDATypes.STATUS_NO_POWER) {
             return msgPowerRequiredShort;
-        } else if (driftStatus == STATUS_NO_SPEED) {
+        } else if (driftStatus == EDATypes.STATUS_NO_SPEED) {
             return msgNoSpeedShort;
-        } else if (driftStatus == STATUS_INVALID_SPEED) {
+        } else if (driftStatus == EDATypes.STATUS_INVALID_SPEED) {
             return msgInvalidSpeedShort;
-        } else if (driftStatus == STATUS_PROVISIONAL) {
+        } else if (driftStatus == EDATypes.STATUS_PROVISIONAL) {
             return msgProvisionalProfileShort;
-        } else if (driftStatus == STATUS_PROFILE_TIMEOUT) {
+        } else if (driftStatus == EDATypes.STATUS_PROFILE_TIMEOUT) {
             return msgProfileTimeoutShort;
         }
 
@@ -814,6 +779,14 @@ class EDAView extends WatchUi.DataField {
 
     private function getRenderer() as EDARenderer {
         return renderer as EDARenderer;
+    }
+
+    private function getWorkloadSourceSelector() as EDAWorkloadSourceSelector {
+        return workloadSourceSelector as EDAWorkloadSourceSelector;
+    }
+
+    private function getLifecycleManager() as EDALifecycleManager {
+        return lifecycleManager as EDALifecycleManager;
     }
 
     (:high_mem)
@@ -871,12 +844,12 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function shouldRetainDisplaySampleState(statusCode as Number) as Boolean {
-        return statusCode == STATUS_WAIT || statusCode == STATUS_WARMUP;
+        return statusCode == EDATypes.STATUS_WAIT || statusCode == EDATypes.STATUS_WARMUP;
     }
 
     private function clearPostResetCollectingStatus() as Void {
         hasPostResetCollectingStatus = false;
-        postResetCollectingStatus = STATUS_WAIT;
+        postResetCollectingStatus = EDATypes.STATUS_WAIT;
         postResetCollectingDetail = "";
         postResetCollectingDetailShort = "";
     }
@@ -905,7 +878,7 @@ class EDAView extends WatchUi.DataField {
             return false;
         }
 
-        if (postResetCollectingStatus == STATUS_WAIT) {
+        if (postResetCollectingStatus == EDATypes.STATUS_WAIT) {
             setCollectingStatus();
             return true;
         }
@@ -1063,14 +1036,14 @@ class EDAView extends WatchUi.DataField {
 
     private function setCollectingStatus() as Void {
         if (!isEngineCalibrated) {
-            setStatusWithDetail(STATUS_CFG_ERR, msgConfigRequired, msgConfigRequiredShort);
+            setStatusWithDetail(EDATypes.STATUS_CFG_ERR, msgConfigRequired, msgConfigRequiredShort);
             return;
         }
 
         if (isProfileProvisional()) {
-            setStatusWithDetail(STATUS_PROVISIONAL, msgProvisionalProfile, msgProvisionalProfileShort);
+            setStatusWithDetail(EDATypes.STATUS_PROVISIONAL, msgProvisionalProfile, msgProvisionalProfileShort);
         } else {
-            setStatus(STATUS_WAIT);
+            setStatus(EDATypes.STATUS_WAIT);
         }
     }
 
@@ -1104,16 +1077,16 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function isInvalidDisplayState() as Boolean {
-        return driftStatus != STATUS_VALUE;
+        return driftStatus != EDATypes.STATUS_VALUE;
     }
 
     private function shouldUseLiveRenderFallback() as Boolean {
-        return driftStatus == STATUS_WAIT || driftStatus == STATUS_WARMUP;
+        return driftStatus == EDATypes.STATUS_WAIT || driftStatus == EDATypes.STATUS_WARMUP;
     }
 
     (:high_mem)
     private function getRenderModelSpeed() as Float? {
-        if (!filterInitialized || validActiveMs < WARMUP_VALID_MS) {
+        if (!filterInitialized || validActiveMs < EDAFeatureFlags.getWarmupValidMs()) {
             return Math.sqrt(-1.0);
         }
 
@@ -1127,7 +1100,7 @@ class EDAView extends WatchUi.DataField {
 
     (:high_mem)
     private function getRenderModelHr() as Float? {
-        if (!filterInitialized || validActiveMs < WARMUP_VALID_MS) {
+        if (!filterInitialized || validActiveMs < EDAFeatureFlags.getWarmupValidMs()) {
             return Math.sqrt(-1.0);
         }
 
@@ -1182,32 +1155,18 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function clearPendingWorkloadSourceSwitch() as Void {
-        pendingWorkloadSource = SOURCE_NONE;
+        pendingWorkloadSource = EDATypes.SOURCE_NONE;
         pendingWorkloadSourceSamples = 0;
     }
 
     private function rememberPauseTimestamp() as Void {
-        if (lastPauseSystemTimer == null) {
-            lastPauseSystemTimer = System.getTimer();
-        }
-
+        getLifecycleManager().rememberPauseTimestamp();
         clearRawLiveSampleState();
         clearDisplaySampleState();
     }
 
     private function shouldResetAfterResumePause() as Boolean {
-        var pausedAt = lastPauseSystemTimer;
-        lastPauseSystemTimer = null;
-        if (pausedAt == null) {
-            return false;
-        }
-
-        var currentSystemTimer = System.getTimer();
-        if (currentSystemTimer < pausedAt) {
-            return true;
-        }
-
-        return (currentSystemTimer - pausedAt) >= MAX_RESUME_GAP_RESET_MS;
+        return getLifecycleManager().shouldResetAfterResumePause();
     }
 
     private function hasAcceptedDataGap(timerTime as Number) as Boolean {
@@ -1216,11 +1175,11 @@ class EDAView extends WatchUi.DataField {
             return false;
         }
 
-        return (timerTime - previousAcceptedTimerTime) > MAX_DATA_DRIVEN_GAP_MS;
+        return (timerTime - previousAcceptedTimerTime) > EDAFeatureFlags.getDataDrivenGapMs();
     }
 
     private function clearLifecyclePauseState() as Void {
-        lastPauseSystemTimer = null;
+        getLifecycleManager().clearLifecyclePauseState();
     }
 
     private function resetResumeSensitiveState() as Void {
@@ -1239,7 +1198,7 @@ class EDAView extends WatchUi.DataField {
         driftActiveMs = 0;
         clearRawLiveSampleState();
         clearDisplaySampleState();
-        currentWorkloadSource = SOURCE_NONE;
+        currentWorkloadSource = EDATypes.SOURCE_NONE;
         valAktPace = "--:--";
         valAktHr = "--";
         resetTargetDisplay();
@@ -1247,11 +1206,11 @@ class EDAView extends WatchUi.DataField {
         statusDetailShort = "";
         getDriftEngine().reset();
         if (!isEngineCalibrated) {
-            setStatusWithDetail(STATUS_CFG_ERR, msgConfigRequired, msgConfigRequiredShort);
+            setStatusWithDetail(EDATypes.STATUS_CFG_ERR, msgConfigRequired, msgConfigRequiredShort);
             return;
         }
 
-        setStatus(STATUS_WAIT);
+        setStatus(EDATypes.STATUS_WAIT);
     }
 
     private function handleImplicitSessionReset() as Void {
@@ -1278,7 +1237,7 @@ class EDAView extends WatchUi.DataField {
                 resetSessionFitSummary();
             }
             resetAnalysisState();
-            rememberPostResetCollectingStatus(STATUS_WAIT, "", "");
+            rememberPostResetCollectingStatus(EDATypes.STATUS_WAIT, "", "");
         }
     }
 
@@ -1523,11 +1482,11 @@ class EDAView extends WatchUi.DataField {
         }
 
         var deltaMs = timerTime - previousTimer;
-        if (deltaMs <= 0 || deltaMs > MAX_VALID_SAMPLE_GAP_MS) {
+        if (deltaMs <= 0 || deltaMs > EDAFeatureFlags.getMaxValidSampleGapMs()) {
             return false;
         }
 
-        var allowedJump = MAX_HR_JUMP_PER_SEC * (deltaMs.toFloat() / 1000.0);
+        var allowedJump = EDAFeatureFlags.getHrJumpPerSec() * (deltaMs.toFloat() / 1000.0);
         return (hr - previousHr).abs() > allowedJump;
     }
 
@@ -1539,11 +1498,11 @@ class EDAView extends WatchUi.DataField {
         }
 
         var deltaMs = timerTime - previousTimer;
-        if (deltaMs <= 0 || deltaMs > MAX_VALID_SAMPLE_GAP_MS) {
+        if (deltaMs <= 0 || deltaMs > EDAFeatureFlags.getMaxValidSampleGapMs()) {
             return false;
         }
 
-        var allowedJump = MAX_SPEED_JUMP_PER_SEC * (deltaMs.toFloat() / 1000.0);
+        var allowedJump = EDAFeatureFlags.getSpeedJumpPerSec() * (deltaMs.toFloat() / 1000.0);
         return (speed - previousSpeed).abs() > allowedJump;
     }
 
@@ -1552,7 +1511,7 @@ class EDAView extends WatchUi.DataField {
             return false;
         }
 
-        return power >= MIN_VALID_POWER && power <= MAX_VALID_POWER;
+        return power >= EDAFeatureFlags.getMinValidPower() && power <= EDAFeatureFlags.getMaxValidPower();
     }
 
     private function getPowerValidationError(power as Float?) as Number? {
@@ -1560,12 +1519,12 @@ class EDAView extends WatchUi.DataField {
             return null;
         }
 
-        if (power < MIN_VALID_POWER) {
-            return STATUS_LOW_POWER;
+        if (power < EDAFeatureFlags.getMinValidPower()) {
+            return EDATypes.STATUS_LOW_POWER;
         }
 
-        if (power > MAX_VALID_POWER) {
-            return STATUS_SPIKE;
+        if (power > EDAFeatureFlags.getMaxValidPower()) {
+            return EDATypes.STATUS_SPIKE;
         }
 
         return null;
@@ -1580,12 +1539,12 @@ class EDAView extends WatchUi.DataField {
             return false;
         }
 
-        if (speed == null || speed > MAX_SPEED_MS) {
+        if (speed == null || speed > EDAFeatureFlags.getMaxSpeedMs()) {
             return false;
         }
 
         var runPace = pacePerKmSeconds(speed);
-        return runPace != null && runPace <= MAX_RUNNING_PACE_PER_KM;
+        return runPace != null && runPace <= EDAFeatureFlags.getMaxRunningPacePerKm();
     }
 
     private function getSpeedValidationError(speed as Float?, timerTime as Number) as Number? {
@@ -1594,28 +1553,28 @@ class EDAView extends WatchUi.DataField {
         }
 
         if (speed == null) {
-            return STATUS_NO_SPEED;
+            return EDATypes.STATUS_NO_SPEED;
         }
 
         if (speed <= 0.0) {
-            return STATUS_LOW_PACE;
+            return EDATypes.STATUS_LOW_PACE;
         }
 
-        if (speed > MAX_SPEED_MS) {
-            return STATUS_INVALID_SPEED;
+        if (speed > EDAFeatureFlags.getMaxSpeedMs()) {
+            return EDATypes.STATUS_INVALID_SPEED;
         }
 
         var runPace = pacePerKmSeconds(speed);
         if (runPace == null) {
-            return STATUS_INVALID_SPEED;
+            return EDATypes.STATUS_INVALID_SPEED;
         }
 
-        if (runPace > MAX_RUNNING_PACE_PER_KM) {
-            return STATUS_LOW_PACE;
+        if (runPace > EDAFeatureFlags.getMaxRunningPacePerKm()) {
+            return EDATypes.STATUS_LOW_PACE;
         }
 
         if (isSpeedOutlier(speed, timerTime)) {
-            return STATUS_INVALID_SPEED;
+            return EDATypes.STATUS_INVALID_SPEED;
         }
 
         return null;
@@ -1641,7 +1600,7 @@ class EDAView extends WatchUi.DataField {
                 return powerError;
             }
 
-            return STATUS_NO_POWER;
+            return EDATypes.STATUS_NO_POWER;
         }
 
         if (speedError == null) {
@@ -1656,66 +1615,36 @@ class EDAView extends WatchUi.DataField {
             return speedError;
         }
 
-        return STATUS_NO_POWER;
+        return EDATypes.STATUS_NO_POWER;
     }
 
     private function determinePreferredWorkloadSource(speed as Float?, power as Float?) as Number {
-        if (hasUsablePower(power)) {
-            return SOURCE_POWER;
-        }
-
-        if (hasUsableSpeedWorkload(speed)) {
-            return SOURCE_SPEED;
-        }
-
-        return SOURCE_NONE;
+        return getWorkloadSourceSelector().determinePreferredWorkloadSource(speed, power);
     }
 
     private function isWorkloadSourceUsable(workloadSource as Number, speed as Float?, power as Float?) as Boolean {
-        if (workloadSource == SOURCE_POWER) {
-            return hasUsablePower(power);
-        }
-
-        if (workloadSource == SOURCE_SPEED) {
-            return hasUsableSpeedWorkload(speed);
-        }
-
-        return false;
+        return getWorkloadSourceSelector().isWorkloadSourceUsable(workloadSource, speed, power);
     }
 
     private function determineWorkloadSource(speed as Float?, power as Float?) as Number {
-        // Keep using the current source while it remains valid to avoid
-        // oscillating between equally usable sensors.
-        if (currentWorkloadSource != SOURCE_NONE && isWorkloadSourceUsable(currentWorkloadSource, speed, power)) {
-            return currentWorkloadSource;
-        }
-
-        return determinePreferredWorkloadSource(speed, power);
+        return getWorkloadSourceSelector().determineWorkloadSource(speed, power);
     }
 
     private function getWorkloadMetricForSource(workloadSource as Number, speed as Float?, power as Float?) as Float? {
-        if (workloadSource == SOURCE_POWER && power != null && hasUsablePower(power)) {
-            return power;
-        }
-
-        if (workloadSource == SOURCE_SPEED && speed != null && hasUsableSpeedWorkload(speed)) {
-            return speed;
-        }
-
-        return null;
+        return getWorkloadSourceSelector().getWorkloadMetricForSource(workloadSource, speed, power);
     }
 
     private function validateSample(speed as Float?, hr as Float?, power as Float?, timerTime as Number) as Number? {
         if (hr == null) {
-            return STATUS_NO_HR;
+            return EDATypes.STATUS_NO_HR;
         }
 
         if (hr < getMinValidHr()) {
-            return STATUS_LOW_HR;
+            return EDATypes.STATUS_LOW_HR;
         }
 
         if (isHrOutlier(hr, timerTime)) {
-            return STATUS_SPIKE;
+            return EDATypes.STATUS_SPIKE;
         }
 
         var speedError = getSpeedValidationError(speed, timerTime);
@@ -1742,17 +1671,17 @@ class EDAView extends WatchUi.DataField {
     private function restartAnalysisAfterSourceSwitch(timerTime as Number, speed as Float?, hr as Float, workloadSource as Number) as Void {
         resetAnalysisState();
         primeAnalysisBaseline(timerTime, speed, hr, workloadSource);
-        rememberPostResetCollectingStatus(STATUS_WAIT, "", "");
+        rememberPostResetCollectingStatus(EDATypes.STATUS_WAIT, "", "");
         setCollectingStatus();
     }
 
     private function restartAnalysisAfterGap(timerTime as Number, speed as Float?, hr as Float?, workloadSource as Number) as Void {
         resetAnalysisState();
-        if (hr != null && workloadSource != SOURCE_NONE) {
+        if (hr != null && workloadSource != EDATypes.SOURCE_NONE) {
             primeAnalysisBaseline(timerTime, speed, hr, workloadSource);
         }
-        rememberPostResetCollectingStatus(STATUS_GAP, "", "");
-        setInvalidStatus(STATUS_GAP);
+        rememberPostResetCollectingStatus(EDATypes.STATUS_GAP, "", "");
+        setInvalidStatus(EDATypes.STATUS_GAP);
     }
 
     private function resetEpochWithoutPrimingWithDetail(statusCode as Number, detailText as String) as Void {
@@ -1768,13 +1697,13 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function validateSourceConsistency(timerTime as Number, speed as Float?, hr as Float, workloadSource as Number, deltaMs as Number) as Boolean {
-        if (deltaMs > MAX_VALID_SAMPLE_GAP_MS) {
+        if (deltaMs > EDAFeatureFlags.getMaxValidSampleGapMs()) {
             clearPendingWorkloadSourceSwitch();
             restartAnalysisAfterGap(timerTime, speed, hr, workloadSource);
             return false;
         }
 
-        if (currentWorkloadSource == SOURCE_NONE || workloadSource == currentWorkloadSource) {
+        if (currentWorkloadSource == EDATypes.SOURCE_NONE || workloadSource == currentWorkloadSource) {
             clearPendingWorkloadSourceSwitch();
             return true;
         }
@@ -1786,7 +1715,7 @@ class EDAView extends WatchUi.DataField {
             pendingWorkloadSourceSamples += 1;
         }
 
-        if (pendingWorkloadSourceSamples < SOURCE_SWITCH_CONFIRM_SAMPLES) {
+        if (pendingWorkloadSourceSamples < EDAFeatureFlags.getSourceSwitchConfirmSamples()) {
             setCollectingStatus();
             return false;
         }
@@ -1798,7 +1727,7 @@ class EDAView extends WatchUi.DataField {
 
     private function updateDriftDisplay(driftPercent as Float) as Void {
         var sign = driftPercent > 0.0 ? "+" : "";
-        driftStatus = STATUS_VALUE;
+        driftStatus = EDATypes.STATUS_VALUE;
         strDrift = sign + driftPercent.format("%.1f") + "%";
         statusDetail = "";
         statusDetailShort = "";
@@ -1865,12 +1794,12 @@ class EDAView extends WatchUi.DataField {
 
     function onTimerPause() as Void {
         rememberPauseTimestamp();
-        setInvalidStatus(STATUS_PAUSE);
+        setInvalidStatus(EDATypes.STATUS_PAUSE);
         WatchUi.requestUpdate();
     }
 
     function onTimerResume() as Void {
-        if (lastPauseSystemTimer == null) {
+        if (getLifecycleManager().getPauseTimestamp() == null) {
             return;
         }
 
@@ -1905,14 +1834,14 @@ class EDAView extends WatchUi.DataField {
         lastLiveHr = curHr;
 
         if (!isEngineCalibrated) {
-            setStatusWithDetail(STATUS_CFG_ERR, msgConfigRequired, msgConfigRequiredShort);
+            setStatusWithDetail(EDATypes.STATUS_CFG_ERR, msgConfigRequired, msgConfigRequiredShort);
             endDeferredRenderCacheRefresh();
             return;
         }
 
         if (info.timerState != Activity.TIMER_STATE_ON) {
             rememberPauseTimestamp();
-            setInvalidStatus(STATUS_PAUSE);
+            setInvalidStatus(EDATypes.STATUS_PAUSE);
             endDeferredRenderCacheRefresh();
             return;
         }
@@ -1920,7 +1849,7 @@ class EDAView extends WatchUi.DataField {
         var previousTimerTime = lastActiveTimerTime;
         if (previousTimerTime != null && currentTimerTime < previousTimerTime) {
             var rollbackMs = previousTimerTime - currentTimerTime;
-            if (rollbackMs > IMPLICIT_TIMER_RESET_TOLERANCE_MS) {
+            if (rollbackMs > EDAFeatureFlags.getImplicitTimerResetToleranceMs()) {
                 handleImplicitSessionReset();
             } else {
                 endDeferredRenderCacheRefresh();
@@ -1930,8 +1859,8 @@ class EDAView extends WatchUi.DataField {
 
         mTimerTime = currentTimerTime;
 
-        if (lastPauseSystemTimer != null && shouldResetAfterResumePause()) {
-            restartAnalysisAfterGap(mTimerTime, null, null, SOURCE_NONE);
+        if (getLifecycleManager().getPauseTimestamp() != null && shouldResetAfterResumePause()) {
+            restartAnalysisAfterGap(mTimerTime, null, null, EDATypes.SOURCE_NONE);
             endDeferredRenderCacheRefresh();
             return;
         }
@@ -1952,7 +1881,7 @@ class EDAView extends WatchUi.DataField {
 
         if (!hasUsableActivityProfile()) {
             if (getProfileResolver().isRetryPending()) {
-                setInvalidStatusWithShortDetail(STATUS_WAIT, getProfileRetryDetail(), getProfileRetryDetailShort());
+                setInvalidStatusWithShortDetail(EDATypes.STATUS_WAIT, getProfileRetryDetail(), getProfileRetryDetailShort());
             } else {
                 setCollectingStatus();
             }
@@ -1968,12 +1897,12 @@ class EDAView extends WatchUi.DataField {
 
         var validationError = validateSample(curSpeed, curHr, curPower, mTimerTime);
         if (validationError != null) {
-            if (validationError == STATUS_NO_HR || validationError == STATUS_NO_POWER || validationError == STATUS_INVALID_SPEED) {
+            if (validationError == EDATypes.STATUS_NO_HR || validationError == EDATypes.STATUS_NO_POWER || validationError == EDATypes.STATUS_INVALID_SPEED) {
                 syncDisplayWithCurrentSample(curSpeed, curHr);
             }
             if (getProfileResolver().hasTimeoutNoticePending()) {
                 getProfileResolver().clearTimeoutNoticePending();
-                resetEpochWithoutPrimingWithShortDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
+                resetEpochWithoutPrimingWithShortDetail(EDATypes.STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
                 endDeferredRenderCacheRefresh();
                 return;
             }
@@ -1985,9 +1914,9 @@ class EDAView extends WatchUi.DataField {
         var workloadSource = determineWorkloadSource(curSpeed, curPower);
         var workload = getWorkloadMetricForSource(workloadSource, curSpeed, curPower);
         if (curHr == null || workload == null || curHr <= 0.0 || workload <= 0.0) {
-            if (getProfileResolver().hasTimeoutNoticePending()) {
-                getProfileResolver().clearTimeoutNoticePending();
-                resetEpochWithoutPrimingWithShortDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
+        if (getProfileResolver().hasTimeoutNoticePending()) {
+            getProfileResolver().clearTimeoutNoticePending();
+            resetEpochWithoutPrimingWithShortDetail(EDATypes.STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
                 endDeferredRenderCacheRefresh();
                 return;
             }
@@ -1999,8 +1928,8 @@ class EDAView extends WatchUi.DataField {
         if (getProfileResolver().hasTimeoutNoticePending()) {
             getProfileResolver().clearTimeoutNoticePending();
             restartAnalysisAfterGap(mTimerTime, curSpeed, curHr, workloadSource);
-            rememberPostResetCollectingStatus(STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
-            setInvalidStatusWithShortDetail(STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
+            rememberPostResetCollectingStatus(EDATypes.STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
+            setInvalidStatusWithShortDetail(EDATypes.STATUS_PROFILE_TIMEOUT, msgProfileTimeout, msgProfileTimeoutShort);
             endDeferredRenderCacheRefresh();
             return;
         }
@@ -2031,14 +1960,14 @@ class EDAView extends WatchUi.DataField {
         var driftDeltaMs = driftActiveMs - previousDriftActiveMs;
         getDriftEngine().recordValidSample(driftActiveMs, driftDeltaMs, ef);
 
-        if (driftActiveMs < WARMUP_VALID_MS) {
+        if (driftActiveMs < EDAFeatureFlags.getWarmupValidMs()) {
             if (!shouldShowWarmupStatus() && applyPostResetCollectingStatus()) {
                 endDeferredRenderCacheRefresh();
                 return;
             }
-            var remainingMs = WARMUP_VALID_MS - driftActiveMs;
+            var remainingMs = EDAFeatureFlags.getWarmupValidMs() - driftActiveMs;
             var remainingSeconds = ((remainingMs + 999) / 1000).toNumber();
-            setInvalidStatusWithDetail(STATUS_WARMUP, remainingSeconds.toString() + msgWarmupValidSuffix);
+            setInvalidStatusWithDetail(EDATypes.STATUS_WARMUP, remainingSeconds.toString() + msgWarmupValidSuffix);
             endDeferredRenderCacheRefresh();
             return;
         }

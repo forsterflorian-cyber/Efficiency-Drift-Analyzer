@@ -1,0 +1,231 @@
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Lang,1,14,18]; ]
+import Toybox.Lang;
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 17; @symbol_moduledef = [EDAFeatureFlags,17,7,22]; ]
+module EDAFeatureFlags {
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 17; ]
+    <init> {
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 26; @position = 10; @symbol_constdef = [ENABLE_CYCLING_SPEED_FALLBACK,26,10,39]; @symbol_type<0> = [Boolean,26,43,50]; ]
+    const ENABLE_CYCLING_SPEED_FALLBACK as Boolean = false;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 35; @position = 10; @symbol_constdef = [ENABLE_DRIFT_CLAMPING,35,10,31]; @symbol_type<0> = [Boolean,35,35,42]; ]
+    const ENABLE_DRIFT_CLAMPING as Boolean = true;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 44; @position = 10; @symbol_constdef = [ENABLE_STATUS_HISTORY,44,10,31]; @symbol_type<0> = [Boolean,44,35,42]; ]
+    const ENABLE_STATUS_HISTORY as Boolean = false;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 53; @position = 10; @symbol_constdef = [ENABLE_WARMUP_PROGRESS,53,10,32]; @symbol_type<0> = [Boolean,53,36,43]; ]
+    const ENABLE_WARMUP_PROGRESS as Boolean = false;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 62; @position = 10; @symbol_constdef = [ENABLE_EARLY_FALLBACK_EXPORT,62,10,38]; @symbol_type<0> = [Boolean,62,42,49]; ]
+    const ENABLE_EARLY_FALLBACK_EXPORT as Boolean = false;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 71; @position = 10; @symbol_constdef = [ENABLE_DEBUG_LOGGING,71,10,30]; @symbol_type<0> = [Boolean,71,34,41]; ]
+    const ENABLE_DEBUG_LOGGING as Boolean = false;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 80; @position = 10; @symbol_constdef = [ENABLE_DYNAMIC_EWMA_TUNING,80,10,36]; @symbol_type<0> = [Boolean,80,40,47]; ]
+    const ENABLE_DYNAMIC_EWMA_TUNING as Boolean = false;
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 86; @symbol_functiondef = [isCyclingSpeedFallbackEnabled,86,13,42]; @symbol_return<0> = [Boolean,86,48,55]; ]
+    function isCyclingSpeedFallbackEnabled() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_86_56_88_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 87 8 ]
+        symbol [ ENABLE_CYCLING_SPEED_FALLBACK %tmp.2 87 15 44 ];
+        %tmp.2 = getv ? :ENABLE_CYCLING_SPEED_FALLBACK;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_86_56_88_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 90; @symbol_functiondef = [isDriftClampingEnabled,90,13,35]; @symbol_return<0> = [Boolean,90,41,48]; ]
+    function isDriftClampingEnabled() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_90_49_92_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 91 8 ]
+        symbol [ ENABLE_DRIFT_CLAMPING %tmp.2 91 15 36 ];
+        %tmp.2 = getv ? :ENABLE_DRIFT_CLAMPING;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_90_49_92_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 94; @symbol_functiondef = [isStatusHistoryEnabled,94,13,35]; @symbol_return<0> = [Boolean,94,41,48]; ]
+    function isStatusHistoryEnabled() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_94_49_96_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 95 8 ]
+        symbol [ ENABLE_STATUS_HISTORY %tmp.2 95 15 36 ];
+        %tmp.2 = getv ? :ENABLE_STATUS_HISTORY;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_94_49_96_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 98; @symbol_functiondef = [isWarmupProgressEnabled,98,13,36]; @symbol_return<0> = [Boolean,98,42,49]; ]
+    function isWarmupProgressEnabled() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_98_50_100_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 99 8 ]
+        symbol [ ENABLE_WARMUP_PROGRESS %tmp.2 99 15 37 ];
+        %tmp.2 = getv ? :ENABLE_WARMUP_PROGRESS;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_98_50_100_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 102; @symbol_functiondef = [isEarlyFallbackExportEnabled,102,13,41]; @symbol_return<0> = [Boolean,102,47,54]; ]
+    function isEarlyFallbackExportEnabled() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_102_55_104_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 103 8 ]
+        symbol [ ENABLE_EARLY_FALLBACK_EXPORT %tmp.2 103 15 43 ];
+        %tmp.2 = getv ? :ENABLE_EARLY_FALLBACK_EXPORT;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_102_55_104_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 106; @symbol_functiondef = [isDebugLoggingEnabled,106,13,34]; @symbol_return<0> = [Boolean,106,40,47]; ]
+    function isDebugLoggingEnabled() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_106_48_108_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 107 8 ]
+        symbol [ ENABLE_DEBUG_LOGGING %tmp.2 107 15 35 ];
+        %tmp.2 = getv ? :ENABLE_DEBUG_LOGGING;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_106_48_108_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 110; @symbol_functiondef = [isDynamicEwmaTuningEnabled,110,13,39]; @symbol_return<0> = [Boolean,110,45,52]; ]
+    function isDynamicEwmaTuningEnabled() as Boolean {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_110_53_112_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 111 8 ]
+        symbol [ ENABLE_DYNAMIC_EWMA_TUNING %tmp.2 111 15 41 ];
+        %tmp.2 = getv ? :ENABLE_DYNAMIC_EWMA_TUNING;
+        ret %tmp.2;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_110_53_112_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 121; @symbol_functiondef = [getMinValidPower,121,13,29]; @symbol_return<0> = [Float,121,35,40]; ]
+    function getMinValidPower() as Float {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_121_41_123_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 122 8 ]
+        %tmp.1 = 30.0;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_121_41_123_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 125; @symbol_functiondef = [getMaxValidPower,125,13,29]; @symbol_return<0> = [Float,125,35,40]; ]
+    function getMaxValidPower() as Float {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_125_41_127_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 126 8 ]
+        %tmp.1 = 700.0;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_125_41_127_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 129; @symbol_functiondef = [getMaxSpeedMs,129,13,26]; @symbol_return<0> = [Float,129,32,37]; ]
+    function getMaxSpeedMs() as Float {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_129_38_131_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 130 8 ]
+        %tmp.1 = 12.0;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_129_38_131_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 133; @symbol_functiondef = [getMaxRunningPacePerKm,133,13,35]; @symbol_return<0> = [Float,133,41,46]; ]
+    function getMaxRunningPacePerKm() as Float {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_133_47_135_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 134 8 ]
+        %tmp.1 = 480.0;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_133_47_135_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 137; @symbol_functiondef = [getHrJumpPerSec,137,13,28]; @symbol_return<0> = [Float,137,34,39]; ]
+    function getHrJumpPerSec() as Float {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_137_40_139_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 138 8 ]
+        %tmp.1 = 20.0;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_137_40_139_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 141; @symbol_functiondef = [getSpeedJumpPerSec,141,13,31]; @symbol_return<0> = [Float,141,37,42]; ]
+    function getSpeedJumpPerSec() as Float {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_141_43_143_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 142 8 ]
+        %tmp.1 = 4.0;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_141_43_143_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 145; @symbol_functiondef = [getWarmupValidMs,145,13,29]; @symbol_return<0> = [Number,145,35,41]; ]
+    function getWarmupValidMs() as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_145_42_147_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 146 8 ]
+        %tmp.1 = 180000;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_145_42_147_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 149; @symbol_functiondef = [getMaxValidSampleGapMs,149,13,35]; @symbol_return<0> = [Number,149,41,47]; ]
+    function getMaxValidSampleGapMs() as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_149_48_151_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 150 8 ]
+        %tmp.1 = 5000;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_149_48_151_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 153; @symbol_functiondef = [getMaxDataDrivenGapMs,153,13,34]; @symbol_return<0> = [Number,153,40,46]; ]
+    function getMaxDataDrivenGapMs() as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_153_47_155_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 154 8 ]
+        %tmp.1 = 20000;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_153_47_155_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 157; @symbol_functiondef = [getMaxResumeGapResetMs,157,13,35]; @symbol_return<0> = [Number,157,41,47]; ]
+    function getMaxResumeGapResetMs() as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_157_48_159_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 158 8 ]
+        %tmp.1 = 300000;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_157_48_159_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 161; @symbol_functiondef = [getDataDrivenGapMs,161,13,31]; @symbol_return<0> = [Number,161,37,43]; ]
+    function getDataDrivenGapMs() as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_161_44_163_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 162 8 ]
+        %tmp.1 = self;
+        symbol [ getMaxDataDrivenGapMs %tmp.2 162 15 36 ];
+        %tmp.2 = getv function %tmp.1 :getMaxDataDrivenGapMs;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        ret %tmp.3;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_161_44_163_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 165; @symbol_functiondef = [getFallbackExportTimeoutMs,165,13,39]; @symbol_return<0> = [Number,165,45,51]; ]
+    function getFallbackExportTimeoutMs() as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_165_52_167_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 166 8 ]
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_166_15_166_54_begin:
+        symbol [ ENABLE_EARLY_FALLBACK_EXPORT %tmp.2 166 15 43 ];
+        %tmp.2 = getv ? :ENABLE_EARLY_FALLBACK_EXPORT;
+        bf %tmp.2 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_166_15_166_54_else_false;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_166_15_166_54_true:
+        %tmp.3 = 60000;
+        push %tmp.3;
+        goto @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_166_15_166_54_end;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_166_15_166_54_else_false:
+        %tmp.4 = 120000;
+        push %tmp.4;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_166_15_166_54_end:
+        %tmp.5 = phi [%tmp.2 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_166_15_166_54_begin] [%tmp.3 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_166_15_166_54_true] [%tmp.4 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_166_15_166_54_else_false] [%tmp.5 @E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_166_15_166_54_end];
+        ret %tmp.5;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_165_52_167_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 169; @symbol_functiondef = [getImplicitTimerResetToleranceMs,169,13,45]; @symbol_return<0> = [Number,169,51,57]; ]
+    function getImplicitTimerResetToleranceMs() as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_169_58_171_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 170 8 ]
+        %tmp.1 = 5000;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_169_58_171_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 173; @symbol_functiondef = [getSourceSwitchConfirmSamples,173,13,42]; @symbol_return<0> = [Number,173,48,54]; ]
+    function getSourceSwitchConfirmSamples() as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_173_55_175_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 174 8 ]
+        %tmp.1 = 3;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_173_55_175_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 177; @symbol_functiondef = [getDriftWindowMs,177,13,29]; @symbol_return<0> = [Number,177,35,41]; ]
+    function getDriftWindowMs() as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_177_42_179_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 178 8 ]
+        %tmp.1 = 1200000;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_177_42_179_4_stop:
+    }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 181; @symbol_functiondef = [getDriftBucketCount,181,13,32]; @symbol_return<0> = [Number,181,38,44]; ]
+    function getDriftBucketCount() as Number {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_181_45_183_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 182 8 ]
+        %tmp.1 = 120;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_181_45_183_4_stop:
+    }
+}
+[ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 1; ]
+<init> {
+}

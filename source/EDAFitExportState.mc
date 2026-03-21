@@ -4,8 +4,8 @@ import Toybox.Math;
 
 class EDAFitExportState {
 
-    private const SOURCE_POWER as Number = 1;
-    private const SOURCE_SPEED as Number = 2;
+    // SOURCE-Konstanten werden jetzt aus EDATypes importiert
+    // SOURCE-Konstanten werden jetzt aus EDATypes importiert
 
     private var mDriftField as Toybox.FitContributor.Field?;
     private var mAvgDriftField as Toybox.FitContributor.Field?;
@@ -48,10 +48,10 @@ class EDAFitExportState {
             return;
         }
 
-        if (workloadSource == SOURCE_POWER) {
+        if (workloadSource == EDATypes.SOURCE_POWER) {
             mSessionPowerDriftWeightedSum += driftPercent * intervalMs.toFloat();
             mSessionPowerDriftMs += intervalMs;
-        } else if (workloadSource == SOURCE_SPEED) {
+        } else if (workloadSource == EDATypes.SOURCE_SPEED) {
             mSessionSpeedDriftWeightedSum += driftPercent * intervalMs.toFloat();
             mSessionSpeedDriftMs += intervalMs;
         }
