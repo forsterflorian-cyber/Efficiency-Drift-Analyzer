@@ -1,64 +1,64 @@
-[ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [FitContributor,1,14,28]; ]
+[ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [FitContributor,1,14,28]; ]
 import Toybox.FitContributor;
-[ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [Lang,2,14,18]; ]
+[ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [Lang,2,14,18]; ]
 import Toybox.Lang;
-[ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 3; @symbol_importdef<0> = [Toybox,3,7,13]; @symbol_importdef<1> = [Math,3,14,18]; ]
+[ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 3; @symbol_importdef<0> = [Toybox,3,7,13]; @symbol_importdef<1> = [Math,3,14,18]; ]
 import Toybox.Math;
-[ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 5; @symbol_classdef = [EDAFitExportState,5,6,23]; ]
+[ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 5; @symbol_classdef = [EDAFitExportState,5,6,23]; ]
 class EDAFitExportState {
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 5; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 5; ]
     <init> {
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 5; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 5; ]
     static
     <init> {
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 10; @position = 16; @symbol_vardef = [mDriftField,10,16,27]; @symbol_type<0> = [Toybox,10,31,37]; @symbol_type<1> = [FitContributor,10,38,52]; @symbol_type<2> = [Field,10,53,58]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 10; @position = 16; @symbol_vardef = [mDriftField,10,16,27]; @symbol_type<0> = [Toybox,10,31,37]; @symbol_type<1> = [FitContributor,10,38,52]; @symbol_type<2> = [Field,10,53,58]; ]
     private
     var mDriftField as Toybox.FitContributor.Field or Null;
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 11; @position = 16; @symbol_vardef = [mAvgDriftField,11,16,30]; @symbol_type<0> = [Toybox,11,34,40]; @symbol_type<1> = [FitContributor,11,41,55]; @symbol_type<2> = [Field,11,56,61]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 11; @position = 16; @symbol_vardef = [mAvgDriftField,11,16,30]; @symbol_type<0> = [Toybox,11,34,40]; @symbol_type<1> = [FitContributor,11,41,55]; @symbol_type<2> = [Field,11,56,61]; ]
     private
     var mAvgDriftField as Toybox.FitContributor.Field or Null;
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 12; @position = 16; @symbol_vardef = [mProfileStateField,12,16,34]; @symbol_type<0> = [Toybox,12,38,44]; @symbol_type<1> = [FitContributor,12,45,59]; @symbol_type<2> = [Field,12,60,65]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 12; @position = 16; @symbol_vardef = [mProfileStateField,12,16,34]; @symbol_type<0> = [Toybox,12,38,44]; @symbol_type<1> = [FitContributor,12,45,59]; @symbol_type<2> = [Field,12,60,65]; ]
     private
     var mProfileStateField as Toybox.FitContributor.Field or Null;
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 14; @position = 16; @symbol_vardef = [mSessionPowerDriftWeightedSum,14,16,45]; @symbol_type<0> = [Float,14,49,54]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 14; @position = 16; @symbol_vardef = [mSessionPowerDriftWeightedSum,14,16,45]; @symbol_type<0> = [Float,14,49,54]; ]
     private
     var mSessionPowerDriftWeightedSum as Float = 0.0;
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 15; @position = 16; @symbol_vardef = [mSessionPowerDriftMs,15,16,36]; @symbol_type<0> = [Number,15,40,46]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 15; @position = 16; @symbol_vardef = [mSessionPowerDriftMs,15,16,36]; @symbol_type<0> = [Number,15,40,46]; ]
     private
     var mSessionPowerDriftMs as Number = 0;
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 16; @position = 16; @symbol_vardef = [mSessionSpeedDriftWeightedSum,16,16,45]; @symbol_type<0> = [Float,16,49,54]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 16; @position = 16; @symbol_vardef = [mSessionSpeedDriftWeightedSum,16,16,45]; @symbol_type<0> = [Float,16,49,54]; ]
     private
     var mSessionSpeedDriftWeightedSum as Float = 0.0;
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 17; @position = 16; @symbol_vardef = [mSessionSpeedDriftMs,17,16,36]; @symbol_type<0> = [Number,17,40,46]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 17; @position = 16; @symbol_vardef = [mSessionSpeedDriftMs,17,16,36]; @symbol_type<0> = [Number,17,40,46]; ]
     private
     var mSessionSpeedDriftMs as Number = 0;
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 19; @symbol_functiondef = [initialize,19,13,23]; @symbol_param<0> = [driftField,20,8,18]; @symbol_param<0>_type<0> = [Toybox,20,22,28]; @symbol_param<0>_type<1> = [FitContributor,20,29,43]; @symbol_param<0>_type<2> = [Field,20,44,49]; @symbol_param<1> = [avgDriftField,21,8,21]; @symbol_param<1>_type<0> = [Toybox,21,25,31]; @symbol_param<1>_type<1> = [FitContributor,21,32,46]; @symbol_param<1>_type<2> = [Field,21,47,52]; @symbol_param<2> = [profileStateField,22,8,25]; @symbol_param<2>_type<0> = [Toybox,22,29,35]; @symbol_param<2>_type<1> = [FitContributor,22,36,50]; @symbol_param<2>_type<2> = [Field,22,51,56]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 19; @symbol_functiondef = [initialize,19,13,23]; @symbol_param<0> = [driftField,20,8,18]; @symbol_param<0>_type<0> = [Toybox,20,22,28]; @symbol_param<0>_type<1> = [FitContributor,20,29,43]; @symbol_param<0>_type<2> = [Field,20,44,49]; @symbol_param<1> = [avgDriftField,21,8,21]; @symbol_param<1>_type<0> = [Toybox,21,25,31]; @symbol_param<1>_type<1> = [FitContributor,21,32,46]; @symbol_param<1>_type<2> = [Field,21,47,52]; @symbol_param<2> = [profileStateField,22,8,25]; @symbol_param<2>_type<0> = [Toybox,22,29,35]; @symbol_param<2>_type<1> = [FitContributor,22,36,50]; @symbol_param<2>_type<2> = [Field,22,51,56]; ]
     function initialize(driftField as Toybox.FitContributor.Field or Null, avgDriftField as Toybox.FitContributor.Field or Null, profileStateField as Toybox.FitContributor.Field or Null) as Void {
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_23_6_27_4_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 24 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_23_6_27_4_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 24 8 ]
         %tmp.1 = lgetv %driftField;
         symbol [ driftField %tmp.1 24 22 32 ];
         symbol [ mDriftField ? 24 8 19 ];
         putv self :mDriftField %tmp.1;
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 25 8 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 25 8 ]
         %tmp.2 = lgetv %avgDriftField;
         symbol [ avgDriftField %tmp.2 25 25 38 ];
         symbol [ mAvgDriftField ? 25 8 22 ];
         putv self :mAvgDriftField %tmp.2;
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 26 8 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 26 8 ]
         %tmp.3 = lgetv %profileStateField;
         symbol [ profileStateField %tmp.3 26 29 46 ];
         symbol [ mProfileStateField ? 26 8 26 ];
         putv self :mProfileStateField %tmp.3;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_23_6_27_4_stop:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_23_6_27_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 29; @symbol_functiondef = [getInvalidFitFloat,29,21,39]; @symbol_return<0> = [Float,29,45,50]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 29; @symbol_functiondef = [getInvalidFitFloat,29,21,39]; @symbol_return<0> = [Float,29,45,50]; ]
     private
     function getInvalidFitFloat() as Float {
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_29_51_32_4_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 31 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_29_51_32_4_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 31 8 ]
         symbol [ Math %tmp.1 31 15 19 ];
         %tmp.1 = getm $.Toybox.Math;
         symbol [ sqrt %tmp.2 31 20 24 ];
@@ -66,22 +66,22 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.3 = -1.0;
         %tmp.4 = invoke %tmp.1 %tmp.2(%tmp.3);
         ret %tmp.4;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_29_51_32_4_stop:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_29_51_32_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 34; @symbol_functiondef = [clearRealtimeDriftField,34,21,44]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 34; @symbol_functiondef = [clearRealtimeDriftField,34,21,44]; ]
     private
     function clearRealtimeDriftField() as Void {
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_34_55_38_4_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 35 8 ]
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_8_37_8_if_stmt:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_34_55_38_4_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 35 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_8_37_8_if_stmt:
         symbol [ mDriftField %tmp.2 35 12 23 ];
         %tmp.2 = getv ? :mDriftField;
         %tmp.3 = null;
         %tmp.4 = ne %tmp.2 %tmp.3;
-        bf %tmp.4 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_8_37_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_8_37_8_if_true:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_33_37_8_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 36 12 ]
+        bf %tmp.4 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_8_37_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_8_37_8_if_true:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_33_37_8_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 36 12 ]
         symbol [ mDriftField %tmp.6 36 12 23 ];
         %tmp.6 = getv ? :mDriftField;
         %tmp.7 = as %tmp.6 { (!Null) };
@@ -92,25 +92,25 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.10 = getv function %tmp.9 :getInvalidFitFloat;
         %tmp.11 = invoke %tmp.9 %tmp.10();
         invoke %tmp.7 %tmp.8(%tmp.11);
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_33_37_8_stop:
-        goto @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_8_37_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_8_37_8_if_end:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_34_55_38_4_stop:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_33_37_8_stop:
+        goto @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_8_37_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_35_8_37_8_if_end:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_34_55_38_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 40; @symbol_functiondef = [updateProfileStateField,40,21,44]; @symbol_param<0> = [profileState,40,45,57]; @symbol_param<0>_type<0> = [Number,40,61,67]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 40; @symbol_functiondef = [updateProfileStateField,40,21,44]; @symbol_param<0> = [profileState,40,45,57]; @symbol_param<0>_type<0> = [Number,40,61,67]; ]
     private
     function updateProfileStateField(profileState as Number) as Void {
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_40_77_44_4_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 41 8 ]
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_8_43_8_if_stmt:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_40_77_44_4_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 41 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_8_43_8_if_stmt:
         symbol [ mProfileStateField %tmp.2 41 12 30 ];
         %tmp.2 = getv ? :mProfileStateField;
         %tmp.3 = null;
         %tmp.4 = ne %tmp.2 %tmp.3;
-        bf %tmp.4 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_8_43_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_8_43_8_if_true:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_40_43_8_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 42 12 ]
+        bf %tmp.4 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_8_43_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_8_43_8_if_true:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_40_43_8_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 42 12 ]
         symbol [ mProfileStateField %tmp.6 42 12 30 ];
         %tmp.6 = getv ? :mProfileStateField;
         %tmp.7 = as %tmp.6 { (!Null) };
@@ -119,31 +119,31 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.9 = lgetv %profileState;
         symbol [ profileState %tmp.9 42 39 51 ];
         invoke %tmp.7 %tmp.8(%tmp.9);
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_40_43_8_stop:
-        goto @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_8_43_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_8_43_8_if_end:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_40_77_44_4_stop:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_40_43_8_stop:
+        goto @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_8_43_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_41_8_43_8_if_end:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_40_77_44_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 46; @symbol_functiondef = [addSessionDriftSample,46,21,42]; @symbol_param<0> = [driftPercent,46,43,55]; @symbol_param<0>_type<0> = [Float,46,59,64]; @symbol_param<1> = [intervalMs,46,66,76]; @symbol_param<1>_type<0> = [Number,46,80,86]; @symbol_param<2> = [workloadSource,46,88,102]; @symbol_param<2>_type<0> = [Number,46,106,112]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 46; @symbol_functiondef = [addSessionDriftSample,46,21,42]; @symbol_param<0> = [driftPercent,46,43,55]; @symbol_param<0>_type<0> = [Float,46,59,64]; @symbol_param<1> = [intervalMs,46,66,76]; @symbol_param<1>_type<0> = [Number,46,80,86]; @symbol_param<2> = [workloadSource,46,88,102]; @symbol_param<2>_type<0> = [Number,46,106,112]; ]
     private
     function addSessionDriftSample(driftPercent as Float, intervalMs as Number, workloadSource as Number) as Void {
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_46_122_58_4_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 47 8 ]
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_8_49_8_if_stmt:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_46_122_58_4_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 47 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_8_49_8_if_stmt:
         %tmp.1 = lgetv %intervalMs;
         symbol [ intervalMs %tmp.1 47 12 22 ];
         %tmp.2 = 0;
         %tmp.3 = lte %tmp.1 %tmp.2;
-        bf %tmp.3 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_8_49_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_8_49_8_if_true:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_29_49_8_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 48 12 ]
+        bf %tmp.3 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_8_49_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_8_49_8_if_true:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_29_49_8_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 48 12 ]
         ret ?;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_29_49_8_stop:
-        goto @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_8_49_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_8_49_8_if_end:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 51 8 ]
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_stmt:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_29_49_8_stop:
+        goto @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_8_49_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_47_8_49_8_if_end:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 51 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_stmt:
         %tmp.4 = lgetv %workloadSource;
         symbol [ workloadSource %tmp.4 51 12 26 ];
         symbol [ EDATypes %tmp.6 51 30 38 ];
@@ -151,10 +151,10 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         symbol [ SOURCE_POWER %tmp.7 51 39 51 ];
         %tmp.7 = getv %tmp.6 :SOURCE_POWER;
         %tmp.8 = eq %tmp.4 %tmp.7;
-        bf %tmp.8 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_false;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_true:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_53_54_8_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 52 12 ]
+        bf %tmp.8 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_false;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_true:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_53_54_8_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 52 12 ]
         symbol [ mSessionPowerDriftWeightedSum %tmp.9 52 12 41 ];
         %tmp.9 = getv self :mSessionPowerDriftWeightedSum;
         %tmp.10 = lgetv %driftPercent;
@@ -168,7 +168,7 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.15 = add %tmp.9 %tmp.14;
         symbol [ mSessionPowerDriftWeightedSum ? 52 12 41 ];
         putv self :mSessionPowerDriftWeightedSum dup %tmp.15;
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 53 12 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 53 12 ]
         symbol [ mSessionPowerDriftMs %tmp.16 53 12 32 ];
         %tmp.16 = getv self :mSessionPowerDriftMs;
         %tmp.17 = lgetv %intervalMs;
@@ -176,11 +176,11 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.18 = add %tmp.16 %tmp.17;
         symbol [ mSessionPowerDriftMs ? 53 12 32 ];
         putv self :mSessionPowerDriftMs dup %tmp.18;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_53_54_8_stop:
-        goto @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_false:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 54 15 ]
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_stmt:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_53_54_8_stop:
+        goto @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_false:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 54 15 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_stmt:
         %tmp.19 = lgetv %workloadSource;
         symbol [ workloadSource %tmp.19 54 19 33 ];
         symbol [ EDATypes %tmp.21 54 37 45 ];
@@ -188,10 +188,10 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         symbol [ SOURCE_SPEED %tmp.22 54 46 58 ];
         %tmp.22 = getv %tmp.21 :SOURCE_SPEED;
         %tmp.23 = eq %tmp.19 %tmp.22;
-        bf %tmp.23 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_true:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_60_57_8_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 55 12 ]
+        bf %tmp.23 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_true:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_60_57_8_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 55 12 ]
         symbol [ mSessionSpeedDriftWeightedSum %tmp.24 55 12 41 ];
         %tmp.24 = getv self :mSessionSpeedDriftWeightedSum;
         %tmp.25 = lgetv %driftPercent;
@@ -205,7 +205,7 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.30 = add %tmp.24 %tmp.29;
         symbol [ mSessionSpeedDriftWeightedSum ? 55 12 41 ];
         putv self :mSessionSpeedDriftWeightedSum dup %tmp.30;
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 56 12 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 56 12 ]
         symbol [ mSessionSpeedDriftMs %tmp.31 56 12 32 ];
         %tmp.31 = getv self :mSessionSpeedDriftMs;
         %tmp.32 = lgetv %intervalMs;
@@ -213,18 +213,18 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.33 = add %tmp.31 %tmp.32;
         symbol [ mSessionSpeedDriftMs ? 56 12 32 ];
         putv self :mSessionSpeedDriftMs dup %tmp.33;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_60_57_8_stop:
-        goto @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_end:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_end:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_46_122_58_4_stop:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_60_57_8_stop:
+        goto @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_54_15_57_8_if_end:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_51_8_57_8_if_end:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_46_122_58_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 60; @symbol_functiondef = [getSessionAverageDrift,60,21,43]; @symbol_return<0> = [Float,60,49,54]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 60; @symbol_functiondef = [getSessionAverageDrift,60,21,43]; @symbol_return<0> = [Float,60,49,54]; ]
     private
     function getSessionAverageDrift() as Float or Null {
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_60_56_68_4_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 61 8 ]
-        [ "E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_60_56_68_4_start" "E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_60_56_68_4_stop" ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_60_56_68_4_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 61 8 ]
+        [ "E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_60_56_68_4_start" "E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_60_56_68_4_stop" ]
         %totalDriftMs.1 = local;
         symbol [ totalDriftMs %totalDriftMs.1 61 12 24 ];
         symbol [ mSessionPowerDriftMs %tmp.2 61 27 47 ];
@@ -234,23 +234,23 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.5 = add %tmp.2 %tmp.4;
         lputv %totalDriftMs.1 %tmp.5;
         symbol [ totalDriftMs %totalDriftMs.1 61 12 24 ];
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 62 8 ]
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_8_64_8_if_stmt:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 62 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_8_64_8_if_stmt:
         %tmp.6 = lgetv %totalDriftMs.1;
         symbol [ totalDriftMs %tmp.6 62 12 24 ];
         %tmp.7 = 0;
         %tmp.8 = lte %tmp.6 %tmp.7;
-        bf %tmp.8 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_8_64_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_8_64_8_if_true:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_31_64_8_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 63 12 ]
+        bf %tmp.8 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_8_64_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_8_64_8_if_true:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_31_64_8_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 63 12 ]
         %tmp.9 = null;
         ret %tmp.9;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_31_64_8_stop:
-        goto @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_8_64_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_8_64_8_if_end:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 66 8 ]
-        [ "E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_60_56_68_4_start" "E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_60_56_68_4_stop" ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_31_64_8_stop:
+        goto @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_8_64_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_62_8_64_8_if_end:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 66 8 ]
+        [ "E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_60_56_68_4_start" "E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_60_56_68_4_stop" ]
         %weightedDrift.2 = local;
         symbol [ weightedDrift %weightedDrift.2 66 12 25 ];
         symbol [ mSessionPowerDriftWeightedSum %tmp.11 66 28 57 ];
@@ -260,7 +260,7 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.14 = add %tmp.11 %tmp.13;
         lputv %weightedDrift.2 %tmp.14;
         symbol [ weightedDrift %weightedDrift.2 66 12 25 ];
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 67 8 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 67 8 ]
         %tmp.15 = lgetv %weightedDrift.2;
         symbol [ weightedDrift %tmp.15 67 15 28 ];
         %tmp.16 = lgetv %totalDriftMs.1;
@@ -270,22 +270,22 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.18 = invoke %tmp.16 %tmp.17();
         %tmp.19 = div %tmp.15 %tmp.18;
         ret %tmp.19;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_60_56_68_4_stop:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_60_56_68_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 70; @symbol_functiondef = [clearSessionSummaryField,70,21,45]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 70; @symbol_functiondef = [clearSessionSummaryField,70,21,45]; ]
     private
     function clearSessionSummaryField() as Void {
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_70_56_74_4_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 71 8 ]
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_8_73_8_if_stmt:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_70_56_74_4_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 71 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_8_73_8_if_stmt:
         symbol [ mAvgDriftField %tmp.2 71 12 26 ];
         %tmp.2 = getv ? :mAvgDriftField;
         %tmp.3 = null;
         %tmp.4 = ne %tmp.2 %tmp.3;
-        bf %tmp.4 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_8_73_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_8_73_8_if_true:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_36_73_8_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 72 12 ]
+        bf %tmp.4 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_8_73_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_8_73_8_if_true:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_36_73_8_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 72 12 ]
         symbol [ mAvgDriftField %tmp.6 72 12 26 ];
         %tmp.6 = getv ? :mAvgDriftField;
         %tmp.7 = as %tmp.6 { (!Null) };
@@ -296,17 +296,17 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.10 = getv function %tmp.9 :getInvalidFitFloat;
         %tmp.11 = invoke %tmp.9 %tmp.10();
         invoke %tmp.7 %tmp.8(%tmp.11);
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_36_73_8_stop:
-        goto @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_8_73_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_8_73_8_if_end:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_70_56_74_4_stop:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_36_73_8_stop:
+        goto @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_8_73_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_71_8_73_8_if_end:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_70_56_74_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 76; @symbol_functiondef = [updateSessionSummaryField,76,21,46]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 76; @symbol_functiondef = [updateSessionSummaryField,76,21,46]; ]
     private
     function updateSessionSummaryField() as Void {
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_76_57_84_4_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 77 8 ]
-        [ "E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_76_57_84_4_start" "E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_76_57_84_4_stop" ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_76_57_84_4_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 77 8 ]
+        [ "E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_76_57_84_4_start" "E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_76_57_84_4_stop" ]
         %sessionAverageDrift.1 = local;
         symbol [ sessionAverageDrift %sessionAverageDrift.1 77 12 31 ];
         %tmp.1 = self;
@@ -315,26 +315,26 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.3 = invoke %tmp.1 %tmp.2();
         lputv %sessionAverageDrift.1 %tmp.3;
         symbol [ sessionAverageDrift %sessionAverageDrift.1 77 12 31 ];
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 78 8 ]
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_8_81_8_if_stmt:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_12_78_61_begin:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 78 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_8_81_8_if_stmt:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_12_78_61_begin:
         symbol [ mAvgDriftField %tmp.5 78 12 26 ];
         %tmp.5 = getv ? :mAvgDriftField;
         %tmp.6 = null;
         %tmp.7 = ne %tmp.5 %tmp.6;
-        bf %tmp.7 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_8_81_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_38_78_61_true:
+        bf %tmp.7 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_8_81_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_38_78_61_true:
         %tmp.8 = lgetv %sessionAverageDrift.1;
         symbol [ sessionAverageDrift %tmp.8 78 38 57 ];
         %tmp.9 = null;
         %tmp.10 = ne %tmp.8 %tmp.9;
         push %tmp.10;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_38_78_61_end:
-        %tmp.11 = phi [%tmp.7 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_12_78_61_begin] [%tmp.10 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_38_78_61_true] [%tmp.11 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_38_78_61_end];
-        bf %tmp.11 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_8_81_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_8_81_8_if_true:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_67_81_8_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 79 12 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_38_78_61_end:
+        %tmp.11 = phi [%tmp.7 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_12_78_61_begin] [%tmp.10 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_38_78_61_true] [%tmp.11 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_38_78_61_end];
+        bf %tmp.11 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_8_81_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_8_81_8_if_true:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_67_81_8_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 79 12 ]
         symbol [ mAvgDriftField %tmp.13 79 12 26 ];
         %tmp.13 = getv ? :mAvgDriftField;
         %tmp.14 = as %tmp.13 { (!Null) };
@@ -344,46 +344,46 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         symbol [ sessionAverageDrift %tmp.16 79 35 54 ];
         %tmp.17 = as %tmp.16 { (!Null) };
         invoke %tmp.14 %tmp.15(%tmp.17);
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 80 12 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 80 12 ]
         ret ?;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_67_81_8_stop:
-        goto @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_8_81_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_8_81_8_if_end:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 83 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_67_81_8_stop:
+        goto @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_8_81_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_78_8_81_8_if_end:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 83 8 ]
         %tmp.18 = self;
         symbol [ clearSessionSummaryField %tmp.19 83 8 32 ];
         %tmp.19 = getv function %tmp.18 :clearSessionSummaryField;
         invoke %tmp.18 %tmp.19();
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_76_57_84_4_stop:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_76_57_84_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 86; @symbol_functiondef = [writeInvalidRecord,86,13,31]; @symbol_param<0> = [profileState,86,32,44]; @symbol_param<0>_type<0> = [Number,86,48,54]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 86; @symbol_functiondef = [writeInvalidRecord,86,13,31]; @symbol_param<0> = [profileState,86,32,44]; @symbol_param<0>_type<0> = [Number,86,48,54]; ]
     function writeInvalidRecord(profileState as Number) as Void {
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_86_64_89_4_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 87 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_86_64_89_4_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 87 8 ]
         %tmp.1 = self;
         symbol [ updateProfileStateField %tmp.2 87 8 31 ];
         %tmp.2 = getv function %tmp.1 :updateProfileStateField;
         %tmp.3 = lgetv %profileState;
         symbol [ profileState %tmp.3 87 32 44 ];
         invoke %tmp.1 %tmp.2(%tmp.3);
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 88 8 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 88 8 ]
         %tmp.4 = self;
         symbol [ clearRealtimeDriftField %tmp.5 88 8 31 ];
         %tmp.5 = getv function %tmp.4 :clearRealtimeDriftField;
         invoke %tmp.4 %tmp.5();
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_86_64_89_4_stop:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_86_64_89_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 91; @symbol_functiondef = [updateFitFields,91,13,28]; @symbol_param<0> = [profileState,91,29,41]; @symbol_param<0>_type<0> = [Number,91,45,51]; @symbol_param<1> = [canExport,91,53,62]; @symbol_param<1>_type<0> = [Boolean,91,66,73]; @symbol_param<2> = [driftPercent,91,75,87]; @symbol_param<2>_type<0> = [Float,91,91,96]; @symbol_param<3> = [intervalMs,91,98,108]; @symbol_param<3>_type<0> = [Number,91,112,118]; @symbol_param<4> = [workloadSource,91,120,134]; @symbol_param<4>_type<0> = [Number,91,138,144]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 91; @symbol_functiondef = [updateFitFields,91,13,28]; @symbol_param<0> = [profileState,91,29,41]; @symbol_param<0>_type<0> = [Number,91,45,51]; @symbol_param<1> = [canExport,91,53,62]; @symbol_param<1>_type<0> = [Boolean,91,66,73]; @symbol_param<2> = [driftPercent,91,75,87]; @symbol_param<2>_type<0> = [Float,91,91,96]; @symbol_param<3> = [intervalMs,91,98,108]; @symbol_param<3>_type<0> = [Number,91,112,118]; @symbol_param<4> = [workloadSource,91,120,134]; @symbol_param<4>_type<0> = [Number,91,138,144]; ]
     function updateFitFields(profileState as Number, canExport as Boolean, driftPercent as Float, intervalMs as Number, workloadSource as Number) as Void {
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_91_154_104_4_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 92 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_91_154_104_4_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 92 8 ]
         %tmp.1 = self;
         symbol [ updateProfileStateField %tmp.2 92 8 31 ];
         %tmp.2 = getv function %tmp.1 :updateProfileStateField;
         %tmp.3 = lgetv %profileState;
         symbol [ profileState %tmp.3 92 32 44 ];
         invoke %tmp.1 %tmp.2(%tmp.3);
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 93 8 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 93 8 ]
         %tmp.4 = self;
         symbol [ addSessionDriftSample %tmp.5 93 8 29 ];
         %tmp.5 = getv function %tmp.4 :addSessionDriftSample;
@@ -394,39 +394,39 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.8 = lgetv %workloadSource;
         symbol [ workloadSource %tmp.8 93 56 70 ];
         invoke %tmp.4 %tmp.5(%tmp.6, %tmp.7, %tmp.8);
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 94 8 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 94 8 ]
         %tmp.9 = self;
         symbol [ updateSessionSummaryField %tmp.10 94 8 33 ];
         %tmp.10 = getv function %tmp.9 :updateSessionSummaryField;
         invoke %tmp.9 %tmp.10();
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 96 8 ]
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_8_99_8_if_stmt:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 96 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_8_99_8_if_stmt:
         %tmp.11 = lgetv %canExport;
         symbol [ canExport %tmp.11 96 13 22 ];
         %tmp.12 = not %tmp.11;
-        bf %tmp.12 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_8_99_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_8_99_8_if_true:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_24_99_8_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 97 12 ]
+        bf %tmp.12 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_8_99_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_8_99_8_if_true:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_24_99_8_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 97 12 ]
         %tmp.13 = self;
         symbol [ clearRealtimeDriftField %tmp.14 97 12 35 ];
         %tmp.14 = getv function %tmp.13 :clearRealtimeDriftField;
         invoke %tmp.13 %tmp.14();
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 98 12 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 98 12 ]
         ret ?;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_24_99_8_stop:
-        goto @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_8_99_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_8_99_8_if_end:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 101 8 ]
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_8_103_8_if_stmt:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_24_99_8_stop:
+        goto @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_8_99_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_96_8_99_8_if_end:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 101 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_8_103_8_if_stmt:
         symbol [ mDriftField %tmp.16 101 12 23 ];
         %tmp.16 = getv ? :mDriftField;
         %tmp.17 = null;
         %tmp.18 = ne %tmp.16 %tmp.17;
-        bf %tmp.18 @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_8_103_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_8_103_8_if_true:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_33_103_8_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 102 12 ]
+        bf %tmp.18 @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_8_103_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_8_103_8_if_true:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_33_103_8_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 102 12 ]
         symbol [ mDriftField %tmp.20 102 12 23 ];
         %tmp.20 = getv ? :mDriftField;
         %tmp.21 = as %tmp.20 { (!Null) };
@@ -435,49 +435,49 @@ E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_ED
         %tmp.23 = lgetv %driftPercent;
         symbol [ driftPercent %tmp.23 102 32 44 ];
         invoke %tmp.21 %tmp.22(%tmp.23);
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_33_103_8_stop:
-        goto @E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_8_103_8_if_end;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_8_103_8_if_end:
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_91_154_104_4_stop:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_33_103_8_stop:
+        goto @E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_8_103_8_if_end;
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_101_8_103_8_if_end:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_91_154_104_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 106; @symbol_functiondef = [resetSessionFitSummary,106,13,35]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 106; @symbol_functiondef = [resetSessionFitSummary,106,13,35]; ]
     function resetSessionFitSummary() as Void {
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_106_46_112_4_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 107 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_106_46_112_4_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 107 8 ]
         %tmp.1 = 0.0;
         symbol [ mSessionPowerDriftWeightedSum ? 107 8 37 ];
         putv self :mSessionPowerDriftWeightedSum %tmp.1;
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 108 8 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 108 8 ]
         %tmp.2 = 0;
         symbol [ mSessionPowerDriftMs ? 108 8 28 ];
         putv self :mSessionPowerDriftMs %tmp.2;
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 109 8 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 109 8 ]
         %tmp.3 = 0.0;
         symbol [ mSessionSpeedDriftWeightedSum ? 109 8 37 ];
         putv self :mSessionSpeedDriftWeightedSum %tmp.3;
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 110 8 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 110 8 ]
         %tmp.4 = 0;
         symbol [ mSessionSpeedDriftMs ? 110 8 28 ];
         putv self :mSessionSpeedDriftMs %tmp.4;
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 111 8 ]
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 111 8 ]
         %tmp.5 = self;
         symbol [ clearSessionSummaryField %tmp.6 111 8 32 ];
         %tmp.6 = getv function %tmp.5 :clearSessionSummaryField;
         invoke %tmp.5 %tmp.6();
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_106_46_112_4_stop:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_106_46_112_4_stop:
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 114; @symbol_functiondef = [getSessionAverageDriftForDiagnostics,114,13,49]; @symbol_return<0> = [Float,114,55,60]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 114; @symbol_functiondef = [getSessionAverageDriftForDiagnostics,114,13,49]; @symbol_return<0> = [Float,114,55,60]; ]
     function getSessionAverageDriftForDiagnostics() as Float or Null {
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_114_62_116_4_start:
-[ "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 115 8 ]
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_114_62_116_4_start:
+[ "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc" 115 8 ]
         %tmp.1 = self;
         symbol [ getSessionAverageDrift %tmp.2 115 15 37 ];
         %tmp.2 = getv function %tmp.1 :getSessionAverageDrift;
         %tmp.3 = invoke %tmp.1 %tmp.2();
         ret %tmp.3;
-E__Verwaltung_07_IT___Identit√§t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_114_62_116_4_stop:
+E__Verwaltung_07_IT___Identit‰t_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFitExportState_mc_114_62_116_4_stop:
     }
 }
-[ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 1; ]
+[ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFitExportState.mc"; @line = 1; ]
 <init> {
 }
