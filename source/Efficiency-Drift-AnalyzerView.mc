@@ -1641,16 +1641,39 @@ class EDAView extends WatchUi.DataField {
         statusDetail = "";
         statusDetailShort = "";
 
+        // Confidence-based color thresholds
+        // Rationale: HR lags behind workload changes, especially after warmup.
+        // Short observation windows → numerical drift ≠ physiological drift.
+        // - low (< 90s): HR still stabilizing → never show red
+        // - medium (90-180s): settling phase → conservative red threshold
+        // - high (>= 180s): stable → normal thresholds
         if (driftPercent < 3.0) {
             bgColor = Graphics.COLOR_GREEN;
             fgColor = Graphics.COLOR_BLACK;
-        } else if (driftPercent <= 7.0) {
+        } else if (validActiveMs < 90000) {
+            // Low confidence: HR still unstable → max yellow
             bgColor = Graphics.COLOR_YELLOW;
             fgColor = Graphics.COLOR_BLACK;
+        } else if (validActiveMs < 180000) {
+            // Medium confidence: settling → conservative red threshold at 9%
+            if (driftPercent <= 9.0) {
+                bgColor = Graphics.COLOR_YELLOW;
+                fgColor = Graphics.COLOR_BLACK;
+            } else {
+                bgColor = Graphics.COLOR_RED;
+                fgColor = Graphics.COLOR_WHITE;
+            }
         } else {
-            bgColor = Graphics.COLOR_RED;
-            fgColor = Graphics.COLOR_WHITE;
+            // High confidence: stable → normal thresholds at 7%
+            if (driftPercent <= 7.0) {
+                bgColor = Graphics.COLOR_YELLOW;
+                fgColor = Graphics.COLOR_BLACK;
+            } else {
+                bgColor = Graphics.COLOR_RED;
+                fgColor = Graphics.COLOR_WHITE;
+            }
         }
+
         requestRenderCacheRefresh();
     }
 
@@ -1894,6 +1917,11 @@ class EDAView extends WatchUi.DataField {
             writeInvalidRecord();
             endDeferredRenderCacheRefresh();
             return;
+        }
+
+        // Post-warmup stabilization: damp early drift spikes due to HR lag
+        if (validActiveMs < 90000) {
+            driftPercent = driftPercent * 0.5;
         }
 
         updateDriftDisplay(driftPercent);
