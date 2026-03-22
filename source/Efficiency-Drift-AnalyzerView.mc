@@ -1434,7 +1434,19 @@ class EDAView extends WatchUi.DataField {
             valSollHr = hrSoll.toNumber().toString();
         }
 
-        var vSoll = (displayHr - b) / m;
+        // Soft clamp for HR extrapolation above HR_B
+        // Prevents unrealistic pace expectations at higher intensities
+        // where the HR↔pace relationship is no longer linear
+        var effectiveHr = displayHr;
+        if (displayHr > hrB && hrB > 0.0) {
+            var hrDelta = displayHr - hrB;
+            if (hrDelta > 10.0) {
+                hrDelta = 10.0 + (hrDelta - 10.0) * 0.5;
+            }
+            effectiveHr = hrB + hrDelta;
+        }
+
+        var vSoll = (effectiveHr - b) / m;
         if (vSoll > 0.2) {
             valSollPace = formatPace(vSoll);
         }

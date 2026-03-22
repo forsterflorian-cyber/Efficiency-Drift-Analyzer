@@ -79,6 +79,7 @@ module EDAFeatureFlags {
     // --------------------------------------------------------------------------
     const ENABLE_DYNAMIC_EWMA_TUNING as Boolean = false;
 
+
     // --------------------------------------------------------------------------
     // Helper Functions
     // --------------------------------------------------------------------------
@@ -189,4 +190,5 @@ module EDAFeatureFlags {
     function getCalibrationDistanceFactor() as Float {
         return 1000.0;
     }
+
 }
