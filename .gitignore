@@ -2,3 +2,4 @@ bin/
 *.prg
 *.mir
 *.debug.xml
+.VSCodeCounter/
