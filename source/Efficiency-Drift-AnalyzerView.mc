@@ -122,6 +122,7 @@ class EDAView extends WatchUi.DataField {
     private var isRenderCacheRefreshDeferred as Boolean = false;
     private var isRenderCacheDirty as Boolean = false;
     private var hasCompletedWarmupThisSession as Boolean = false;
+    private var mWarmupCompletedAt as Number = -1;
     private var hasPostResetCollectingStatus as Boolean = false;
     private var postResetCollectingStatus as Number = EDATypes.STATUS_WAIT;
     private var postResetCollectingDetail as String = "";
@@ -860,6 +861,7 @@ class EDAView extends WatchUi.DataField {
 
     private function clearWarmupSessionState() as Void {
         hasCompletedWarmupThisSession = false;
+        mWarmupCompletedAt = -1;
         clearPostResetCollectingStatus();
     }
 
@@ -901,7 +903,17 @@ class EDAView extends WatchUi.DataField {
 
     private function markWarmupCompleted() as Void {
         hasCompletedWarmupThisSession = true;
+        mWarmupCompletedAt = mTimerTime;
         clearPostResetCollectingStatus();
+    }
+
+    // Returns ms elapsed since warmup completed, or -1 if warmup not yet completed.
+    // Used for confidence-based color rendering and drift dampening.
+    private function getMsSinceWarmupEnd() as Number {
+        if (mWarmupCompletedAt < 0) {
+            return -1;
+        }
+        return mTimerTime - mWarmupCompletedAt;
     }
 
     private function getRenderSafePaceValue() as String {
@@ -1641,20 +1653,21 @@ class EDAView extends WatchUi.DataField {
         statusDetail = "";
         statusDetailShort = "";
 
-        // Confidence-based color thresholds
+        // Confidence-based color thresholds using time since warmup ended.
         // Rationale: HR lags behind workload changes, especially after warmup.
         // Short observation windows → numerical drift ≠ physiological drift.
-        // - low (< 90s): HR still stabilizing → never show red
+        // - low (< 90s since warmup end): HR still stabilizing → never show red
         // - medium (90-180s): settling phase → conservative red threshold
         // - high (>= 180s): stable → normal thresholds
+        var msSinceWarmupEnd = getMsSinceWarmupEnd();
         if (driftPercent < 3.0) {
             bgColor = Graphics.COLOR_GREEN;
             fgColor = Graphics.COLOR_BLACK;
-        } else if (validActiveMs < 90000) {
+        } else if (msSinceWarmupEnd >= 0 && msSinceWarmupEnd < 90000) {
             // Low confidence: HR still unstable → max yellow
             bgColor = Graphics.COLOR_YELLOW;
             fgColor = Graphics.COLOR_BLACK;
-        } else if (validActiveMs < 180000) {
+        } else if (msSinceWarmupEnd >= 0 && msSinceWarmupEnd < 180000) {
             // Medium confidence: settling → conservative red threshold at 9%
             if (driftPercent <= 9.0) {
                 bgColor = Graphics.COLOR_YELLOW;
@@ -1920,7 +1933,9 @@ class EDAView extends WatchUi.DataField {
         }
 
         // Post-warmup stabilization: damp early drift spikes due to HR lag
-        if (validActiveMs < 90000) {
+        // Use time-since-warmup-end so dampening starts fresh after each warmup completes
+        var msSinceWarmupEndForDampening = getMsSinceWarmupEnd();
+        if (msSinceWarmupEndForDampening >= 0 && msSinceWarmupEndForDampening < 90000) {
             driftPercent = driftPercent * 0.5;
         }
 

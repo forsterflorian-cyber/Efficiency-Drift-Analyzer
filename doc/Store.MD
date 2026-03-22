@@ -4,7 +4,7 @@ Datum: 2026-03-10
 ==============================================================================
 
 [ENGLISH]
-Efficiency-Drift-Analyzer - Real-Time Aerobic Decoupling for Running & Cycling
+Efficiency-Drift-Analyzer - Real-Time Aerobic Decoupling for Running
 Support: https://buymeacoffee.com/forsterf
 
 WHAT IS EFFICIENCY DRIFT?
@@ -21,7 +21,7 @@ EDA analyzes the relationship between your workload (pace or power) and
 heart rate, calculating the percentage drift over rolling time windows. 
 Results appear directly on your Garmin watch face during activity.
 
-SUPPORTED ACTIVITIES: Running, Cycling
+SUPPORTED ACTIVITIES: Running
 SUPPORTED DEVICES:
 - Forerunner: FR165, FR165M, FR255, FR255M, FR255S, FR255SM, FR265, FR265S, 
   FR955, FR965
@@ -50,7 +50,7 @@ CARRIED OVER FROM v0.9.x:
 ------------------------------------------------------------------------------
 
 [DEUTSCH]
-Efficiency-Drift-Analyzer - Echtzeit Aerobe Entkopplung fuer Laufen & Radfahren
+Efficiency-Drift-Analyzer - Echtzeit Aerobe Entkopplung fuer Laufen 
 Unterstuetze das Projekt: https://buymeacoffee.com/forsterf
 
 WAS IST EFFICIENCY DRIFT?
@@ -69,7 +69,7 @@ der Herzfrequenz und berechnet die prozentuale Drift ueber rollierende
 Zeitfenster. Die Ergebnisse erscheinen direkt auf deiner Garmin-Uhr waehrend 
 der Aktivitaet.
 
-UNTERSTUETZTE AKTIVITAETEN: Laufen, Radfahren
+UNTERSTUETZTE AKTIVITAETEN: Laufen
 UNTERSTUETZTE GERAETE:
 - Forerunner: FR165, FR165M, FR255, FR255M, FR255S, FR255SM, FR265, FR265S, 
   FR955, FR965
