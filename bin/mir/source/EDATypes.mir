@@ -1,65 +1,65 @@
-[ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Lang,1,14,18]; ]
+[ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Lang,1,14,18]; ]
 import Toybox.Lang;
-[ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 10; @symbol_moduledef = [EDATypes,10,7,15]; ]
+[ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 10; @symbol_moduledef = [EDATypes,10,7,15]; ]
 module EDATypes {
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 10; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 10; ]
     <init> {
     }
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 30; @position = 10; @symbol_constdef = [STATUS_VALUE,30,10,22]; @symbol_type<0> = [Number,30,26,32]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 30; @position = 10; @symbol_constdef = [STATUS_VALUE,30,10,22]; @symbol_type<0> = [Number,30,26,32]; ]
     const STATUS_VALUE as Number = 0;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 31; @position = 10; @symbol_constdef = [STATUS_WAIT,31,10,21]; @symbol_type<0> = [Number,31,25,31]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 31; @position = 10; @symbol_constdef = [STATUS_WAIT,31,10,21]; @symbol_type<0> = [Number,31,25,31]; ]
     const STATUS_WAIT as Number = 1;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 32; @position = 10; @symbol_constdef = [STATUS_PAUSE,32,10,22]; @symbol_type<0> = [Number,32,26,32]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 32; @position = 10; @symbol_constdef = [STATUS_PAUSE,32,10,22]; @symbol_type<0> = [Number,32,26,32]; ]
     const STATUS_PAUSE as Number = 2;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 33; @position = 10; @symbol_constdef = [STATUS_WARMUP,33,10,23]; @symbol_type<0> = [Number,33,27,33]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 33; @position = 10; @symbol_constdef = [STATUS_WARMUP,33,10,23]; @symbol_type<0> = [Number,33,27,33]; ]
     const STATUS_WARMUP as Number = 3;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 34; @position = 10; @symbol_constdef = [STATUS_PROVISIONAL,34,10,28]; @symbol_type<0> = [Number,34,32,38]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 34; @position = 10; @symbol_constdef = [STATUS_PROVISIONAL,34,10,28]; @symbol_type<0> = [Number,34,32,38]; ]
     const STATUS_PROVISIONAL as Number = 4;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 35; @position = 10; @symbol_constdef = [STATUS_PROFILE_TIMEOUT,35,10,32]; @symbol_type<0> = [Number,35,36,42]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 35; @position = 10; @symbol_constdef = [STATUS_PROFILE_TIMEOUT,35,10,32]; @symbol_type<0> = [Number,35,36,42]; ]
     const STATUS_PROFILE_TIMEOUT as Number = 5;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 36; @position = 10; @symbol_constdef = [STATUS_CFG_ERR,36,10,24]; @symbol_type<0> = [Number,36,28,34]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 36; @position = 10; @symbol_constdef = [STATUS_CFG_ERR,36,10,24]; @symbol_type<0> = [Number,36,28,34]; ]
     const STATUS_CFG_ERR as Number = 6;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 37; @position = 10; @symbol_constdef = [STATUS_NO_HR,37,10,22]; @symbol_type<0> = [Number,37,26,32]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 37; @position = 10; @symbol_constdef = [STATUS_NO_HR,37,10,22]; @symbol_type<0> = [Number,37,26,32]; ]
     const STATUS_NO_HR as Number = 7;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 38; @position = 10; @symbol_constdef = [STATUS_LOW_HR,38,10,23]; @symbol_type<0> = [Number,38,27,33]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 38; @position = 10; @symbol_constdef = [STATUS_LOW_HR,38,10,23]; @symbol_type<0> = [Number,38,27,33]; ]
     const STATUS_LOW_HR as Number = 8;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 39; @position = 10; @symbol_constdef = [STATUS_SPIKE,39,10,22]; @symbol_type<0> = [Number,39,26,32]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 39; @position = 10; @symbol_constdef = [STATUS_SPIKE,39,10,22]; @symbol_type<0> = [Number,39,26,32]; ]
     const STATUS_SPIKE as Number = 9;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 40; @position = 10; @symbol_constdef = [STATUS_LOW_POWER,40,10,26]; @symbol_type<0> = [Number,40,30,36]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 40; @position = 10; @symbol_constdef = [STATUS_LOW_POWER,40,10,26]; @symbol_type<0> = [Number,40,30,36]; ]
     const STATUS_LOW_POWER as Number = 10;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 41; @position = 10; @symbol_constdef = [STATUS_LOW_PACE,41,10,25]; @symbol_type<0> = [Number,41,29,35]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 41; @position = 10; @symbol_constdef = [STATUS_LOW_PACE,41,10,25]; @symbol_type<0> = [Number,41,29,35]; ]
     const STATUS_LOW_PACE as Number = 11;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 42; @position = 10; @symbol_constdef = [STATUS_NO_POWER,42,10,25]; @symbol_type<0> = [Number,42,29,35]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 42; @position = 10; @symbol_constdef = [STATUS_NO_POWER,42,10,25]; @symbol_type<0> = [Number,42,29,35]; ]
     const STATUS_NO_POWER as Number = 12;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 43; @position = 10; @symbol_constdef = [STATUS_NO_SPEED,43,10,25]; @symbol_type<0> = [Number,43,29,35]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 43; @position = 10; @symbol_constdef = [STATUS_NO_SPEED,43,10,25]; @symbol_type<0> = [Number,43,29,35]; ]
     const STATUS_NO_SPEED as Number = 13;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 44; @position = 10; @symbol_constdef = [STATUS_INVALID_SPEED,44,10,30]; @symbol_type<0> = [Number,44,34,40]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 44; @position = 10; @symbol_constdef = [STATUS_INVALID_SPEED,44,10,30]; @symbol_type<0> = [Number,44,34,40]; ]
     const STATUS_INVALID_SPEED as Number = 14;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 45; @position = 10; @symbol_constdef = [STATUS_GAP,45,10,20]; @symbol_type<0> = [Number,45,24,30]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 45; @position = 10; @symbol_constdef = [STATUS_GAP,45,10,20]; @symbol_type<0> = [Number,45,24,30]; ]
     const STATUS_GAP as Number = 15;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 48; @position = 10; @symbol_constdef = [SOURCE_NONE,48,10,21]; @symbol_type<0> = [Number,48,25,31]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 48; @position = 10; @symbol_constdef = [SOURCE_NONE,48,10,21]; @symbol_type<0> = [Number,48,25,31]; ]
     const SOURCE_NONE as Number = 0;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 49; @position = 10; @symbol_constdef = [SOURCE_POWER,49,10,22]; @symbol_type<0> = [Number,49,26,32]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 49; @position = 10; @symbol_constdef = [SOURCE_POWER,49,10,22]; @symbol_type<0> = [Number,49,26,32]; ]
     const SOURCE_POWER as Number = 1;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 50; @position = 10; @symbol_constdef = [SOURCE_SPEED,50,10,22]; @symbol_type<0> = [Number,50,26,32]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 50; @position = 10; @symbol_constdef = [SOURCE_SPEED,50,10,22]; @symbol_type<0> = [Number,50,26,32]; ]
     const SOURCE_SPEED as Number = 2;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 53; @position = 10; @symbol_constdef = [PROFILE_STATE_UNRESOLVED,53,10,34]; @symbol_type<0> = [Number,53,38,44]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 53; @position = 10; @symbol_constdef = [PROFILE_STATE_UNRESOLVED,53,10,34]; @symbol_type<0> = [Number,53,38,44]; ]
     const PROFILE_STATE_UNRESOLVED as Number = 0;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 54; @position = 10; @symbol_constdef = [PROFILE_STATE_PROVISIONAL,54,10,35]; @symbol_type<0> = [Number,54,39,45]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 54; @position = 10; @symbol_constdef = [PROFILE_STATE_PROVISIONAL,54,10,35]; @symbol_type<0> = [Number,54,39,45]; ]
     const PROFILE_STATE_PROVISIONAL as Number = 1;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 55; @position = 10; @symbol_constdef = [PROFILE_STATE_FALLBACK_CONFIRMED,55,10,42]; @symbol_type<0> = [Number,55,46,52]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 55; @position = 10; @symbol_constdef = [PROFILE_STATE_FALLBACK_CONFIRMED,55,10,42]; @symbol_type<0> = [Number,55,46,52]; ]
     const PROFILE_STATE_FALLBACK_CONFIRMED as Number = 2;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 56; @position = 10; @symbol_constdef = [PROFILE_STATE_AUTHORITATIVE,56,10,37]; @symbol_type<0> = [Number,56,41,47]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 56; @position = 10; @symbol_constdef = [PROFILE_STATE_AUTHORITATIVE,56,10,37]; @symbol_type<0> = [Number,56,41,47]; ]
     const PROFILE_STATE_AUTHORITATIVE as Number = 3;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 57; @position = 10; @symbol_constdef = [PROFILE_STATE_STALE,57,10,29]; @symbol_type<0> = [Number,57,33,39]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 57; @position = 10; @symbol_constdef = [PROFILE_STATE_STALE,57,10,29]; @symbol_type<0> = [Number,57,33,39]; ]
     const PROFILE_STATE_STALE as Number = 4;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 60; @position = 10; @symbol_constdef = [ACTIVITY_UNKNOWN,60,10,26]; @symbol_type<0> = [Number,60,30,36]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 60; @position = 10; @symbol_constdef = [ACTIVITY_UNKNOWN,60,10,26]; @symbol_type<0> = [Number,60,30,36]; ]
     const ACTIVITY_UNKNOWN as Number = 0;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 61; @position = 10; @symbol_constdef = [ACTIVITY_RUNNING,61,10,26]; @symbol_type<0> = [Number,61,30,36]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 61; @position = 10; @symbol_constdef = [ACTIVITY_RUNNING,61,10,26]; @symbol_type<0> = [Number,61,30,36]; ]
     const ACTIVITY_RUNNING as Number = 1;
-    [ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 62; @position = 10; @symbol_constdef = [ACTIVITY_OTHER,62,10,24]; @symbol_type<0> = [Number,62,28,34]; ]
+    [ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 62; @position = 10; @symbol_constdef = [ACTIVITY_OTHER,62,10,24]; @symbol_type<0> = [Number,62,28,34]; ]
     const ACTIVITY_OTHER as Number = 2;
 }
-[ @file = "E:\Verwaltung\07_IT & Identit‰t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 1; ]
+[ @file = "E:\Verwaltung\07_IT & Identit√§t\IT Projekte\Efficiency-Drift-Analyzer\source\EDATypes.mc"; @line = 1; ]
 <init> {
 }

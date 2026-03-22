@@ -14,8 +14,8 @@ class RunNoEvil extends Test.Test {
     function initialize() {
         Test.Test.initialize();
         logger = new Test.Logger();
-        idToName = new [4];
-        populate_test_entries_0_to_4();
+        idToName = new [17];
+        populate_test_entries_0_to_17();
     }
 
     function getIndexOf(name as String) as Number {
@@ -41,23 +41,62 @@ class RunNoEvil extends Test.Test {
         return idToName.size();
     }
 
-    function populate_test_entries_0_to_4() as Void {
+    function populate_test_entries_0_to_17() as Void {
         idToName[0] = "sessionSummaryResetsOnProfileUpgrade";
-        idToName[1] = "staleProfileRecoversAfter121Seconds";
-        idToName[2] = "driftWeightingPrefersLongerIntervals";
-        idToName[3] = "mixedSourceSessionSummaryRemainsContinuous";
+        idToName[1] = "statusManagerReturnsCorrectLabels";
+        idToName[2] = "statusManagerReturnsCorrectShortLabels";
+        idToName[3] = "featureFlagsReturnValidValues";
+        idToName[4] = "staleProfileRecoversAfter121Seconds";
+        idToName[5] = "driftWeightingPrefersLongerIntervals";
+        idToName[6] = "mixedSourceSessionSummaryRemainsContinuous";
+        idToName[7] = "midSessionResetKeepsCollectingStatusOutOfWarmup";
+        idToName[8] = "sourceSelectorRejectsNullPower";
+        idToName[9] = "sourceSelectorValidatesSpeedForRunning";
+        idToName[10] = "sourceSelectorPrefersPowerOverSpeed";
+        idToName[11] = "warmupLogicCorrected";
+        idToName[12] = "driftEngineRejectsInvalidSamples";
+        idToName[13] = "driftClampedAt50Percent";
+        idToName[14] = "lifecycleManagerDetectsImplicitReset";
+        idToName[15] = "lifecycleManagerDetectsPauseResume";
+        idToName[16] = "lifecycleManagerSampleDelta";
     }
 
-    function evaluate_test_entries_0_to_4(id as Number, logger as Logger) {
+    function evaluate_test_entries_0_to_17(id as Number, logger as Logger) {
         var result = false;
         if (id == 0) {
             result = $.sessionSummaryResetsOnProfileUpgrade(logger);
         } else if (id == 1) {
-            result = $.staleProfileRecoversAfter121Seconds(logger);
+            result = $.statusManagerReturnsCorrectLabels(logger);
         } else if (id == 2) {
-            result = $.driftWeightingPrefersLongerIntervals(logger);
+            result = $.statusManagerReturnsCorrectShortLabels(logger);
         } else if (id == 3) {
+            result = $.featureFlagsReturnValidValues(logger);
+        } else if (id == 4) {
+            result = $.staleProfileRecoversAfter121Seconds(logger);
+        } else if (id == 5) {
+            result = $.driftWeightingPrefersLongerIntervals(logger);
+        } else if (id == 6) {
             result = $.mixedSourceSessionSummaryRemainsContinuous(logger);
+        } else if (id == 7) {
+            result = $.midSessionResetKeepsCollectingStatusOutOfWarmup(logger);
+        } else if (id == 8) {
+            result = $.sourceSelectorRejectsNullPower(logger);
+        } else if (id == 9) {
+            result = $.sourceSelectorValidatesSpeedForRunning(logger);
+        } else if (id == 10) {
+            result = $.sourceSelectorPrefersPowerOverSpeed(logger);
+        } else if (id == 11) {
+            result = $.warmupLogicCorrected(logger);
+        } else if (id == 12) {
+            result = $.driftEngineRejectsInvalidSamples(logger);
+        } else if (id == 13) {
+            result = $.driftClampedAt50Percent(logger);
+        } else if (id == 14) {
+            result = $.lifecycleManagerDetectsImplicitReset(logger);
+        } else if (id == 15) {
+            result = $.lifecycleManagerDetectsPauseResume(logger);
+        } else if (id == 16) {
+            result = $.lifecycleManagerSampleDelta(logger);
         }
 
         return result;
@@ -71,8 +110,8 @@ class RunNoEvil extends Test.Test {
 
         assertMessage(id >= 0, "Could not find '" + test + "'");
         var result = false;
-        if (id < 4) {
-            result = self.evaluate_test_entries_0_to_4(id, logger);
+        if (id < 17) {
+            result = self.evaluate_test_entries_0_to_17(id, logger);
         }
 
         if (result instanceof Boolean) {
