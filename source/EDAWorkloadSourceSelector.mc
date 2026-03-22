@@ -14,16 +14,12 @@ import Toybox.Lang;
 
 class EDAWorkloadSourceSelector {
 
-    // SOURCE-Konstanten werden jetzt aus EDATypes importiert
-    // SOURCE-Konstanten werden jetzt aus EDATypes importiert
-    // SOURCE-Konstanten werden jetzt aus EDATypes importiert
-    // SOURCE-Konstanten werden jetzt aus EDATypes importiert
-
-    private const MIN_VALID_POWER as Float = 30.0;
-    private const MAX_VALID_POWER as Float = 700.0;
-    private const MAX_SPEED_MS as Float = 12.0;
-    private const MAX_RUNNING_PACE_PER_KM as Float = 480.0;
-    private const CALIBRATION_DISTANCE_FACTOR as Float = 1000.0;
+    // Konstanten werden aus EDAFeatureFlags bezogen (Single Source of Truth)
+    // MIN_VALID_POWER → EDAFeatureFlags.getMinValidPower()
+    // MAX_VALID_POWER → EDAFeatureFlags.getMaxValidPower()
+    // MAX_SPEED_MS → EDAFeatureFlags.getMaxSpeedMs()
+    // MAX_RUNNING_PACE_PER_KM → EDAFeatureFlags.getMaxRunningPacePerKm()
+    // CALIBRATION_DISTANCE_FACTOR → EDAFeatureFlags.getCalibrationDistanceFactor()
 
     private var mCurrentWorkloadSource as Number = EDATypes.SOURCE_NONE;
     private var mPendingWorkloadSource as Number = EDATypes.SOURCE_NONE;
@@ -66,7 +62,7 @@ class EDAWorkloadSourceSelector {
             return false;
         }
 
-        return power >= MIN_VALID_POWER && power <= MAX_VALID_POWER;
+        return power >= EDAFeatureFlags.getMinValidPower() && power <= EDAFeatureFlags.getMaxValidPower();
     }
 
     function getPowerValidationError(power as Float?) as Number? {
@@ -74,11 +70,11 @@ class EDAWorkloadSourceSelector {
             return null;
         }
 
-        if (power < MIN_VALID_POWER) {
+        if (power < EDAFeatureFlags.getMinValidPower()) {
             return 10; // STATUS_LOW_POWER
         }
 
-        if (power > MAX_VALID_POWER) {
+        if (power > EDAFeatureFlags.getMaxValidPower()) {
             return 9; // STATUS_SPIKE
         }
 
@@ -98,7 +94,7 @@ class EDAWorkloadSourceSelector {
             return null;
         }
 
-        return CALIBRATION_DISTANCE_FACTOR / speed;
+        return EDAFeatureFlags.getCalibrationDistanceFactor() / speed;
     }
 
     function hasUsableSpeedWorkload(speed as Float?) as Boolean {
@@ -106,12 +102,12 @@ class EDAWorkloadSourceSelector {
             return false;
         }
 
-        if (speed == null || speed > MAX_SPEED_MS) {
+        if (speed == null || speed > EDAFeatureFlags.getMaxSpeedMs()) {
             return false;
         }
 
         var runPace = pacePerKmSeconds(speed);
-        return runPace != null && runPace <= MAX_RUNNING_PACE_PER_KM;
+        return runPace != null && runPace <= EDAFeatureFlags.getMaxRunningPacePerKm();
     }
 
     function getSpeedValidationError(speed as Float?, timerTime as Number, isSpeedOutlier as Boolean) as Number? {
@@ -127,7 +123,7 @@ class EDAWorkloadSourceSelector {
             return 11; // STATUS_LOW_PACE
         }
 
-        if (speed > MAX_SPEED_MS) {
+        if (speed > EDAFeatureFlags.getMaxSpeedMs()) {
             return 14; // STATUS_INVALID_SPEED
         }
 
@@ -136,7 +132,7 @@ class EDAWorkloadSourceSelector {
             return 14; // STATUS_INVALID_SPEED
         }
 
-        if (runPace > MAX_RUNNING_PACE_PER_KM) {
+        if (runPace > EDAFeatureFlags.getMaxRunningPacePerKm()) {
             return 11; // STATUS_LOW_PACE
         }
 

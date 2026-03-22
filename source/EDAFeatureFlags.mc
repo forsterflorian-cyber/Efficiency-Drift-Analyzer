@@ -181,4 +181,12 @@ module EDAFeatureFlags {
     function getDriftBucketCount() as Number {
         return 120;
     }
+
+    // ---------------------------------------------------------------------------
+    // Workload Validation Constants (Single Source of Truth)
+    // ---------------------------------------------------------------------------
+
+    function getCalibrationDistanceFactor() as Float {
+        return 1000.0;
+    }
 }

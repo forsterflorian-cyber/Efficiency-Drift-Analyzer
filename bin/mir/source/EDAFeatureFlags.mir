@@ -225,6 +225,14 @@ E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDA
         ret %tmp.1;
 E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_181_45_183_4_stop:
     }
+    [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 189; @symbol_functiondef = [getCalibrationDistanceFactor,189,13,41]; @symbol_return<0> = [Float,189,47,52]; ]
+    function getCalibrationDistanceFactor() as Float {
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_189_53_191_4_start:
+[ "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc" 190 8 ]
+        %tmp.1 = 1000.0;
+        ret %tmp.1;
+E__Verwaltung_07_IT___Identität_IT_Projekte_Efficiency_Drift_Analyzer_source_EDAFeatureFlags_mc_189_53_191_4_stop:
+    }
 }
 [ @file = "E:\Verwaltung\07_IT & Identität\IT Projekte\Efficiency-Drift-Analyzer\source\EDAFeatureFlags.mc"; @line = 1; ]
 <init> {

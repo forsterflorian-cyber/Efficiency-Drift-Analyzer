@@ -1223,7 +1223,7 @@ class EDAView extends WatchUi.DataField {
 
     private function resolveActivityProfile() as Void {
         var previousMinValidHr = getMinValidHr();
-        var previousCanUseSpeedWorkload = canUseSpeedWorkload();
+        var previousCanUseSpeedWorkload = getWorkloadSourceSelector().canUseSpeedWorkload();
         var previouslyAuthoritative = hasAuthoritativeProfile();
         if (getProfileResolver().resolveActivityProfile(mTimerTime)) {
             if (EDASessionPolicy.shouldResetSessionFitSummaryForProfileChange(
@@ -1231,7 +1231,7 @@ class EDAView extends WatchUi.DataField {
                 previousCanUseSpeedWorkload,
                 previouslyAuthoritative,
                 getMinValidHr(),
-                canUseSpeedWorkload(),
+                getWorkloadSourceSelector().canUseSpeedWorkload(),
                 hasAuthoritativeProfile()
             )) {
                 resetSessionFitSummary();
@@ -1466,14 +1466,6 @@ class EDAView extends WatchUi.DataField {
         return driftPercent == null || driftPercent != driftPercent;
     }
 
-    private function pacePerKmSeconds(speed as Float?) as Float? {
-        if (speed == null || speed <= 0.0) {
-            return null;
-        }
-
-        return CALIBRATION_DISTANCE_FACTOR / speed;
-    }
-
     private function isHrOutlier(hr as Float, timerTime as Number) as Boolean {
         var previousHr = lastAcceptedHr;
         var previousTimer = lastAcceptedDriftSampleTime;
@@ -1506,82 +1498,8 @@ class EDAView extends WatchUi.DataField {
         return (speed - previousSpeed).abs() > allowedJump;
     }
 
-    private function hasUsablePower(power as Float?) as Boolean {
-        if (power == null) {
-            return false;
-        }
-
-        return power >= EDAFeatureFlags.getMinValidPower() && power <= EDAFeatureFlags.getMaxValidPower();
-    }
-
-    private function getPowerValidationError(power as Float?) as Number? {
-        if (power == null) {
-            return null;
-        }
-
-        if (power < EDAFeatureFlags.getMinValidPower()) {
-            return EDATypes.STATUS_LOW_POWER;
-        }
-
-        if (power > EDAFeatureFlags.getMaxValidPower()) {
-            return EDATypes.STATUS_SPIKE;
-        }
-
-        return null;
-    }
-
-    private function canUseSpeedWorkload() as Boolean {
-        return isRunningProfile();
-    }
-
-    private function hasUsableSpeedWorkload(speed as Float?) as Boolean {
-        if (!canUseSpeedWorkload()) {
-            return false;
-        }
-
-        if (speed == null || speed > EDAFeatureFlags.getMaxSpeedMs()) {
-            return false;
-        }
-
-        var runPace = pacePerKmSeconds(speed);
-        return runPace != null && runPace <= EDAFeatureFlags.getMaxRunningPacePerKm();
-    }
-
-    private function getSpeedValidationError(speed as Float?, timerTime as Number) as Number? {
-        if (!canUseSpeedWorkload()) {
-            return null;
-        }
-
-        if (speed == null) {
-            return EDATypes.STATUS_NO_SPEED;
-        }
-
-        if (speed <= 0.0) {
-            return EDATypes.STATUS_LOW_PACE;
-        }
-
-        if (speed > EDAFeatureFlags.getMaxSpeedMs()) {
-            return EDATypes.STATUS_INVALID_SPEED;
-        }
-
-        var runPace = pacePerKmSeconds(speed);
-        if (runPace == null) {
-            return EDATypes.STATUS_INVALID_SPEED;
-        }
-
-        if (runPace > EDAFeatureFlags.getMaxRunningPacePerKm()) {
-            return EDATypes.STATUS_LOW_PACE;
-        }
-
-        if (isSpeedOutlier(speed, timerTime)) {
-            return EDATypes.STATUS_INVALID_SPEED;
-        }
-
-        return null;
-    }
-
     private function updateValidSpeedSignal(speed as Float?, timerTime as Number, speedValidationError as Number?) as Void {
-        if (!canUseSpeedWorkload() || speed == null || speedValidationError != null) {
+        if (!getWorkloadSourceSelector().canUseSpeedWorkload() || speed == null || speedValidationError != null) {
             return;
         }
 
@@ -1590,32 +1508,7 @@ class EDAView extends WatchUi.DataField {
     }
 
     private function getWorkloadValidationError(speedError as Number?, power as Float?) as Number? {
-        if (hasUsablePower(power)) {
-            return null;
-        }
-
-        var powerError = getPowerValidationError(power);
-        if (!canUseSpeedWorkload()) {
-            if (powerError != null) {
-                return powerError;
-            }
-
-            return EDATypes.STATUS_NO_POWER;
-        }
-
-        if (speedError == null) {
-            return null;
-        }
-
-        if (powerError != null) {
-            return powerError;
-        }
-
-        if (canUseSpeedWorkload()) {
-            return speedError;
-        }
-
-        return EDATypes.STATUS_NO_POWER;
+        return getWorkloadSourceSelector().getWorkloadValidationError(speedError, power);
     }
 
     private function determinePreferredWorkloadSource(speed as Float?, power as Float?) as Number {
@@ -1647,7 +1540,7 @@ class EDAView extends WatchUi.DataField {
             return EDATypes.STATUS_SPIKE;
         }
 
-        var speedError = getSpeedValidationError(speed, timerTime);
+        var speedError = getWorkloadSourceSelector().getSpeedValidationError(speed, timerTime, isSpeedOutlier(speed, timerTime));
         updateValidSpeedSignal(speed, timerTime, speedError);
         return getWorkloadValidationError(speedError, power);
     }
