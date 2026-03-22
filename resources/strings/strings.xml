@@ -67,7 +67,7 @@
     <string id="lblFitDrift">Metabolic Drift</string>
     <string id="lblFitDriftChart">Efficiency Analysis</string>
     <string id="lblFitAvgDrift">Avg. Metabolic Drift</string>
-    <string id="lblFitProfileState">Profile State (0=Unresolved,1=Provisional,2=Fallback,3=Authoritative,4=Stale)</string>
+    <string id="lblFitProfileState">Profile State</string>
     
     <string id="minHrTitle">Min Valid HR</string>
     <string id="minHrPrompt">Minimum valid heart rate in bpm. Use your easy-zone floor if you want to include low-intensity sessions.</string>

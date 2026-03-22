@@ -94,7 +94,7 @@ class EDAWorkloadSourceSelector {
             return null;
         }
 
-        return EDAFeatureFlags.getCalibrationDistanceFactor() / speed;
+        return mDistanceFactor / speed;
     }
 
     function hasUsableSpeedWorkload(speed as Float?) as Boolean {

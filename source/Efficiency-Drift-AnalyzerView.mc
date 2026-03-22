@@ -23,7 +23,7 @@ class EDAView extends WatchUi.DataField {
 
     // Kalibrierungs-Distanz-Faktor: 1000m
     // Begründung: Pace wird in Sekunden pro km/mi berechnet
-    private const CALIBRATION_DISTANCE_FACTOR as Float = 1000.0;
+    // private const CALIBRATION_DISTANCE_FACTOR as Float = 1000.0; // Unused
 
     // Konstanten werden aus EDAFeatureFlags bezogen:
     // - MIN_VALID_POWER → EDAFeatureFlags.getMinValidPower()
@@ -254,7 +254,7 @@ class EDAView extends WatchUi.DataField {
     private var workloadSourceSelector as EDAWorkloadSourceSelector? = null;
     private var lifecycleManager as EDALifecycleManager? = null;
     private var highMemRenderModel as Dictionary? = null;
-    private var lowMemRenderModel as Dictionary? = null;
+    // private var lowMemRenderModel as Dictionary? = null; // Unused - excluded by low_mem annotation
     private var areStringsLoaded as Boolean = false;
     private const DRIFT_GRAPH_ID = 0;
     private const DRIFT_AVG_ID = 1;
@@ -262,6 +262,7 @@ class EDAView extends WatchUi.DataField {
 
     function initialize() {
         DataField.initialize();
+        loadStrings();
         loadSettings();
         setNeutralColors();
 
@@ -285,6 +286,7 @@ class EDAView extends WatchUi.DataField {
         renderer = new EDARenderer();
         workloadSourceSelector = new EDAWorkloadSourceSelector();
         lifecycleManager = new EDALifecycleManager();
+        getWorkloadSourceSelector().updateDistanceFactor(mDistanceFactor);
         initializeRenderModels();
         refreshEngineCalibrationState();
 
@@ -294,7 +296,10 @@ class EDAView extends WatchUi.DataField {
 
     (:high_mem)
     private function loadStrings() as Void {
+     //   var deviceSettings = System.getDeviceSettings();
+       // System.println("Current language: " + deviceSettings.systemLanguage);
         lblAktPace = WatchUi.loadResource(Rez.Strings.lblAktPace) as String;
+      //  System.println("Loaded lblAktPace: " + lblAktPace);
         lblAktPaceShort = WatchUi.loadResource(Rez.Strings.lblAktPaceShort) as String;
         lblSollPace = WatchUi.loadResource(Rez.Strings.lblSollPace) as String;
         lblSollHr = WatchUi.loadResource(Rez.Strings.lblSollHr) as String;
@@ -792,16 +797,15 @@ class EDAView extends WatchUi.DataField {
     (:high_mem)
     private function initializeRenderModels() as Void {
         highMemRenderModel = {};
-        lowMemRenderModel = null;
         requestRenderCacheRefresh();
     }
 
-    (:low_mem)
-    private function initializeRenderModels() as Void {
-        highMemRenderModel = null;
-        lowMemRenderModel = {};
-        requestRenderCacheRefresh();
-    }
+    // (:low_mem) - Excluded by monkey.jungle annotation
+    // private function initializeRenderModels() as Void {
+    //     highMemRenderModel = null;
+    //     lowMemRenderModel = {};
+    //     requestRenderCacheRefresh();
+    // }
 
     private function requestRenderCacheRefresh() as Void {
         isRenderCacheDirty = true;
@@ -964,41 +968,41 @@ class EDAView extends WatchUi.DataField {
         model[:hrShortLine] = renderHrShortLine;
     }
 
-    (:low_mem)
-    private function refreshRenderCache() as Void {
-        var currentPaceValue = getRenderSafePaceValue();
-        var currentHrValue = getRenderSafeHrValue();
-        renderPaceLine = lblAktPace + currentPaceValue;
-        renderPaceShortLine = lblAktPaceShort + currentPaceValue;
-        renderDriftLine = getRenderedDriftLabel();
-        renderDriftShortLine = getRenderedDriftShortLabel();
-        renderStatusDetailLine = statusDetail;
-        renderStatusDetailShortLine = statusDetailShort != "" ? statusDetailShort : statusDetail;
-
-        var defaultDetail = getDefaultStatusDetail();
-        renderDefaultDetailLine = (defaultDetail == null) ? "" : defaultDetail;
-        var defaultDetailShort = getDefaultStatusDetailShort();
-        renderDefaultDetailShortLine = (defaultDetailShort == null) ? renderDefaultDetailLine : defaultDetailShort;
-
-        renderHrLine = lblAktHr + currentHrValue;
-        renderHrShortLine = lblAktHrShort + currentHrValue;
-        renderShowModelError = false;
-        renderModelErrorLine = "";
-
-        var model = lowMemRenderModel as Dictionary;
-        model[:renderBgColor] = bgColor;
-        model[:renderFgColor] = fgColor;
-        model[:paceLine] = renderPaceLine;
-        model[:paceShortLine] = renderPaceShortLine;
-        model[:driftLine] = renderDriftLine;
-        model[:driftShortLine] = renderDriftShortLine;
-        model[:renderStatusDetailLine] = renderStatusDetailLine;
-        model[:renderStatusDetailShortLine] = renderStatusDetailShortLine;
-        model[:defaultDetailLine] = renderDefaultDetailLine;
-        model[:defaultDetailShortLine] = renderDefaultDetailShortLine;
-        model[:hrLine] = renderHrLine;
-        model[:hrShortLine] = renderHrShortLine;
-    }
+    // (:low_mem) - Excluded by monkey.jungle annotation
+    // private function refreshRenderCache() as Void {
+    //     var currentPaceValue = getRenderSafePaceValue();
+    //     var currentHrValue = getRenderSafeHrValue();
+    //     renderPaceLine = lblAktPace + currentPaceValue;
+    //     renderPaceShortLine = lblAktPaceShort + currentPaceValue;
+    //     renderDriftLine = getRenderedDriftLabel();
+    //     renderDriftShortLine = getRenderedDriftShortLabel();
+    //     renderStatusDetailLine = statusDetail;
+    //     renderStatusDetailShortLine = statusDetailShort != "" ? statusDetailShort : statusDetail;
+    //
+    //     var defaultDetail = getDefaultStatusDetail();
+    //     renderDefaultDetailLine = (defaultDetail == null) ? "" : defaultDetail;
+    //     var defaultDetailShort = getDefaultStatusDetailShort();
+    //     renderDefaultDetailShortLine = (defaultDetailShort == null) ? renderDefaultDetailLine : defaultDetailShort;
+    //
+    //     renderHrLine = lblAktHr + currentHrValue;
+    //     renderHrShortLine = lblAktHrShort + currentHrValue;
+    //     renderShowModelError = false;
+    //     renderModelErrorLine = "";
+    //
+    //     var model = lowMemRenderModel as Dictionary;
+    //     model[:renderBgColor] = bgColor;
+    //     model[:renderFgColor] = fgColor;
+    //     model[:paceLine] = renderPaceLine;
+    //     model[:paceShortLine] = renderPaceShortLine;
+    //     model[:driftLine] = renderDriftLine;
+    //     model[:driftShortLine] = renderDriftShortLine;
+    //     model[:renderStatusDetailLine] = renderStatusDetailLine;
+    //     model[:renderStatusDetailShortLine] = renderStatusDetailShortLine;
+    //     model[:defaultDetailLine] = renderDefaultDetailLine;
+    //     model[:defaultDetailShortLine] = renderDefaultDetailShortLine;
+    //     model[:hrLine] = renderHrLine;
+    //     model[:hrShortLine] = renderHrShortLine;
+    // }
 
     private function writeInvalidRecord() as Void {
         getFitExportState().writeInvalidRecord(getProfileResolver().getState());
@@ -1663,10 +1667,10 @@ class EDAView extends WatchUi.DataField {
         return highMemRenderModel as Dictionary;
     }
 
-    (:low_mem)
-    private function buildLowMemRenderModel() as Dictionary {
-        return lowMemRenderModel as Dictionary;
-    }
+    // (:low_mem) - Excluded by monkey.jungle annotation
+    // private function buildLowMemRenderModel() as Dictionary {
+    //     return lowMemRenderModel as Dictionary;
+    // }
 
     (:high_mem)
     private function resetFilterState() as Void {

@@ -34,12 +34,36 @@
     "fill-color" : null
   } ],
   "strings" : {
+    "de-DE" : {
+      "lblFitDriftChart" : "Effizienz-Analyse",
+      "lblFitDrift" : "Stoffwechsel-Drift",
+      "unitPercent" : "%",
+      "lblFitAvgDrift" : "Durchschn. Stoffw.-Drift",
+      "lblFitProfileState" : "Profilstatus",
+      "unitState" : "Status"
+    },
+    "de-AT" : {
+      "lblFitDriftChart" : "Effizienz-Analyse",
+      "lblFitDrift" : "Stoffwechsel-Drift",
+      "unitPercent" : "%",
+      "lblFitAvgDrift" : "Durchschn. Stoffw.-Drift",
+      "lblFitProfileState" : "Profilstatus",
+      "unitState" : "Status"
+    },
+    "de-CH" : {
+      "lblFitDriftChart" : "Effizienz-Analyse",
+      "lblFitDrift" : "Stoffwechsel-Drift",
+      "unitPercent" : "%",
+      "lblFitAvgDrift" : "Durchschn. Stoffw.-Drift",
+      "lblFitProfileState" : "Profilstatus",
+      "unitState" : "Status"
+    },
     "default" : {
       "lblFitDriftChart" : "Efficiency Analysis",
       "lblFitDrift" : "Metabolic Drift",
       "unitPercent" : "%",
       "lblFitAvgDrift" : "Avg. Metabolic Drift",
-      "lblFitProfileState" : "Profile State (0=Unresolved...",
+      "lblFitProfileState" : "Profile State",
       "unitState" : "state"
     }
   }
