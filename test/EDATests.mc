@@ -25,6 +25,60 @@ function sessionSummaryResetsOnProfileUpgrade(logger as Test.Logger) as Boolean 
     return true;
 }
 
+(:test)
+function sessionSummaryWaitsForExportGate(logger as Test.Logger) as Boolean {
+    var fitExportState = new EDAFitExportState(null, null, null);
+
+    fitExportState.updateFitFields(1, false, 4.0, 10000, 1);
+    fitExportState.updateFitFields(2, false, 6.0, 10000, 2);
+
+    Test.assertMessage(
+        fitExportState.getSessionAverageDriftForDiagnostics() == null,
+        "Session summary must stay empty until drift samples are exportable."
+    );
+
+    fitExportState.updateFitFields(3, true, 8.0, 10000, 1);
+    var averageAfterGate = fitExportState.getSessionAverageDriftForDiagnostics();
+    Test.assertMessage(averageAfterGate != null, "Expected session summary once export opens.");
+    logger.debug("avgAfterGate=" + (averageAfterGate as Float).format("%.2f"));
+    Test.assertMessage(
+        ((averageAfterGate as Float) - 8.0).abs() < 0.01,
+        "Pre-gate samples must not leak into the exported session summary."
+    );
+    return true;
+}
+
+(:test)
+function coachingActionMappingUsesV2Thresholds(logger as Test.Logger) as Boolean {
+    Test.assertEqualMessage(EDACoachingProjection.ACTION_OK, EDACoachingProjection.getAction(2.9), "Drift below 3.0 should map to OK.");
+    Test.assertEqualMessage(EDACoachingProjection.ACTION_WATCH, EDACoachingProjection.getAction(3.0), "Drift at 3.0 should map to WATCH.");
+    Test.assertEqualMessage(EDACoachingProjection.ACTION_WATCH, EDACoachingProjection.getAction(5.9), "Drift below 6.0 should stay WATCH.");
+    Test.assertEqualMessage(EDACoachingProjection.ACTION_EASIER, EDACoachingProjection.getAction(6.0), "Drift at 6.0 should map to EASIER.");
+    logger.debug("actionThresholds=ok");
+    return true;
+}
+
+(:test)
+function coachingTrendClassificationUsesDeltaThresholds(logger as Test.Logger) as Boolean {
+    Test.assertEqualMessage(EDACoachingProjection.TREND_UNKNOWN, EDACoachingProjection.classifyTrendDelta(null, 1.0), "Missing history should stay unknown.");
+    Test.assertEqualMessage(EDACoachingProjection.TREND_STABLE, EDACoachingProjection.classifyTrendDelta(1.0, 1.0), "Delta at threshold should stay stable.");
+    Test.assertEqualMessage(EDACoachingProjection.TREND_RISING, EDACoachingProjection.classifyTrendDelta(1.01, 1.0), "Positive delta above threshold should rise.");
+    Test.assertEqualMessage(EDACoachingProjection.TREND_FALLING, EDACoachingProjection.classifyTrendDelta(-1.01, 1.0), "Negative delta below threshold should fall.");
+    logger.debug("trendThresholds=ok");
+    return true;
+}
+
+(:test)
+function coachingConfidenceWindowsFollowWarmupAge(logger as Test.Logger) as Boolean {
+    Test.assertEqualMessage(EDACoachingProjection.CONFIDENCE_LOW, EDACoachingProjection.getConfidence(0), "Warmup completion should start in low confidence.");
+    Test.assertEqualMessage(EDACoachingProjection.CONFIDENCE_LOW, EDACoachingProjection.getConfidence(89999), "Confidence stays low before 90s.");
+    Test.assertEqualMessage(EDACoachingProjection.CONFIDENCE_MEDIUM, EDACoachingProjection.getConfidence(90000), "Confidence becomes medium at 90s.");
+    Test.assertEqualMessage(EDACoachingProjection.CONFIDENCE_MEDIUM, EDACoachingProjection.getConfidence(179999), "Confidence stays medium before 180s.");
+    Test.assertEqualMessage(EDACoachingProjection.CONFIDENCE_HIGH, EDACoachingProjection.getConfidence(180000), "Confidence becomes high at 180s.");
+    logger.debug("confidenceWindows=ok");
+    return true;
+}
+
 // ============================================================================
 // Edge-Case Tests: Status Manager
 // ============================================================================
@@ -133,6 +187,27 @@ function mixedSourceSessionSummaryRemainsContinuous(logger as Test.Logger) as Bo
     Test.assertMessage(
         (actual - expected).abs() < 0.05,
         "Session summary should keep both power and speed contributions without a reset."
+    );
+    return true;
+}
+
+(:test)
+function mixedSourceSessionSummaryOnlyUsesExportedSamples(logger as Test.Logger) as Boolean {
+    var fitExportState = new EDAFitExportState(null, null, null);
+
+    fitExportState.updateFitFields(2, false, 4.0, 10000, 1);
+    fitExportState.updateFitFields(2, true, 6.0, 10000, 2);
+    fitExportState.updateFitFields(3, true, 3.0, 20000, 1);
+
+    var averageDrift = fitExportState.getSessionAverageDriftForDiagnostics();
+    Test.assertMessage(averageDrift != null, "Expected session summary after exportable samples.");
+
+    var actual = averageDrift as Float;
+    var expected = 4.0;
+    logger.debug("exportedOnlyAvg=" + actual.format("%.4f"));
+    Test.assertMessage(
+        (actual - expected).abs() < 0.05,
+        "Session summary should be weighted only from exportable samples across both workload sources."
     );
     return true;
 }
@@ -325,6 +400,25 @@ function lifecycleManagerDetectsPauseResume(logger as Test.Logger) as Boolean {
         "Pause state should be cleared."
     );
     
+    return true;
+}
+
+(:test)
+function lifecycleManagerClearsPauseStateOnResumeCheck(logger as Test.Logger) as Boolean {
+    var manager = new EDALifecycleManager();
+    manager.rememberPauseTimestamp();
+
+    var shouldReset = manager.shouldResetAfterResumePause();
+    logger.debug("resumeReset=" + shouldReset.toString());
+
+    Test.assertMessage(
+        !shouldReset,
+        "Immediate resume should not be treated as a long-pause reset."
+    );
+    Test.assertMessage(
+        manager.getPauseTimestamp() == null,
+        "Resume evaluation should clear the stored pause timestamp."
+    );
     return true;
 }
 

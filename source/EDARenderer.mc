@@ -15,7 +15,7 @@ class EDARenderer {
         return budget;
     }
 
-    private function selectTextToFit(dc as Graphics.Dc, text as String?, fallbackText as String?, font, maxWidth as Number) as String {
+    private function selectTextToFit(dc as Graphics.Dc, text as String?, fallbackText as String?, font as Graphics.FontType, maxWidth as Number) as String {
         if (text == null) {
             return "";
         }
@@ -45,7 +45,7 @@ class EDARenderer {
         return "";
     }
 
-    private function drawResponsiveText(dc as Graphics.Dc, width as Number, y, font, text as String?, fallbackText as String?) as Void {
+    private function drawResponsiveText(dc as Graphics.Dc, width as Number, y as Numeric, font as Graphics.FontType, text as String?, fallbackText as String?) as Void {
         var renderText = selectTextToFit(dc, text, fallbackText, font, getTextBudget(width));
         if (renderText == "") {
             return;

@@ -13,6 +13,13 @@ class EDAView extends WatchUi.DataField {
     // Status-Konstanten werden jetzt aus EDATypes importiert
     private const INVALID_RENDER_VALUE as String = "NaN";
 
+    // Drift trend indicator constants
+    // Compare current drift against drift from ~30 seconds earlier
+    // Threshold: delta > +1.0% => rising, delta < -1.0% => falling, otherwise stable
+    private const DRIFT_TREND_WINDOW_MS as Number = 30000;
+    private const DRIFT_TREND_THRESHOLD as Float = 1.0;
+    private const DRIFT_HISTORY_SIZE as Number = 32;
+
     // Default Minimum HR für Running: 80 bpm
     // Begründung: Unter 80 bpm ist HR-Sensor wahrscheinlich ungenau oder nicht verbunden
     private const DEFAULT_RUNNING_MIN_HR as Float = 80.0;
@@ -188,6 +195,18 @@ class EDAView extends WatchUi.DataField {
     private var msgConfigRequired as String = "";
     private var msgConfigRequiredShort as String = "";
     private var msgWarmupValidSuffix as String = "";
+    private var msgActionOk as String = "";
+    private var msgActionOkShort as String = "";
+    private var msgActionWatch as String = "";
+    private var msgActionWatchShort as String = "";
+    private var msgActionEasier as String = "";
+    private var msgActionEasierShort as String = "";
+    private var msgTrendRising as String = "";
+    private var msgTrendRisingShort as String = "";
+    private var msgTrendStable as String = "";
+    private var msgTrendStableShort as String = "";
+    private var msgTrendFalling as String = "";
+    private var msgTrendFallingShort as String = "";
 
     (:high_mem)
     private var lblSollPace as String = "";
@@ -207,6 +226,13 @@ class EDAView extends WatchUi.DataField {
     private var strDrift as String = "--";
     private var driftStatus as Number = EDATypes.STATUS_WAIT;
     private var valAktHr as String = "--";
+
+    // Drift trend indicator: circular buffer of recent drift samples
+    private var mDriftHistoryTs as Array<Number> = new Array<Number>[DRIFT_HISTORY_SIZE];
+    private var mDriftHistoryVal as Array<Float> = new Array<Float>[DRIFT_HISTORY_SIZE];
+    private var mDriftHistoryWriteIdx as Number = 0;
+    private var mDriftHistoryCount as Number = 0;
+    private var mLastTrendCode as Number = EDACoachingProjection.TREND_UNKNOWN;
 
     (:high_mem)
     private var valSollPace as String = "--:--";
@@ -362,6 +388,18 @@ class EDAView extends WatchUi.DataField {
         msgConfigRequired = WatchUi.loadResource(Rez.Strings.msgConfigRequired) as String;
         msgConfigRequiredShort = WatchUi.loadResource(Rez.Strings.msgConfigRequiredShort) as String;
         msgWarmupValidSuffix = WatchUi.loadResource(Rez.Strings.msgWarmupValidSuffix) as String;
+        msgActionOk = WatchUi.loadResource(Rez.Strings.msgActionOk) as String;
+        msgActionOkShort = WatchUi.loadResource(Rez.Strings.msgActionOkShort) as String;
+        msgActionWatch = WatchUi.loadResource(Rez.Strings.msgActionWatch) as String;
+        msgActionWatchShort = WatchUi.loadResource(Rez.Strings.msgActionWatchShort) as String;
+        msgActionEasier = WatchUi.loadResource(Rez.Strings.msgActionEasier) as String;
+        msgActionEasierShort = WatchUi.loadResource(Rez.Strings.msgActionEasierShort) as String;
+        msgTrendRising = WatchUi.loadResource(Rez.Strings.msgTrendRising) as String;
+        msgTrendRisingShort = WatchUi.loadResource(Rez.Strings.msgTrendRisingShort) as String;
+        msgTrendStable = WatchUi.loadResource(Rez.Strings.msgTrendStable) as String;
+        msgTrendStableShort = WatchUi.loadResource(Rez.Strings.msgTrendStableShort) as String;
+        msgTrendFalling = WatchUi.loadResource(Rez.Strings.msgTrendFalling) as String;
+        msgTrendFallingShort = WatchUi.loadResource(Rez.Strings.msgTrendFallingShort) as String;
         areStringsLoaded = true;
     }
 
@@ -425,6 +463,18 @@ class EDAView extends WatchUi.DataField {
         msgConfigRequiredShort = WatchUi.loadResource(Rez.Strings.msgConfigRequiredShort) as String;
         msgConfigRequired = msgConfigRequiredShort;
         msgWarmupValidSuffix = WatchUi.loadResource(Rez.Strings.msgWarmupValidSuffix) as String;
+        msgActionOkShort = WatchUi.loadResource(Rez.Strings.msgActionOkShort) as String;
+        msgActionOk = msgActionOkShort;
+        msgActionWatchShort = WatchUi.loadResource(Rez.Strings.msgActionWatchShort) as String;
+        msgActionWatch = msgActionWatchShort;
+        msgActionEasierShort = WatchUi.loadResource(Rez.Strings.msgActionEasierShort) as String;
+        msgActionEasier = msgActionEasierShort;
+        msgTrendRisingShort = WatchUi.loadResource(Rez.Strings.msgTrendRisingShort) as String;
+        msgTrendRising = msgTrendRisingShort;
+        msgTrendStableShort = WatchUi.loadResource(Rez.Strings.msgTrendStableShort) as String;
+        msgTrendStable = msgTrendStableShort;
+        msgTrendFallingShort = WatchUi.loadResource(Rez.Strings.msgTrendFallingShort) as String;
+        msgTrendFalling = msgTrendFallingShort;
         areStringsLoaded = true;
     }
 
@@ -865,6 +915,12 @@ class EDAView extends WatchUi.DataField {
         clearPostResetCollectingStatus();
     }
 
+    private function resetDriftHistory() as Void {
+        mDriftHistoryWriteIdx = 0;
+        mDriftHistoryCount = 0;
+        mLastTrendCode = EDACoachingProjection.TREND_UNKNOWN;
+    }
+
     // Preserve why a mid-session reset happened so recollection does not look
     // like the very first warmup of the activity.
     private function rememberPostResetCollectingStatus(statusCode as Number, detailText as String, shortDetailText as String) as Void {
@@ -914,6 +970,91 @@ class EDAView extends WatchUi.DataField {
             return -1;
         }
         return mTimerTime - mWarmupCompletedAt;
+    }
+
+    // Record a drift sample into the circular history buffer for trend computation.
+    private function recordDriftHistory(timerTime as Number, driftPercent as Float) as Void {
+        mDriftHistoryTs[mDriftHistoryWriteIdx] = timerTime;
+        mDriftHistoryVal[mDriftHistoryWriteIdx] = driftPercent;
+        mDriftHistoryWriteIdx = (mDriftHistoryWriteIdx + 1) % DRIFT_HISTORY_SIZE;
+        if (mDriftHistoryCount < DRIFT_HISTORY_SIZE) {
+            mDriftHistoryCount += 1;
+        }
+    }
+
+    // Compute drift trend by comparing current value against ~30s earlier sample.
+    // Returns trend code, or TREND_UNKNOWN if insufficient history exists.
+    private function computeDriftTrend(timerTime as Number, currentDrift as Float) as Number {
+        if (mDriftHistoryCount < 2) {
+            return EDACoachingProjection.TREND_UNKNOWN;
+        }
+
+        var targetTime = timerTime - DRIFT_TREND_WINDOW_MS;
+        var bestIdx = -1;
+        var bestDelta = 2147483647; // Max int value
+        var i = 0;
+        while (i < mDriftHistoryCount) {
+            var readIdx = (mDriftHistoryWriteIdx - mDriftHistoryCount + i + DRIFT_HISTORY_SIZE) % DRIFT_HISTORY_SIZE;
+            var ts = mDriftHistoryTs[readIdx];
+            if (ts <= targetTime) {
+                var d = targetTime - ts;
+                if (d < bestDelta) {
+                    bestDelta = d;
+                    bestIdx = readIdx;
+                }
+            }
+            i += 1;
+        }
+
+        if (bestIdx < 0) {
+            return EDACoachingProjection.TREND_UNKNOWN;
+        }
+
+        var pastDrift = mDriftHistoryVal[bestIdx];
+        var delta = currentDrift - pastDrift;
+        return EDACoachingProjection.classifyTrendDelta(delta, DRIFT_TREND_THRESHOLD);
+    }
+
+    private function getCoachingActionLabel(actionCode as Number, isShortLabel as Boolean) as String {
+        if (actionCode == EDACoachingProjection.ACTION_OK) {
+            return isShortLabel ? msgActionOkShort : msgActionOk;
+        }
+
+        if (actionCode == EDACoachingProjection.ACTION_WATCH) {
+            return isShortLabel ? msgActionWatchShort : msgActionWatch;
+        }
+
+        return isShortLabel ? msgActionEasierShort : msgActionEasier;
+    }
+
+    private function getCoachingTrendLabel(trendCode as Number, isShortLabel as Boolean) as String {
+        if (trendCode == EDACoachingProjection.TREND_RISING) {
+            return isShortLabel ? msgTrendRisingShort : msgTrendRising;
+        }
+
+        if (trendCode == EDACoachingProjection.TREND_FALLING) {
+            return isShortLabel ? msgTrendFallingShort : msgTrendFalling;
+        }
+
+        if (trendCode == EDACoachingProjection.TREND_STABLE) {
+            return isShortLabel ? msgTrendStableShort : msgTrendStable;
+        }
+
+        return "";
+    }
+
+    private function buildCoachingDetailLine(actionCode as Number, trendCode as Number, confidenceCode as Number, isShortLabel as Boolean) as String {
+        var actionLabel = getCoachingActionLabel(actionCode, isShortLabel);
+        if (!EDACoachingProjection.shouldShowTrend(confidenceCode, trendCode)) {
+            return actionLabel;
+        }
+
+        var trendLabel = getCoachingTrendLabel(trendCode, isShortLabel);
+        if (trendLabel == "") {
+            return actionLabel;
+        }
+
+        return actionLabel + " " + trendLabel;
     }
 
     private function getRenderSafePaceValue() as String {
@@ -1103,7 +1244,7 @@ class EDAView extends WatchUi.DataField {
     (:high_mem)
     private function getRenderModelSpeed() as Float? {
         if (!filterInitialized || validActiveMs < EDAFeatureFlags.getWarmupValidMs()) {
-            return Math.sqrt(-1.0);
+            return Math.sqrt(-1.0) as Float;
         }
 
         return ewmaSpeed;
@@ -1117,7 +1258,7 @@ class EDAView extends WatchUi.DataField {
     (:high_mem)
     private function getRenderModelHr() as Float? {
         if (!filterInitialized || validActiveMs < EDAFeatureFlags.getWarmupValidMs()) {
-            return Math.sqrt(-1.0);
+            return Math.sqrt(-1.0) as Float;
         }
 
         return ewmaHr;
@@ -1210,6 +1351,7 @@ class EDAView extends WatchUi.DataField {
 
     private function resetAnalysisState() as Void {
         resetResumeSensitiveState();
+        resetDriftHistory();
         validActiveMs = 0;
         driftActiveMs = 0;
         clearRawLiveSampleState();
@@ -1568,7 +1710,8 @@ class EDAView extends WatchUi.DataField {
             return EDATypes.STATUS_SPIKE;
         }
 
-        var speedError = getWorkloadSourceSelector().getSpeedValidationError(speed, timerTime, isSpeedOutlier(speed, timerTime));
+        var isSpeedSampleOutlier = speed != null && isSpeedOutlier(speed, timerTime);
+        var speedError = getWorkloadSourceSelector().getSpeedValidationError(speed, timerTime, isSpeedSampleOutlier);
         updateValidSpeedSignal(speed, timerTime, speedError);
         return getWorkloadValidationError(speedError, power);
     }
@@ -1649,9 +1792,12 @@ class EDAView extends WatchUi.DataField {
     private function updateDriftDisplay(driftPercent as Float) as Void {
         var sign = driftPercent > 0.0 ? "+" : "";
         driftStatus = EDATypes.STATUS_VALUE;
-        strDrift = sign + driftPercent.format("%.1f") + "%";
         statusDetail = "";
         statusDetailShort = "";
+
+        recordDriftHistory(mTimerTime, driftPercent);
+        mLastTrendCode = computeDriftTrend(mTimerTime, driftPercent);
+        strDrift = sign + driftPercent.format("%.1f") + "%";
 
         // Confidence-based color thresholds using time since warmup ended.
         // Rationale: HR lags behind workload changes, especially after warmup.
@@ -1660,14 +1806,18 @@ class EDAView extends WatchUi.DataField {
         // - medium (90-180s): settling phase → conservative red threshold
         // - high (>= 180s): stable → normal thresholds
         var msSinceWarmupEnd = getMsSinceWarmupEnd();
+        var confidenceCode = EDACoachingProjection.getConfidence((msSinceWarmupEnd < 0) ? 0 : msSinceWarmupEnd);
+        var actionCode = EDACoachingProjection.getAction(driftPercent);
+        statusDetail = buildCoachingDetailLine(actionCode, mLastTrendCode, confidenceCode, false);
+        statusDetailShort = buildCoachingDetailLine(actionCode, mLastTrendCode, confidenceCode, true);
         if (driftPercent < 3.0) {
             bgColor = Graphics.COLOR_GREEN;
             fgColor = Graphics.COLOR_BLACK;
-        } else if (msSinceWarmupEnd >= 0 && msSinceWarmupEnd < 90000) {
+        } else if (confidenceCode == EDACoachingProjection.CONFIDENCE_LOW) {
             // Low confidence: HR still unstable → max yellow
             bgColor = Graphics.COLOR_YELLOW;
             fgColor = Graphics.COLOR_BLACK;
-        } else if (msSinceWarmupEnd >= 0 && msSinceWarmupEnd < 180000) {
+        } else if (confidenceCode == EDACoachingProjection.CONFIDENCE_MEDIUM) {
             // Medium confidence: settling → conservative red threshold at 9%
             if (driftPercent <= 9.0) {
                 bgColor = Graphics.COLOR_YELLOW;

@@ -28,7 +28,7 @@ class EDAFitExportState {
 
     private function getInvalidFitFloat() as Float {
         // FIT float developer fields use NaN as the protocol-level invalid sentinel.
-        return Math.sqrt(-1.0);
+        return Math.sqrt(-1.0) as Float;
     }
 
     private function clearRealtimeDriftField() as Void {
@@ -90,13 +90,15 @@ class EDAFitExportState {
 
     function updateFitFields(profileState as Number, canExport as Boolean, driftPercent as Float, intervalMs as Number, workloadSource as Number) as Void {
         updateProfileStateField(profileState);
-        addSessionDriftSample(driftPercent, intervalMs, workloadSource);
-        updateSessionSummaryField();
 
         if (!canExport) {
             clearRealtimeDriftField();
+            clearSessionSummaryField();
             return;
         }
+
+        addSessionDriftSample(driftPercent, intervalMs, workloadSource);
+        updateSessionSummaryField();
 
         if (mDriftField != null) {
             mDriftField.setData(driftPercent);

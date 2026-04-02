@@ -81,7 +81,7 @@ class EDADriftEngine {
 
     function computeDrift(driftActiveMs as Number) as Float? {
         if (!mIsCalibrated) {
-            return Math.sqrt(-1.0);
+            return Math.sqrt(-1.0) as Float;
         }
 
         if (driftActiveMs < MIN_VALID_TIME_MS) {

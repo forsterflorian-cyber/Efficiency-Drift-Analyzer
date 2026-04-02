@@ -1,193 +1,164 @@
-# EDA – Agent Guidance
+\# AGENTS.md - Garmin / Connect IQ Projects
 
-This repository contains **Efficiency Drift Analyzer (EDA)**, a real-time aerobic decoupling analysis data field for Garmin devices.
 
-The system runs inside the Garmin Connect IQ runtime (Monkey C) and must remain **predictable, lightweight, and robust under real-time constraints**.
 
-Agents modifying this repository must follow the rules below.
+\## Project context
 
----
 
-# Core Architecture
 
-Main execution path:
+This repository contains a Garmin Connect IQ app, data field, widget, or watch app. Priorities are stability, correctness, low memory pressure, low allocation behavior in hot paths, clear lifecycle handling, and practical on-device usability.
 
-EDAView.compute()
 
-This function orchestrates:
 
-- sensor ingestion
-- lifecycle repair (pause/resume)
-- profile resolution
-- source selection (pace vs power)
-- drift accumulation
-- render model update
-- FIT export decisions
+Do not add new features unless explicitly requested.
 
-Supporting modules:
 
-EDAProfileResolver  
-→ resolves activity type and workload source  
-→ states: unresolved / provisional / authoritative / fallback
 
-EDADriftEngine  
-→ O(1) drift accumulation logic  
-→ hot-path runtime component
+\## Core rules
 
-EDAFitExportState  
-→ FIT export behavior and session summary resets
 
-EDARenderer  
-→ final UI text and numeric rendering
 
----
+\- Stability and device safety come first.
 
-# Runtime Constraints
+\- Optimize for correctness under real device lifecycle conditions:
 
-This is a **real-time Garmin data field**.
+&#x20; - start
 
-Key constraints:
+&#x20; - pause
 
-- compute() runs every update cycle
-- memory is limited
-- allocations in hot paths should be avoided
-- runtime cost must remain stable
+&#x20; - resume
 
-Agents must not introduce:
+&#x20; - lap
 
-- large allocations in compute()
-- expensive loops in hot paths
-- repeated string creation during update cycles
+&#x20; - app reload
 
----
+&#x20; - sensor gaps
 
-# Lifecycle Model
+&#x20; - invalid data
 
-The app depends on Garmin timer lifecycle events.
+\- Keep runtime allocations low, especially in hot paths and draw/update loops.
 
-Relevant transitions:
+\- Prefer simple, robust logic over elegant but fragile abstractions.
 
-- start
-- pause
-- resume
-- lap
-- stop
 
-Important rules:
 
-1. State must remain consistent across pause/resume.
-2. Pre-pause sensor values must not appear as fresh data after resume.
-3. Lifecycle recovery must not silently reset analysis unless necessary.
+\## Device and performance rules
 
----
 
-# Workload Source Model
 
-EDA can derive workload from:
+\- Default main validation target is FR955 unless another device is explicitly requested.
 
-- Power
-- Speed/Pace
+\- Consider compatibility with somewhat older supported Garmin devices when possible, but do not distort the architecture just to support very old devices.
 
-Source selection must be:
+\- Be alert to memory limits, font/resource size issues, and argument-count/platform quirks on older devices.
 
-- deterministic
-- hysteresis-protected
-- resilient to noisy sensors
+\- Avoid unnecessary object churn inside update, compute, or draw paths.
 
-Agents must avoid introducing **source thrashing**.
 
----
 
-# Status Model
+\## Connect IQ implementation rules
 
-User-visible statuses include:
 
-- Provisional
-- Retry
-- Valid
 
-These statuses communicate **data confidence**, not just data presence.
+\- Respect Connect IQ lifecycle and Toybox constraints.
 
-Agents must ensure that UI status always reflects the true internal state.
+\- Treat background services, temporal events, glance/widget/update timing, and app state restoration as risk areas.
 
-Avoid situations where:
+\- Do not assume simulator behavior always equals device behavior.
 
-- UI shows Valid while data is provisional
-- UI indicates sensor failure when the issue is profile resolution
+\- Distinguish clearly between:
 
----
+&#x20; - compile success
 
-# UI Rendering
+&#x20; - simulator success
 
-User-visible text is assembled across:
+&#x20; - on-device validation
 
-- EDARenderer
-- EDAView helpers
-- resources/strings
 
-Agents should prefer:
 
-- structured status composition
-- minimal runtime string concatenation
+\## UX rules
 
----
 
-# FIT Export
 
-FIT export behavior must remain conservative.
+\- UI must remain readable on target screens.
 
-Export must only occur when:
+\- Favor resolution-relative layout where possible.
 
-- drift values are valid
-- data integrity is guaranteed
-- fallback states are resolved
+\- Avoid fixed pixel assumptions unless device-specific by design.
 
----
+\- Ensure states are understandable on-watch:
 
-# Testing
+&#x20; - loading
 
-Current automated tests are limited.
+&#x20; - waiting
 
-When modifying:
+&#x20; - invalid
 
-- lifecycle handling
-- source switching
-- status generation
+&#x20; - provisional
 
-agents should add targeted tests if feasible.
+&#x20; - active
 
----
+&#x20; - paused
 
-# Change Philosophy
+\- Compact clarity is more important than visual ornament.
 
-This project prioritizes:
 
-1. stability
-2. determinism
-3. clarity of user feedback
-4. runtime efficiency
 
-Agents should prefer:
+\## Validation rules
 
-- small targeted fixes
-- minimal diffs
-- explicit logic
 
-Agents must avoid:
 
-- architectural rewrites
-- feature additions unless explicitly requested
-- speculative optimizations
+\- After changes, state separately:
 
----
+&#x20; - compile status
 
-# Typical Failure Modes
+&#x20; - simulator status
 
-Common issues in Garmin real-time apps include:
+&#x20; - device validation status
 
-- stale sensor values surviving pause/resume
-- source switching oscillation
-- status/UI desynchronization
-- drift calculations running on invalid windows
+\- Never imply on-device validation if it did not happen.
 
-Agents should actively look for these issues during stabilization passes.
+\- If a behavior is inferred rather than observed, say so.
+
+
+
+\## Review focus
+
+
+
+When reviewing code, prioritize:
+
+1\. lifecycle correctness
+
+2\. memory and allocation behavior
+
+3\. stale state / cache invalidation risks
+
+4\. simulator vs device mismatch risk
+
+5\. readability and usefulness of on-watch UI
+
+
+
+\## Preferred response style
+
+
+
+\- Be exact and implementation-oriented.
+
+\- Explain runtime behavior in operational terms.
+
+\- When diagnosing, separate:
+
+&#x20; - root cause
+
+&#x20; - trigger path
+
+&#x20; - observed effect
+
+&#x20; - fix
+
+&#x20; - remaining uncertainty
+
+\- Avoid broad refactors unless the current structure is the cause of instability.
+
