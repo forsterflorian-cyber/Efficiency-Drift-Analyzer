@@ -1242,6 +1242,33 @@ class EDAView extends WatchUi.DataField {
     }
 
     (:high_mem)
+    private function isReplayDisplaySpeedGuardAvailable() as Boolean {
+        return isTargetModelSupported() && modelValid && m.abs() > MODEL_DELTA_EPSILON;
+    }
+
+    (:low_mem)
+    private function isReplayDisplaySpeedGuardAvailable() as Boolean {
+        return false;
+    }
+
+    (:high_mem)
+    private function getNormalizedDisplaySpeed(speed as Float?) as Float? {
+        return EDAReplayDisplayGuard.normalizeDisplaySpeed(
+            speed,
+            isRunningProfile(),
+            currentWorkloadSource,
+            isReplayDisplaySpeedGuardAvailable(),
+            m,
+            b
+        );
+    }
+
+    (:low_mem)
+    private function getNormalizedDisplaySpeed(speed as Float?) as Float? {
+        return speed;
+    }
+
+    (:high_mem)
     private function getRenderModelSpeed() as Float? {
         if (!filterInitialized || validActiveMs < EDAFeatureFlags.getWarmupValidMs()) {
             return Math.sqrt(-1.0) as Float;
@@ -1271,13 +1298,14 @@ class EDAView extends WatchUi.DataField {
 
     private function getRenderedCurrentPaceValue() as String {
         if (shouldUseLiveRenderFallback()) {
-            var displaySpeed = getRenderModelSpeed();
+            var displaySpeed = getNormalizedDisplaySpeed(getRenderModelSpeed());
             if (displaySpeed != null && displaySpeed == displaySpeed && displaySpeed > 0.0) {
                 return formatPace(displaySpeed);
             }
 
-            if (lastDisplaySpeed != null && (lastDisplaySpeed as Float) > 0.0) {
-                return formatPace(lastDisplaySpeed as Float);
+            var lastSpeed = getNormalizedDisplaySpeed(lastDisplaySpeed);
+            if (lastSpeed != null && (lastSpeed as Float) > 0.0) {
+                return formatPace(lastSpeed as Float);
             }
 
             return INVALID_RENDER_VALUE;
@@ -1447,8 +1475,9 @@ class EDAView extends WatchUi.DataField {
     private function updateLiveDisplay(speed as Float?, hr as Float?) as Void {
         updateDisplaySampleState(speed, hr);
         if (filterInitialized) {
-            if (speed != null) {
-                valAktPace = formatPace(ewmaSpeed);
+            var filteredDisplaySpeed = getNormalizedDisplaySpeed(ewmaSpeed);
+            if (filteredDisplaySpeed != null) {
+                valAktPace = formatPace(filteredDisplaySpeed);
             } else {
                 valAktPace = "--:--";
             }
@@ -1462,8 +1491,9 @@ class EDAView extends WatchUi.DataField {
             return;
         }
 
-        if (speed != null) {
-            valAktPace = formatPace(speed);
+        var rawDisplaySpeed = getNormalizedDisplaySpeed(speed);
+        if (rawDisplaySpeed != null) {
+            valAktPace = formatPace(rawDisplaySpeed);
         } else {
             valAktPace = "--:--";
         }
@@ -1587,7 +1617,13 @@ class EDAView extends WatchUi.DataField {
             return;
         }
 
-        var hrSoll = (m * displaySpeed) + b;
+        var normalizedDisplaySpeed = getNormalizedDisplaySpeed(displaySpeed);
+        if (normalizedDisplaySpeed == null) {
+            requestRenderCacheRefresh();
+            return;
+        }
+
+        var hrSoll = (m * (normalizedDisplaySpeed as Float)) + b;
         if (hrSoll > 0.0) {
             valSollHr = hrSoll.toNumber().toString();
         }

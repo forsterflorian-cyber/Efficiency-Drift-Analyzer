@@ -273,6 +273,80 @@ function sourceSelectorPrefersPowerOverSpeed(logger as Test.Logger) as Boolean {
 }
 
 // ============================================================================
+// Edge-Case Tests: Replay Display Speed Guard
+// ============================================================================
+
+(:test)
+function replayDisplayGuardNormalizesPowerBasedReplaySpeed(logger as Test.Logger) as Boolean {
+    var normalized = EDAReplayDisplayGuard.normalizeDisplaySpeed(10.8, true, EDATypes.SOURCE_POWER, true, 41.6667, 35.0);
+    Test.assertMessage(normalized != null, "Expected a normalized replay speed.");
+    logger.debug("normalizedReplaySpeed=" + (normalized as Float).format("%.3f"));
+    Test.assertMessage(
+        ((normalized as Float) - 3.0).abs() < 0.01,
+        "Replay-like 10.8 speed should normalize to roughly 3.0 m/s."
+    );
+    return true;
+}
+
+(:test)
+function replayDisplayGuardKeepsAlreadyCorrectSpeed(logger as Test.Logger) as Boolean {
+    var normalized = EDAReplayDisplayGuard.normalizeDisplaySpeed(3.0, true, EDATypes.SOURCE_POWER, true, 41.6667, 35.0);
+    Test.assertMessage(normalized != null, "Expected a display speed.");
+    logger.debug("normalizedCorrectSpeed=" + (normalized as Float).format("%.3f"));
+    Test.assertMessage(
+        ((normalized as Float) - 3.0).abs() < 0.0001,
+        "A valid 3.0 m/s running speed must stay unchanged."
+    );
+    return true;
+}
+
+(:test)
+function replayDisplayGuardIgnoresSpeedSourceSessions(logger as Test.Logger) as Boolean {
+    var normalized = EDAReplayDisplayGuard.normalizeDisplaySpeed(10.8, true, EDATypes.SOURCE_SPEED, true, 41.6667, 35.0);
+    Test.assertMessage(normalized != null, "Expected a display speed.");
+    Test.assertMessage(
+        ((normalized as Float) - 10.8).abs() < 0.0001,
+        "Speed-based sessions must not use the power-replay normalization."
+    );
+    return true;
+}
+
+(:test)
+function replayDisplayGuardRequiresAbsurdExpectedHr(logger as Test.Logger) as Boolean {
+    var normalized = EDAReplayDisplayGuard.normalizeDisplaySpeed(10.8, true, EDATypes.SOURCE_POWER, true, 15.0, 40.0);
+    Test.assertMessage(normalized != null, "Expected a display speed.");
+    Test.assertMessage(
+        ((normalized as Float) - 10.8).abs() < 0.0001,
+        "Suspicious speed should stay raw when the derived expected HR remains plausible."
+    );
+    return true;
+}
+
+(:test)
+function replayDisplayGuardKeepsDerivedDisplayValuesPlausible(logger as Test.Logger) as Boolean {
+    var slope = 41.6667;
+    var intercept = 35.0;
+    var normalized = EDAReplayDisplayGuard.normalizeDisplaySpeed(10.8, true, EDATypes.SOURCE_POWER, true, slope, intercept);
+    Test.assertMessage(normalized != null, "Expected replay speed normalization for the screenshot scenario.");
+
+    var rawPacePerKmSeconds = EDAFeatureFlags.getCalibrationDistanceFactor() / 10.8;
+    var normalizedPacePerKmSeconds = EDAFeatureFlags.getCalibrationDistanceFactor() / (normalized as Float);
+    var rawExpectedHr = (slope * 10.8) + intercept;
+    var normalizedExpectedHr = (slope * (normalized as Float)) + intercept;
+    logger.debug(
+        "rawPace=" + rawPacePerKmSeconds.format("%.1f")
+            + " normPace=" + normalizedPacePerKmSeconds.format("%.1f")
+            + " rawHr=" + rawExpectedHr.format("%.1f")
+            + " normHr=" + normalizedExpectedHr.format("%.1f")
+    );
+    Test.assertMessage(rawPacePerKmSeconds < 110.0, "Raw replay speed should look implausibly fast.");
+    Test.assertMessage(normalizedPacePerKmSeconds > 300.0, "Normalized replay speed should land in a plausible running pace range.");
+    Test.assertMessage(rawExpectedHr > 300.0, "Raw replay speed should imply an absurd expected HR.");
+    Test.assertMessage(normalizedExpectedHr < 260.0, "Normalized replay speed should keep expected HR below the absurd threshold.");
+    return true;
+}
+
+// ============================================================================
 // Edge-Case Tests: Warmup-Logik (korrigiert)
 // ============================================================================
 
