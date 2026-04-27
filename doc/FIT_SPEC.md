@@ -2,6 +2,7 @@
 
 | Field ID | Name                 | Type   | Unit | Description |
 | :---     | :---                 | :---   | :--- | :---        |
+| 0        | metabolic_drift      | float  | %    | Record-level Drift fuer exportierbare Samples |
 | 1        | avg_metabolic_drift  | float  | %    | Epochen-Durchschnitt |
 | 2        | profile_state        | uint8  | -    | Vertrauensstatus (0-4)|
 

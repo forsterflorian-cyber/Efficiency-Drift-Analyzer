@@ -14,18 +14,10 @@ import Toybox.System;
 
 class EDALifecycleManager {
 
-    private const MAX_RESUME_GAP_RESET_MS as Number = 300000;
-    private const IMPLICIT_TIMER_RESET_TOLERANCE_MS as Number = 5000;
-
     private var mLastPauseSystemTimer as Number? = null;
     private var mLastActiveTimerTime as Number? = null;
 
     function initialize() {
-        mLastPauseSystemTimer = null;
-        mLastActiveTimerTime = null;
-    }
-
-    function reset() as Void {
         mLastPauseSystemTimer = null;
         mLastActiveTimerTime = null;
     }
@@ -64,7 +56,7 @@ class EDALifecycleManager {
             return true;
         }
 
-        return (currentSystemTimer - pausedAt) >= MAX_RESUME_GAP_RESET_MS;
+        return (currentSystemTimer - pausedAt) >= EDAFeatureFlags.getMaxResumeGapResetMs();
     }
 
     // --------------------------------------------------------------------------
@@ -109,6 +101,6 @@ class EDALifecycleManager {
         }
 
         var rollbackMs = previousTimerTime - currentTimerTime;
-        return rollbackMs > IMPLICIT_TIMER_RESET_TOLERANCE_MS;
+        return rollbackMs > EDAFeatureFlags.getImplicitTimerResetToleranceMs();
     }
 }

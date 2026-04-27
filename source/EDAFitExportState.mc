@@ -4,9 +4,6 @@ import Toybox.Math;
 
 class EDAFitExportState {
 
-    // SOURCE-Konstanten werden jetzt aus EDATypes importiert
-    // SOURCE-Konstanten werden jetzt aus EDATypes importiert
-
     private var mDriftField as Toybox.FitContributor.Field?;
     private var mAvgDriftField as Toybox.FitContributor.Field?;
     private var mProfileStateField as Toybox.FitContributor.Field?;

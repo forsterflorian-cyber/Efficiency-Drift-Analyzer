@@ -3,12 +3,8 @@ import Toybox.Math;
 
 class EDADriftEngine {
 
-    private const MIN_VALID_TIME_MS as Number = 180000;
     private const MAX_DRIFT_PERCENT as Float = 50.0;
     private const SPLIT_BUCKET_MS as Number = 10000;
-    private const MAX_VALID_SAMPLE_GAP_MS as Number = 5000;
-    private const DRIFT_WINDOW_MS as Number = 1200000;
-    private const DRIFT_BUCKET_COUNT as Number = 120;
 
     private var mDriftWeightedBuckets as Array<Float> = [];
     private var mDriftValidBuckets as Array<Number> = [];
@@ -20,7 +16,8 @@ class EDADriftEngine {
             return;
         }
 
-        for (var i = 0; i < DRIFT_BUCKET_COUNT; i += 1) {
+        var bucketCount = EDAFeatureFlags.getDriftBucketCount();
+        for (var i = 0; i < bucketCount; i += 1) {
             mDriftWeightedBuckets.add(0.0);
             mDriftValidBuckets.add(0);
             mDriftBucketKeys.add(-1);
@@ -42,7 +39,8 @@ class EDADriftEngine {
     function reset() as Void {
         initializeDriftBuffers();
 
-        for (var i = 0; i < DRIFT_BUCKET_COUNT; i += 1) {
+        var bucketCount = EDAFeatureFlags.getDriftBucketCount();
+        for (var i = 0; i < bucketCount; i += 1) {
             mDriftWeightedBuckets[i] = 0.0;
             mDriftValidBuckets[i] = 0;
             mDriftBucketKeys[i] = -1;
@@ -61,14 +59,14 @@ class EDADriftEngine {
     }
 
     function recordValidSample(driftTimerTime as Number, deltaMs as Number, ef as Float) as Void {
-        if (driftTimerTime <= 0 || deltaMs <= 0 || deltaMs > MAX_VALID_SAMPLE_GAP_MS || ef <= 0.0) {
+        if (driftTimerTime <= 0 || deltaMs <= 0 || deltaMs > EDAFeatureFlags.getMaxValidSampleGapMs() || ef <= 0.0) {
             return;
         }
 
         initializeDriftBuffers();
 
         var bucketKey = (driftTimerTime / SPLIT_BUCKET_MS).toNumber();
-        var slot = bucketKey % DRIFT_BUCKET_COUNT;
+        var slot = bucketKey % EDAFeatureFlags.getDriftBucketCount();
         if ((mDriftBucketKeys[slot] as Number) != bucketKey) {
             mDriftBucketKeys[slot] = bucketKey;
             mDriftWeightedBuckets[slot] = 0.0;
@@ -84,7 +82,7 @@ class EDADriftEngine {
             return Math.sqrt(-1.0) as Float;
         }
 
-        if (driftActiveMs < MIN_VALID_TIME_MS) {
+        if (driftActiveMs < EDAFeatureFlags.getWarmupValidMs()) {
             return null;
         }
 
@@ -97,13 +95,15 @@ class EDADriftEngine {
         var split1SlotCount = 0;
         var split2SlotCount = 0;
         var windowSizeMs = driftActiveMs;
-        if (windowSizeMs > DRIFT_WINDOW_MS) {
-            windowSizeMs = DRIFT_WINDOW_MS;
+        var maxWindowMs = EDAFeatureFlags.getDriftWindowMs();
+        if (windowSizeMs > maxWindowMs) {
+            windowSizeMs = maxWindowMs;
         }
         var windowStart = driftActiveMs - windowSizeMs;
         var windowMid = windowStart + ((windowSizeMs / 2).toNumber());
 
-        for (var i = 0; i < DRIFT_BUCKET_COUNT; i += 1) {
+        var bucketCount = EDAFeatureFlags.getDriftBucketCount();
+        for (var i = 0; i < bucketCount; i += 1) {
             var bucketKey = mDriftBucketKeys[i] as Number;
             if (bucketKey < 0) {
                 continue;

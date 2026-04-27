@@ -3,16 +3,6 @@ import Toybox.Lang;
 
 class EDAProfileResolver {
 
-    private const PROFILE_STATE_UNRESOLVED as Number = 0;
-    private const PROFILE_STATE_PROVISIONAL as Number = 1;
-    private const PROFILE_STATE_FALLBACK_CONFIRMED as Number = 2;
-    private const PROFILE_STATE_AUTHORITATIVE as Number = 3;
-    private const PROFILE_STATE_STALE as Number = 4;
-
-    private const ACTIVITY_UNKNOWN as Number = 0;
-    private const ACTIVITY_RUNNING as Number = 1;
-    private const ACTIVITY_OTHER as Number = 2;
-
     private const PROFILE_RESOLVE_TIMEOUT_MS as Number = 30000;
     private const PROFILE_CONFIRM_TIMEOUT_MS as Number = 60000;
     private const PROFILE_EXCEPTION_RETRY_BASE_MS as Number = 5000;
@@ -21,38 +11,38 @@ class EDAProfileResolver {
     private const PROFILE_REVALIDATION_LOSS_THRESHOLD as Number = 3;
     private const PROFILE_STALE_RECOVERY_MS as Number = 120000;
 
-    private var mState as Number = PROFILE_STATE_UNRESOLVED;
+    private var mState as Number = EDATypes.PROFILE_STATE_UNRESOLVED;
     private var mRetryPending as Boolean = false;
     private var mNextRetryTime as Number = 0;
     private var mExceptionBackoffMs as Number = PROFILE_EXCEPTION_RETRY_BASE_MS;
     private var mLastErrorCode as String = "";
-    private var mActivityKind as Number = ACTIVITY_UNKNOWN;
+    private var mActivityKind as Number = EDATypes.ACTIVITY_UNKNOWN;
     private var mTimeoutNoticePending as Boolean = false;
     private var mNextAuthoritativeRefreshTime as Number = 0;
     private var mRevalidationLossCount as Number = 0;
     private var mStaleSinceTime as Number = 0;
 
     function hasUsableActivityProfile() as Boolean {
-        return mState == PROFILE_STATE_PROVISIONAL
-            || mState == PROFILE_STATE_FALLBACK_CONFIRMED
-            || mState == PROFILE_STATE_AUTHORITATIVE
-            || (mState == PROFILE_STATE_STALE && mActivityKind != ACTIVITY_UNKNOWN);
+        return mState == EDATypes.PROFILE_STATE_PROVISIONAL
+            || mState == EDATypes.PROFILE_STATE_FALLBACK_CONFIRMED
+            || mState == EDATypes.PROFILE_STATE_AUTHORITATIVE
+            || (mState == EDATypes.PROFILE_STATE_STALE && mActivityKind != EDATypes.ACTIVITY_UNKNOWN);
     }
 
     function isProfileProvisional() as Boolean {
-        return mState == PROFILE_STATE_PROVISIONAL;
+        return mState == EDATypes.PROFILE_STATE_PROVISIONAL;
     }
 
     function hasAuthoritativeProfile() as Boolean {
-        return mState == PROFILE_STATE_AUTHORITATIVE;
+        return mState == EDATypes.PROFILE_STATE_AUTHORITATIVE;
     }
 
     function isFallbackConfirmed() as Boolean {
-        return mState == PROFILE_STATE_FALLBACK_CONFIRMED;
+        return mState == EDATypes.PROFILE_STATE_FALLBACK_CONFIRMED;
     }
 
     function isRunningActivity() as Boolean {
-        return hasUsableActivityProfile() && mActivityKind == ACTIVITY_RUNNING;
+        return hasUsableActivityProfile() && mActivityKind == EDATypes.ACTIVITY_RUNNING;
     }
 
     function isRetryPending() as Boolean {
@@ -76,8 +66,8 @@ class EDAProfileResolver {
     }
 
     function forceStaleStateForDiagnostics(isRunning as Boolean, staleSinceTime as Number, nextRetryTime as Number) as Void {
-        mState = PROFILE_STATE_STALE;
-        mActivityKind = isRunning ? ACTIVITY_RUNNING : ACTIVITY_OTHER;
+        mState = EDATypes.PROFILE_STATE_STALE;
+        mActivityKind = isRunning ? EDATypes.ACTIVITY_RUNNING : EDATypes.ACTIVITY_OTHER;
         mRetryPending = true;
         mNextRetryTime = nextRetryTime;
         mTimeoutNoticePending = false;
@@ -86,8 +76,8 @@ class EDAProfileResolver {
     }
 
     function resetSession() as Void {
-        mState = PROFILE_STATE_UNRESOLVED;
-        mActivityKind = ACTIVITY_UNKNOWN;
+        mState = EDATypes.PROFILE_STATE_UNRESOLVED;
+        mActivityKind = EDATypes.ACTIVITY_UNKNOWN;
         mTimeoutNoticePending = false;
         mNextAuthoritativeRefreshTime = 0;
         mStaleSinceTime = 0;
@@ -137,18 +127,18 @@ class EDAProfileResolver {
 
     private function getResolvedActivityKind(resolvedRunning as Boolean) as Number {
         if (resolvedRunning) {
-            return ACTIVITY_RUNNING;
+            return EDATypes.ACTIVITY_RUNNING;
         }
 
-        return ACTIVITY_OTHER;
+        return EDATypes.ACTIVITY_OTHER;
     }
 
     private function applyAuthoritativeActivityProfile(resolvedRunning as Boolean, timerTime as Number) as Boolean {
         var resolvedActivityKind = getResolvedActivityKind(resolvedRunning);
-        var profileChanged = ((mState != PROFILE_STATE_UNRESOLVED) && (mState != PROFILE_STATE_AUTHORITATIVE))
+        var profileChanged = ((mState != EDATypes.PROFILE_STATE_UNRESOLVED) && (mState != EDATypes.PROFILE_STATE_AUTHORITATIVE))
             || (hasUsableActivityProfile() && (mActivityKind != resolvedActivityKind));
         mActivityKind = resolvedActivityKind;
-        mState = PROFILE_STATE_AUTHORITATIVE;
+        mState = EDATypes.PROFILE_STATE_AUTHORITATIVE;
         mTimeoutNoticePending = false;
         mStaleSinceTime = 0;
         clearRetryState();
@@ -157,7 +147,7 @@ class EDAProfileResolver {
     }
 
     private function promoteStaleProfileToFallback(timerTime as Number) as Boolean {
-        if (mState != PROFILE_STATE_STALE || mActivityKind == ACTIVITY_UNKNOWN || mStaleSinceTime <= 0) {
+        if (mState != EDATypes.PROFILE_STATE_STALE || mActivityKind == EDATypes.ACTIVITY_UNKNOWN || mStaleSinceTime <= 0) {
             return false;
         }
 
@@ -165,21 +155,21 @@ class EDAProfileResolver {
             return false;
         }
 
-        mState = PROFILE_STATE_FALLBACK_CONFIRMED;
+        mState = EDATypes.PROFILE_STATE_FALLBACK_CONFIRMED;
         mTimeoutNoticePending = true;
         mStaleSinceTime = 0;
         return true;
     }
 
     private function updateFallbackProfileState(timerTime as Number) as Void {
-        if (mState != PROFILE_STATE_FALLBACK_CONFIRMED
-            && mState != PROFILE_STATE_AUTHORITATIVE
-            && mState != PROFILE_STATE_STALE
+        if (mState != EDATypes.PROFILE_STATE_FALLBACK_CONFIRMED
+            && mState != EDATypes.PROFILE_STATE_AUTHORITATIVE
+            && mState != EDATypes.PROFILE_STATE_STALE
             && timerTime >= PROFILE_CONFIRM_TIMEOUT_MS) {
-            mState = PROFILE_STATE_FALLBACK_CONFIRMED;
+            mState = EDATypes.PROFILE_STATE_FALLBACK_CONFIRMED;
             mTimeoutNoticePending = true;
-        } else if (mState == PROFILE_STATE_UNRESOLVED && timerTime >= PROFILE_RESOLVE_TIMEOUT_MS) {
-            mState = PROFILE_STATE_PROVISIONAL;
+        } else if (mState == EDATypes.PROFILE_STATE_UNRESOLVED && timerTime >= PROFILE_RESOLVE_TIMEOUT_MS) {
+            mState = EDATypes.PROFILE_STATE_PROVISIONAL;
         }
     }
 
@@ -191,7 +181,7 @@ class EDAProfileResolver {
         }
 
         scheduleExceptionRetry(timerTime, errorCode, false);
-        mState = PROFILE_STATE_STALE;
+        mState = EDATypes.PROFILE_STATE_STALE;
         mTimeoutNoticePending = false;
         mNextAuthoritativeRefreshTime = 0;
         mStaleSinceTime = timerTime;

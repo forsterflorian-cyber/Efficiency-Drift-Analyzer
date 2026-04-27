@@ -10,6 +10,14 @@ module EDASessionPolicy {
         return !hasCompletedWarmupThisSession && !hasPostResetCollectingStatus;
     }
 
+    function getWarmupCompletionTimestamp(currentCompletionAt as Number, timerTime as Number) as Number {
+        if (currentCompletionAt < 0) {
+            return timerTime;
+        }
+
+        return currentCompletionAt;
+    }
+
     function shouldResetSessionFitSummaryForProfileChange(
         previousMinValidHr as Float,
         previousCanUseSpeedWorkload as Boolean,

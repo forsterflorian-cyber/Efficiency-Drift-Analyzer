@@ -1,7 +1,20 @@
 {
+  "metabolic_drift": {
+    "field_id": 0,
+    "type": "float",
+    "unit": "%",
+    "mesg_type": "record"
+  },
+  "avg_metabolic_drift": {
+    "field_id": 1,
+    "type": "float",
+    "unit": "%",
+    "mesg_type": "session"
+  },
   "profile_state": {
     "field_id": 2,
     "type": "uint8",
+    "mesg_type": "record",
     "mapping": {
       "0": "unresolved",
       "1": "provisional",

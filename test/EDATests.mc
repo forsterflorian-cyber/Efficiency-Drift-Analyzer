@@ -85,13 +85,13 @@ function coachingConfidenceWindowsFollowWarmupAge(logger as Test.Logger) as Bool
 
 (:test)
 function statusManagerReturnsCorrectLabels(logger as Test.Logger) as Boolean {
-    var waitLabel = EDAStatusManager.getStatusLabel(1, "WAIT", "PAUSE", "WARMUP", "PROV", "P TIME", "CFG", "NO HR", "LOW HR", "SPIKE", "LOW P", "SLOW", "NO P", "NO SPD", "BAD SPD", "GAP", "--");
+    var waitLabel = EDAStatusManager.getStatusLabel(EDATypes.STATUS_WAIT, "WAIT", "PAUSE", "WARMUP", "PROV", "P TIME", "CFG", "NO HR", "LOW HR", "SPIKE", "LOW P", "SLOW", "NO P", "NO SPD", "BAD SPD", "GAP", "--");
     Test.assertMessage(waitLabel.equals("WAIT"), "Status 1 should return WAIT label.");
-    
-    var pauseLabel = EDAStatusManager.getStatusLabel(2, "WAIT", "PAUSE", "WARMUP", "PROV", "P TIME", "CFG", "NO HR", "LOW HR", "SPIKE", "LOW P", "SLOW", "NO P", "NO SPD", "BAD SPD", "GAP", "--");
+
+    var pauseLabel = EDAStatusManager.getStatusLabel(EDATypes.STATUS_PAUSE, "WAIT", "PAUSE", "WARMUP", "PROV", "P TIME", "CFG", "NO HR", "LOW HR", "SPIKE", "LOW P", "SLOW", "NO P", "NO SPD", "BAD SPD", "GAP", "--");
     Test.assertMessage(pauseLabel.equals("PAUSE"), "Status 2 should return PAUSE label.");
-    
-    var valueLabel = EDAStatusManager.getStatusLabel(0, "WAIT", "PAUSE", "WARMUP", "PROV", "P TIME", "CFG", "NO HR", "LOW HR", "SPIKE", "LOW P", "SLOW", "NO P", "NO SPD", "BAD SPD", "GAP", "--");
+
+    var valueLabel = EDAStatusManager.getStatusLabel(EDATypes.STATUS_VALUE, "WAIT", "PAUSE", "WARMUP", "PROV", "P TIME", "CFG", "NO HR", "LOW HR", "SPIKE", "LOW P", "SLOW", "NO P", "NO SPD", "BAD SPD", "GAP", "--");
     Test.assertMessage(valueLabel.equals("--"), "Status 0 should return default label.");
     
     return true;
@@ -99,10 +99,10 @@ function statusManagerReturnsCorrectLabels(logger as Test.Logger) as Boolean {
 
 (:test)
 function statusManagerReturnsCorrectShortLabels(logger as Test.Logger) as Boolean {
-    var waitLabel = EDAStatusManager.getStatusShortLabel(1, "W", "P", "WARM", "PROV", "PTIME", "CFG", "NOHR", "LOWHR", "SPIKE", "LOWP", "SLOW", "NOP", "NOSP", "BADSP", "GAP", "--");
+    var waitLabel = EDAStatusManager.getStatusShortLabel(EDATypes.STATUS_WAIT, "W", "P", "WARM", "PROV", "PTIME", "CFG", "NOHR", "LOWHR", "SPIKE", "LOWP", "SLOW", "NOP", "NOSP", "BADSP", "GAP", "--");
     Test.assertMessage(waitLabel.equals("W"), "Status 1 should return W short label.");
-    
-    var valueLabel = EDAStatusManager.getStatusShortLabel(0, "W", "P", "WARM", "PROV", "PTIME", "CFG", "NOHR", "LOWHR", "SPIKE", "LOWP", "SLOW", "NOP", "NOSP", "BADSP", "GAP", "--");
+
+    var valueLabel = EDAStatusManager.getStatusShortLabel(EDATypes.STATUS_VALUE, "W", "P", "WARM", "PROV", "PTIME", "CFG", "NOHR", "LOWHR", "SPIKE", "LOWP", "SLOW", "NOP", "NOSP", "BADSP", "GAP", "--");
     Test.assertMessage(valueLabel.equals("--"), "Status 0 should return default short label.");
     
     return true;
@@ -139,7 +139,7 @@ function staleProfileRecoversAfter121Seconds(logger as Test.Logger) as Boolean {
 
     var profileChanged = resolver.resolveActivityProfile(121001);
     logger.debug("changed=" + profileChanged.toString() + " state=" + resolver.getState().toString());
-    Test.assertEqualMessage(2, resolver.getState(), "STALE should recover to FALLBACK_CONFIRMED after 120s.");
+    Test.assertEqualMessage(EDATypes.PROFILE_STATE_FALLBACK_CONFIRMED, resolver.getState(), "STALE should recover to FALLBACK_CONFIRMED after 120s.");
     Test.assertMessage(
         resolver.hasTimeoutNoticePending(),
         "Timeout notice should be raised when stale recovery unlocks export."
@@ -257,18 +257,46 @@ function sourceSelectorValidatesSpeedForRunning(logger as Test.Logger) as Boolea
 }
 
 (:test)
+function sourceSelectorUsesPerKmPaceCutoff(logger as Test.Logger) as Boolean {
+    var selector = new EDAWorkloadSourceSelector();
+    selector.updateProfile(true);
+
+    var acceptedPace = selector.pacePerKmSeconds(2.5);
+    Test.assertMessage(acceptedPace != null, "Expected pace for a valid speed.");
+    Test.assertMessage(((acceptedPace as Float) - 400.0).abs() < 0.01, "2.5 m/s should be 400s/km.");
+    Test.assertMessage(selector.hasUsableSpeedWorkload(2.5), "6:40/km should be accepted for running speed workload.");
+    Test.assertEqualMessage(EDATypes.STATUS_LOW_PACE, selector.getSpeedValidationError(2.0, false) as Number, "8:20/km should be rejected by the per-km cutoff.");
+    logger.debug("perKmPaceCutoff=ok");
+    return true;
+}
+
+(:test)
+function sourceSelectorReturnsSharedValidationStatusCodes(logger as Test.Logger) as Boolean {
+    var selector = new EDAWorkloadSourceSelector();
+    selector.updateProfile(true);
+
+    Test.assertEqualMessage(EDATypes.STATUS_LOW_POWER, selector.getPowerValidationError(29.9) as Number, "Low power should use the shared LOW_POWER status.");
+    Test.assertEqualMessage(EDATypes.STATUS_SPIKE, selector.getPowerValidationError(700.1) as Number, "High power should use the shared SPIKE status.");
+    Test.assertEqualMessage(EDATypes.STATUS_NO_SPEED, selector.getSpeedValidationError(null, false) as Number, "Missing speed should use the shared NO_SPEED status.");
+    Test.assertEqualMessage(EDATypes.STATUS_INVALID_SPEED, selector.getSpeedValidationError(13.0, false) as Number, "Fast speed should use the shared INVALID_SPEED status.");
+    Test.assertEqualMessage(EDATypes.STATUS_LOW_PACE, selector.getWorkloadValidationError(EDATypes.STATUS_LOW_PACE, null) as Number, "Speed fallback errors should pass through shared status codes.");
+    logger.debug("sourceValidationStatuses=ok");
+    return true;
+}
+
+(:test)
 function sourceSelectorPrefersPowerOverSpeed(logger as Test.Logger) as Boolean {
     var selector = new EDAWorkloadSourceSelector();
     selector.updateProfile(true);
 
     var source = selector.determinePreferredWorkloadSource(3.0, 200.0);
-    Test.assertEqualMessage(1, source, "Power should be preferred over speed when both available.");
+    Test.assertEqualMessage(EDATypes.SOURCE_POWER, source, "Power should be preferred over speed when both available.");
 
     source = selector.determinePreferredWorkloadSource(3.0, null);
-    Test.assertEqualMessage(2, source, "Speed should be used when power is unavailable.");
+    Test.assertEqualMessage(EDATypes.SOURCE_SPEED, source, "Speed should be used when power is unavailable.");
 
     source = selector.determinePreferredWorkloadSource(null, null);
-    Test.assertEqualMessage(0, source, "SOURCE_NONE when neither available.");
+    Test.assertEqualMessage(EDATypes.SOURCE_NONE, source, "SOURCE_NONE when neither available.");
     return true;
 }
 
@@ -373,6 +401,24 @@ function warmupLogicCorrected(logger as Test.Logger) as Boolean {
     return true;
 }
 
+(:test)
+function warmupCompletionTimestampOnlyStampsOncePerEpoch(logger as Test.Logger) as Boolean {
+    var firstCompletion = EDASessionPolicy.getWarmupCompletionTimestamp(-1, 180000);
+    Test.assertEqualMessage(180000, firstCompletion, "First warmup completion should stamp the current timer.");
+
+    var restampedCompletion = EDASessionPolicy.getWarmupCompletionTimestamp(firstCompletion, 240000);
+    Test.assertEqualMessage(
+        firstCompletion,
+        restampedCompletion,
+        "Post-warmup samples must not refresh the completion timestamp."
+    );
+
+    var nextEpochCompletion = EDASessionPolicy.getWarmupCompletionTimestamp(-1, 420000);
+    Test.assertEqualMessage(420000, nextEpochCompletion, "A reset analysis epoch should stamp a new warmup completion.");
+    logger.debug("warmupCompletionTimestamp=ok");
+    return true;
+}
+
 // ============================================================================
 // Edge-Case Tests: Drift Engine
 // ============================================================================
@@ -409,14 +455,14 @@ function driftClampedAt50Percent(logger as Test.Logger) as Boolean {
     // Split 2 (90-180s): Low efficiency (ef=1.0)
     // Expected drift: (5.0/1.0 - 1) * 100 = 400%, clamped to 50%
 
-    // Split 1 samples
-    for (var i = 0; i < 9; i += 1) {
-        engine.recordValidSample((i + 1) * 10000, 10000, 5.0);
+    // Split 1 samples. Keep deltas within the engine's 5s valid-sample gap.
+    for (var i = 0; i < 17; i += 1) {
+        engine.recordValidSample((i + 1) * 5000, 5000, 5.0);
     }
 
     // Split 2 samples
-    for (var i = 9; i < 18; i += 1) {
-        engine.recordValidSample((i + 1) * 10000, 10000, 1.0);
+    for (var i = 17; i < 36; i += 1) {
+        engine.recordValidSample((i + 1) * 5000, 5000, 1.0);
     }
 
     var drift = engine.computeDrift(180000);
